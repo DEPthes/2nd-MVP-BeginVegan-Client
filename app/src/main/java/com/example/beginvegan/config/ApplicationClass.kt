@@ -13,7 +13,7 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
         sSharedPreferences =
-            applicationContext.getSharedPreferences("SIMYA_APP", MODE_PRIVATE)
+            applicationContext.getSharedPreferences("BeginVegan", MODE_PRIVATE)
         initRetrofitInstance()
     }
     companion object {

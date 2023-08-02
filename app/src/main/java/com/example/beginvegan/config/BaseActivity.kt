@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
