@@ -9,7 +9,6 @@ import com.example.beginvegan.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.text
     }
     override fun init() {
 
