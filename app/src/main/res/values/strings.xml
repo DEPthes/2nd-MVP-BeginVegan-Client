@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">beginvegan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="str_vegan_test_before_description">
+        비건 7가지 있음을 알려주는 내용\n그 중 나의 성향은 무엇일까? 이런 느낌 글\n\n비건 시작의 첫단계\n나의 성향을 알아보기 ~~
+    </string>
 </resources>
