@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".src.ui.view.RestaurantDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".src.ui.view.VeganTestActivity"
             android:exported="false" />
         <activity

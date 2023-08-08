@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".src.ui.view.MainHomeFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_home_greetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00님, 안녕하세요 \n '비거너'의 여정으로 함께 떠나봐요"
+            android:textSize="20sp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp"/>
+        <TextView
+            android:id="@+id/tv_home_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="우리 동네에서 비건 여정을 시작해보세요"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_greetings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_recommend_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_description"
+            android:layout_marginTop="20dp"
+            tools:listitem="@layout/item_home_recommend_restaurant"/>
+        <TextView
+            android:id="@+id/tv_title_today_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오늘의 추천 레시피"
+            app:layout_constraintTop_toBottomOf="@id/rv_home_recommend_restaurant"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_today_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_today_recipe"
+            tools:listitem="@layout/item_home_today_recipe" />
+        <TextView
+            android:id="@+id/tv_title_magazine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비건 매거진"
+            app:layout_constraintTop_toBottomOf="@id/rv_today_recipe"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_magazines"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_magazine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="16dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/vp_magazines"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:id="@+id/iv_indicator_0"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/shape_circle_home_indicator_active"/>
+            <ImageView
+                android:id="@+id/iv_indicator_1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/shape_circle_home_indicator_inactive"
+                android:layout_marginHorizontal="8dp"/>
+            <ImageView
+                android:id="@+id/iv_indicator_2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/shape_circle_home_indicator_inactive"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
