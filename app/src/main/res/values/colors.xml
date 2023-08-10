@@ -10,4 +10,5 @@
     <color name="color_gray_e9">#FFe9e9e9</color>
     <color name="color_gray_d4">#FFd4d4d4</color>
     <color name="color_gray_95">#FF959595</color>
+    <color name="color_transparent">#00000000</color>
 </resources>
