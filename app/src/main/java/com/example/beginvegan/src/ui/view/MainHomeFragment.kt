@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainHomeBinding
 
 class MainHomeFragment : Fragment(){
+
+    private lateinit var viewPager: ViewPager2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setContentView(R.layout.fragment_main_home)
+
     }
 
     override fun onCreateView(
@@ -24,5 +30,9 @@ class MainHomeFragment : Fragment(){
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    private fun initializeViews(){
+
     }
 }
