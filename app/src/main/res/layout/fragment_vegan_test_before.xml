@@ -8,41 +8,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_vegan_test"
+        <FrameLayout
+            android:id="@+id/fl_vegan_test_description"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardCornerRadius="16dp"
-            android:backgroundTint="@color/color_primary1">
-            <TextView
-                android:id="@+id/tv_test_result_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오보 배지테리언"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"/>
-            <TextView
-                android:id="@+id/tv_test_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_vegan_test_before_description"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="30dp"/>
-        </androidx.cardview.widget.CardView>
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="156dp"/>
         <Button
             android:id="@+id/b_vegan_test_next"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="다음에 할게요"
-            app:layout_constraintTop_toBottomOf="@id/cv_vegan_test"
+            app:layout_constraintTop_toBottomOf="@id/fl_vegan_test_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/b_vegan_test_start"
             android:layout_marginTop="20dp"/>
@@ -52,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="테스트 시작하기"
             android:backgroundTint="@color/color_primary3"
-            app:layout_constraintTop_toBottomOf="@id/cv_vegan_test"
+            app:layout_constraintTop_toBottomOf="@id/fl_vegan_test_description"
             app:layout_constraintStart_toEndOf="@id/b_vegan_test_next"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"/>

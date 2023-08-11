@@ -11,6 +11,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         super.onCreate(savedInstanceState)
     }
     override fun init() {
-
+        supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
     }
 }
