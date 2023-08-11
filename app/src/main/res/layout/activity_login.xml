@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="30dp"/>
     <ImageButton
-        android:id="@+id/ib_login_kakao"
+        android:id="@+id/btn_login_kakao"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:src="@drawable/b_img_login_kakao"
@@ -50,5 +50,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="132dp"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
