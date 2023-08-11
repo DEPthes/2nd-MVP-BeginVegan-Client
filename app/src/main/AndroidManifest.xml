@@ -18,18 +18,33 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".src.ui.view.VeganMapActivity"
-            android:exported="true">
+            android:name=".src.ui.view.LoginActivity"
+            android:exported="true" >
+            <intent-filter>
+
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="oauth"
+                    android:scheme="kakaofb5550ba69a57eb73aae78bc996d8a8e" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".src.ui.view.VeganMapActivity"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".src.ui.view.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
