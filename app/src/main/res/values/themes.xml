@@ -8,8 +8,4 @@
 
     <style name="Theme.Beginvegan" parent="Base.Theme.Beginvegan" />
 
-    // 스플래시 스크린
-    <style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/logo_beginvegan</item>
-    </style>
 </resources>
