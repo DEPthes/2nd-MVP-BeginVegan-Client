@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">beginvegan</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_vegan_test_before_description">비거너로 향한 여정에 오신 \n 비기너 여러분 환영합니다!
+        \n 저희 여정에 있어 “비긴, 비건”은 \n 비건이 단순한 ‘채식주의자’가 아닌,
+        자신의 성향에 맞는 비건 단계를 \n 안내하는 것으로 목표하고 있습니다.
+        \n 여정을 떠날 준비가 되셨나요?
+        \n 준비가 되셨다면 \n ‘시작하기’ 버튼을 눌러주세요!
+    </string>
+    <string-array name="vegan_type_array">
+        <item>비건</item>
+        <item>락토 베지테리언</item>
+        <item>오보 베지테리언</item>
+        <item>락토-오보 베지테리언</item>
+        <item>플로테리언</item>
+        <item>페스트코테리언</item>
+        <item>플렉시테리언</item>
+    </string-array>
+
 </resources>

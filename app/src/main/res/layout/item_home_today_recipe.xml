@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp"
+    android:layout_margin="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_recipe_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginVertical="14dp">
+        <TextView
+            android:id="@+id/tv_recipe_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="레시피명"
+            android:textSize="16sp"
+            android:textColor="@color/color_text_32"
+            android:fontFamily="@font/notosanskr_medium"
+            android:includeFontPadding="false"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tv_recipe_type"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="오보 배지테리언"
+            android:textSize="12sp"
+            android:textColor="@color/color_white"
+            android:fontFamily="@font/notosanskr_regular"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:background="@drawable/bg_text_custom"
+            android:paddingHorizontal="24dp"
+            android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/tv_recipe_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&quot;토마토와 가지의 만남&quot;"
+            android:textSize="12sp"
+            android:textColor="@color/color_text_89"
+            android:fontFamily="@font/notosanskr_regular"
+            android:includeFontPadding="false"
+            android:layout_marginTop="12dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

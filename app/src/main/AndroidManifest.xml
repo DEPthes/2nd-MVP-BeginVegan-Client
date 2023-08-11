@@ -10,14 +10,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_beginvegan"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_beginvegan"
         android:supportsRtl="true"
         android:theme="@style/Theme.Beginvegan"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".src.ui.view.SplashActivity"
+            android:theme="@style/SplashScreen"
+            android:exported="true" />
+         <activity
             android:name=".src.ui.view.LoginActivity"
             android:exported="true" >
             <intent-filter>
@@ -29,6 +33,7 @@
                 <data android:host="oauth"
                     android:scheme="kakaofb5550ba69a57eb73aae78bc996d8a8e" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,15 +41,25 @@
             </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".src.ui.view.WriteReviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.ui.view.RestaurantDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.ui.view.VeganTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.ui.view.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".src.ui.view.VeganMapActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".src.ui.view.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
