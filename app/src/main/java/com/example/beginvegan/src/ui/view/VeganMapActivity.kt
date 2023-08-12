@@ -4,10 +4,14 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -16,6 +20,8 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityVeganMapBinding
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapView
 
@@ -23,6 +29,7 @@ class VeganMapActivity : BaseActivity<ActivityVeganMapBinding>({ActivityVeganMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setBottomSheet()
     }
 
     override fun init() {
@@ -31,6 +38,36 @@ class VeganMapActivity : BaseActivity<ActivityVeganMapBinding>({ActivityVeganMap
         } else {
             Toast.makeText(this, "GPS를 켜주세요", Toast.LENGTH_SHORT).show()
         }
+    }
+    // Set Bottom Sheet
+    private fun setBottomSheet(){
+        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_bottom_sheet, null)
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.window!!.setDimAmount(0F)
+        bottomSheetDialog.behavior.isDraggable = true
+        // peekHeight 바텀시트 접혀있을때 DP 설정
+        bottomSheetDialog.behavior.peekHeight = resources.getDimension(R.dimen.margin_76).toInt()
+        bottomSheetDialog.show()
+
+        bottomSheetDialog.behavior.apply{
+            addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    when(newState){
+                        BottomSheetBehavior.STATE_COLLAPSED -> {}
+                        BottomSheetBehavior.STATE_EXPANDED -> {}
+                        BottomSheetBehavior.STATE_HIDDEN -> {}    //숨겨짐
+                        BottomSheetBehavior.STATE_HALF_EXPANDED -> {} //절반 펼쳐짐
+                        BottomSheetBehavior.STATE_DRAGGING -> {}  //드래그하는 중
+                        BottomSheetBehavior.STATE_SETTLING -> {}  //(움직이다가) 안정화되는 중
+                    }
+                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                }
+            })
+        }
+
+
     }
 
 

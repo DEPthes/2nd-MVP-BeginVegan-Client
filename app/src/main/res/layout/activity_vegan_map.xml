@@ -9,6 +9,5 @@
     <net.daum.mf.map.api.MapView
         android:id="@+id/mv_vegan_map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/side_margin"/>
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
