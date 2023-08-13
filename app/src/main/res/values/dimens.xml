@@ -26,7 +26,7 @@
     <!--    Text Size(sp)-->
     <dimen name="text_8">8sp</dimen>
     <dimen name="text_12">12sp</dimen>
-    <dimen name="text_15">15sp</dimen>
+    <dimen name="text_14">14sp</dimen>
     <dimen name="text_18">18sp</dimen>
     <dimen name="text_24">24sp</dimen>
     <dimen name="text_28">28sp</dimen>

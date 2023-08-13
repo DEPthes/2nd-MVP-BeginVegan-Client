@@ -41,31 +41,37 @@ class VeganMapActivity : BaseActivity<ActivityVeganMapBinding>({ActivityVeganMap
     }
     // Set Bottom Sheet
     private fun setBottomSheet(){
-        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_bottom_sheet, null)
-        val bottomSheetDialog = BottomSheetDialog(this)
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.window!!.setDimAmount(0F)
-        bottomSheetDialog.behavior.isDraggable = true
-        // peekHeight 바텀시트 접혀있을때 DP 설정
-        bottomSheetDialog.behavior.peekHeight = resources.getDimension(R.dimen.margin_76).toInt()
-        bottomSheetDialog.show()
+        val bottomSheet = VeganMapBottomSheetDialog()
+//        bottomSheet.behavior.isDraggable = true
+//        bottomSheet.behavior.peekHeight = resources.getDimension(R.dimen.margin_76).toInt()
+        bottomSheet.show(supportFragmentManager,bottomSheet.tag)
 
-        bottomSheetDialog.behavior.apply{
-            addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when(newState){
-                        BottomSheetBehavior.STATE_COLLAPSED -> {}
-                        BottomSheetBehavior.STATE_EXPANDED -> {}
-                        BottomSheetBehavior.STATE_HIDDEN -> {}    //숨겨짐
-                        BottomSheetBehavior.STATE_HALF_EXPANDED -> {} //절반 펼쳐짐
-                        BottomSheetBehavior.STATE_DRAGGING -> {}  //드래그하는 중
-                        BottomSheetBehavior.STATE_SETTLING -> {}  //(움직이다가) 안정화되는 중
-                    }
-                }
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                }
-            })
-        }
+//        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_bottom_sheet, null)
+//        val bottomSheetDialog = BottomSheetDialog(this)
+//        bottomSheetDialog.setContentView(bottomSheetView)
+//        bottomSheetDialog.window!!.setDimAmount(0F)
+//        bottomSheetDialog.behavior.isDraggable = true
+//        bottomSheet
+//        // peekHeight 바텀시트 접혀있을때 DP 설정
+//        bottomSheetDialog.behavior.peekHeight = resources.getDimension(R.dimen.margin_76).toInt()
+//        bottomSheetDialog.show()
+//
+//        bottomSheetDialog.behavior.apply{
+//            addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+//                override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                    when(newState){
+//                        BottomSheetBehavior.STATE_COLLAPSED -> {}
+//                        BottomSheetBehavior.STATE_EXPANDED -> {}
+//                        BottomSheetBehavior.STATE_HIDDEN -> {}    //숨겨짐
+//                        BottomSheetBehavior.STATE_HALF_EXPANDED -> {} //절반 펼쳐짐
+//                        BottomSheetBehavior.STATE_DRAGGING -> {}  //드래그하는 중
+//                        BottomSheetBehavior.STATE_SETTLING -> {}  //(움직이다가) 안정화되는 중
+//                    }
+//                }
+//                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+//                }
+//            })
+//        }
 
 
     }
