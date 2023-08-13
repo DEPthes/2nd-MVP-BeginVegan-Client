@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
-import com.example.beginvegan.databinding.FragmentVeganTestBeforeBinding
 
-class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
-    FragmentVeganTestBeforeBinding::bind,R.layout.fragment_vegan_test_before) {
+class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
+    FragmentVeganTestAfterBinding::bind,R.layout.fragment_vegan_test_after) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -21,10 +20,7 @@ class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vegan_test_before, container, false)
+        return inflater.inflate(R.layout.fragment_vegan_test_after, container, false)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

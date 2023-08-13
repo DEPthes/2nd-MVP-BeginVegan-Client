@@ -24,21 +24,21 @@
          <activity
             android:name=".src.ui.view.LoginActivity"
             android:exported="true" >
-            <intent-filter>
+<!--            <intent-filter>-->
 
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data android:host="oauth"
-                    android:scheme="kakaofb5550ba69a57eb73aae78bc996d8a8e" />
-            </intent-filter>
+<!--                <data android:host="oauth"-->
+<!--                    android:scheme="kakaofb5550ba69a57eb73aae78bc996d8a8e" />-->
+<!--            </intent-filter>-->
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <activity
@@ -49,10 +49,13 @@
             android:exported="false" />
         <activity
             android:name=".src.ui.view.VeganTestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".src.ui.view.LoginActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".src.ui.view.VeganMapActivity"
             android:exported="true"/>

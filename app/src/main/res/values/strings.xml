@@ -1,12 +1,39 @@
 <resources>
     <string name="app_name">beginvegan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="str_vegan_test_before_description">비거너로 향한 여정에 오신 \n 비기너 여러분 환영합니다!
+
+    <!--    Vegan Test -->
+    <string name="btn_vegan_test_next">다음에 할게요</string>
+    <string name="btn_vegan_test_start">테스트 시작하기</string>
+    <string name="btn_vegan_test_again">다시하기</string>
+    <string name="btn_go_home">여정 시작하기</string>
+
+    <string name="vegan_test_description_before">비거너로 향한 여정에 오신 \n 비기너 여러분 환영합니다!
         \n 저희 여정에 있어 “비긴, 비건”은 \n 비건이 단순한 ‘채식주의자’가 아닌,
         자신의 성향에 맞는 비건 단계를 \n 안내하는 것으로 목표하고 있습니다.
         \n 여정을 떠날 준비가 되셨나요?
-        \n 준비가 되셨다면 \n ‘시작하기’ 버튼을 눌러주세요!
-    </string>
+        \n 준비가 되셨다면 \n ‘시작하기’ 버튼을 눌러주세요!</string>
+
+    <!--    Vegan Test Questions -->
+    <string name="test_question_1_milk">1. 마트에 왔다!\n식물성 우유는 기본 우유보다 가격이 더 나간다.\n나는?</string>
+    <string name="test_question_2_egg">2. 계란찜이 서비스로 나왔다!\n나는?</string>
+    <string name="test_question_3_fish">3. 하루종일 굶은 나, 식당이 열린 곳은 단 하나!\n메뉴가 생선구이밖에 있지 않다.\n나는?</string>
+    <string name="test_question_4_meat">4. 친구가 취뽀해서 소고기(혹은 돼지고기)를\n사준다고 한다.\n나는?</string>
+    <string name="test_question_5_chicken">5. 오늘은 축구 결승전!\n나는?</string>
+
+    <!--    Vegan Test Answers -->
+    <string name="test_answer_1_a">그냥 우유로 구매할래!</string>
+    <string name="test_answer_1_b">무조건 식물성 우유!</string>
+    <string name="test_answer_2_a">우와 감사합니다!</string>
+    <string name="test_answer_2_b">감사합니다! (사실 안 먹는데 ㅠㅠ)</string>
+    <string name="test_answer_3_a">생선구이 하나 주세요!</string>
+    <string name="test_answer_3_b">다른 곳을 찾으러 나간다.</string>
+    <string name="test_answer_4_a">너무 좋지!!</string>
+    <string name="test_answer_4_b">다른 메뉴로 안될까?</string>
+    <string name="test_answer_5_a">축구에는 치킨이지!</string>
+    <string name="test_answer_5_b">치킨말고 다른 메뉴를 찾아볼래</string>
+
+    <!--    string-array -->
     <string-array name="vegan_type_array">
         <item>비건</item>
         <item>락토 베지테리언</item>

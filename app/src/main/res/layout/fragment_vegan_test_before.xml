@@ -8,42 +8,53 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <FrameLayout
-            android:id="@+id/fl_vegan_test_description"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_test_description_before"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/color_primary1"
+            app:cardCornerRadius="16dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="156dp"/>
+            android:layout_marginTop="@dimen/margin_100"
+            android:layout_marginHorizontal="@dimen/side_margin">
+            <TextView
+                android:id="@+id/tv_test_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vegan_test_description_before"
+                android:textSize="16sp"
+                android:textColor="@color/color_text_32"
+                android:fontFamily="@font/notosanskr_regular"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginVertical="@dimen/margin_48"/>
+        </androidx.cardview.widget.CardView>
         <Button
             android:id="@+id/b_vegan_test_next"
-            android:layout_width="150dp"
+            android:layout_width="@dimen/btn_148"
             android:layout_height="wrap_content"
-            android:text="다음에 할게요"
-            app:layout_constraintTop_toBottomOf="@id/fl_vegan_test_description"
+            android:text="@string/btn_vegan_test_next"
+            android:textColor="@color/color_primary3"
+            android:textSize="@dimen/text_16"
+            android:fontFamily="@font/notosanskr_medium"
+            android:background="@drawable/btn_stroke_primary3"
+            app:layout_constraintTop_toBottomOf="@id/cv_test_description_before"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/b_vegan_test_start"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="@dimen/margin_16" />
         <Button
             android:id="@+id/b_vegan_test_start"
-            android:layout_width="150dp"
+            android:layout_width="@dimen/btn_164"
             android:layout_height="wrap_content"
-            android:text="테스트 시작하기"
-            android:backgroundTint="@color/color_primary3"
-            app:layout_constraintTop_toBottomOf="@id/fl_vegan_test_description"
+            android:text="@string/btn_vegan_test_start"
+            android:textSize="@dimen/text_16"
+            android:textColor="@color/color_white"
+            android:fontFamily="@font/notosanskr_medium"
+            android:background="@drawable/btn_filled_primary3"
+            app:layout_constraintTop_toBottomOf="@id/cv_test_description_before"
             app:layout_constraintStart_toEndOf="@id/b_vegan_test_next"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"/>
-        <ImageButton
-            android:id="@+id/ib_vegan_test_share"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@id/b_vegan_test_start"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_test_share"
-            android:background="@color/color_transparent" />
+            android:layout_marginTop="@dimen/margin_16" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
