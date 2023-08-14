@@ -10,10 +10,12 @@ import com.example.beginvegan.databinding.ActivityVeganTestBinding
 class VeganTestActivity : BaseActivity<ActivityVeganTestBinding>({ ActivityVeganTestBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_vegan_test)
     }
 
     override fun init() {
+        supportFragmentManager.beginTransaction().replace(R.id.fl_vegan_test,VeganTestBeforeFragment()).commit()
 
+//        val fragmentBefore = VeganTestBeforeFragment()
+//        fragmentBefore.btnStart()
     }
 }

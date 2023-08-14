@@ -21,7 +21,17 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        childFragmentManager.beginTransaction().replace(
+//            R.id.fl_test_questions,
+//            TestQuestion1MilkFragment.newInstance()
+//        ).commit()
         return inflater.inflate(R.layout.fragment_vegan_test_ongoing, container, false)
+    }
+
+    companion object{
+        fun newInstance(): VeganTestOngoingFragment{
+            return VeganTestOngoingFragment()
+        }
     }
 
     override fun onDestroy() {

@@ -30,7 +30,7 @@
                 android:layout_marginVertical="@dimen/margin_48"/>
         </androidx.cardview.widget.CardView>
         <Button
-            android:id="@+id/b_vegan_test_next"
+            android:id="@+id/btn_vegan_test_next"
             android:layout_width="@dimen/btn_148"
             android:layout_height="wrap_content"
             android:text="@string/btn_vegan_test_next"
@@ -40,10 +40,10 @@
             android:background="@drawable/btn_stroke_primary3"
             app:layout_constraintTop_toBottomOf="@id/cv_test_description_before"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/b_vegan_test_start"
-            android:layout_marginTop="@dimen/margin_16" />
+            app:layout_constraintEnd_toStartOf="@id/btn_vegan_test_start"
+            android:layout_marginTop="@dimen/margin_20" />
         <Button
-            android:id="@+id/b_vegan_test_start"
+            android:id="@+id/btn_vegan_test_start"
             android:layout_width="@dimen/btn_164"
             android:layout_height="wrap_content"
             android:text="@string/btn_vegan_test_start"
@@ -52,9 +52,9 @@
             android:fontFamily="@font/notosanskr_medium"
             android:background="@drawable/btn_filled_primary3"
             app:layout_constraintTop_toBottomOf="@id/cv_test_description_before"
-            app:layout_constraintStart_toEndOf="@id/b_vegan_test_next"
+            app:layout_constraintStart_toEndOf="@id/btn_vegan_test_next"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/margin_16" />
+            android:layout_marginTop="@dimen/margin_20" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

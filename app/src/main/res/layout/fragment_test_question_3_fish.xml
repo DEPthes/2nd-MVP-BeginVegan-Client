@@ -30,7 +30,7 @@
             android:layout_marginHorizontal="@dimen/margin_32"/>
     </androidx.cardview.widget.CardView>
     <Button
-        android:id="@+id/b_answer_a"
+        android:id="@+id/btn_answer_a"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/test_answer_3_a"
@@ -44,7 +44,7 @@
         android:layout_marginTop="@dimen/margin_48"
         android:layout_marginHorizontal="@dimen/side_margin"/>
     <Button
-        android:id="@+id/b_answer_b"
+        android:id="@+id/btn_answer_b"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/test_answer_3_b"
@@ -52,7 +52,7 @@
         android:textColor="@color/color_white"
         android:fontFamily="@font/notosanskr_medium"
         android:background="@drawable/btn_filled_primary3"
-        app:layout_constraintTop_toBottomOf="@id/b_answer_a"
+        app:layout_constraintTop_toBottomOf="@id/btn_answer_a"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/margin_16"

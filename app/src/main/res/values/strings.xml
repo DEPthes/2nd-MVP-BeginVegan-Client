@@ -8,11 +8,13 @@
     <string name="btn_vegan_test_again">다시하기</string>
     <string name="btn_go_home">여정 시작하기</string>
 
-    <string name="vegan_test_description_before">비거너로 향한 여정에 오신 \n 비기너 여러분 환영합니다!
-        \n 저희 여정에 있어 “비긴, 비건”은 \n 비건이 단순한 ‘채식주의자’가 아닌,
-        자신의 성향에 맞는 비건 단계를 \n 안내하는 것으로 목표하고 있습니다.
-        \n 여정을 떠날 준비가 되셨나요?
-        \n 준비가 되셨다면 \n ‘시작하기’ 버튼을 눌러주세요!</string>
+    <string name="vegan_test_description_before">
+        비거너로 향한 여정에 오신 \n 비기너 여러분 환영합니다!
+        \n\n 저희 여정에 있어 “비긴, 비건”은 \n 비건이 단순한 ‘채식주의자’가 아닌,
+        \n자신의 성향에 맞는 비건 단계를 \n 안내하는 것으로 목표하고 있습니다.
+        \n\n 여정을 떠날 준비가 되셨나요?
+        \n\n 준비가 되셨다면 \n ‘시작하기’ 버튼을 눌러주세요!
+    </string>
 
     <!--    Vegan Test Questions -->
     <string name="test_question_1_milk">1. 마트에 왔다!\n식물성 우유는 기본 우유보다 가격이 더 나간다.\n나는?</string>
