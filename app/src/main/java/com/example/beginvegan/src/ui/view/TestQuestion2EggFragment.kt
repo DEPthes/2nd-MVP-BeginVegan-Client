@@ -14,6 +14,7 @@ class TestQuestion2EggFragment : BaseFragment<FragmentTestQuestion2EggBinding>(
     FragmentTestQuestion2EggBinding::bind,R.layout.fragment_test_question_2_egg) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (parentFragment as VeganTestOngoingFragment).setProgressValue(2)
 
         binding.btnAnswerA.setOnClickListener{
             (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()

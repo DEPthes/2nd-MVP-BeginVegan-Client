@@ -39,4 +39,7 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
             commit()
         }
     }
+    fun setProgressValue(value:Int){
+        binding.pbVeganTestOngoing.progress=value
+    }
 }

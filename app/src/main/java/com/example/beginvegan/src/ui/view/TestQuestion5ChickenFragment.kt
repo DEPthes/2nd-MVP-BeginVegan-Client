@@ -15,6 +15,8 @@ class TestQuestion5ChickenFragment : BaseFragment<FragmentTestQuestion5ChickenBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (parentFragment as VeganTestOngoingFragment).setProgressValue(5)
+        
         binding.btnAnswerA.setOnClickListener{
             (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
         }
