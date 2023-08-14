@@ -1,14 +1,10 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.vegantest
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion1MilkBinding
-import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 import com.example.beginvegan.databinding.FragmentVeganTestOngoingBinding
 
 class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
@@ -18,18 +14,19 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
         super.onViewCreated(view, savedInstanceState)
         childFragmentManager.beginTransaction().replace(
             R.id.fl_test_questions,
-            TestQuestion1MilkFragment.newInstance()
+            TestQuestionMilkFragment.newInstance()
         ).commit()
     }
 
     companion object{
-        fun newInstance(): VeganTestOngoingFragment{
+        fun newInstance(): VeganTestOngoingFragment {
             return VeganTestOngoingFragment()
         }
     }
 
     fun goTestAfterFragment(typeKr:String, typeEng:String, description:String){
-        val veganTestAfterFragment = VeganTestAfterFragment.newInstance(typeKr,typeEng,description)
+        val veganTestAfterFragment =
+            VeganTestAfterFragment.newInstance(typeKr, typeEng, description)
         (activity as VeganTestActivity).changeTestState(veganTestAfterFragment)
     }
     fun changeQuestion(nextQuestion:Fragment){

@@ -1,15 +1,9 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.vegantest
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 import com.example.beginvegan.databinding.FragmentVeganTestBeforeBinding
 
 class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
@@ -29,7 +23,7 @@ class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
         }
     }
     companion object{
-        fun newInstance(): VeganTestBeforeFragment{
+        fun newInstance(): VeganTestBeforeFragment {
             return VeganTestBeforeFragment()
         }
     }

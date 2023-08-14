@@ -1,11 +1,7 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.vegantest
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
@@ -35,8 +31,8 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
         private const val TYPE_KR = "typeKr"
         private const val TYPE_ENG = "typeEng"
         private const val DESCRIPTION = "description"
-        fun newInstance(typeKr:String, typeEng:String, description:String): VeganTestAfterFragment{
-            val fragment =VeganTestAfterFragment()
+        fun newInstance(typeKr:String, typeEng:String, description:String): VeganTestAfterFragment {
+            val fragment = VeganTestAfterFragment()
             val bundle = Bundle()
             bundle.putString(TYPE_KR,typeKr)
             bundle.putString(TYPE_ENG,typeEng)

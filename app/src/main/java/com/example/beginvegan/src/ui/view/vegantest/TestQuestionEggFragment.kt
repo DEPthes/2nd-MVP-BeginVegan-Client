@@ -1,17 +1,13 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.vegantest
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion1MilkBinding
 import com.example.beginvegan.databinding.FragmentTestQuestion2EggBinding
 
-class TestQuestion2EggFragment : BaseFragment<FragmentTestQuestion2EggBinding>(
-    FragmentTestQuestion2EggBinding::bind,R.layout.fragment_test_question_2_egg) {
+class TestQuestionEggFragment : BaseFragment<FragmentTestQuestion2EggBinding>(
+    FragmentTestQuestion2EggBinding::bind,R.layout.fragment_test_question_egg) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (parentFragment as VeganTestOngoingFragment).setProgressValue(2)
@@ -24,14 +20,14 @@ class TestQuestion2EggFragment : BaseFragment<FragmentTestQuestion2EggBinding>(
             )
         }
         binding.btnAnswerB.setOnClickListener{
-            val testQuestion3FishFragment = TestQuestion3FishFragment.newInstance()
+            val testQuestion3FishFragment = TestQuestionFishFragment.newInstance()
             (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion3FishFragment)
         }
     }
 
     companion object{
-        fun newInstance(): TestQuestion2EggFragment{
-            return TestQuestion2EggFragment()
+        fun newInstance(): TestQuestionEggFragment {
+            return TestQuestionEggFragment()
         }
     }
 }

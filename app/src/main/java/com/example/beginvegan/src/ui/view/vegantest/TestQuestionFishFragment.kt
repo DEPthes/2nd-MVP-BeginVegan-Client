@@ -1,18 +1,14 @@
 
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.vegantest
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion2EggBinding
 import com.example.beginvegan.databinding.FragmentTestQuestion3FishBinding
 
-class TestQuestion3FishFragment : BaseFragment<FragmentTestQuestion3FishBinding>(
-    FragmentTestQuestion3FishBinding::bind,R.layout.fragment_test_question_3_fish) {
+class TestQuestionFishFragment : BaseFragment<FragmentTestQuestion3FishBinding>(
+    FragmentTestQuestion3FishBinding::bind,R.layout.fragment_test_question_fish) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,14 +22,14 @@ class TestQuestion3FishFragment : BaseFragment<FragmentTestQuestion3FishBinding>
             )
         }
         binding.btnAnswerB.setOnClickListener{
-            val testQuestion4MeatFragment = TestQuestion4MeatFragment.newInstance()
+            val testQuestion4MeatFragment = TestQuestionMeatFragment.newInstance()
             (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion4MeatFragment)
         }
     }
 
     companion object{
-        fun newInstance(): TestQuestion3FishFragment{
-            return TestQuestion3FishFragment()
+        fun newInstance(): TestQuestionFishFragment {
+            return TestQuestionFishFragment()
         }
     }
 
