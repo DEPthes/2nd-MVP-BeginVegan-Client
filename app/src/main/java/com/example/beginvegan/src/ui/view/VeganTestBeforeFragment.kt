@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,25 +17,21 @@ class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_vegan_test_before, container, false)
-//    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    fun btnStart(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnVeganTestStart.setOnClickListener{
             val fragmentOngoing = VeganTestOngoingFragment.newInstance()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_vegan_test, fragmentOngoing)
-                .addToBackStack(null)
-                .commit()
+            (activity as VeganTestActivity).changeTestState(fragmentOngoing)
+        }
+        binding.btnVeganTestNext.setOnClickListener{
+            (activity as VeganTestActivity).goHome()
         }
     }
+    companion object{
+        fun newInstance(): VeganTestBeforeFragment{
+            return VeganTestBeforeFragment()
+        }
+    }
+
 }

@@ -12,26 +12,22 @@ import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 
 class TestQuestion1MilkFragment : BaseFragment<FragmentTestQuestion1MilkBinding>(
     FragmentTestQuestion1MilkBinding::bind,R.layout.fragment_test_question_1_milk) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnAnswerA.setOnClickListener{
+            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
+        }
+        binding.btnAnswerB.setOnClickListener{
+            val testQuestion2EggFragment = TestQuestion2EggFragment.newInstance()
+            (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion2EggFragment)
+        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_test_question_1_milk, container, false)
-        return binding.root
-    }
-
-    companion object{
+     companion object{
         fun newInstance(): TestQuestion1MilkFragment{
             return TestQuestion1MilkFragment()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

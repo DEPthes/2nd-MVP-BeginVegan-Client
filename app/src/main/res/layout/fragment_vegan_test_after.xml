@@ -26,7 +26,7 @@
                     android:id="@+id/tv_vegan_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="락토-오보 베지테리언"
+                    android:text="@string/vegan_type_lacto_ovo_kr"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/text_16"
                     android:fontFamily="@font/notosanskr_medium"
@@ -39,7 +39,7 @@
                     android:id="@+id/tv_vegan_type_eng"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lacto-ovo vegetarian"
+                    android:text="@string/vegan_type_lacto_ovo_eng"
                     android:textSize="@dimen/text_14"
                     android:textColor="@color/color_text_89"
                     android:fontFamily="@font/notosanskr_regular"
@@ -51,7 +51,7 @@
                     android:id="@+id/tv_vegan_type_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="비건 타입 설명"
+                    android:text="@string/test_result_lacto_ovo"
                     android:textSize="@dimen/text_14"
                     android:textColor="@color/color_text_32"
                     android:fontFamily="@font/notosanskr_regular"
@@ -59,12 +59,13 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     app:layout_constraintTop_toBottomOf="@id/tv_vegan_type_eng"
-                    android:layout_marginTop="@dimen/margin_32"/>
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginHorizontal="@dimen/margin_32"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
         <Button
-            android:id="@+id/b_vegan_test_next"
+            android:id="@+id/btn_vegan_test_again"
             android:layout_width="@dimen/btn_148"
             android:layout_height="wrap_content"
             android:text="@string/btn_vegan_test_again"
@@ -75,10 +76,10 @@
             android:background="@drawable/btn_stroke_primary3"
             app:layout_constraintTop_toBottomOf="@id/cv_test_description_before"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/b_vegan_test_start"
+            app:layout_constraintEnd_toStartOf="@id/btn_go_home"
             android:layout_marginTop="20dp" />
         <Button
-            android:id="@+id/b_vegan_test_start"
+            android:id="@+id/btn_go_home"
             android:layout_width="@dimen/btn_164"
             android:layout_height="wrap_content"
             android:text="@string/btn_go_home"
@@ -88,7 +89,7 @@
             android:includeFontPadding="false"
             android:background="@drawable/btn_filled_primary3"
             app:layout_constraintTop_toBottomOf="@id/cv_test_description_before"
-            app:layout_constraintStart_toEndOf="@id/b_vegan_test_next"
+            app:layout_constraintStart_toEndOf="@id/btn_vegan_test_again"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp" />
         <ImageButton
@@ -97,7 +98,7 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_test_share"
             android:background="@color/color_transparent"
-            app:layout_constraintTop_toBottomOf="@id/b_vegan_test_start"
+            app:layout_constraintTop_toBottomOf="@id/btn_go_home"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_76"/>

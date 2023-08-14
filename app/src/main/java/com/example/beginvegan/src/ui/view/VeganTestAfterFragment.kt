@@ -11,16 +11,21 @@ import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 
 class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
     FragmentVeganTestAfterBinding::bind,R.layout.fragment_vegan_test_after) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnVeganTestAgain.setOnClickListener{
+            val veganTestBeforeFragment = VeganTestBeforeFragment.newInstance()
+            (activity as VeganTestActivity).changeTestState(veganTestBeforeFragment)
+        }
+        binding.btnGoHome.setOnClickListener {
+            (activity as VeganTestActivity).goHome()
+        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vegan_test_after, container, false)
+    companion object{
+        fun newInstance(): VeganTestAfterFragment{
+            return VeganTestAfterFragment()
+        }
     }
-
 }

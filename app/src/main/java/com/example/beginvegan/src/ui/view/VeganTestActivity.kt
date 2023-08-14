@@ -1,7 +1,9 @@
 package com.example.beginvegan.src.ui.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityRestaurantDetailBinding
@@ -15,7 +17,14 @@ class VeganTestActivity : BaseActivity<ActivityVeganTestBinding>({ ActivityVegan
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_vegan_test,VeganTestBeforeFragment()).commit()
 
-//        val fragmentBefore = VeganTestBeforeFragment()
-//        fragmentBefore.btnStart()
+    }
+
+    fun goHome(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun changeTestState(testState:Fragment){
+        supportFragmentManager.beginTransaction().replace(R.id.fl_vegan_test,testState).commit()
     }
 }

@@ -13,17 +13,16 @@ import com.example.beginvegan.databinding.FragmentTestQuestion3FishBinding
 
 class TestQuestion3FishFragment : BaseFragment<FragmentTestQuestion3FishBinding>(
     FragmentTestQuestion3FishBinding::bind,R.layout.fragment_test_question_3_fish) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_test_question_3_fish, container, false)
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnAnswerA.setOnClickListener{
+            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
+        }
+        binding.btnAnswerB.setOnClickListener{
+            val testQuestion4MeatFragment = TestQuestion4MeatFragment.newInstance()
+            (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion4MeatFragment)
+        }
     }
 
     companion object{
@@ -32,7 +31,4 @@ class TestQuestion3FishFragment : BaseFragment<FragmentTestQuestion3FishBinding>
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

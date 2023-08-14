@@ -7,25 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
+import com.example.beginvegan.databinding.FragmentTestQuestion1MilkBinding
 import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 import com.example.beginvegan.databinding.FragmentVeganTestOngoingBinding
 
 class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
     FragmentVeganTestOngoingBinding::bind,R.layout.fragment_vegan_test_ongoing) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-//        childFragmentManager.beginTransaction().replace(
-//            R.id.fl_test_questions,
-//            TestQuestion1MilkFragment.newInstance()
-//        ).commit()
-        return inflater.inflate(R.layout.fragment_vegan_test_ongoing, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        childFragmentManager.beginTransaction().replace(
+            R.id.fl_test_questions,
+            TestQuestion1MilkFragment.newInstance()
+        ).commit()
     }
 
     companion object{
@@ -34,7 +28,15 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    fun goTestAfterFragment(){
+        val veganTestAfterFragment = VeganTestAfterFragment.newInstance()
+        (activity as VeganTestActivity).changeTestState(veganTestAfterFragment)
+    }
+    fun changeQuestion(nextQuestion:Fragment){
+        childFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_test_questions, nextQuestion)
+            addToBackStack(null)
+            commit()
+        }
     }
 }
