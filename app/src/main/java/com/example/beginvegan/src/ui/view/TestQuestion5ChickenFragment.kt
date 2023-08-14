@@ -16,12 +16,20 @@ class TestQuestion5ChickenFragment : BaseFragment<FragmentTestQuestion5ChickenBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (parentFragment as VeganTestOngoingFragment).setProgressValue(5)
-        
+
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
+            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
+                getString(R.string.vegan_type_flexitarian_kr),
+                getString(R.string.vegan_type_flexitarian_eng),
+                getString(R.string.test_result_flexitarian)
+            )
         }
         binding.btnAnswerB.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
+            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
+                getString(R.string.vegan_type_pollotarian_kr),
+                getString(R.string.vegan_type_pollotarian_eng),
+                getString(R.string.test_result_pollotarian)
+            )
         }
     }
     companion object{

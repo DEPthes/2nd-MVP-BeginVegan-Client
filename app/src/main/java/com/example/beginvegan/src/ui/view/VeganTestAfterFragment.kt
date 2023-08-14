@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,13 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments.let{
+            binding.tvVeganTypeKr.text = it?.getString(TYPE_KR)
+//            binding.tvVeganTypeEng.text = typeEng
+//            binding.tvVeganTypeDescription.text = description
+        }
+
+
         binding.btnVeganTestAgain.setOnClickListener{
             val veganTestBeforeFragment = VeganTestBeforeFragment.newInstance()
             (activity as VeganTestActivity).changeTestState(veganTestBeforeFragment)
@@ -24,8 +32,23 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
     }
 
     companion object{
-        fun newInstance(): VeganTestAfterFragment{
-            return VeganTestAfterFragment()
+        private const val TYPE_KR = "typeKr"
+        private const val TYPE_ENG = "typeEng"
+        private const val DESCRIPTION = "description"
+        fun newInstance(typeKr:String, typeEng:String, description:String): VeganTestAfterFragment{
+            val fragment =VeganTestAfterFragment()
+            val bundle = Bundle()
+            bundle.putString(TYPE_KR,typeKr)
+            bundle.putString(TYPE_ENG,typeEng)
+            bundle.putString(DESCRIPTION,description)
+            fragment.arguments = bundle
+            return fragment
         }
     }
+
+//    fun setTestResult(typeKr:String, typeEng:String, description:String){
+//        binding.tvVeganTypeKr.text = typeKr
+//        binding.tvVeganTypeEng.text = typeEng
+//        binding.tvVeganTypeDescription.text = description
+//    }
 }

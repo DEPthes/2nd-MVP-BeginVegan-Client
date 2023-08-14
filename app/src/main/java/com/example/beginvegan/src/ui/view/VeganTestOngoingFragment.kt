@@ -28,8 +28,8 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
         }
     }
 
-    fun goTestAfterFragment(){
-        val veganTestAfterFragment = VeganTestAfterFragment.newInstance()
+    fun goTestAfterFragment(typeKr:String, typeEng:String, description:String){
+        val veganTestAfterFragment = VeganTestAfterFragment.newInstance(typeKr,typeEng,description)
         (activity as VeganTestActivity).changeTestState(veganTestAfterFragment)
     }
     fun changeQuestion(nextQuestion:Fragment){

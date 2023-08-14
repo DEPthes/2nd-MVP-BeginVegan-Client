@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,10 @@ class TestQuestion1MilkFragment : BaseFragment<FragmentTestQuestion1MilkBinding>
         (parentFragment as VeganTestOngoingFragment).setProgressValue(1)
 
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
+            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
+                getString(R.string.vegan_type_vegan_kr),
+                getString(R.string.vegan_type_vegan_eng),
+                getString(R.string.test_result_vegan))
         }
         binding.btnAnswerB.setOnClickListener{
             val testQuestion2EggFragment = TestQuestion2EggFragment.newInstance()

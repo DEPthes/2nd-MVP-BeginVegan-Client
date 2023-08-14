@@ -18,7 +18,11 @@ class TestQuestion4MeatFragment : BaseFragment<FragmentTestQuestion4MeatBinding>
         (parentFragment as VeganTestOngoingFragment).setProgressValue(4)
 
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment()
+            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
+                getString(R.string.vegan_type_pescatarian_kr),
+                getString(R.string.vegan_type_pescatarian_eng),
+                getString(R.string.test_result_pescatarian)
+            )
         }
         binding.btnAnswerB.setOnClickListener{
             val testQuestion5ChickenFragment = TestQuestion5ChickenFragment.newInstance()

@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginVertical="@dimen/margin_40">
                 <TextView
-                    android:id="@+id/tv_vegan_type"
+                    android:id="@+id/tv_vegan_type_kr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/vegan_type_lacto_ovo_kr"
@@ -45,7 +45,7 @@
                     android:fontFamily="@font/notosanskr_regular"
                     android:includeFontPadding="false"
                     android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@id/tv_vegan_type"
+                    app:layout_constraintTop_toBottomOf="@id/tv_vegan_type_kr"
                     android:layout_marginTop="@dimen/margin_4" />
                 <TextView
                     android:id="@+id/tv_vegan_type_description"
