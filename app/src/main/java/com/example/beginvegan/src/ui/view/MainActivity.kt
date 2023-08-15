@@ -12,7 +12,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
     }
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
-
+        binding.bnvMain.itemBackground = null
         binding.bnvMain.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.item_home->{

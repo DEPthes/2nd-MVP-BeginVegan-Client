@@ -28,6 +28,11 @@ class VeganMapBottomSheetRVAdapter(private val dataList: ArrayList<String>): Rec
         position: Int
     ) {
         holder.bind()
+        if(position != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener {
+                listener?.onItemClick(holder.itemView,dataList[position],position)
+            }
+        }
     }
     override fun getItemCount(): Int = dataList.size
 
@@ -36,7 +41,6 @@ class VeganMapBottomSheetRVAdapter(private val dataList: ArrayList<String>): Rec
     }
     interface OnItemClickListener {
         fun onItemClick(v: View, data: String, position: Int)
-        fun onLongClick(v: View, data: String, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){

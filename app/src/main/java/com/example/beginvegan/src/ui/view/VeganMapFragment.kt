@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
@@ -9,14 +10,23 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Gravity
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
+import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
+import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapView
@@ -25,6 +35,7 @@ class VeganMapFragment(layoutResId: Int) : BaseFragment<FragmentVeganMapBinding>
     FragmentVeganMapBinding::bind,
     layoutResId
 ) {
+    private lateinit var dataList: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +44,43 @@ class VeganMapFragment(layoutResId: Int) : BaseFragment<FragmentVeganMapBinding>
     override fun init() {
         if (checkLocationService()) {
             permissionCheck()
+            setRestaurantList()
+            binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
         } else {
             Toast.makeText(context as MainActivity, "GPS를 켜주세요", Toast.LENGTH_SHORT).show()
         }
+
+    }
+    private fun getBottomSheetDialogDefaultHeight(): Int {
+        return getWindowHeight() * 70 / 100
+        // 기기 높이 대비 비율 설정 부분!!
+        // 위 수치는 기기 높이 대비 80%로 다이얼로그 높이를 설정
+    }
+    private fun getWindowHeight(): Int {
+        // Calculate window height for fullscreen use
+        val displayMetrics = DisplayMetrics()
+        (context as Activity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        return displayMetrics.heightPixels
+    }
+
+    // Set Restaurant List and Click and Test Data
+    private fun setRestaurantList(){
+        dataList = arrayListOf()
+        dataList.apply{
+            add("hello1")
+            add("hello2")
+            add("hello3")
+            add("hello4")
+        }
+        val dataRVAdapter  = VeganMapBottomSheetRVAdapter(dataList)
+        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = dataRVAdapter
+        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.layoutManager = LinearLayoutManager(this.context)
+        dataRVAdapter.setOnItemClickListener(object: VeganMapBottomSheetRVAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: String, position: Int) {
+                Log.d("ItemClick",data)
+            }
+
+        })
     }
     // 권한에 대한 메소드
     private fun permissionCheck() {
