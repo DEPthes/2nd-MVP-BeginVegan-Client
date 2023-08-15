@@ -1,4 +1,4 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

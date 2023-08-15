@@ -26,10 +26,13 @@ class VeganMapBottomSheetDialog() : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val dialog = dialog as BottomSheetDialog?
-        dialog!!.window!!.setBackgroundDrawable(ColorDrawable())
-        dialog!!.window!!.setDimAmount(0F)
-        dialog.behavior.peekHeight = resources.getDimension(R.dimen.margin_76).toInt()
+        dialog!!.window!!.apply{
+            setBackgroundDrawable(ColorDrawable())
+            setDimAmount(0F)
+        }
+        // peekheight 기준 선정해야함
         dialog.behavior.apply{
+            peekHeight = resources.getDimension(R.dimen.margin_76).toInt()
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when(newState){

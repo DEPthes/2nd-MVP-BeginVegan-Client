@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="side_margin">16dp</dimen>
-
+    <dimen name="drag_handle_width">32dp</dimen>
+    <dimen name="drag_handle_height">4dp</dimen>
+    <dimen name="drag_handle_peek_height">19dp</dimen>
 
     <!--    Dp Margin-->
     <dimen name="margin_4">4dp</dimen>

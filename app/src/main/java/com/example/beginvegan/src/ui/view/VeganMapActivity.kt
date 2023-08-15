@@ -45,7 +45,6 @@ class VeganMapActivity : BaseActivity<ActivityVeganMapBinding>({ActivityVeganMap
         bottomSheet.show(supportFragmentManager,bottomSheet.tag)
     }
 
-
     // 권한에 대한 메소드
     private fun permissionCheck() {
         val preference = getPreferences(MODE_PRIVATE)
