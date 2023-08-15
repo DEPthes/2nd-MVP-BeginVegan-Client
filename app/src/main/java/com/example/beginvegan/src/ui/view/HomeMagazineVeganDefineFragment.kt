@@ -13,7 +13,6 @@ import com.example.beginvegan.databinding.FragmentMainHomeBinding
 class HomeMagazineVeganDefineFragment : BaseFragment<FragmentHomeMagazineVeganDefineBinding>(
     FragmentHomeMagazineVeganDefineBinding::bind,R.layout.fragment_home_magazine_vegan_define ) {
 
-    val magazineTitle = "비건 = 채식주의자?\nNOPE"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
