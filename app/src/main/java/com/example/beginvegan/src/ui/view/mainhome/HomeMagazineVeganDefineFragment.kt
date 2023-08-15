@@ -1,4 +1,4 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.mainhome
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentHomeMagazineVeganDefineBinding
-import com.example.beginvegan.databinding.FragmentHomeMagazineVeganTypesBinding
+import com.example.beginvegan.databinding.FragmentMainHomeBinding
 
-class HomeMagazineVeganTypesFragment : BaseFragment<FragmentHomeMagazineVeganTypesBinding>(
-    FragmentHomeMagazineVeganTypesBinding::bind,R.layout.fragment_home_magazine_vegan_types ) {
+class HomeMagazineVeganDefineFragment : BaseFragment<FragmentHomeMagazineVeganDefineBinding>(
+    FragmentHomeMagazineVeganDefineBinding::bind,R.layout.fragment_home_magazine_vegan_define ) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
     }
+
 }

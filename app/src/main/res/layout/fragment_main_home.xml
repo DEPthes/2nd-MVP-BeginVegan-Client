@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".src.ui.view.MainHomeFragment">
+    tools:context=".src.ui.view.mainhome.MainHomeFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -96,41 +96,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp"/>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_home_magazine_indicators"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_8"
-            app:tabBackground="@drawable/selector_home_indicator"
-            app:tabGravity="fill"
-            app:tabIndicatorHeight="0dp"
+        <LinearLayout
+            android:id="@+id/ll_magazine_indicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/vp_magazines"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="@dimen/margin_168"
-            app:tabMaxWidth="@dimen/item_8"
-            app:tabIndicatorFullWidth="false"/>
-<!--        <LinearLayout-->
-<!--            android:id="@+id/ll_magazine_indicators"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/vp_magazines"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            android:layout_marginTop="12dp">-->
-<!--            <ImageView-->
-<!--                android:id="@+id/iv_magazine_indicator_0"-->
-<!--                android:layout_width="8dp"-->
-<!--                android:layout_height="8dp"-->
-<!--                android:src="@drawable/shape_circle_home_indicator_active"/>-->
-<!--            <ImageView-->
-<!--                android:id="@+id/iv_magazine_indicator_1"-->
-<!--                android:layout_width="8dp"-->
-<!--                android:layout_height="8dp"-->
-<!--                android:src="@drawable/shape_circle_home_indicator_inactive"-->
-<!--                android:layout_marginStart="8dp"/>-->
-<!--        </LinearLayout>-->
+            android:layout_marginTop="12dp">
+            <ImageView
+                android:id="@+id/iv_magazine_indicator_0"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/shape_circle_home_indicator_active"/>
+            <ImageView
+                android:id="@+id/iv_magazine_indicator_1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@drawable/shape_circle_home_indicator_inactive"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

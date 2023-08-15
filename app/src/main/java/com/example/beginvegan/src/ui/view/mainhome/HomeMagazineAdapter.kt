@@ -1,10 +1,9 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.src.ui.view.mainhome
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class HomeMagazineAdapter(mainHomeFragment: MainHomeFragment): FragmentStateAdapter(mainHomeFragment) {
-//    private var listener: OnItemClickListener? = null
 
     val fragmentList = listOf<Fragment>(
         HomeMagazineVeganDefineFragment(),
@@ -15,18 +14,5 @@ class HomeMagazineAdapter(mainHomeFragment: MainHomeFragment): FragmentStateAdap
 
     override fun createFragment(position: Int): Fragment {
         return fragmentList[position]
-        getPosition(position)
-    }
-
-//    interface OnItemClickListener{
-//        fun onItemClick(position: Int)
-//    }
-//
-//    fun setOnItemClickListener(listener: OnItemClickListener){
-//        this.listener = listener
-//    }
-
-    fun getPosition(index:Int):Int{
-        return index
     }
 }
