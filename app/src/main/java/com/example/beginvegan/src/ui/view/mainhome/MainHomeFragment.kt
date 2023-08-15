@@ -15,13 +15,37 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewpager = binding.vpMagazines
-        val homeMagazineAdapter = HomeMagazineAdapter(this)
-        viewpager.adapter = homeMagazineAdapter
+        //오늘의 추천 레시피
+        val vpTodayRecipe = binding.vpTodayRecipe
+        val homeTodayRecipeAdapter = HomeTodayRecipeAdapter(this)
+        vpTodayRecipe.adapter = homeTodayRecipeAdapter
 
-        viewpager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+        vpTodayRecipe.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
-                Log.d("TAG", "onViewCreated: ${position}")
+                when(position){
+                    0 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_active)
+                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                    }
+                    1 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_active)
+                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                    }
+                    2 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_active)
+                    }
+                }
+            }
+        })
+
+        //비건 매거진
+        val vpMagazines = binding.vpMagazines
+        val homeMagazineAdapter = HomeMagazineAdapter(this)
+        vpMagazines.adapter = homeMagazineAdapter
+
+        vpMagazines.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
                 when(position){
                     0 -> { binding.ivMagazineIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_active)
                         binding.ivMagazineIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
