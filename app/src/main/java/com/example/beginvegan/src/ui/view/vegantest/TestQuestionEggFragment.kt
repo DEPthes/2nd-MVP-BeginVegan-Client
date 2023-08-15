@@ -4,24 +4,31 @@ import android.os.Bundle
 import android.view.View
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion2EggBinding
+import com.example.beginvegan.databinding.FragmentTestQuestionEggBinding
 
-class TestQuestionEggFragment : BaseFragment<FragmentTestQuestion2EggBinding>(
-    FragmentTestQuestion2EggBinding::bind,R.layout.fragment_test_question_egg) {
+class TestQuestionEggFragment : BaseFragment<FragmentTestQuestionEggBinding>(
+    FragmentTestQuestionEggBinding::bind,R.layout.fragment_test_question_egg) {
+    val INDEX = 4
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (parentFragment as VeganTestOngoingFragment).setProgressValue(2)
+        //progress bar
+        (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
+
+        val testActivity =(activity as VeganTestActivity)
+        val testOngoingFragment = (parentFragment as VeganTestOngoingFragment)
+        val testQuestionMilkFragment = TestQuestionMilkFragment.newInstance()
 
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
-                getString(R.string.vegan_type_lacto_kr),
-                getString(R.string.vegan_type_lacto_eng),
-                getString(R.string.test_result_lacto)
+            testActivity.saveUserType(
+                getString(R.string.vegan_type_lacto_ovo_kr),
+                getString(R.string.vegan_type_lacto_ovo_eng),
+                getString(R.string.test_result_lacto_ovo),
+                INDEX
             )
+            testOngoingFragment.changeQuestion(testQuestionMilkFragment)
         }
         binding.btnAnswerB.setOnClickListener{
-            val testQuestion3FishFragment = TestQuestionFishFragment.newInstance()
-            (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion3FishFragment)
+            testOngoingFragment.changeQuestion(testQuestionMilkFragment)
         }
     }
 

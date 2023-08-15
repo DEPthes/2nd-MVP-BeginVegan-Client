@@ -18,23 +18,24 @@
     </string>
 
     <!--    Vegan Test Questions -->
-    <string name="test_question_1_milk">1. 마트에 왔다!\n식물성 우유는 기본 우유보다\n가격이 더 나간다.\n나는?</string>
-    <string name="test_question_2_egg">2. 계란찜이 서비스로 나왔다!\n나는?</string>
-    <string name="test_question_3_fish">3. 하루종일 굶은 나, 식당이 열린 곳은 단 하나!\n메뉴가 생선구이밖에 있지 않다.\n나는?</string>
-    <string name="test_question_4_meat">4. 친구가 취뽀해서 소고기(혹은 돼지고기)를\n사준다고 한다.\n나는?</string>
-    <string name="test_question_5_chicken">5. 오늘은 축구 결승전!\n나는?</string>
+    <string name="test_question_meat">1. 친구가 취뽀해서 소고기(혹은 돼지고기)를\n사준다고 한다.\n나는?</string>
+    <string name="test_question_chicken">2. 오늘은 축구 결승전!\n나는?</string>
+    <string name="test_question_fish">3. 하루종일 굶은 나, 식당이 열린 곳은 단 하나!\n메뉴가 생선구이밖에 있지 않다.\n나는?</string>
+    <string name="test_question_egg">4. 계란찜이 서비스로 나왔다!\n나는?</string>
+    <string name="test_question_milk">5. 마트에 왔다!\n식물성 우유는 기본 우유보다\n가격이 더 나간다.\n나는?</string>
 
     <!--    Vegan Test Answers -->
-    <string name="test_answer_1_a">그냥 우유로 구매할래!</string>
-    <string name="test_answer_1_b">무조건 식물성 우유!</string>
-    <string name="test_answer_2_a">우와 감사합니다!</string>
-    <string name="test_answer_2_b">감사합니다! (사실 안 먹는데 ㅠㅠ)</string>
-    <string name="test_answer_3_a">생선구이 하나 주세요!</string>
-    <string name="test_answer_3_b">다른 곳을 찾으러 나간다.</string>
-    <string name="test_answer_4_a">너무 좋지!!</string>
-    <string name="test_answer_4_b">다른 메뉴로 안될까?</string>
-    <string name="test_answer_5_a">축구에는 치킨이지!</string>
-    <string name="test_answer_5_b">치킨말고 다른 메뉴를 찾아볼래</string>
+    <string name="test_answer_meat_a">너무 좋지!!</string>
+    <string name="test_answer_meat_b">다른 메뉴로 안될까?</string>
+    <string name="test_answer_chicken_a">축구에는 치킨이지!</string>
+    <string name="test_answer_chicken_b">치킨말고 다른 메뉴를 찾아볼래</string>
+    <string name="test_answer_fish_a">생선구이 하나 주세요!</string>
+    <string name="test_answer_fish_b">다른 곳을 찾으러 나간다.</string>
+    <string name="test_answer_egg_a">우와 감사합니다!</string>
+    <string name="test_answer_egg_b">감사합니다! (사실 안 먹는데 ㅠㅠ)</string>
+    <string name="test_answer_milk_a">그냥 우유로 구매할래!</string>
+    <string name="test_answer_milk_b">무조건 식물성 우유!</string>
+
 
     <!--    Vegan Test Result -->
     <string name="test_result_vegan">

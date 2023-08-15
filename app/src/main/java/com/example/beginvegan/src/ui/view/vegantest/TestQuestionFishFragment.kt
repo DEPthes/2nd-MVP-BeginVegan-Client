@@ -5,25 +5,31 @@ import android.os.Bundle
 import android.view.View
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion3FishBinding
+import com.example.beginvegan.databinding.FragmentTestQuestionFishBinding
 
-class TestQuestionFishFragment : BaseFragment<FragmentTestQuestion3FishBinding>(
-    FragmentTestQuestion3FishBinding::bind,R.layout.fragment_test_question_fish) {
-
+class TestQuestionFishFragment : BaseFragment<FragmentTestQuestionFishBinding>(
+    FragmentTestQuestionFishBinding::bind,R.layout.fragment_test_question_fish) {
+    val INDEX = 3
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (parentFragment as VeganTestOngoingFragment).setProgressValue(3)
+        //progress bar
+        (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
+
+        val testActivity =(activity as VeganTestActivity)
+        val testOngoingFragment = (parentFragment as VeganTestOngoingFragment)
+        val testQuestionEggFragment = TestQuestionEggFragment.newInstance()
 
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
-                getString(R.string.vegan_type_lacto_ovo_kr),
-                getString(R.string.vegan_type_lacto_ovo_eng),
-                getString(R.string.test_result_lacto_ovo)
+            testActivity.saveUserType(
+                getString(R.string.vegan_type_pescatarian_kr),
+                getString(R.string.vegan_type_pescatarian_eng),
+                getString(R.string.test_result_pescatarian),
+                INDEX
             )
+            testOngoingFragment.changeQuestion(testQuestionEggFragment)
         }
         binding.btnAnswerB.setOnClickListener{
-            val testQuestion4MeatFragment = TestQuestionMeatFragment.newInstance()
-            (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion4MeatFragment)
+            testOngoingFragment.changeQuestion(testQuestionEggFragment)
         }
     }
 

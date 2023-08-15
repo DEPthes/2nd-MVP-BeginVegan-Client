@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view.vegantest
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
@@ -11,40 +12,27 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments.let{
-            binding.tvVeganTypeKr.text = it?.getString(TYPE_KR)
-//            binding.tvVeganTypeEng.text = typeEng
-//            binding.tvVeganTypeDescription.text = description
-        }
 
+        val testActivity =(activity as VeganTestActivity)
+        val veganTestBeforeFragment = VeganTestBeforeFragment.newInstance()
+
+        //테스트 결과 받아와서 띄워주기
+        binding.tvVeganTypeKr.setText(testActivity.getUserType())
+        binding.tvVeganTypeEng.setText(testActivity.getTypeEng())
+        binding.tvVeganTypeDescription.setText(testActivity.getDescription())
 
         binding.btnVeganTestAgain.setOnClickListener{
-            val veganTestBeforeFragment = VeganTestBeforeFragment.newInstance()
-            (activity as VeganTestActivity).changeTestState(veganTestBeforeFragment)
+            testActivity.changeTestState(veganTestBeforeFragment)
+            testActivity.resetUserType()
         }
         binding.btnGoHome.setOnClickListener {
-            (activity as VeganTestActivity).goHome()
+            testActivity.goHome()
         }
     }
 
-    companion object{
-        private const val TYPE_KR = "typeKr"
-        private const val TYPE_ENG = "typeEng"
-        private const val DESCRIPTION = "description"
-        fun newInstance(typeKr:String, typeEng:String, description:String): VeganTestAfterFragment {
-            val fragment = VeganTestAfterFragment()
-            val bundle = Bundle()
-            bundle.putString(TYPE_KR,typeKr)
-            bundle.putString(TYPE_ENG,typeEng)
-            bundle.putString(DESCRIPTION,description)
-            fragment.arguments = bundle
-            return fragment
+    companion object {
+        fun newInstance(): VeganTestAfterFragment {
+            return VeganTestAfterFragment()
         }
     }
-
-//    fun setTestResult(typeKr:String, typeEng:String, description:String){
-//        binding.tvVeganTypeKr.text = typeKr
-//        binding.tvVeganTypeEng.text = typeEng
-//        binding.tvVeganTypeDescription.text = description
-//    }
 }

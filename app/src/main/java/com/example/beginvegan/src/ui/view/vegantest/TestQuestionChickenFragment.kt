@@ -4,28 +4,31 @@ import android.os.Bundle
 import android.view.View
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion5ChickenBinding
+import com.example.beginvegan.databinding.FragmentTestQuestionChickenBinding
 
-class TestQuestionChickenFragment : BaseFragment<FragmentTestQuestion5ChickenBinding>(
-    FragmentTestQuestion5ChickenBinding::bind,R.layout.fragment_test_question_chicken) {
-
+class TestQuestionChickenFragment : BaseFragment<FragmentTestQuestionChickenBinding>(
+    FragmentTestQuestionChickenBinding::bind,R.layout.fragment_test_question_chicken) {
+    val INDEX = 2
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (parentFragment as VeganTestOngoingFragment).setProgressValue(5)
+        //progress bar
+        (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
+
+        val testActivity =(activity as VeganTestActivity)
+        val testOngoingFragment = (parentFragment as VeganTestOngoingFragment)
+        val testQuestionFishFragment = TestQuestionFishFragment.newInstance()
 
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
-                getString(R.string.vegan_type_flexitarian_kr),
-                getString(R.string.vegan_type_flexitarian_eng),
-                getString(R.string.test_result_flexitarian)
-            )
-        }
-        binding.btnAnswerB.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
+            testActivity.saveUserType(
                 getString(R.string.vegan_type_pollotarian_kr),
                 getString(R.string.vegan_type_pollotarian_eng),
-                getString(R.string.test_result_pollotarian)
+                getString(R.string.test_result_pollotarian),
+                INDEX
             )
+            testOngoingFragment.changeQuestion(testQuestionFishFragment)
+        }
+        binding.btnAnswerB.setOnClickListener{
+            testOngoingFragment.changeQuestion(testQuestionFishFragment)
         }
     }
     companion object{

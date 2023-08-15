@@ -1,8 +1,10 @@
 package com.example.beginvegan.src.ui.view.vegantest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganTestOngoingBinding
@@ -12,10 +14,20 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        childFragmentManager.beginTransaction().replace(
-            R.id.fl_test_questions,
-            TestQuestionMilkFragment.newInstance()
-        ).commit()
+        val testQuestionMeatFragment = TestQuestionMeatFragment.newInstance()
+        val testActivity = activity as VeganTestActivity
+        changeQuestion(testQuestionMeatFragment)
+
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                if(childFragmentManager.backStackEntryCount>0){
+                    if((childFragmentManager.backStackEntryCount-1) == testActivity.getIndex()){
+                        testActivity.resetUserType()
+                    }
+                    childFragmentManager.popBackStackImmediate()
+                }
+            }
+        })
     }
 
     companion object{
@@ -24,11 +36,7 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
         }
     }
 
-    fun goTestAfterFragment(typeKr:String, typeEng:String, description:String){
-        val veganTestAfterFragment =
-            VeganTestAfterFragment.newInstance(typeKr, typeEng, description)
-        (activity as VeganTestActivity).changeTestState(veganTestAfterFragment)
-    }
+    // 질문 fragment 교체
     fun changeQuestion(nextQuestion:Fragment){
         childFragmentManager.beginTransaction().apply {
             replace(R.id.fl_test_questions, nextQuestion)
@@ -36,6 +44,7 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
             commit()
         }
     }
+    // progress bar 제어
     fun setProgressValue(value:Int){
         binding.pbVeganTestOngoing.progress=value
     }

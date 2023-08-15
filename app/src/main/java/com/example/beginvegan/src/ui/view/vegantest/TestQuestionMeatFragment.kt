@@ -4,25 +4,31 @@ import android.os.Bundle
 import android.view.View
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentTestQuestion4MeatBinding
+import com.example.beginvegan.databinding.FragmentTestQuestionMeatBinding
 
-class TestQuestionMeatFragment : BaseFragment<FragmentTestQuestion4MeatBinding>(
-    FragmentTestQuestion4MeatBinding::bind,R.layout.fragment_test_question_meat) {
-
+class TestQuestionMeatFragment : BaseFragment<FragmentTestQuestionMeatBinding>(
+    FragmentTestQuestionMeatBinding::bind,R.layout.fragment_test_question_meat) {
+    val INDEX = 1
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (parentFragment as VeganTestOngoingFragment).setProgressValue(4)
+        //progress bar
+        (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
+
+        val testActivity =(activity as VeganTestActivity)
+        val testOngoingFragment = (parentFragment as VeganTestOngoingFragment)
+        val testQuestionChickenFragment = TestQuestionChickenFragment.newInstance()
 
         binding.btnAnswerA.setOnClickListener{
-            (parentFragment as VeganTestOngoingFragment).goTestAfterFragment(
-                getString(R.string.vegan_type_pescatarian_kr),
-                getString(R.string.vegan_type_pescatarian_eng),
-                getString(R.string.test_result_pescatarian)
+            testActivity.saveUserType(
+                getString(R.string.vegan_type_flexitarian_kr),
+                getString(R.string.vegan_type_flexitarian_eng),
+                getString(R.string.test_result_flexitarian),
+                INDEX
             )
+            testOngoingFragment.changeQuestion(testQuestionChickenFragment)
         }
         binding.btnAnswerB.setOnClickListener{
-            val testQuestion5ChickenFragment = TestQuestionChickenFragment.newInstance()
-            (parentFragment as VeganTestOngoingFragment).changeQuestion(testQuestion5ChickenFragment)
+            testOngoingFragment.changeQuestion(testQuestionChickenFragment)
         }
     }
     companion object{
