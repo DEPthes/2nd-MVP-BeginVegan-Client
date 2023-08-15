@@ -29,6 +29,11 @@ class RestaurantDetailReviewRVAdapter (private val dataList: ArrayList<String>):
         position: Int
     ) {
         holder.bind()
+        if(position != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener {
+                listener?.onItemClick(holder.itemView,dataList[position],position)
+            }
+        }
     }
     override fun getItemCount(): Int = dataList.size
 

@@ -31,16 +31,14 @@ import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapView
 
-class VeganMapFragment(layoutResId: Int) : BaseFragment<FragmentVeganMapBinding>(
+class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     FragmentVeganMapBinding::bind,
-    layoutResId
+    R.layout.fragment_vegan_map
 ) {
     private lateinit var dataList: ArrayList<String>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
     override fun init() {
         if (checkLocationService()) {
             permissionCheck()
@@ -49,7 +47,6 @@ class VeganMapFragment(layoutResId: Int) : BaseFragment<FragmentVeganMapBinding>
         } else {
             Toast.makeText(context as MainActivity, "GPS를 켜주세요", Toast.LENGTH_SHORT).show()
         }
-
     }
     private fun getBottomSheetDialogDefaultHeight(): Int {
         return getWindowHeight() * 70 / 100
@@ -78,10 +75,12 @@ class VeganMapFragment(layoutResId: Int) : BaseFragment<FragmentVeganMapBinding>
         dataRVAdapter.setOnItemClickListener(object: VeganMapBottomSheetRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {
                 Log.d("ItemClick",data)
+                parentFragmentManager.beginTransaction().hide(this@VeganMapFragment).add(R.id.fl_main,RestaurantDetailFragment()).addToBackStack(null).commit()
             }
 
         })
     }
+
     // 권한에 대한 메소드
     private fun permissionCheck() {
         val preference = this.requireActivity().getPreferences(MODE_PRIVATE)

@@ -13,6 +13,5 @@
        />
     <include
         android:id="@+id/veganmap_bottomSheet"
-        layout="@layout/dialog_bottom_sheet"
-        />
+        layout="@layout/dialog_bottom_sheet" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

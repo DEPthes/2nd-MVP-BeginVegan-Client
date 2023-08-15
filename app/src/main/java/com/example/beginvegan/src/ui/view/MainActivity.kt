@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
                 }
                 R.id.item_map->{
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_main,VeganMapFragment(R.layout.fragment_vegan_map)).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_main,VeganMapFragment()).commit()
                 }
                 R.id.item_recipe->{
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
