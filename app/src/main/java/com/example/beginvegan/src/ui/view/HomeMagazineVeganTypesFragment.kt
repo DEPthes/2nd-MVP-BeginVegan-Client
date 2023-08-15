@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.beginvegan.R
+import com.example.beginvegan.config.BaseFragment
+import com.example.beginvegan.databinding.FragmentHomeMagazineVeganDefineBinding
+import com.example.beginvegan.databinding.FragmentHomeMagazineVeganTypesBinding
 
-class HomeMagazineVeganTypesFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+class HomeMagazineVeganTypesFragment : BaseFragment<FragmentHomeMagazineVeganTypesBinding>(
+    FragmentHomeMagazineVeganTypesBinding::bind,R.layout.fragment_home_magazine_vegan_types ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

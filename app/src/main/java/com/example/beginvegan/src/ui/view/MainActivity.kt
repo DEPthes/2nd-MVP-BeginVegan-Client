@@ -7,9 +7,6 @@ import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it)}) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
 

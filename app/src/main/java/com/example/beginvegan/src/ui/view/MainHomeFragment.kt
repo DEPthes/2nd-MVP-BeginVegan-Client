@@ -10,29 +10,13 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainHomeBinding
 
-class MainHomeFragment : Fragment(){
+class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
+    FragmentMainHomeBinding::bind,R.layout.fragment_main_home ){
 
     private lateinit var viewPager: ViewPager2
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //setContentView(R.layout.fragment_main_home)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_home, container, false)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    private fun initializeViews(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
     }
 }
