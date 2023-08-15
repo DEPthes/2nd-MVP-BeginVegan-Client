@@ -14,5 +14,9 @@ class HomeRecipe1Fragment : BaseFragment<FragmentHomeRecipe1Binding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        binding.tvRecipeTitle.setText()
+//        binding.tvRecipeVeganType.setText()
+//        binding.tvRecipeDescription.setText()
     }
 }

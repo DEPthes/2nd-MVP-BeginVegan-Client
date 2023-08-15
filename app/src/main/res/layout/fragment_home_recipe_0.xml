@@ -8,10 +8,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/item_114"
         android:layout_marginHorizontal="@dimen/side_margin"
         app:cardCornerRadius="@dimen/radius_16"
-        android:elevation="@dimen/dim_10">
+        android:elevation="@dimen/dim_10"
+        android:layout_gravity="center">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -37,10 +38,13 @@
                 android:textSize="@dimen/text_12"
                 android:fontFamily="@font/notosanskr_regular"
                 android:includeFontPadding="false"
+                android:background="@drawable/btn_filled_primary3"
                 app:layout_constraintTop_toBottomOf="@id/tv_recipe_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/margin_4"/>
+                android:layout_marginTop="@dimen/margin_4"
+                android:paddingHorizontal="@dimen/margin_24"
+                android:paddingVertical="@dimen/margin_6"/>
             <TextView
                 android:id="@+id/tv_recipe_description"
                 android:layout_width="match_parent"
