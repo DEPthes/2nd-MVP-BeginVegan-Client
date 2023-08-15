@@ -37,7 +37,6 @@ class RestaurantDetailReviewRVAdapter (private val dataList: ArrayList<String>):
     }
     interface OnItemClickListener {
         fun onItemClick(v: View, data: String, position: Int)
-        fun onLongClick(v: View, data: String, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){
