@@ -20,11 +20,13 @@ class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
 
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
-                if(childFragmentManager.backStackEntryCount>0){
+                if(childFragmentManager.backStackEntryCount>1){
                     if((childFragmentManager.backStackEntryCount-1) == testActivity.getIndex()){
                         testActivity.resetUserType()
                     }
                     childFragmentManager.popBackStackImmediate()
+                }else{
+                    requireActivity().supportFragmentManager.popBackStackImmediate()
                 }
             }
         })
