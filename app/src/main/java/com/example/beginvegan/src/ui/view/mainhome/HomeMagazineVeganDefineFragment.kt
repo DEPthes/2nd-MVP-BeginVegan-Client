@@ -15,6 +15,12 @@ class HomeMagazineVeganDefineFragment : BaseFragment<FragmentHomeMagazineVeganDe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnMagazineDefine.setOnClickListener {
+            val homeFragment = parentFragment as MainHomeFragment
+            homeFragment.onDialogBtnClicked()
+        }
+
     }
 
 }

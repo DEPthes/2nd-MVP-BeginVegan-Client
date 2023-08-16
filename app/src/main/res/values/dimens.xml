@@ -51,6 +51,8 @@
     <dimen name="item_116">116dp</dimen>
     <dimen name="item_134">134dp</dimen>
     <dimen name="item_136">136dp</dimen>
+    <dimen name="item_186">186dp</dimen>
+    <dimen name="item_248">248dp</dimen>
     <dimen name="item_276">276dp</dimen>
 
     <!--    Corner Radius(dp)-->

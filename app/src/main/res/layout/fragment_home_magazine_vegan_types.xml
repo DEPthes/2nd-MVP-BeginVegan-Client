@@ -14,6 +14,12 @@
         android:paddingVertical="@dimen/margin_24"
         android:layout_marginHorizontal="@dimen/side_margin"
         android:elevation="@dimen/dim_10">
+        <Button
+            android:id="@+id/btn_magazine_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/color_transparent"
+            android:background="@color/color_transparent"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

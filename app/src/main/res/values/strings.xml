@@ -88,6 +88,8 @@
     <string name="home_vegan_magazine">비건 매거진</string>
     <string name="home_magazine_title_define">비건 = 채식주의자?\nNOPE</string>
     <string name="home_magazine_title_types">비건 종류가 7가지인 사실에\n놀라움을 감출 수 없었다</string>
+    <string name="magazine_detail_title_define">비건 = 채식주의자\n1가지만 아니란 말이다!</string>
+    <string name="magazine_editor">By 에디터 로이드, 안</string>
 
     <!--    string-array -->
     <string-array name="vegan_type_array">

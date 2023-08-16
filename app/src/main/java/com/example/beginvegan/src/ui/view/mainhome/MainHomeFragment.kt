@@ -62,6 +62,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         })
     }
 
+    //추천 식당 recyclerView
     private fun initializeViews(){
         val recyclerView = binding.rvHomeRecommendRestaurant
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
@@ -69,5 +70,11 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
         val startPosition = Int.MAX_VALUE/2
         recyclerView.scrollToPosition(startPosition)
+    }
+
+    //매거진 Dialog
+    fun onDialogBtnClicked(){
+        val dialog = HomeMagazineDetailDialog(requireContext())
+        dialog.show()
     }
 }

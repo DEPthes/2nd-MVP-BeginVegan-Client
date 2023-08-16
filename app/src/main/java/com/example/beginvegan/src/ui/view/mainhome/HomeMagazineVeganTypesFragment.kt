@@ -14,5 +14,10 @@ class HomeMagazineVeganTypesFragment : BaseFragment<FragmentHomeMagazineVeganTyp
     FragmentHomeMagazineVeganTypesBinding::bind,R.layout.fragment_home_magazine_vegan_types ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnMagazineTypes.setOnClickListener {
+            val homeFragment = parentFragment as MainHomeFragment
+            homeFragment.onDialogBtnClicked()
+        }
     }
 }
