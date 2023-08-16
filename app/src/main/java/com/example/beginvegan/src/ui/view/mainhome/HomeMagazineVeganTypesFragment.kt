@@ -12,9 +12,8 @@ import com.example.beginvegan.databinding.FragmentHomeMagazineVeganTypesBinding
 
 class HomeMagazineVeganTypesFragment : BaseFragment<FragmentHomeMagazineVeganTypesBinding>(
     FragmentHomeMagazineVeganTypesBinding::bind,R.layout.fragment_home_magazine_vegan_types ) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
+    override fun init() {
         binding.btnMagazineTypes.setOnClickListener {
             val homeFragment = parentFragment as MainHomeFragment
             homeFragment.onDialogBtnClicked()

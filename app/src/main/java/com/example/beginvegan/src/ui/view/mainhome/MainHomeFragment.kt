@@ -14,9 +14,7 @@ import com.example.beginvegan.src.ui.view.mainhome.HomeMagazineAdapter
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ){
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         //추천 레스토랑
         initializeViews()
 

@@ -9,8 +9,8 @@ import com.example.beginvegan.databinding.FragmentTestQuestionEggBinding
 class TestQuestionEggFragment : BaseFragment<FragmentTestQuestionEggBinding>(
     FragmentTestQuestionEggBinding::bind,R.layout.fragment_test_question_egg) {
     val INDEX = 4
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun init() {
         //progress bar
         (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
 

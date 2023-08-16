@@ -13,9 +13,7 @@ import com.example.beginvegan.src.ui.view.MainActivity
 class HomeRecipe2Fragment : BaseFragment<FragmentHomeRecipe2Binding>(
     FragmentHomeRecipe2Binding::bind,R.layout.fragment_home_recipe_2) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         binding.btnRecipe2.setOnClickListener {
             (activity as MainActivity).goRecipe()
         }

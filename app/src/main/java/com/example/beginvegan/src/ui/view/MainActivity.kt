@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityMainBinding
+import com.example.beginvegan.src.ui.view.mainhome.MainHomeFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,5 +31,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
             }
             true
         }
+    }
+
+    fun goRecipe(){
+        supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
+        binding.bnvMain.selectedItemId = R.id.item_recipe
     }
 }
