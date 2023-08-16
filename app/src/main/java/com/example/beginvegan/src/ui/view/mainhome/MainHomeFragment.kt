@@ -14,8 +14,6 @@ import com.example.beginvegan.src.ui.view.mainhome.HomeMagazineAdapter
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ){
 
-//    private var listener: AdapterView.OnItemClickListener? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,7 +67,11 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     private fun initializeViews(){
         val recyclerView = binding.rvHomeRecommendRestaurant
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
-        recyclerView.adapter = HomeRecommendRestAdapter()
+        val adapter = HomeRecommendRestAdapter{
+            position ->
+            //로직
+        }
+        recyclerView.adapter = adapter
 
         val startPosition = Int.MAX_VALUE/2
         recyclerView.scrollToPosition(startPosition)

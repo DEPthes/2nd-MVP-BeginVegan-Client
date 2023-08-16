@@ -36,7 +36,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         binding.bnvMain.selectedItemId = R.id.item_recipe
     }
 
-//    fun goMap(){
-//        //지도로 이동
-//    }
 }
