@@ -9,6 +9,8 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
@@ -75,7 +77,12 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         dataRVAdapter.setOnItemClickListener(object: VeganMapBottomSheetRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {
                 Log.d("ItemClick",data)
-                parentFragmentManager.beginTransaction().hide(this@VeganMapFragment).add(R.id.fl_main,RestaurantDetailFragment()).addToBackStack(null).commit()
+                showLoadingDialog(requireContext())
+                Handler(Looper.myLooper()!!).postDelayed({
+                    dismissLoadingDialog()
+                    parentFragmentManager.beginTransaction().hide(this@VeganMapFragment).add(R.id.fl_main,RestaurantDetailFragment()).addToBackStack(null).commit()
+                },3000)
+
             }
 
         })
