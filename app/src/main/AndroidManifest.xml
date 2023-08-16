@@ -44,8 +44,8 @@
             android:name=".src.ui.view.WriteReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".src.ui.view.VeganTestActivity"
-            android:exported="false" />
+            android:name=".src.ui.view.vegantest.VeganTestActivity"
+            android:exported="true" />
         <activity
             android:name=".src.ui.view.MainActivity"
             android:exported="true" />

@@ -10,8 +10,8 @@ import com.example.beginvegan.databinding.FragmentTestQuestionFishBinding
 class TestQuestionFishFragment : BaseFragment<FragmentTestQuestionFishBinding>(
     FragmentTestQuestionFishBinding::bind,R.layout.fragment_test_question_fish) {
     val INDEX = 3
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun init() {
         //progress bar
         (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
 
