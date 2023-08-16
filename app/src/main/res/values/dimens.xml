@@ -3,6 +3,7 @@
     <dimen name="side_margin">16dp</dimen>
 
     <!--    Dp Margin-->
+    <dimen name="margin_2">2dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_6">6dp</dimen>
     <dimen name="margin_8">8dp</dimen>
@@ -43,10 +44,17 @@
 
     <!--    Item Size(dp)-->
     <dimen name="item_8">8dp</dimen>
+    <dimen name="item_76">76dp</dimen>
+    <dimen name="item_80">80dp</dimen>
+    <dimen name="item_88">88dp</dimen>
     <dimen name="item_114">114dp</dimen>
+    <dimen name="item_116">116dp</dimen>
     <dimen name="item_134">134dp</dimen>
+    <dimen name="item_136">136dp</dimen>
+    <dimen name="item_276">276dp</dimen>
 
     <!--    Corner Radius(dp)-->
+    <dimen name="radius_12">12dp</dimen>
     <dimen name="radius_16">16dp</dimen>
     <dimen name="radius_25">25dp</dimen>
 

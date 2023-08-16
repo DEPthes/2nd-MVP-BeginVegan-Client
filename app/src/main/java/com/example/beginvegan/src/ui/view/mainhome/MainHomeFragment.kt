@@ -3,6 +3,7 @@ package com.example.beginvegan.src.ui.view.mainhome
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
@@ -14,6 +15,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //추천 레스토랑
+        initializeViews()
 
         //오늘의 추천 레시피
         val vpTodayRecipe = binding.vpTodayRecipe
@@ -56,5 +60,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
                 }
             }
         })
+    }
+
+    private fun initializeViews(){
+        val recyclerView = binding.rvHomeRecommendRestaurant
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
+        recyclerView.adapter = HomeRecommendRestAdapter()
+
+        val startPosition = Int.MAX_VALUE/2
+        recyclerView.scrollToPosition(startPosition)
     }
 }
