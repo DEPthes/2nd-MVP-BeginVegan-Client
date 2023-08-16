@@ -35,4 +35,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
         binding.bnvMain.selectedItemId = R.id.item_recipe
     }
+
+//    fun goMap(){
+//        //지도로 이동
+//    }
 }

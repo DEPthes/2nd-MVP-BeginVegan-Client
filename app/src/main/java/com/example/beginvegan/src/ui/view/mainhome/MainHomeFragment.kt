@@ -3,6 +3,7 @@ package com.example.beginvegan.src.ui.view.mainhome
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
@@ -12,6 +13,8 @@ import com.example.beginvegan.src.ui.view.mainhome.HomeMagazineAdapter
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ){
+
+//    private var listener: AdapterView.OnItemClickListener? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
