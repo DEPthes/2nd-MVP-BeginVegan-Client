@@ -1,97 +1,12 @@
 <resources>
     <string name="app_name">beginvegan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!--    btn text -->
-    <string name="btn_vegan_test_next">다음에 할게요</string>
-    <string name="btn_vegan_test_start">테스트 시작하기</string>
-    <string name="btn_vegan_test_again">다시하기</string>
-    <string name="btn_go_home">여정 시작하기</string>
-
-    <!--    Vegan Test -->
-    <string name="vegan_test_description_before">
-        비거너로 향한 여정에 오신\n비기너 여러분 환영합니다 !
-        \n\n저희 여정에 있어 “비긴, 비건”은\n비건이 단순한 ‘채식주의자’가 아닌,
-        \n자신의 성향에 맞는 비건 단계를\n안내하는 것으로 목표하고 있습니다.
-        \n\n여정을 떠날 준비 되셨나요?
-        \n\n준비가 되셨다면\n아래의 ‘시작하기’ 버튼을 눌러주세요 !
+    <string name="str_vegan_test_before_description">비거너로 향한 여정에 오신 \n 비기너 여러분 환영합니다!
+        \n 저희 여정에 있어 “비긴, 비건”은 \n 비건이 단순한 ‘채식주의자’가 아닌,
+        자신의 성향에 맞는 비건 단계를 \n 안내하는 것으로 목표하고 있습니다.
+        \n 여정을 떠날 준비가 되셨나요?
+        \n 준비가 되셨다면 \n ‘시작하기’ 버튼을 눌러주세요!
     </string>
-
-    <!--    Vegan Test Questions -->
-    <string name="test_question_meat">1. 친구가 취뽀해서 소고기(혹은 돼지고기)를\n사준다고 한다.\n나는?</string>
-    <string name="test_question_chicken">2. 오늘은 축구 결승전!\n나는?</string>
-    <string name="test_question_fish">3. 하루종일 굶은 나, 식당이 열린 곳은 단 하나!\n메뉴가 생선구이밖에 있지 않다.\n나는?</string>
-    <string name="test_question_egg">4. 계란찜이 서비스로 나왔다!\n나는?</string>
-    <string name="test_question_milk">5. 마트에 왔다!\n식물성 우유는 기본 우유보다\n가격이 더 나간다.\n나는?</string>
-
-    <!--    Vegan Test Answers -->
-    <string name="test_answer_meat_a">너무 좋지!!</string>
-    <string name="test_answer_meat_b">다른 메뉴로 안될까?</string>
-    <string name="test_answer_chicken_a">축구에는 치킨이지!</string>
-    <string name="test_answer_chicken_b">치킨말고 다른 메뉴를 찾아볼래</string>
-    <string name="test_answer_fish_a">생선구이 하나 주세요!</string>
-    <string name="test_answer_fish_b">다른 곳을 찾으러 나간다.</string>
-    <string name="test_answer_egg_a">우와 감사합니다!</string>
-    <string name="test_answer_egg_b">감사합니다! (사실 안 먹는데 ㅠㅠ)</string>
-    <string name="test_answer_milk_a">그냥 우유로 구매할래!</string>
-    <string name="test_answer_milk_b">무조건 식물성 우유!</string>
-
-
-    <!--    Vegan Test Result -->
-    <string name="test_result_vegan">
-        순수 채식주의자를 뜻하며, 어떠한 종류의 육류도 섭취하지 않는다
-        \n\n육류와 생선은 물론이고 달걀, 유제품, 벌꿀 또는 젤라틴과 같은 동물 유래 성분을 포함한 가공식품도 섭취하지 않는다
-    </string>
-    <string name="test_result_lacto">
-        Lacto는 우유를 뜻하는 라틴어로부터 유래한 것으로,
-        우유와 같은 유제품은 섭취하되 다른 동물 제품(붉은 육류, 흰 육류, 생선, 조류 또는 달걀)을 전혀 섭취하지 않는다
-        \n\n비건의 허용품목에서 유제품(치즈, 우유, 요거트 등)만 더하면 락토가 된다
-    </string>
-    <string name="test_result_lacto_ovo">
-        유제품과 달걀을 모두 섭취하는 채식주의자로, 가장 일반적으로 알려진 채식주의자이다
-        \n\n붉은 육류, 흰육류, 생선 또는 조류를 섭취하지 않으며 즉, 육류만 거부한다
-    </string>
-    <string name="test_result_pescatarian">
-        "semi-vegetarian"또는 "flexitarian" 식단으로 간주하며, 기술적으로 채식주의자의 유형은 아니지만, 생선 및 해산물의 섭취를 허용한다
-        \n\n즉, 육류, 가금류를 제외한 모든 식품을 섭취한다
-        \n\n비건(vegan)의 허용 품목에서 우유, 계란 등의 알류, 어류와 해산물을 더하면 페스코가 된다
-    </string>
-    <string name="test_result_pollotarian">
-        "semi-vegetarian" 식단으로, 동물 가운데 가금류(닭이나 오리 등)만 허용한 채식주의이다
-        \n\n붉은 육류 또는 생선과 해산물을 섭취하지 않는다
-    </string>
-    <string name="test_result_flexitarian">
-        기본적으로 채식을 하며,\n허용된 기준 안에서만 육류 제품을 섭취하기도 한다
-    </string>
-
-    <!--    Vegan Type Korean -->
-    <string name="vegan_type_vegan_kr">비건</string>
-    <string name="vegan_type_lacto_kr">락토 베지테리언</string>
-    <string name="vegan_type_lacto_ovo_kr">락토-오보 베지테리언</string>
-    <string name="vegan_type_pescatarian_kr">페스코테리언</string>
-    <string name="vegan_type_pollotarian_kr">폴로테리언</string>
-    <string name="vegan_type_flexitarian_kr">플렉시테리언</string>
-
-    <!--    Vegan Type English -->
-    <string name="vegan_type_vegan_eng">Vegan</string>
-    <string name="vegan_type_lacto_eng">Lacto-vegetarian</string>
-    <string name="vegan_type_lacto_ovo_eng">Lacto-ovo-vegetarian</string>
-    <string name="vegan_type_pescatarian_eng">Pescatarian</string>
-    <string name="vegan_type_pollotarian_eng">Pollotarian</string>
-    <string name="vegan_type_flexitarian_eng">Flexitarian</string>
-
-    <!--    Main Home  -->
-    <string name="home_slogan_veganner">비거너</string>
-    <string name="home_slogan_description">의 여정으로 함께 떠나봐요</string>
-    <string name="home_semi_title">주변 식당에서 비건 여정을 시작해 보세요</string>
-    <string name="home_today_recipe">오늘의 추천 레시피 🥗</string>
-    <string name="home_vegan_magazine">비건 매거진</string>
-    <string name="home_magazine_title_define">비건 = 채식주의자?\nNOPE</string>
-    <string name="home_magazine_title_types">비건 종류가 7가지인 사실에\n놀라움을 감출 수 없었다</string>
-    <string name="magazine_detail_title_define">비건 = 채식주의자\n1가지만 아니란 말이다!</string>
-    <string name="magazine_editor">By 에디터 로이드, 안</string>
-
-    <!--    string-array -->
     <string-array name="vegan_type_array">
         <item>비건</item>
         <item>락토 베지테리언</item>
