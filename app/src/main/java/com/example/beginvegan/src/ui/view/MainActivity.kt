@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view
 
+import androidx.fragment.app.Fragment
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityMainBinding
@@ -30,5 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         }
     }
 
-
+    fun goRecipe(){
+        supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
+        binding.bnvMain.selectedItemId = R.id.item_recipe
+    }
 }
