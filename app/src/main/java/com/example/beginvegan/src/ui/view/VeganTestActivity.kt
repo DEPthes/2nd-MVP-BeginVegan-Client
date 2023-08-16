@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
-import com.example.beginvegan.databinding.ActivityLoginBinding
 import com.example.beginvegan.databinding.ActivityRestaurantDetailBinding
+import com.example.beginvegan.databinding.ActivityVeganTestBinding
 
-class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding>({ ActivityRestaurantDetailBinding.inflate(it)}) {
+class VeganTestActivity : BaseActivity<ActivityVeganTestBinding>({ ActivityVeganTestBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_restaurant_detail)
+        setContentView(R.layout.activity_vegan_test)
     }
+
     override fun init() {
 
     }

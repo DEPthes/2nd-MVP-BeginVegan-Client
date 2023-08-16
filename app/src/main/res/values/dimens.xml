@@ -2,13 +2,12 @@
 <resources>
     <dimen name="side_margin">16dp</dimen>
 
+
     <!--    Dp Margin-->
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_16">16dp</dimen>
-    <dimen name="margin_20">20dp</dimen>
     <dimen name="margin_24">24dp</dimen>
-    <dimen name="margin_28">28dp</dimen>
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_36">36dp</dimen>
     <dimen name="margin_40">40dp</dimen>
@@ -22,25 +21,26 @@
     <dimen name="margin_72">72dp</dimen>
     <dimen name="margin_76">76dp</dimen>
     <dimen name="margin_80">80dp</dimen>
-    <dimen name="margin_100">100dp</dimen>
 
     <!--    Text Size(sp)-->
-    <dimen name="text_14">14sp</dimen>
-    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_8">8sp</dimen>
+    <dimen name="text_12">12sp</dimen>
+    <dimen name="text_15">15sp</dimen>
     <dimen name="text_18">18sp</dimen>
-    <dimen name="text_20">20sp</dimen>
-
-    <!--    Button Size(dp)-->
-    <dimen name="btn_40">40dp</dimen>
-    <dimen name="btn_148">148dp</dimen>
-    <dimen name="btn_164">164dp</dimen>
-
-    <!--    Corner Radius(dp)-->
-    <dimen name="radius_16">16dp</dimen>
-    <dimen name="radius_25">25dp</dimen>
-
-    <!--    Line Width(dp)-->
-    <dimen name="line_1">1dp</dimen>
-    <dimen name="line_4">4dp</dimen>
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_28">28sp</dimen>
+    <dimen name="text_32">32sp</dimen>
+    <dimen name="text_36">36sp</dimen>
+    <dimen name="text_40">40sp</dimen>
+    <dimen name="text_44">44sp</dimen>
+    <dimen name="text_48">48sp</dimen>
+    <dimen name="text_52">52sp</dimen>
+    <dimen name="text_56">56sp</dimen>
+    <dimen name="text_60">60sp</dimen>
+    <dimen name="text_64">64sp</dimen>
+    <dimen name="text_68">68sp</dimen>
+    <dimen name="text_72">72sp</dimen>
+    <dimen name="text_76">76sp</dimen>
+    <dimen name="text_80">80sp</dimen>
 
 </resources>

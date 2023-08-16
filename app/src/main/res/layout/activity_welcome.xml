@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".src.ui.view.SplashActivity">
+    tools:context=".src.ui.view.WelcomeActivity">
+
     <ImageView
-        android:id="@+id/iv_splash_logo"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
-        android:src="@drawable/logo_beginvegan"
+        android:id="@+id/iv_welcome_beginvegan"
+        android:layout_width="124dp"
+        android:layout_height="96dp"
+        android:src="@drawable/splash_welcome"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

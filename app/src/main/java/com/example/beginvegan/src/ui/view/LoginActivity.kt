@@ -1,10 +1,7 @@
 package com.example.beginvegan.src.ui.view
 
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityLoginBinding
@@ -13,8 +10,6 @@ import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +52,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             }
         }
     }
-
-
 }
