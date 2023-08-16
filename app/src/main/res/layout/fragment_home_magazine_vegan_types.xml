@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".src.ui.view.mainhome.HomeMagazineVeganTypesFragment"
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/color_primary4"
+        app:cardCornerRadius="@dimen/radius_16"
+        android:paddingVertical="@dimen/margin_24"
+        android:layout_marginHorizontal="@dimen/side_margin"
+        android:elevation="@dimen/dim_10">
+        <Button
+            android:id="@+id/btn_magazine_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/color_transparent"
+            android:background="@color/color_transparent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_magazine_title_define"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_magazine_title_types"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_16"
+                android:fontFamily="@font/notosanskr_bold"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/margin_28"/>
+            <ImageView
+                android:id="@+id/iv_icon_arrow"
+                android:layout_width="@dimen/btn_32"
+                android:layout_height="@dimen/btn_32"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:src="@drawable/ic_general_arrow_large_white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

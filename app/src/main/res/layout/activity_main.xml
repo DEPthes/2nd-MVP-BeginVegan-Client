@@ -26,8 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fl_main"
+        app:itemRippleColor="@null"
+        
         app:itemIconTint="@color/color_primary3"
-        app:itemRippleColor="@color/color_transparent"
         app:menu="@menu/menu_bn"
         />
 
