@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
-import com.example.beginvegan.databinding.ActivityRestaurantDetailBinding
 import com.example.beginvegan.databinding.ActivityVeganTestBinding
 
 class VeganTestActivity : BaseActivity<ActivityVeganTestBinding>({ ActivityVeganTestBinding.inflate(it)}) {

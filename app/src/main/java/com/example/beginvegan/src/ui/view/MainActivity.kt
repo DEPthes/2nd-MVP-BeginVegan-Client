@@ -12,14 +12,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
     }
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
-
+        binding.bnvMain.itemBackground = null
         binding.bnvMain.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.item_home->{
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
                 }
                 R.id.item_map->{
-                    //supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_main,VeganMapFragment()).commit()
                 }
                 R.id.item_recipe->{
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
