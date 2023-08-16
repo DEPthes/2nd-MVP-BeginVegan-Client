@@ -10,9 +10,7 @@ import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
     FragmentVeganTestAfterBinding::bind,R.layout.fragment_vegan_test_after) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         val testActivity =(activity as VeganTestActivity)
         val veganTestBeforeFragment = VeganTestBeforeFragment.newInstance()
 
