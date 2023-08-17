@@ -44,6 +44,8 @@
 
     <!--    Item Size(dp)-->
     <dimen name="item_8">8dp</dimen>
+    <dimen name="item_52">52dp</dimen>
+    <dimen name="item_36">36dp</dimen>
     <dimen name="item_76">76dp</dimen>
     <dimen name="item_80">80dp</dimen>
     <dimen name="item_88">88dp</dimen>
@@ -51,11 +53,13 @@
     <dimen name="item_116">116dp</dimen>
     <dimen name="item_134">134dp</dimen>
     <dimen name="item_136">136dp</dimen>
+    <dimen name="item_168">168dp</dimen>
     <dimen name="item_186">186dp</dimen>
     <dimen name="item_248">248dp</dimen>
     <dimen name="item_276">276dp</dimen>
 
     <!--    Corner Radius(dp)-->
+    <dimen name="radius_8">8dp</dimen>
     <dimen name="radius_12">12dp</dimen>
     <dimen name="radius_16">16dp</dimen>
     <dimen name="radius_25">25dp</dimen>
