@@ -1,8 +1,8 @@
-package com.example.beginvegan.src.data.model
+package com.example.beginvegan.config
 
 import com.google.gson.annotations.SerializedName
 
-open class FailedResult(
+open class ErrorResponse(
     @SerializedName("timestamp")
     val timestamp: String,
     @SerializedName("message")
@@ -12,5 +12,5 @@ open class FailedResult(
     @SerializedName("status")
     val status: Int,
     @SerializedName("class")
-    val ex: String,
+    val errorResponse: String,
 )
