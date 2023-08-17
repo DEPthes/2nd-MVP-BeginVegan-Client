@@ -1,20 +1,16 @@
-package com.example.beginvegan.src.ui.view.mainhome
+package com.example.beginvegan.src.ui.view
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Layout
 import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
-import com.example.beginvegan.R
-import com.example.beginvegan.databinding.DialogHomeMagazineDetailBinding
+import com.example.beginvegan.databinding.DialogRecipeDetailBinding
 
-class HomeMagazineDetailDialog(context: Context): Dialog(context) {
+class RecipeDetailDialog(context: Context): Dialog(context) {
 
-    private val binding: DialogHomeMagazineDetailBinding = DialogHomeMagazineDetailBinding.inflate(
+    private val binding: DialogRecipeDetailBinding = DialogRecipeDetailBinding.inflate(
         LayoutInflater.from(context))
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +20,9 @@ class HomeMagazineDetailDialog(context: Context): Dialog(context) {
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         //데이터 연결
-//        binding.tv_magazine_title.setText("")
+//        binding.tvVeganType.setText("")
+//        binding.tvRecipeTitle.setText("")
+//        binding.tvRecipeContent.setText("")
 
         //dialog 크기
 //        val layoutParams = WindowManager.LayoutParams()
