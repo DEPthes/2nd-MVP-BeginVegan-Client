@@ -57,15 +57,16 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     private fun initializeViews(){
         val recipeAdapter = RecipeListRVAdapter(recipeNames)
-        Log.d("TAG", "initializeViews: before")
-        binding.rvRecipes.adapter = recipeAdapter
-        binding.rvRecipes.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL,false)
+
 
         recipeAdapter.setOnItemClickListener(object: RecipeListRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {
-                Log.d("TAG", "onItemClick: $position")
+                onDialogBtnClicked()
             }
         })
+
+        binding.rvRecipes.adapter = recipeAdapter
+        binding.rvRecipes.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL,false)
     }
 
     private fun checkFilter(filter:Chip, checked:Boolean){
@@ -83,8 +84,8 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
 
     //recipe Dialog
-//    fun onDialogBtnClicked(){
-//        val dialog = RecipeDetailDialog(requireContext())
-//        dialog.show()
-//    }
+    fun onDialogBtnClicked(){
+        val dialog = RecipeDetailDialog(requireContext())
+        dialog.show()
+    }
 }
