@@ -12,32 +12,36 @@ import retrofit2.create
 class MagazineService(val magazineInterface: MagazineInterface) {
     private val magazineRetrofitInterface: MagazineRetrofitInterface = ApplicationClass.sRetrofit.create(MagazineRetrofitInterface::class.java)
 
-    fun tryGetMagazineRandomList(){
+
+    // 2가지 매거진 목록 조회
+    fun tryGetMagazineTwoList(){
         magazineRetrofitInterface.getMagazineTwoList().enqueue(object: Callback<MagazineTwoResponse>{
             override fun onResponse(
                 call: Call<MagazineTwoResponse>,
                 response: Response<MagazineTwoResponse>
             ) {
                 if(response.code() == 200){
-                    magazineInterface.onGetMagazineRandomListSuccess(response.body() as MagazineTwoResponse)
+                    magazineInterface.onGetMagazineTwoListSuccess(response.body() as MagazineTwoResponse)
                 }else{
                     try{
                         val gson = Gson()
                         val errorResponse =
                             gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                        magazineInterface.onGetMagazineRandomListFailure(errorResponse.message)
+                        magazineInterface.onGetMagazineTwoListFailure(errorResponse.message)
                     }catch(e:Exception){
-                        magazineInterface.onGetMagazineRandomListFailure(e.message?:"통신 오류")
+                        magazineInterface.onGetMagazineTwoListFailure(e.message?:"통신 오류")
                     }
                 }
             }
 
             override fun onFailure(call: Call<MagazineTwoResponse>, t: Throwable) {
-                magazineInterface.onGetMagazineRandomListFailure(t.message?:"통신 오류")
+                magazineInterface.onGetMagazineTwoListFailure(t.message?:"통신 오류")
             }
 
         })
     }
+
+    // 매거진 상세 정보 조회
     fun tryPostMagazineDetail(magazineId: Int){
         magazineRetrofitInterface.postMagazineDetail(magazineId).enqueue(object: Callback<MagazineDetailResponse>{
             override fun onResponse(
