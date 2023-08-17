@@ -1,7 +1,7 @@
 package com.example.beginvegan.util
 
 object Constants {
-    const val BASE_URL = "Base Url"
+    const val BASE_URL = "http://beginvegan.p-e.kr/"
 
 
     // VALIDATION
