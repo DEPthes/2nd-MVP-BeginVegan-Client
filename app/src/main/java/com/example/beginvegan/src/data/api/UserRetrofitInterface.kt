@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.data.api
 
+import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.user.VeganType
 import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
 import com.example.beginvegan.src.data.model.user.UserResponse
@@ -23,4 +24,9 @@ interface UserRetrofitInterface {
     fun postUserVeganType(
         @Body veganType: VeganType
     ): Call<VeganTypeResponse>
+
+    // 유저의 스크랩 조회
+    // 이상 있음 response <- 이 부분을 어떻게 받을 것인지 생각 해야함
+    @GET("/api/v1/bookmarks")
+    fun getUserBookmarks(): Call<List<RestaurantDetailResponse>>
 }
