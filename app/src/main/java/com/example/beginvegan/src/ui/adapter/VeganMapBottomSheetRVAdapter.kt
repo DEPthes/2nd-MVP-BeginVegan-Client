@@ -6,19 +6,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemVeganmapRestaurantBinding
 
-class VeganMapBottomSheetRVAdapter(private val dataList: ArrayList<String>): RecyclerView.Adapter<VeganMapBottomSheetRVAdapter.DataViewHolder>(){
+class VeganMapBottomSheetRVAdapter(private val dataList: ArrayList<String>) :
+    RecyclerView.Adapter<VeganMapBottomSheetRVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
 
-    inner class DataViewHolder(private val binding: ItemVeganmapRestaurantBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(){
+    inner class DataViewHolder(private val binding: ItemVeganmapRestaurantBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
             // bind
         }
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): DataViewHolder {
-        val binding = ItemVeganmapRestaurantBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemVeganmapRestaurantBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return DataViewHolder(binding)
     }
 
@@ -28,22 +35,24 @@ class VeganMapBottomSheetRVAdapter(private val dataList: ArrayList<String>): Rec
         position: Int
     ) {
         holder.bind()
-        if(position != RecyclerView.NO_POSITION){
+        if (position != RecyclerView.NO_POSITION) {
             holder.itemView.setOnClickListener {
-                listener?.onItemClick(holder.itemView,dataList[position],position)
+                listener?.onItemClick(holder.itemView, dataList[position], position)
             }
         }
     }
+
     override fun getItemCount(): Int = dataList.size
 
     override fun getItemViewType(position: Int): Int {
         return position
     }
+
     interface OnItemClickListener {
         fun onItemClick(v: View, data: String, position: Int)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener){
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 }

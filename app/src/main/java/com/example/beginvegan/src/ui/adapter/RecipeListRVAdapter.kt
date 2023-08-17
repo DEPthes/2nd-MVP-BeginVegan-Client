@@ -4,10 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemRecipeBinding
-import com.example.beginvegan.src.ui.view.mainhome.HomeRecommendRestAdapter
 
 class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerView.Adapter<RecipeListRVAdapter.RecycleViewHolder>() {
     private var listener: OnItemClickListener? = null
@@ -19,7 +17,8 @@ class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerV
     inner class RecycleViewHolder(private val binding: ItemRecipeBinding):
         RecyclerView.ViewHolder(binding.root){
         fun bind(recipeName:String){
-            binding.tvRecipeName.setText(recipeName)
+            Log.d("TEST","bind")
+            binding.tvRecipeName.text = recipeName
         }
     }
 
@@ -39,10 +38,12 @@ class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerV
         val item = recipeNames[position]
         holder.bind(item)
 
+        Log.d("TEST","onBindViewHolder")
         if(position != RecyclerView.NO_POSITION){
+            Log.d("TAG","Click")
             holder.itemView.setOnClickListener {
                 listener?.onItemClick(holder.itemView, recipeNames[position], position)
-                Log.d("TAG","Adapter")
+                Log.d("TAG","ClickListener")
             }
         }
     }
@@ -56,6 +57,8 @@ class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerV
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){
+
+        Log.d("TAG","setOnItemClickListener")
         this.listener = listener
     }
 }
