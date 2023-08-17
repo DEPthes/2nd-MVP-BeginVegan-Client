@@ -20,7 +20,7 @@ data class CustomFieldError(
     @SerializedName("field")
     val field: String,
     @SerializedName("value")
-    // String 타입 아님 뭔지 알면 등록 하십셔
+    // String 타입 아님 뭔지 알면 등록 하십셔 -> List<String> 이라고 함
     val value: String,
     @SerializedName("reason")
     val reason: String
