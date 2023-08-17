@@ -14,7 +14,7 @@ data class ErrorResponse(
     @SerializedName("class")
     val errorResponse: String,
     @SerializedName("errors")
-    val errors: CustomFieldError
+    val errors: List<CustomFieldError>
 )
 data class CustomFieldError(
     @SerializedName("field")
