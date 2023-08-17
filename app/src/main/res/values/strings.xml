@@ -60,6 +60,12 @@
         기본적으로 채식을 하며,\n허용된 기준 안에서만 육류 제품을 섭취하기도 한다
     </string>
 
+    <!--    Recipe Filter -->
+    <string name="recipe_filter_all">전체보기</string>
+    <string name="recipe_filter_lacto">락토</string>
+    <string name="recipe_filter_lacto_ovo">락토-오보</string>
+    <string name="recipe_filter_pollo">폴로</string>
+
     <!--    Vegan Type Korean -->
     <string name="vegan_type_vegan_kr">비건</string>
     <string name="vegan_type_lacto_kr">락토 베지테리언</string>
