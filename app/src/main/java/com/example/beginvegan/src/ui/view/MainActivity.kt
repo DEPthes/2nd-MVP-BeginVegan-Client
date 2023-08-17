@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityMainBinding
+import com.example.beginvegan.src.ui.view.mainhome.MainHomeFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,14 +13,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
     }
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
-        binding.bnvMain.itemBackground = null
+
         binding.bnvMain.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.item_home->{
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
                 }
                 R.id.item_map->{
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_main,VeganMapFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
                 }
                 R.id.item_recipe->{
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
@@ -30,5 +31,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
             }
             true
         }
+    }
+
+    fun goRecipe(){
+        supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
+        binding.bnvMain.selectedItemId = R.id.item_recipe
     }
 }

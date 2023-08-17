@@ -12,8 +12,7 @@ import com.example.beginvegan.databinding.FragmentVeganTestOngoingBinding
 class VeganTestOngoingFragment : BaseFragment<FragmentVeganTestOngoingBinding>(
     FragmentVeganTestOngoingBinding::bind,R.layout.fragment_vegan_test_ongoing) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
         val testQuestionMeatFragment = TestQuestionMeatFragment.newInstance()
         val testActivity = activity as VeganTestActivity
         changeQuestion(testQuestionMeatFragment)

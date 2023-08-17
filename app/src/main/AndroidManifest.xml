@@ -18,38 +18,39 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".src.ui.view.WelcomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".src.ui.view.SplashActivity"
-            android:exported="true" />
-         <activity
+            android:exported="true"/>
+        <activity
             android:name=".src.ui.view.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
-
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakaofb5550ba69a57eb73aae78bc996d8a8e" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".src.ui.view.WriteReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".src.ui.view.VeganTestActivity"
-            android:exported="false" />
+            android:name=".src.ui.view.vegantest.VeganTestActivity"
+            android:exported="true" />
         <activity
             android:name=".src.ui.view.MainActivity"
             android:exported="true" />
-
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

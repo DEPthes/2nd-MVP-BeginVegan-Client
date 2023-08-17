@@ -9,8 +9,8 @@ import com.example.beginvegan.databinding.FragmentTestQuestionMeatBinding
 class TestQuestionMeatFragment : BaseFragment<FragmentTestQuestionMeatBinding>(
     FragmentTestQuestionMeatBinding::bind,R.layout.fragment_test_question_meat) {
     val INDEX = 1
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun init() {
         //progress bar
         (parentFragment as VeganTestOngoingFragment).setProgressValue(INDEX)
 
@@ -31,6 +31,7 @@ class TestQuestionMeatFragment : BaseFragment<FragmentTestQuestionMeatBinding>(
             testOngoingFragment.changeQuestion(testQuestionChickenFragment)
         }
     }
+
     companion object{
         fun newInstance(): TestQuestionMeatFragment {
             return TestQuestionMeatFragment()

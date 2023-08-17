@@ -8,12 +8,8 @@ import com.example.beginvegan.databinding.FragmentVeganTestBeforeBinding
 
 class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
     FragmentVeganTestBeforeBinding::bind,R.layout.fragment_vegan_test_before) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
         binding.btnVeganTestStart.setOnClickListener{
             val fragmentOngoing = VeganTestOngoingFragment.newInstance()
             (activity as VeganTestActivity).changeTestState(fragmentOngoing)
@@ -22,6 +18,7 @@ class VeganTestBeforeFragment : BaseFragment<FragmentVeganTestBeforeBinding>(
             (activity as VeganTestActivity).goHome()
         }
     }
+
     companion object{
         fun newInstance(): VeganTestBeforeFragment {
             return VeganTestBeforeFragment()
