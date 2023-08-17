@@ -1,9 +1,8 @@
 package com.example.beginvegan.src.data.api
 
-import com.example.beginvegan.src.data.model.food.Recipe
-import com.example.beginvegan.src.data.model.food.RecipeDetailResponse
-import com.example.beginvegan.src.data.model.food.RecipeListResponse
-import com.example.beginvegan.src.data.model.food.RecipeThreeResponse
+import com.example.beginvegan.src.data.model.recipe.RecipeDetailResponse
+import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
+import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

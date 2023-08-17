@@ -2,7 +2,6 @@ package com.example.beginvegan.src.data.api
 
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.user.VeganType
-import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
 import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.data.model.user.VeganTypeResponse
 import retrofit2.Call

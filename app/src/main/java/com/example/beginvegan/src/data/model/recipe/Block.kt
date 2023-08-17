@@ -1,10 +1,10 @@
-package com.example.beginvegan.src.data.model.magazines
+package com.example.beginvegan.src.data.model.recipe
 
 import com.google.gson.annotations.SerializedName
 
-data class MagazineContents(
+data class Block(
     @SerializedName("content") val content: String,
     @SerializedName("sequence") val sequence: Int,
-    // ENUM TYPE
+    //  blockType: Image???
     @SerializedName("blockType") val blockType: String
 )

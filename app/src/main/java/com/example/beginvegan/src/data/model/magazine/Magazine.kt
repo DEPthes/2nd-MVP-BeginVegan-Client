@@ -1,4 +1,4 @@
-package com.example.beginvegan.src.data.model.magazines
+package com.example.beginvegan.src.data.model.magazine
 
 import com.google.gson.annotations.SerializedName
 
