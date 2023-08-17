@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainRecipeBinding
@@ -31,28 +32,28 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         //레시피 리스트
         initializeViews()
 
-        //filter
-        binding.cFilterAll.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterAll, isChecked)
-        }
-        binding.cFilterVegan.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterVegan, isChecked)
-        }
-        binding.cFilterLacto.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterLacto, isChecked)
-        }
-        binding.cFilterLactoOvo.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterLactoOvo, isChecked)
-        }
-        binding.cFilterPesco.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterPesco, isChecked)
-        }
-        binding.cFilterPollo.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterPollo, isChecked)
-        }
-        binding.cFilterFlexitarian.setOnCheckedChangeListener{ _, isChecked ->
-            checkFilter(binding.cFilterFlexitarian, isChecked)
-        }
+//        //filter
+//        binding.cFilterAll.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterAll, isChecked)
+//        }
+//        binding.cFilterVegan.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterVegan, isChecked)
+//        }
+//        binding.cFilterLacto.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterLacto, isChecked)
+//        }
+//        binding.cFilterLactoOvo.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterLactoOvo, isChecked)
+//        }
+//        binding.cFilterPesco.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterPesco, isChecked)
+//        }
+//        binding.cFilterPollo.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterPollo, isChecked)
+//        }
+//        binding.cFilterFlexitarian.setOnCheckedChangeListener{ _, isChecked ->
+//            checkFilter(binding.cFilterFlexitarian, isChecked)
+//        }
     }
 
     private fun initializeViews(){
