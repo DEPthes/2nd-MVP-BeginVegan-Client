@@ -11,6 +11,8 @@ import retrofit2.Response
 class RestaurantService(val restaurantInterface: RestaurantInterface){
     private val restaurantRetrofitInterface: RestaurantRetrofitInterface = ApplicationClass.sRetrofit.create(RestaurantRetrofitInterface::class.java)
 
+
+    // 식당/카페 상세 정보(메뉴까지) 조회
     fun tryGetRestaurantDetail(restaurantId: Int){
         restaurantRetrofitInterface.getRestaurantsDetail(restaurantId).enqueue(object: Callback<RestaurantDetailResponse>{
             override fun onResponse(
@@ -18,21 +20,50 @@ class RestaurantService(val restaurantInterface: RestaurantInterface){
                 response: Response<RestaurantDetailResponse>
             ) {
                 if(response.code()==200){
-                    restaurantInterface.onGetRestaurantsDetailSuccess(response.body() as RestaurantDetailResponse)
+                    restaurantInterface.onGetRestaurantDetailSuccess(response.body() as RestaurantDetailResponse)
                 }else{
                     try{
                         val gson = Gson()
                         val errorResponse =
                             gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                        restaurantInterface.onGetRestaurantsDetailFailure(errorResponse.message)
+                        restaurantInterface.onGetRestaurantDetailFailure(errorResponse.message)
                     }catch(e:Exception){
-                        restaurantInterface.onGetRestaurantsDetailFailure(e.message?:"통신 오류")
+                        restaurantInterface.onGetRestaurantDetailFailure(e.message?:"통신 오류")
                     }
 
                 }
             }
             override fun onFailure(call: Call<RestaurantDetailResponse>, t: Throwable) {
-                restaurantInterface.onGetRestaurantsDetailFailure(t.message?:"통신 오류")
+                restaurantInterface.onGetRestaurantDetailFailure(t.message?:"통신 오류")
+            }
+
+        })
+    }
+
+    // 식당/카페 리뷰 조회
+    fun tryGetRestaurantReview(restaurantId: Int){
+        restaurantRetrofitInterface.getRestaurantReview(restaurantId).enqueue(object: Callback<RestaurantReviewResponse>{
+            override fun onResponse(
+                call: Call<RestaurantReviewResponse>,
+                response: Response<RestaurantReviewResponse>
+            ) {
+                if(response.code()==200){
+                    restaurantInterface.onGetRestaurantReviewSuccess(response.body() as RestaurantReviewResponse)
+                }
+                else{
+                    try{
+                        val gson = Gson()
+                        val errorResponse =
+                            gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                        restaurantInterface.onGetRestaurantReviewFailure(errorResponse.message)
+                    }catch(e:Exception){
+                        restaurantInterface.onGetRestaurantReviewFailure(e.message?:"통신 오류")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<RestaurantReviewResponse>, t: Throwable) {
+                restaurantInterface.onGetRestaurantReviewFailure(t.message?:"통신 오류")
             }
 
         })

@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.data.api
 
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
 import retrofit2.Call
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -19,7 +20,7 @@ interface RestaurantRetrofitInterface {
     @GET("/api/v1/restaurants/review/{restaurant-id}")
     fun getRestaurantReview(
         @Path("restaurant-id") id: Int
-    )
+    ): Call<RestaurantReviewResponse>
 
     // 식당/카페 스크랩
     @POST("@Path(\"restaurant-id\") id: String")
