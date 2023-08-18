@@ -8,24 +8,47 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentRestaurantDetailBinding
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
+import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
+import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantService
 import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
 import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 
 class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     FragmentRestaurantDetailBinding::bind,
     R.layout.fragment_restaurant_detail
-) {
-    private lateinit var dataList: ArrayList<String>
+),RestaurantInterface{
+    private lateinit var reViewList: ArrayList<String>
     override fun init() {
-        dataList = arrayListOf()
-        dataList.apply{
+        // Res 아이디 받아오기
+        RestaurantService(this).tryGetRestaurantDetail(0)
+        RestaurantService(this).tryGetRestaurantReview(0)
+
+        reViewList = arrayListOf()
+        reViewList.apply{
             add("hello1")
             add("hello2")
             add("hello3")
             add("hello4")
         }
-        val dataRVAdapter  = RestaurantDetailReviewRVAdapter(dataList)
+        val dataRVAdapter  = RestaurantDetailReviewRVAdapter(reViewList)
         binding.rvRestaurantReviews.adapter = dataRVAdapter
         binding.rvRestaurantReviews.layoutManager = LinearLayoutManager(this.context)
     }
+
+    override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
+        binding.tvRestaurantAddress.text = response.restaurant.address.toString()
+    }
+
+    override fun onGetRestaurantDetailFailure(message: String) {
+    }
+
+    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetRestaurantReviewFailure(message: String) {}
+
+
 }

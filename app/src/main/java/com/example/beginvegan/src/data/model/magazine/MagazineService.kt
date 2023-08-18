@@ -3,6 +3,7 @@ package com.example.beginvegan.src.data.model.magazine
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.MagazineRetrofitInterface
+import com.example.beginvegan.util.Constants.ACCESS_TOKEN
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,11 +12,14 @@ import retrofit2.create
 
 class MagazineService(val magazineInterface: MagazineInterface) {
     private val magazineRetrofitInterface: MagazineRetrofitInterface = ApplicationClass.sRetrofit.create(MagazineRetrofitInterface::class.java)
-
+    private val accessToken = ApplicationClass.sSharedPreferences.getString(
+        ACCESS_TOKEN,
+        null
+    )
 
     // 2가지 매거진 목록 조회
     fun tryGetMagazineTwoList(){
-        magazineRetrofitInterface.getMagazineTwoList().enqueue(object: Callback<MagazineTwoResponse>{
+        magazineRetrofitInterface.getMagazineTwoList(accessToken).enqueue(object: Callback<MagazineTwoResponse>{
             override fun onResponse(
                 call: Call<MagazineTwoResponse>,
                 response: Response<MagazineTwoResponse>
@@ -43,7 +47,7 @@ class MagazineService(val magazineInterface: MagazineInterface) {
 
     // 매거진 상세 정보 조회
     fun tryPostMagazineDetail(magazineId: Int){
-        magazineRetrofitInterface.postMagazineDetail(magazineId).enqueue(object: Callback<MagazineDetailResponse>{
+        magazineRetrofitInterface.postMagazineDetail(accessToken,magazineId).enqueue(object: Callback<MagazineDetailResponse>{
             override fun onResponse(
                 call: Call<MagazineDetailResponse>,
                 response: Response<MagazineDetailResponse>

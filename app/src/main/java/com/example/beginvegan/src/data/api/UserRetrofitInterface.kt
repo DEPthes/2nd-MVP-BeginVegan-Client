@@ -7,13 +7,16 @@ import com.example.beginvegan.src.data.model.user.VeganTypeResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface UserRetrofitInterface {
 
     // AccessToken을 이용한 정보 조회
     @GET("/api/v1/users")
-    fun getUser(): Call<UserResponse>
+    fun getUser(
+        @Header("Authorization") accessToken: String?,
+    ): Call<UserResponse>
 
 //    @PATCH("/api/v1/users")
 //    fun getAlarmUser(): Call<RestaurantReviewResponse>
@@ -21,11 +24,15 @@ interface UserRetrofitInterface {
     // 유저 비건 타입 변경
     @POST("/api/v1/users/vegan-type")
     fun postUserVeganType(
-        @Body veganType: VeganType
+        @Header("Authorization") accessToken: String?,
+        @Body veganType: String
     ): Call<VeganTypeResponse>
 
     // 유저의 스크랩 조회
     // 이상 있음 response <- 이 부분을 어떻게 받을 것인지 생각 해야함
     @GET("/api/v1/bookmarks")
-    fun getUserBookmarks(): Call<List<RestaurantDetailResponse>>
+    fun getUserBookmarks(
+        @Header("Authorization") accessToken: String?,
+    ): Call<List<RestaurantDetailResponse>>
+    // 페이징
 }

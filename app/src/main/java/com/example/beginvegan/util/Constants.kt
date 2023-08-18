@@ -3,6 +3,8 @@ package com.example.beginvegan.util
 object Constants {
     const val BASE_URL = "http://beginvegan.p-e.kr/"
 
+    const val ACCESS_TOKEN = "ACCESS_TOKEN"
+    const val REFRESH_TOKEN = "REFRESH_TOKEN"
 
     // VALIDATION
     const val EMAIL_VALIDATION =

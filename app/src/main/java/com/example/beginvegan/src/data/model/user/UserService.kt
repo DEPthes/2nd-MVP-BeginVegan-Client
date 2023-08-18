@@ -3,6 +3,7 @@ package com.example.beginvegan.src.data.model.user
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.UserRetrofitInterface
+import com.example.beginvegan.util.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,9 +11,12 @@ import retrofit2.Response
 
 class UserService(val userInterface: UserInterface){
     private val userRetrofitInterface: UserRetrofitInterface = ApplicationClass.sRetrofit.create(UserRetrofitInterface::class.java)
-
+    private val accessToken = ApplicationClass.sSharedPreferences.getString(
+        Constants.ACCESS_TOKEN,
+        null
+    )
     fun tryGetUser(){
-        userRetrofitInterface.getUser().enqueue(object: Callback<UserResponse>{
+        userRetrofitInterface.getUser(accessToken).enqueue(object: Callback<UserResponse>{
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if(response.code() == 200){
                     userInterface.onGetUserSuccess(response.body() as UserResponse)
@@ -34,8 +38,8 @@ class UserService(val userInterface: UserInterface){
 
         })
     }
-    fun tryPostUserVeganType(veganType: VeganType){
-        userRetrofitInterface.postUserVeganType(veganType = veganType).enqueue(object: Callback<VeganTypeResponse>{
+    fun tryPostUserVeganType(veganType: String){
+        userRetrofitInterface.postUserVeganType(accessToken,veganType).enqueue(object: Callback<VeganTypeResponse>{
             override fun onResponse(
                 call: Call<VeganTypeResponse>,
                 response: Response<VeganTypeResponse>
