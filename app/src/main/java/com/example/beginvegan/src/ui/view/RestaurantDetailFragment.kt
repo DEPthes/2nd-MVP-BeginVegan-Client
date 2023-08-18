@@ -1,6 +1,8 @@
 package com.example.beginvegan.src.ui.view
 
+import android.util.Log
 import androidx.annotation.NonNull
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.R
@@ -16,6 +18,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     R.layout.fragment_restaurant_detail
 ),RestaurantInterface{
     private lateinit var reViewList: ArrayList<String>
+
     override fun init() {
         // Res 아이디 받아오기
 
@@ -29,9 +32,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         val dataRVAdapter  = RestaurantDetailReviewRVAdapter(reViewList)
         binding.rvRestaurantReviews.adapter = dataRVAdapter
         binding.rvRestaurantReviews.layoutManager = LinearLayoutManager(this.context)
-        binding.btnReviewGoWrite.setOnClickListener {
-            parentFragmentManager.beginTransaction().hide(this@RestaurantDetailFragment).add(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
-        }
+
         // 페이징 처리
         binding.rvRestaurantReviews.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -45,6 +46,15 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
                 }
             }
         })
+        binding.btnReviewGoWrite.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
+        }
+        // callback Listener Review
+        parentFragmentManager.setFragmentResultListener("requestKey",viewLifecycleOwner) { requestKey, bundle ->
+            val result = bundle.getString("review")
+            Log.d("setFragmentResultListener",result.toString())
+        }
+
     }
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
         dismissLoadingDialog()
