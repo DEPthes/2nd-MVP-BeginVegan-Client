@@ -32,28 +32,28 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         //레시피 리스트
         initializeViews()
 
-//        //filter
-//        binding.cFilterAll.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterAll, isChecked)
-//        }
-//        binding.cFilterVegan.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterVegan, isChecked)
-//        }
-//        binding.cFilterLacto.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterLacto, isChecked)
-//        }
-//        binding.cFilterLactoOvo.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterLactoOvo, isChecked)
-//        }
-//        binding.cFilterPesco.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterPesco, isChecked)
-//        }
-//        binding.cFilterPollo.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterPollo, isChecked)
-//        }
-//        binding.cFilterFlexitarian.setOnCheckedChangeListener{ _, isChecked ->
-//            checkFilter(binding.cFilterFlexitarian, isChecked)
-//        }
+        //filter
+        binding.cFilterAll.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterAll, isChecked)
+        }
+        binding.cFilterVegan.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterVegan, isChecked)
+        }
+        binding.cFilterLacto.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterLacto, isChecked)
+        }
+        binding.cFilterLactoOvo.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterLactoOvo, isChecked)
+        }
+        binding.cFilterPesco.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterPesco, isChecked)
+        }
+        binding.cFilterPollo.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterPollo, isChecked)
+        }
+        binding.cFilterFlexitarian.setOnCheckedChangeListener{ _, isChecked ->
+            checkFilter(binding.cFilterFlexitarian, isChecked)
+        }
     }
 
     private fun initializeViews(){
@@ -64,7 +64,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
         recipeAdapter.setOnItemClickListener(object: RecipeListRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {
-                Log.d("TAG", "onItemClick: $position")
+                onDialogBtnClicked()
             }
         })
     }
@@ -84,8 +84,8 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
 
     //recipe Dialog
-//    fun onDialogBtnClicked(){
-//        val dialog = RecipeDetailDialog(requireContext())
-//        dialog.show()
-//    }
+    fun onDialogBtnClicked(){
+        val dialog = RecipeDetailDialog(requireContext())
+        dialog.show()
+    }
 }
