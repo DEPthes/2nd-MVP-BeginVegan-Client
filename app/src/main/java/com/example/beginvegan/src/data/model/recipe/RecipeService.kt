@@ -12,10 +12,10 @@ import retrofit2.Response
 class RecipeService(val recipeInterface: RecipeInterface) {
     private val recipeRetrofitInterface: RecipeRetrofitInterface =
         ApplicationClass.sRetrofit.create(RecipeRetrofitInterface::class.java)
-    private val accessToken = ApplicationClass.sSharedPreferences.getString(
+    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
         Constants.ACCESS_TOKEN,
         null
-    )
+    )))
     // 전체 레시피 목록 조회
     fun tryGetRecipeList() {
         recipeRetrofitInterface.getRecipeList(accessToken)

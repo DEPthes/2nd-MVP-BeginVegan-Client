@@ -11,10 +11,10 @@ import retrofit2.Response
 
 class UserService(val userInterface: UserInterface){
     private val userRetrofitInterface: UserRetrofitInterface = ApplicationClass.sRetrofit.create(UserRetrofitInterface::class.java)
-    private val accessToken = ApplicationClass.sSharedPreferences.getString(
+    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
         Constants.ACCESS_TOKEN,
         null
-    )
+    )))
     fun tryGetUser(){
         userRetrofitInterface.getUser(accessToken).enqueue(object: Callback<UserResponse>{
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {

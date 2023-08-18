@@ -3,6 +3,7 @@ package com.example.beginvegan.src.data.model.magazine
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.MagazineRetrofitInterface
+import com.example.beginvegan.util.Constants
 import com.example.beginvegan.util.Constants.ACCESS_TOKEN
 import com.google.gson.Gson
 import retrofit2.Call
@@ -12,10 +13,10 @@ import retrofit2.create
 
 class MagazineService(val magazineInterface: MagazineInterface) {
     private val magazineRetrofitInterface: MagazineRetrofitInterface = ApplicationClass.sRetrofit.create(MagazineRetrofitInterface::class.java)
-    private val accessToken = ApplicationClass.sSharedPreferences.getString(
-        ACCESS_TOKEN,
+    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
+        Constants.ACCESS_TOKEN,
         null
-    )
+    )))
 
     // 2가지 매거진 목록 조회
     fun tryGetMagazineTwoList(){

@@ -42,6 +42,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         super.onCreate(savedInstanceState)
     }
     override fun init() {
+        showLoadingDialog(requireContext())
         if (checkLocationService()) {
             permissionCheck()
             setRestaurantList()
@@ -156,7 +157,8 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 
     private fun startTracking(){
         binding.mvVeganMap.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
-        binding.mvVeganMap.setCustomCurrentLocationMarkerTrackingImage(R.drawable.test_location_small, MapPOIItem.ImageOffset(25, 25))
+//        binding.mvVeganMap.setCustomCurrentLocationMarkerTrackingImage(R.drawable.test_location_small, MapPOIItem.ImageOffset(25, 25))
+        dismissLoadingDialog()
     }
 
     // Set Modal Bottom Sheet

@@ -11,10 +11,10 @@ import retrofit2.Response
 
 class RestaurantService(val restaurantInterface: RestaurantInterface){
     private val restaurantRetrofitInterface: RestaurantRetrofitInterface = ApplicationClass.sRetrofit.create(RestaurantRetrofitInterface::class.java)
-    private val accessToken = ApplicationClass.sSharedPreferences.getString(
+    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
         Constants.ACCESS_TOKEN,
         null
-    )
+    )))
 
     // 식당/카페 상세 정보(메뉴까지) 조회
     fun tryGetRestaurantDetail(restaurantId: Int){

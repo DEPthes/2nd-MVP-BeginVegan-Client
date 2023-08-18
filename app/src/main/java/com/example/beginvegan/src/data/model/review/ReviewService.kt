@@ -3,6 +3,7 @@ package com.example.beginvegan.src.data.model.review
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.ReviewRetrofitInterface
+import com.example.beginvegan.util.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,9 +12,12 @@ import retrofit2.Response
 class ReviewService(val reviewInterface: ReviewInterface) {
     private val reviewRetrofitInterface: ReviewRetrofitInterface =
         ApplicationClass.sRetrofit.create(ReviewRetrofitInterface::class.java)
-
+    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
+        Constants.ACCESS_TOKEN,
+        null
+    )))
     fun tryPostWriteReview(restaurantId: Int, content: String) {
-        reviewRetrofitInterface.postWriteReview(restaurantId, content)
+        reviewRetrofitInterface.postWriteReview(accessToken,restaurantId, content)
             .enqueue(object : Callback<WriteReviewResponse> {
                 override fun onResponse(
                     call: Call<WriteReviewResponse>,
@@ -44,7 +48,7 @@ class ReviewService(val reviewInterface: ReviewInterface) {
     }
 
     fun tryGetReviewList() {
-        reviewRetrofitInterface.getReviewList().enqueue(object : Callback<ReviewListResponse> {
+        reviewRetrofitInterface.getReviewList(accessToken).enqueue(object : Callback<ReviewListResponse> {
             override fun onResponse(
                 call: Call<ReviewListResponse>,
                 response: Response<ReviewListResponse>
