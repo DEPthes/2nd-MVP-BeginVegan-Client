@@ -1,14 +1,11 @@
-package com.example.beginvegan.src.ui.view.mainhome
+package com.example.beginvegan.src.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemHomeRecommendRestaurantBinding
 
-class HomeRecommendRestAdapter(private val onItemClick:(position:Int)-> Unit):RecyclerView.Adapter<HomeRecommendRestAdapter.RecyclerViewHolder>() {
+class HomeRecommendRestRVAdapter(private val onItemClick:(position:Int)-> Unit):RecyclerView.Adapter<HomeRecommendRestRVAdapter.RecyclerViewHolder>() {
     val restaurantNames = listOf(
         "Sample1", "Sample2", "Sample3", "Sample4", "Sample5"
     )

@@ -37,6 +37,7 @@
     <dimen name="text_20">20sp</dimen>
 
     <!--    Button Size(dp)-->
+    <dimen name="btn_24">24dp</dimen>
     <dimen name="btn_32">32dp</dimen>
     <dimen name="btn_40">40dp</dimen>
     <dimen name="btn_148">148dp</dimen>
@@ -44,17 +45,22 @@
 
     <!--    Item Size(dp)-->
     <dimen name="item_8">8dp</dimen>
-    <dimen name="item_52">52dp</dimen>
+    <dimen name="item_28">28dp</dimen>
     <dimen name="item_36">36dp</dimen>
+    <dimen name="item_52">52dp</dimen>
+    <dimen name="item_56">56dp</dimen>
     <dimen name="item_76">76dp</dimen>
     <dimen name="item_80">80dp</dimen>
     <dimen name="item_88">88dp</dimen>
+    <dimen name="item_95">95dp</dimen>
     <dimen name="item_114">114dp</dimen>
     <dimen name="item_116">116dp</dimen>
     <dimen name="item_134">134dp</dimen>
     <dimen name="item_136">136dp</dimen>
     <dimen name="item_168">168dp</dimen>
     <dimen name="item_186">186dp</dimen>
+    <dimen name="item_200">200dp</dimen>
+    <dimen name="item_210">210dp</dimen>
     <dimen name="item_248">248dp</dimen>
     <dimen name="item_276">276dp</dimen>
 
@@ -63,6 +69,7 @@
     <dimen name="radius_12">12dp</dimen>
     <dimen name="radius_16">16dp</dimen>
     <dimen name="radius_25">25dp</dimen>
+    <dimen name="radius_28">28dp</dimen>
 
     <!--    Line Width(dp)-->
     <dimen name="line_1">1dp</dimen>

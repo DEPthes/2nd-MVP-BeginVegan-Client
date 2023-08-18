@@ -19,15 +19,14 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_white"
-        app:labelVisibilityMode="unlabeled"
+        android:layout_height="@dimen/item_56"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fl_main"
+        android:background="@color/color_white"
+        app:labelVisibilityMode="unlabeled"
         app:itemRippleColor="@null"
-        
         app:itemIconTint="@color/color_primary3"
         app:menu="@menu/menu_bn"
         />
