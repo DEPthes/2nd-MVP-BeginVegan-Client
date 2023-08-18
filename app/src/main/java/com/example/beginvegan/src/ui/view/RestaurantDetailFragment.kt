@@ -1,19 +1,15 @@
 package com.example.beginvegan.src.ui.view
 
-import android.os.Bundle
-import android.util.Log
-import android.view.View
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentRestaurantDetailBinding
-import com.example.beginvegan.databinding.FragmentVeganMapBinding
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
-import com.example.beginvegan.src.data.model.restaurant.RestaurantService
 import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
-import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 
 class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     FragmentRestaurantDetailBinding::bind,
@@ -36,20 +32,24 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         binding.btnReviewGoWrite.setOnClickListener {
             parentFragmentManager.beginTransaction().hide(this@RestaurantDetailFragment).add(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
         }
-    }
+        // 페이징 처리
+        binding.rvRestaurantReviews.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = 10
+                if (lastVisibleItemPosition + 1 == itemTotalCount) {
+                    // Last page next data load
 
+                }
+            }
+        })
+    }
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
         dismissLoadingDialog()
     }
-
-    override fun onGetRestaurantDetailFailure(message: String) {
-    }
-
-    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
-        TODO("Not yet implemented")
-    }
-
+    override fun onGetRestaurantDetailFailure(message: String) {}
+    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {}
     override fun onGetRestaurantReviewFailure(message: String) {}
-
-
 }
