@@ -93,6 +93,12 @@
     <string name="magazine_detail_title_define">비건 = 채식주의자\n1가지만 아니란 말이다!</string>
     <string name="magazine_editor">By 에디터 로이드, 안</string>
 
+    <!--    Main Profile  -->
+    <string name="profile_go_vegan_test">테스트 바로가기</string>
+    <string name="profile_my_review">나의 리뷰</string>
+    <string name="profile_my_scrap">나의 스크랩</string>
+
+    <!--    string-array  -->
     <string-array name="vegan_type_array">
         <item>비건</item>
         <item>락토 베지테리언</item>

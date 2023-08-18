@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentMainProfileBinding
+import com.example.beginvegan.databinding.FragmentProfileMyreviewBinding
+import com.example.beginvegan.databinding.FragmentProfileMyscrapBinding
 
-class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
-    FragmentMainProfileBinding::bind, R.layout.fragment_main_profile
+class ProfileMyscrapFragment : BaseFragment<FragmentProfileMyscrapBinding>(
+    FragmentProfileMyscrapBinding::bind, R.layout.fragment_profile_myscrap
 ) {
     override fun init() {
 

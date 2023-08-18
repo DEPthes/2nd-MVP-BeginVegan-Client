@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".src.ui.view.RecordsMyreviewFragment">
+    tools:context=".src.ui.view.ProfileMyscrapFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_myreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_profile_myreview"/>
+        tools:listitem="@layout/item_profile_myscrap"/>
 
 </FrameLayout>
