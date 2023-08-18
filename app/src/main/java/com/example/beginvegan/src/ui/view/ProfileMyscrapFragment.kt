@@ -29,13 +29,13 @@ class ProfileMyscrapFragment : BaseFragment<FragmentProfileMyscrapBinding>(
 //            add("hello4")
 //        }
 
-//        initializeViews()
+        initializeViews()
     }
 
     private fun initializeViews(){
         val scrapAdapter = ProfileMyScrapRVAdapter(scrapList)
-        binding.rvMyreview.adapter = scrapAdapter
-        binding.rvMyreview.layoutManager = LinearLayoutManager(this.context)
+        binding.rvMyscrap.adapter = scrapAdapter
+        binding.rvMyscrap.layoutManager = LinearLayoutManager(this.context)
 
         scrapAdapter.setOnItemClickListener(object: ProfileMyScrapRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {

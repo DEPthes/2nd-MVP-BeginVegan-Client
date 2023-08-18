@@ -28,7 +28,7 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
 //            add("hello4")
 //        }
 
-//        initializeViews()
+        initializeViews()
     }
 
     private fun initializeViews(){

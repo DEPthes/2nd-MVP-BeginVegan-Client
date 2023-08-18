@@ -107,16 +107,16 @@
             app:tabIndicatorColor="@color/color_primary3"
             app:tabIndicatorHeight="@dimen/line_1"
             app:tabRippleColor="@null">
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/ti_myreview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/profile_my_review" />
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/ti_myscrap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/profile_my_scrap"/>
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:id="@+id/ti_myreview"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/profile_my_review" />-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:id="@+id/ti_myscrap"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/profile_my_scrap"/>-->
         </com.google.android.material.tabs.TabLayout>
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_my_records"

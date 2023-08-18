@@ -59,6 +59,7 @@
     <dimen name="item_136">136dp</dimen>
     <dimen name="item_168">168dp</dimen>
     <dimen name="item_186">186dp</dimen>
+    <dimen name="item_200">200dp</dimen>
     <dimen name="item_210">210dp</dimen>
     <dimen name="item_248">248dp</dimen>
     <dimen name="item_276">276dp</dimen>
@@ -68,6 +69,7 @@
     <dimen name="radius_12">12dp</dimen>
     <dimen name="radius_16">16dp</dimen>
     <dimen name="radius_25">25dp</dimen>
+    <dimen name="radius_28">28dp</dimen>
 
     <!--    Line Width(dp)-->
     <dimen name="line_1">1dp</dimen>

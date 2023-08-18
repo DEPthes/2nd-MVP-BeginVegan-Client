@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view
 
+import android.app.AlertDialog
 import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
@@ -12,10 +13,15 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
     override fun init() {
 
         Log.d("TAG", "init: mainProfile")
+
+
         //ViewPager
         val vpMyRecords = binding.vpMyRecords
-        val profileMyRecordsVPAdapter = ProfileMyRecordsVPAdapter(this)
-        vpMyRecords.adapter = profileMyRecordsVPAdapter
+        val tabLayout = binding.tlRecords
+//        val profileMyRecordsVPAdapter = ProfileMyRecordsVPAdapter(this)
+        vpMyRecords.adapter = ProfileMyRecordsVPAdapter(this)
+
+        //닉네임 수정 dialog
 
     }
 
