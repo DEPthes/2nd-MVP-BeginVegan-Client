@@ -22,7 +22,9 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     private lateinit var reViewList: ArrayList<String>
     override fun init() {
         // Res 아이디 받아오기
-        RestaurantService(this).tryGetRestaurantDetail(0)
+        RestaurantService(this).tryGetRestaurantDetail(0).apply {
+            showLoadingDialog(requireContext())
+        }
         RestaurantService(this).tryGetRestaurantReview(0)
 
         reViewList = arrayListOf()
@@ -38,7 +40,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     }
 
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
-        binding.tvRestaurantAddress.text = response.restaurant.address.toString()
+        dismissLoadingDialog()
     }
 
     override fun onGetRestaurantDetailFailure(message: String) {

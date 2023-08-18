@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".src.ui.view.VeganMapFragment">
 
-    <net.daum.mf.map.api.MapView
+    <RelativeLayout
         android:id="@+id/mv_vegan_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

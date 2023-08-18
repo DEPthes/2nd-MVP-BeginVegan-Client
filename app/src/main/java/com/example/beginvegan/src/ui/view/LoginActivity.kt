@@ -25,8 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         } else if (token != null) {
             Log.e("KaKao Login | CallBack", "로그인 성공 ${token.accessToken}")
             //엑세스 토큰 처리하기
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            moveToMain()
         }
     }
 
@@ -56,6 +55,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                     else if (token != null) {
                         Log.e("KaKao Login", "로그인 성공 ${token.accessToken}")
                         // 엑세스 토큰 처리하기
+                        moveToMain()
                     }
                 }
             } else {
@@ -64,4 +64,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             }
         }
     }
+    private fun moveToMain(){
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 }

@@ -14,12 +14,9 @@ import android.os.Looper
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Gravity
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.LinearLayout
 import android.widget.Toast
+
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -27,10 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
-import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
 import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
-import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapView
 
 class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
@@ -38,10 +33,12 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     R.layout.fragment_vegan_map
 ) {
     private lateinit var dataList: ArrayList<String>
+    private lateinit var mapView: MapView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
     override fun init() {
+        setMapView()
         showLoadingDialog(requireContext())
         if (checkLocationService()) {
             permissionCheck()
@@ -154,9 +151,12 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         val locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
-
+    private fun setMapView(){
+        mapView = MapView(this@VeganMapFragment.activity)
+        binding.mvVeganMap.addView(mapView)
+    }
     private fun startTracking(){
-        binding.mvVeganMap.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
+        mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
 //        binding.mvVeganMap.setCustomCurrentLocationMarkerTrackingImage(R.drawable.test_location_small, MapPOIItem.ImageOffset(25, 25))
         dismissLoadingDialog()
     }
@@ -168,4 +168,12 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 //        bottomSheet.show(childFragmentManager,bottomSheet.tag)
 //
 //    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mvVeganMap.removeAllViews()
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }
