@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.Material3.Light"
     tools:context=".src.ui.view.WriteReviewActivity">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_write_review"
@@ -13,8 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="16dp"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-        app:boxStrokeColor="@color/color_gray_d4"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:hintEnabled="true"
         app:hintAnimationEnabled="true"
         android:hint="음식에 대한 솔직한 리뷰를 남겨주세요 (10자 이상)"
