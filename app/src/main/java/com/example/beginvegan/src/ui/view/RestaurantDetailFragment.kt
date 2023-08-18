@@ -22,10 +22,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     private lateinit var reViewList: ArrayList<String>
     override fun init() {
         // Res 아이디 받아오기
-        RestaurantService(this).tryGetRestaurantDetail(0).apply {
-            showLoadingDialog(requireContext())
-        }
-        RestaurantService(this).tryGetRestaurantReview(0)
 
         reViewList = arrayListOf()
         reViewList.apply{
@@ -37,6 +33,9 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         val dataRVAdapter  = RestaurantDetailReviewRVAdapter(reViewList)
         binding.rvRestaurantReviews.adapter = dataRVAdapter
         binding.rvRestaurantReviews.layoutManager = LinearLayoutManager(this.context)
+        binding.btnReviewGoWrite.setOnClickListener {
+            parentFragmentManager.beginTransaction().hide(this@RestaurantDetailFragment).add(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
+        }
     }
 
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
