@@ -40,7 +40,9 @@
         </activity>
         <activity
             android:name=".src.ui.view.WriteReviewActivity"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".src.ui.view.vegantest.VeganTestActivity"
             android:exported="true" />

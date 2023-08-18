@@ -20,13 +20,13 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
     private lateinit var reviewList: ArrayList<String>
     override fun init() {
         Log.d("TAG", "init: my review")
-//        reviewList = arrayListOf()
-//        reviewList.apply {
-//            add("hello1")
-//            add("hello2")
-//            add("hello3")
-//            add("hello4")
-//        }
+        reviewList = arrayListOf()
+        reviewList.apply {
+            add("hello1")
+            add("hello2")
+            add("hello3")
+            add("hello4")
+        }
 
         initializeViews()
     }
