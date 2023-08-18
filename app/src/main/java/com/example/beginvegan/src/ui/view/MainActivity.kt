@@ -2,6 +2,7 @@ package com.example.beginvegan.src.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityMainBinding
@@ -26,6 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
                 }
                 R.id.item_profile->{
+                    Log.d("TAG", "init: main activity")
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainProfileFragment()).commit()
                 }
             }

@@ -5,21 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beginvegan.databinding.ItemRecipeBinding
+import com.example.beginvegan.databinding.ItemProfileMyreviewBinding
 
-class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerView.Adapter<RecipeListRVAdapter.RecycleViewHolder>() {
+class ProfileMyReviewRVAdapter(private val reviewList: ArrayList<String>): RecyclerView.Adapter<ProfileMyReviewRVAdapter.RecycleViewHolder>() {
     private var listener: OnItemClickListener? = null
 
-    inner class RecycleViewHolder(private val binding: ItemRecipeBinding):
+    inner class RecycleViewHolder(private val binding: ItemProfileMyreviewBinding):
         RecyclerView.ViewHolder(binding.root){
-        fun bind(recipeName:String){
-            binding.tvRecipeName.text = recipeName
+        fun bind(restaurantName:String, date:String, content:String){
+            Log.d("TEST","bind")
+            binding.tvRestaurantName.text = restaurantName
+            binding.tvDate.text = date
+            binding.tvReviewContent.text = content
         }
     }
 
-    //
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
-        val binding = ItemRecipeBinding.inflate(
+        val binding = ItemProfileMyreviewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -27,19 +29,21 @@ class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerV
         return RecycleViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = recipeNames.size
+    override fun getItemCount(): Int = reviewList.size
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
-        val item = recipeNames[position]
-        holder.bind(item)
+        val item = reviewList[position]
+        holder.bind("식당 이름","date","content")
 
+        Log.d("TEST","onBindViewHolder")
         if(position != RecyclerView.NO_POSITION){
+            Log.d("TAG","Click")
             holder.itemView.setOnClickListener {
-                listener?.onItemClick(holder.itemView, recipeNames[position], position)
+                listener?.onItemClick(holder.itemView, reviewList[position], position)
+                Log.d("TAG","ClickListener")
             }
         }
     }
-
 
     override fun getItemViewType(position: Int): Int {
         return position
@@ -49,6 +53,8 @@ class RecipeListRVAdapter(private val recipeNames: ArrayList<String>): RecyclerV
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){
+
+        Log.d("TAG","setOnItemClickListener")
         this.listener = listener
     }
 }
