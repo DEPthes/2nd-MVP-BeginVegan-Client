@@ -13,6 +13,7 @@ class ProfileEditVeganTypeDialog(context: Context): Dialog(context) {
     private val binding: DialogProfileEidtVeganTypeBinding = DialogProfileEidtVeganTypeBinding.inflate(
         LayoutInflater.from(context))
 
+    var selectedId:Int?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -27,15 +28,23 @@ class ProfileEditVeganTypeDialog(context: Context): Dialog(context) {
 
         //setOnChangeListener
         binding.rgEditVeganType.setOnCheckedChangeListener { group, checkedId ->
-            saveVeganType(checkedId)
+            selectVeganType(checkedId)
         }
         //Cancel
-//        binding..setOnClickListener {
-//            this.dismiss()
-//        }
+        binding.btnCancel.setOnClickListener {
+            this.dismiss()
+        }
+        //Confrim
+        binding.btnConfirm.setOnClickListener {
+            saveVagenType(selectedId)
+        }
     }
 
-    private fun saveVeganType(checkedId:Int){
+    private fun selectVeganType(checkedId:Int){
+        //클릭한 정보 저장
+        selectedId = checkedId
+    }
+    private fun saveVagenType(checkedId:Int?){
         //저장
         this.dismiss()
     }

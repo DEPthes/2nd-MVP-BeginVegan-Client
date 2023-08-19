@@ -5,6 +5,7 @@ import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainProfileBinding
 import com.example.beginvegan.src.ui.adapter.ProfileMyRecordsVPAdapter
 import com.example.beginvegan.util.ProfileEditNameDialog
+import com.example.beginvegan.util.ProfileEditVeganTypeDialog
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
@@ -36,11 +37,12 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
 
     //닉네임 수정 dialog
     private fun openEditUserNameDialog(){
-        val dialog = ProfileEditNameDialog(requireContext())
-        dialog.show()
+        val editNameDialog = ProfileEditNameDialog(requireContext())
+        editNameDialog.show()
     }
     //Vegan Type 수정 dialog
     private fun openEditVeganTypeDialog(){
-
+        val editVeganTypeDialog = ProfileEditVeganTypeDialog(requireContext())
+        editVeganTypeDialog.show()
     }
 }
