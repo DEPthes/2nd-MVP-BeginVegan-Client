@@ -63,7 +63,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     private fun initializeViews(){
         val recyclerView = binding.rvHomeRecommendRestaurant
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
-        val adapter = HomeRecommendRestRVAdapter{
+        val adapter = HomeRecommendRestRVAdapter(requireContext()){
             position ->
             //로직
         }

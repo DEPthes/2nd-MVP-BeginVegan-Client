@@ -12,6 +12,11 @@
     <string name="btn_vegan_test_start">테스트 시작하기</string>
     <string name="btn_vegan_test_again">다시하기</string>
     <string name="btn_go_home">여정 시작하기</string>
+    <string name="btn_edit">수정하기</string>
+    <string name="btn_confirm">확인</string>
+    <string name="btn_cancel">취소</string>
+    <string name="btn_logout">로그아웃</string>
+    <string name="btn_back">돌아가기</string>
 
     <!--    Vegan Test Questions -->
     <string name="test_question_meat">1. 친구가 취뽀해서 소고기(혹은 돼지고기)를\n사준다고 한다.\n나는?</string>
@@ -97,6 +102,10 @@
     <string name="profile_go_vegan_test">테스트 바로가기</string>
     <string name="profile_my_review">나의 리뷰</string>
     <string name="profile_my_scrap">나의 스크랩</string>
+
+    <!--    logout  -->
+    <string name="logout_title">로그아웃 하시겠어요?</string>
+    <string name="logout_description">비거너로서의 여정을 멈추실 건가요?\n저희 함께해요!</string>
 
     <!--    string-array  -->
     <string-array name="vegan_type_array">
