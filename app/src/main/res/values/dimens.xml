@@ -15,6 +15,7 @@
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_28">28dp</dimen>
     <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_34">34dp</dimen>
     <dimen name="margin_36">36dp</dimen>
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_44">44dp</dimen>
@@ -36,6 +37,7 @@
     <dimen name="text_16">16sp</dimen>
     <dimen name="text_18">18sp</dimen>
     <dimen name="text_20">20sp</dimen>
+    <dimen name="text_24">24sp</dimen>
 
     <!--    Button Size(dp)-->
     <dimen name="btn_24">24dp</dimen>

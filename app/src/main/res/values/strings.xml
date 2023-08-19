@@ -103,6 +103,10 @@
     <string name="profile_my_review">나의 리뷰</string>
     <string name="profile_my_scrap">나의 스크랩</string>
 
+    <!--    logout  -->
+    <string name="logout_title">로그아웃 하시겠어요?</string>
+    <string name="logout_description">비거너로서의 여정을 멈추실 건가요?\n저희 함께해요!</string>
+
     <!--    string-array  -->
     <string-array name="vegan_type_array">
         <item>비건</item>

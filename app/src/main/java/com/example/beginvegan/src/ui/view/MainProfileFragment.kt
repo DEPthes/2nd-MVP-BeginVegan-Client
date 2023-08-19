@@ -1,17 +1,18 @@
 package com.example.beginvegan.src.ui.view
 
-import android.view.ViewGroup
+import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainProfileBinding
 import com.example.beginvegan.src.ui.adapter.ProfileMyRecordsVPAdapter
+import com.example.beginvegan.util.LogoutDialog
 import com.example.beginvegan.util.ProfileEditNameDialog
 import com.example.beginvegan.util.ProfileEditVeganTypeDialog
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
     FragmentMainProfileBinding::bind, R.layout.fragment_main_profile
-) {
+), BottomSheetLogoutFragment.MyFragmentInteractionListener {
     override fun init() {
         //ViewPager
         val vpMyRecords = binding.vpMyRecords
@@ -52,6 +53,20 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
     }
     //로그아웃 more button
     private fun openBottomSheetLogout(){
-        BottomSheetLogoutFragment().show(requireActivity().supportFragmentManager, null)
+        val bottomSheet =BottomSheetLogoutFragment()
+        bottomSheet.listener = this
+        bottomSheet.show(requireActivity().supportFragmentManager, null)
     }
+    //로그아웃 dialog
+    fun openLogoutDialog() {
+        Log.d("TAG", "openLogoutDialog: 로그아웃 dialog open")
+        val logoutDialog = LogoutDialog(requireContext())
+        logoutDialog.show()
+    }
+
+    override fun onButtonClicked() {
+        Log.d("TAG", "onButtonClicked: ")
+        openLogoutDialog()
+    }
+
 }
