@@ -15,7 +15,7 @@ class HomeRecipe0Fragment : BaseFragment<FragmentHomeRecipe0Binding>(
 
     override fun init() {
         binding.btnRecipe0.setOnClickListener {
-            (activity as MainActivity).goRecipe()
+            (activity as MainActivity).goRecipe(0)
         }
 
 //        binding.tvRecipeTitle.setText()

@@ -35,8 +35,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         }
     }
 
-    fun goRecipe(){
-        supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
+    fun goRecipe(position:Int){
+        val fragment = MainRecipeFragment.newInstance()
+        val bundle = Bundle()
+        bundle.putInt("position", position)
+        fragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction().replace(R.id.fl_main, fragment).commit()
         binding.bnvMain.selectedItemId = R.id.item_recipe
     }
 }

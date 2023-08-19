@@ -1,4 +1,4 @@
-package com.example.beginvegan.src.ui.view
+package com.example.beginvegan.util
 
 import android.app.Dialog
 import android.content.Context
