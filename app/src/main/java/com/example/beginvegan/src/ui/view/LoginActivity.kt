@@ -38,10 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     }
 
     override fun init() {
-
         binding.btnLoginKakao.setOnClickListener{
-            // 이메일 로그인 콜백
-// 카카오톡 설치 확인
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
                 // 카카오톡 로그인
                 UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
@@ -105,10 +102,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         ApplicationClass.sSharedPreferences.edit().putString(ACCESS_TOKEN,response.accessToken)
         ApplicationClass.sSharedPreferences.edit().putString(REFRESH_TOKEN,response.refreshToken)
         moveToMain()
+        dismissLoadingDialog()
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
         Log.d("onPostAuthSignUpFailed",message)
+        dismissLoadingDialog()
     }
 
 }
