@@ -21,7 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
                 }
                 R.id.item_map->{
-                    //supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_main,VeganMapFragment()).setReorderingAllowed(true).commitAllowingStateLoss()
                 }
                 R.id.item_recipe->{
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()

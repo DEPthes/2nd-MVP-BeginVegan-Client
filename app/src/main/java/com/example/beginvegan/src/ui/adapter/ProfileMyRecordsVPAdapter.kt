@@ -18,6 +18,11 @@ class ProfileMyRecordsVPAdapter(mainProfileFragment: MainProfileFragment): Fragm
 
     override fun createFragment(position: Int): Fragment {
         Log.d("TAG", "createFragment: adapter")
-        return fragmentList[position]
+        return when (position) {
+            0 -> ProfileMyreviewFragment()
+            else -> {
+                ProfileMyscrapFragment()
+            }
+        }
     }
 }

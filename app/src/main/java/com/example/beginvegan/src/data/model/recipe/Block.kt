@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class Block(
     @SerializedName("content") val content: String,
     @SerializedName("sequence") val sequence: Int,
-    //  blockType: Image???
+    //  blockType: Image??? IMAGE OR TEXT  -> ENUM
     @SerializedName("blockType") val blockType: String
 )

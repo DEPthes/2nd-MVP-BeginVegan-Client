@@ -10,7 +10,6 @@
     app:behavior_peekHeight="24dp"
     android:background="@drawable/shape_veganmap_bottom_sheet"
     >
-<!--    style="@style/AppBottomSheetDialogTheme"-->
     <ImageView
         android:id="@+id/iv_veganmap_dialog_drag_handle"
         android:layout_width="@dimen/drag_handle_width"
@@ -21,14 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:src="@drawable/logo_beginvegan"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_bottom_sheet_restaurant_list"
             android:layout_width="match_parent"

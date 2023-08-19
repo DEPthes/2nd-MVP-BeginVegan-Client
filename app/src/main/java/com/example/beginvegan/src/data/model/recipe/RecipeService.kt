@@ -3,6 +3,7 @@ package com.example.beginvegan.src.data.model.recipe
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.RecipeRetrofitInterface
+import com.example.beginvegan.util.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,10 +12,13 @@ import retrofit2.Response
 class RecipeService(val recipeInterface: RecipeInterface) {
     private val recipeRetrofitInterface: RecipeRetrofitInterface =
         ApplicationClass.sRetrofit.create(RecipeRetrofitInterface::class.java)
-
+    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
+        Constants.ACCESS_TOKEN,
+        null
+    )))
     // 전체 레시피 목록 조회
     fun tryGetRecipeList() {
-        recipeRetrofitInterface.getRecipeList()
+        recipeRetrofitInterface.getRecipeList(accessToken)
             .enqueue(object : Callback<List<RecipeListResponse>> {
                 override fun onResponse(
                     call: Call<List<RecipeListResponse>>,
@@ -47,7 +51,7 @@ class RecipeService(val recipeInterface: RecipeInterface) {
 
     // 3가지 음식 목록 조회
     fun tryGetThreeRecipeList() {
-        recipeRetrofitInterface.getThreeRecipeList()
+        recipeRetrofitInterface.getThreeRecipeList(accessToken)
             .enqueue(object : Callback<List<RecipeThreeResponse>> {
                 override fun onResponse(
                     call: Call<List<RecipeThreeResponse>>,
@@ -80,7 +84,7 @@ class RecipeService(val recipeInterface: RecipeInterface) {
 
     // 레시피 상세 정보 조회
     fun tryPostRecipeDetail(recipeId: Int) {
-        recipeRetrofitInterface.postRecipeDetail(recipeId)
+        recipeRetrofitInterface.postRecipeDetail(accessToken,recipeId)
             .enqueue(object : Callback<RecipeDetailResponse> {
                 override fun onResponse(
                     call: Call<RecipeDetailResponse>,

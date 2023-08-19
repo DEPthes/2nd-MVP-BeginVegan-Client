@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentProfileMyreviewBinding
@@ -40,6 +41,19 @@ class ProfileMyscrapFragment : BaseFragment<FragmentProfileMyscrapBinding>(
         scrapAdapter.setOnItemClickListener(object: ProfileMyScrapRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {
                 Log.d("TAG", "onItemClick: my scrap")
+            }
+        })
+        // 페이징 처리
+        binding.rvMyscrap.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = 10
+                if (lastVisibleItemPosition + 1 == itemTotalCount) {
+                    // Last page next data load
+
+                }
             }
         })
     }
