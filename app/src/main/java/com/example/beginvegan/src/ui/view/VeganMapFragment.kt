@@ -26,7 +26,6 @@ import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
 import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
-import com.example.beginvegan.util.MarkerEventListener
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -39,7 +38,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 {
     private lateinit var dataList: ArrayList<String>
     private lateinit var mapView: MapView
-    private lateinit var markerEventListener: MarkerEventListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -119,7 +117,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         // 주변식당 조회시 리사이클러뷰에 등록
     }
     private fun setRestaurantGps(){
-        markerEventListener = MarkerEventListener(requireContext())
         // for문으로 데이터 갯수만큼 돌리기
         var la = 37.223036
         var lo = 127.187954
