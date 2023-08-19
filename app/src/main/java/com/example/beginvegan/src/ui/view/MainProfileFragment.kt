@@ -71,5 +71,4 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
         }
         dialog.show()
     }
-
 }
