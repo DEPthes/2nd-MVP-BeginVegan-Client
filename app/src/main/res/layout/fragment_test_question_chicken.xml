@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="@dimen/side_margin"
-        >
+        app:cardElevation="@null">
         <TextView
             android:id="@+id/tv_question"
             android:layout_width="match_parent"
