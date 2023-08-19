@@ -6,4 +6,7 @@ interface RestaurantInterface {
 
     fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse)
     fun onGetRestaurantReviewFailure(message: String)
+
+
+
 }

@@ -217,35 +217,44 @@
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:background="@color/color_gray_f2"
-            app:layout_constraintTop_toBottomOf="@id/cl_item_menu_2"
-            android:layout_marginTop="20dp"/>
-        <TextView
-            android:id="@+id/tv_review_title"
-            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cl_item_menu_2" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_review_layer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="방문자 리뷰 00개"
-            android:textSize="18sp"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
             app:layout_constraintTop_toBottomOf="@id/v_divider_2"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="16dp"/>
-        <Button
-            android:id="@+id/b_review_go_write"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📝 나도 작성하기"
-            android:textColor="@color/color_primary3"
-            android:backgroundTint="@color/color_transparent"
-            app:layout_constraintTop_toBottomOf="@id/v_divider_2"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"/>
+            app:layout_constraintBottom_toTopOf="@id/rv_restaurant_reviews">
+            <TextView
+                android:id="@+id/tv_review_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="방문자 리뷰 00개"
+                android:textSize="18sp"
+                android:textColor="@color/color_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <Button
+                android:id="@+id/btn_review_go_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📝나도 작성하기"
+                android:textColor="@color/color_primary3"
+                android:backgroundTint="@color/color_transparent"
+                app:layout_constraintTop_toTopOf="@id/tv_review_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_review_title"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_restaurant_reviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_review_title"
-            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_review_layer"
             tools:listitem="@layout/item_restaurant_review"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
