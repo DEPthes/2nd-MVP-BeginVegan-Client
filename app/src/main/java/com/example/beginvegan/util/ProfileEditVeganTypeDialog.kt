@@ -6,14 +6,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
-import android.widget.RadioGroup
-import com.example.beginvegan.R
-import com.example.beginvegan.databinding.DialogProfileEditVeganTypeBinding
+import com.example.beginvegan.databinding.DialogProfileEidtVeganTypeBinding
 
 class ProfileEditVeganTypeDialog(context: Context): Dialog(context) {
-    private val binding: DialogProfileEditVeganTypeBinding = DialogProfileEditVeganTypeBinding.inflate(
+    private val binding: DialogProfileEidtVeganTypeBinding = DialogProfileEidtVeganTypeBinding.inflate(
         LayoutInflater.from(context))
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +30,9 @@ class ProfileEditVeganTypeDialog(context: Context): Dialog(context) {
             saveVeganType(checkedId)
         }
         //Cancel
-        binding.btnCancel.setOnClickListener {
-            this.dismiss()
-        }
+//        binding..setOnClickListener {
+//            this.dismiss()
+//        }
     }
 
     private fun saveVeganType(checkedId:Int){
