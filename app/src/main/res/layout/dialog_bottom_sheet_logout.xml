@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_76"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/btn_logout"
+        android:textSize="@dimen/text_16"
+        android:textColor="@color/color_text_32"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"
+        android:background="@color/color_transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="onButtonClick"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

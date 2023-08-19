@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view
 
+import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainProfileBinding
@@ -33,6 +34,10 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
         binding.ibEditVeganType.setOnClickListener{
             openEditVeganTypeDialog()
         }
+        //로그아웃 more button 클릭
+        binding.btnProfileMore.setOnClickListener {
+            openBottomSheetLogout()
+        }
     }
 
     //닉네임 수정 dialog
@@ -44,5 +49,9 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
     private fun openEditVeganTypeDialog(){
         val editVeganTypeDialog = ProfileEditVeganTypeDialog(requireContext())
         editVeganTypeDialog.show()
+    }
+    //로그아웃 more button
+    private fun openBottomSheetLogout(){
+        BottomSheetLogoutFragment().show(requireActivity().supportFragmentManager, null)
     }
 }
