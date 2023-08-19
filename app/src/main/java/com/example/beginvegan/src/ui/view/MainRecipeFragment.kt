@@ -9,6 +9,7 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainRecipeBinding
 import com.example.beginvegan.src.ui.adapter.RecipeListRVAdapter
+import com.example.beginvegan.src.ui.view.vegantest.TestQuestionMilkFragment
 import com.example.beginvegan.util.RecipeDetailDialog
 import com.google.android.material.chip.Chip
 
@@ -17,6 +18,11 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     private lateinit var recipeNames: ArrayList<String>
     override fun init() {
+        val position = arguments?.getInt("position")
+        if(position!=null){
+            onDialogBtnClicked()
+        }
+
         recipeNames = arrayListOf()
         recipeNames.apply{
             add("hello1")
@@ -83,5 +89,10 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     fun onDialogBtnClicked(){
         val dialog = RecipeDetailDialog(requireContext())
         dialog.show()
+    }
+    companion object{
+        fun newInstance(): MainRecipeFragment {
+            return MainRecipeFragment()
+        }
     }
 }
