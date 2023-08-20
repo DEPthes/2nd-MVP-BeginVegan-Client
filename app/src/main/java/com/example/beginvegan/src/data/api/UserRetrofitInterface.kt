@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.data.api
 
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
+import com.example.beginvegan.src.data.model.user.UserModifyNameResponse
 import com.example.beginvegan.src.data.model.user.VeganType
 import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.data.model.user.VeganTypeResponse
@@ -18,8 +19,6 @@ interface UserRetrofitInterface {
         @Header("Authorization") accessToken: String?,
     ): Call<UserResponse>
 
-//    @PATCH("/api/v1/users")
-//    fun getAlarmUser(): Call<RestaurantReviewResponse>
 
     // 유저 비건 타입 변경
     @POST("/api/v1/users/vegan-type")
@@ -29,10 +28,14 @@ interface UserRetrofitInterface {
     ): Call<VeganTypeResponse>
 
     // 유저의 스크랩 조회
-    // 이상 있음 response <- 이 부분을 어떻게 받을 것인지 생각 해야함
     @GET("/api/v1/bookmarks")
     fun getUserBookmarks(
-        @Header("Authorization") accessToken: String?,
+        @Header("Authorization") accessToken: String?
     ): Call<List<RestaurantDetailResponse>>
-    // 페이징
+
+    // 유저 닉네임 변경
+    @POST("/api/v1/users/nickname")
+    fun postUserModifyName(
+        @Header("Authorization") accessToken: String?,
+    ):Call<UserModifyNameResponse>
 }

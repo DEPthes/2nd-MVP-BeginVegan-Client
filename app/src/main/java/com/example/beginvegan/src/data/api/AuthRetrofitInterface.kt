@@ -1,10 +1,11 @@
 package com.example.beginvegan.src.data.api
 
-import com.example.beginvegan.src.data.model.auth.Auth
+import com.example.beginvegan.src.data.model.auth.KakaoAuth
 import com.example.beginvegan.src.data.model.auth.AuthLogin
-import com.example.beginvegan.src.data.model.auth.AuthLoginResponse
+import com.example.beginvegan.src.data.model.auth.AuthSignResponse
 import com.example.beginvegan.src.data.model.auth.AuthResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignOutResponse
+import com.example.beginvegan.src.data.model.auth.AuthTokenResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -15,11 +16,11 @@ interface AuthRetrofitInterface {
     @POST("/auth/sign-in")
     fun postAuthSignIn(
         @Body auth:AuthLogin
-    ): Call<AuthLoginResponse>
+    ): Call<AuthSignResponse>
     @POST("/auth/sign-up")
     fun postAuthSignUp(
-        @Body auth: Auth
-    ): Call<AuthResponse>
+        @Body auth: KakaoAuth
+    ): Call<AuthSignResponse>
 
     // 유저 로그아웃
     @POST("/auth/sign-out")
@@ -31,5 +32,5 @@ interface AuthRetrofitInterface {
     @POST("/auth/refresh")
     fun postTokenRefresh(
         @Body refreshToken :String
-    ): Call<AuthResponse>
+    ): Call<AuthTokenResponse>
 }

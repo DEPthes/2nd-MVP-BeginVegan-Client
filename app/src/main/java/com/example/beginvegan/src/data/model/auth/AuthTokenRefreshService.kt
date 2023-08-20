@@ -12,10 +12,10 @@ class AuthTokenRefreshService(val authTokenRefreshInterface: AuthTokenRefreshInt
     private val authRetrofitInterface: AuthRetrofitInterface = ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
 
     fun tryPostTokenRefreshSuccess(refreshToken: String){
-        authRetrofitInterface.postTokenRefresh(refreshToken).enqueue(object: Callback<AuthResponse>{
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+        authRetrofitInterface.postTokenRefresh(refreshToken).enqueue(object: Callback<AuthTokenResponse>{
+            override fun onResponse(call: Call<AuthTokenResponse>, response: Response<AuthTokenResponse>) {
                 if(response.code() == 200){
-                    authTokenRefreshInterface.onPostTokenRefreshSuccess(response.body() as AuthResponse)
+                    authTokenRefreshInterface.onPostTokenRefreshSuccess(response.body() as AuthTokenResponse)
                 }else{
                     try{
                         val gson = Gson()
@@ -28,7 +28,7 @@ class AuthTokenRefreshService(val authTokenRefreshInterface: AuthTokenRefreshInt
                 }
             }
 
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            override fun onFailure(call: Call<AuthTokenResponse>, t: Throwable) {
                 authTokenRefreshInterface.onPostTokenRefreshFailure(t.message?:"통신 오류")
             }
 
