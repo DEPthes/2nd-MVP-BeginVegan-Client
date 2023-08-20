@@ -13,14 +13,10 @@ import retrofit2.create
 
 class MagazineService(val magazineInterface: MagazineInterface) {
     private val magazineRetrofitInterface: MagazineRetrofitInterface = ApplicationClass.sRetrofit.create(MagazineRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
-        Constants.ACCESS_TOKEN,
-        null
-    )))
 
     // 2가지 매거진 목록 조회
     fun tryGetMagazineTwoList(){
-        magazineRetrofitInterface.getMagazineTwoList(accessToken).enqueue(object: Callback<MagazineTwoResponse>{
+        magazineRetrofitInterface.getMagazineTwoList(ApplicationClass.xAccessToken).enqueue(object: Callback<MagazineTwoResponse>{
             override fun onResponse(
                 call: Call<MagazineTwoResponse>,
                 response: Response<MagazineTwoResponse>
@@ -48,7 +44,7 @@ class MagazineService(val magazineInterface: MagazineInterface) {
 
     // 매거진 상세 정보 조회
     fun tryPostMagazineDetail(magazineId: Int){
-        magazineRetrofitInterface.postMagazineDetail(accessToken,magazineId).enqueue(object: Callback<MagazineDetailResponse>{
+        magazineRetrofitInterface.postMagazineDetail(ApplicationClass.xAccessToken,magazineId).enqueue(object: Callback<MagazineDetailResponse>{
             override fun onResponse(
                 call: Call<MagazineDetailResponse>,
                 response: Response<MagazineDetailResponse>

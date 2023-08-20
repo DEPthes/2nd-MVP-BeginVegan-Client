@@ -6,6 +6,11 @@ object Constants {
     const val ACCESS_TOKEN = "ACCESS_TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
 
+    const val PROVIDER_ID = "PROVIDER_ID"
+    const val USER_EMAIL = "USER_EMAIL"
+    const val USER_NAME ="USER_NAME"
+    const val USER_IMG_URL="USER_IMG_URL"
+
     // VALIDATION
     const val EMAIL_VALIDATION =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"

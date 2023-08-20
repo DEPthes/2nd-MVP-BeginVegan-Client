@@ -12,13 +12,9 @@ import retrofit2.Response
 class RecipeService(val recipeInterface: RecipeInterface) {
     private val recipeRetrofitInterface: RecipeRetrofitInterface =
         ApplicationClass.sRetrofit.create(RecipeRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
-        Constants.ACCESS_TOKEN,
-        null
-    )))
     // 전체 레시피 목록 조회
     fun tryGetRecipeList() {
-        recipeRetrofitInterface.getRecipeList(accessToken)
+        recipeRetrofitInterface.getRecipeList(ApplicationClass.xAccessToken)
             .enqueue(object : Callback<List<RecipeListResponse>> {
                 override fun onResponse(
                     call: Call<List<RecipeListResponse>>,
@@ -51,7 +47,7 @@ class RecipeService(val recipeInterface: RecipeInterface) {
 
     // 3가지 음식 목록 조회
     fun tryGetThreeRecipeList() {
-        recipeRetrofitInterface.getThreeRecipeList(accessToken)
+        recipeRetrofitInterface.getThreeRecipeList(ApplicationClass.xAccessToken)
             .enqueue(object : Callback<List<RecipeThreeResponse>> {
                 override fun onResponse(
                     call: Call<List<RecipeThreeResponse>>,
@@ -84,7 +80,7 @@ class RecipeService(val recipeInterface: RecipeInterface) {
 
     // 레시피 상세 정보 조회
     fun tryPostRecipeDetail(recipeId: Int) {
-        recipeRetrofitInterface.postRecipeDetail(accessToken,recipeId)
+        recipeRetrofitInterface.postRecipeDetail(ApplicationClass.xAccessToken,recipeId)
             .enqueue(object : Callback<RecipeDetailResponse> {
                 override fun onResponse(
                     call: Call<RecipeDetailResponse>,

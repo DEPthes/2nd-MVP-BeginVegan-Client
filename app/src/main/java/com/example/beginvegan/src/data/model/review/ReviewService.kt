@@ -12,12 +12,8 @@ import retrofit2.Response
 class ReviewService(val reviewInterface: ReviewInterface) {
     private val reviewRetrofitInterface: ReviewRetrofitInterface =
         ApplicationClass.sRetrofit.create(ReviewRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
-        Constants.ACCESS_TOKEN,
-        null
-    )))
     fun tryPostWriteReview(restaurantId: Int, content: String) {
-        reviewRetrofitInterface.postWriteReview(accessToken,restaurantId, content)
+        reviewRetrofitInterface.postWriteReview(ApplicationClass.xAccessToken,restaurantId, content)
             .enqueue(object : Callback<WriteReviewResponse> {
                 override fun onResponse(
                     call: Call<WriteReviewResponse>,
@@ -48,7 +44,7 @@ class ReviewService(val reviewInterface: ReviewInterface) {
     }
 
     fun tryGetReviewList() {
-        reviewRetrofitInterface.getReviewList(accessToken).enqueue(object : Callback<ReviewListResponse> {
+        reviewRetrofitInterface.getReviewList(ApplicationClass.xAccessToken).enqueue(object : Callback<ReviewListResponse> {
             override fun onResponse(
                 call: Call<ReviewListResponse>,
                 response: Response<ReviewListResponse>
