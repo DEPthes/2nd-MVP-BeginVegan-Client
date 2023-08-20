@@ -120,6 +120,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     override fun onPostAuthSignUpSuccess(response: AuthResponse) {
         Log.d("onPostAuthSignUpSuccess",response.toString())
         setUserData(response)
+        // 비건 타입이 null 일 경우 테스트 연결
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
