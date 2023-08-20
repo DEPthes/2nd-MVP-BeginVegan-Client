@@ -45,6 +45,9 @@ class ApplicationClass : Application() {
             USER_PROVIDER,
             null,
             null)
+        var xLatitude = "37.580261"
+        var xLongitude ="126.922838"
+
     }
     private fun initRetrofitInstance() {
         val client: OkHttpClient = OkHttpClient.Builder()

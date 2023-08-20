@@ -7,7 +7,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class RecipeService(val recipeInterface: RecipeInterface) {
     private val recipeRetrofitInterface: RecipeRetrofitInterface =
         ApplicationClass.sRetrofit.create(RecipeRetrofitInterface::class.java)
