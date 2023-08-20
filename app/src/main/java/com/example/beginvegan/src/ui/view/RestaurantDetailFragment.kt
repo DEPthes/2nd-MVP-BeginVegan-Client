@@ -11,6 +11,8 @@ import com.example.beginvegan.databinding.FragmentRestaurantDetailBinding
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapDeleteResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapResponse
 import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
 
 class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
@@ -62,4 +64,14 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     override fun onGetRestaurantDetailFailure(message: String) {}
     override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {}
     override fun onGetRestaurantReviewFailure(message: String) {}
+    override fun onPostScrapRestaurantSuccess(response: RestaurantScrapResponse) {
+    }
+    override fun onPostScrapRestaurantFailure(message: String) {
+    }
+    override fun onPostScrapDeleteRestaurantSuccess(response: RestaurantScrapDeleteResponse) {
+    }
+
+    override fun onPostScrapDeleteRestaurantFailure(message: String) {
+        TODO("Not yet implemented")
+    }
 }
