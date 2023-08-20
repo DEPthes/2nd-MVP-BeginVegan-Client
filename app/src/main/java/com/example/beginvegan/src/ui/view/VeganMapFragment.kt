@@ -148,6 +148,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
     }
 
-    override fun onPostFIndRestaurantFailure(message: String) {
+    override fun onPostFindRestaurantFailure(message: String) {
     }
 }

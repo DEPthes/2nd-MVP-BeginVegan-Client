@@ -17,7 +17,7 @@ class HomeRecipe0Fragment(private val data:RecipeThree) : BaseFragment<FragmentH
 
     override fun init() {
         binding.btnRecipe0.setOnClickListener {
-            (activity as MainActivity).goRecipe(0)
+            (activity as MainActivity).goRecipe(data.id)
         }
 
         binding.tvRecipeTitle.text = data.name

@@ -1,22 +1,18 @@
 package com.example.beginvegan.src.ui.view.mainhome
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
-import com.example.beginvegan.databinding.FragmentHomeMagazineVeganDefineBinding
 import com.example.beginvegan.databinding.FragmentHomeMagazineVeganTypesBinding
+import com.example.beginvegan.src.data.model.magazine.Magazine
 
-class HomeMagazineVeganTypesFragment : BaseFragment<FragmentHomeMagazineVeganTypesBinding>(
+class HomeMagazineVeganTypesFragment(private val data:Magazine) : BaseFragment<FragmentHomeMagazineVeganTypesBinding>(
     FragmentHomeMagazineVeganTypesBinding::bind,R.layout.fragment_home_magazine_vegan_types ) {
 
     override fun init() {
         binding.btnMagazineTypes.setOnClickListener {
             val homeFragment = parentFragment as MainHomeFragment
-            homeFragment.onDialogBtnClicked()
+            homeFragment.onDialogBtnClicked(data.id)
+            binding.tvMagazineTitleDefine.text = data.title
         }
     }
 }
