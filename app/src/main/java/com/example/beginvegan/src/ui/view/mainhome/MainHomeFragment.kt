@@ -13,7 +13,12 @@ import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
 import com.example.beginvegan.src.data.model.recipe.RecipeService
 import com.example.beginvegan.src.data.model.recipe.RecipeThree
 import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
+import com.example.beginvegan.src.data.model.restaurant.Coordinate
+import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantFindInterface
+import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
 import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantService
@@ -23,9 +28,10 @@ import com.example.beginvegan.src.ui.adapter.HomeTodayRecipeVPAdapter
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
-    RecipeInterface{
+    RecipeInterface, RestaurantFindInterface{
 
     lateinit var todayRecipeList: List<RecipeThree>
+    lateinit var recommendRestList: ArrayList<NearRestaurant>
 
     override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
         todayRecipeList = listOf(
@@ -35,11 +41,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     }
     override fun init() {
         //서버 데이터 불러오기
-//        RestaurantService(this).tryGetRestaurantDetail()
+        val coordinate = Coordinate("37.580261","126.922838") //test
+        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList()
-
-        //추천 레스토랑 RecyclerView
-        initializeViews()
 
         //비건 매거진 ViewPager
         val vpMagazines = binding.vpMagazines
@@ -60,19 +64,8 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         })
     }
 
-    //추천 식당 recyclerView
-    private fun initializeViews(){
-        val recyclerView = binding.rvHomeRecommendRestaurant
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
-        val adapter = HomeRecommendRestRVAdapter(requireContext()){
-            position ->
-            //로직
-        }
-        recyclerView.adapter = adapter
 
-        val startPosition = Int.MAX_VALUE/2
-        recyclerView.scrollToPosition(startPosition)
-    }
+
 
     //매거진 Dialog
     fun onDialogBtnClicked(){
@@ -105,20 +98,16 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             }
         })
     }
+    //추천 식당 recyclerView
+    private fun setRestaurantRVAdapter(){
+        val recyclerView = binding.rvHomeRecommendRestaurant
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
+        recyclerView.adapter = HomeRecommendRestRVAdapter(requireContext(),recommendRestList)
 
-    //서버 - 식당
-//    override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override fun onGetRestaurantDetailFailure(message: String) {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
-//        TODO("Not yet implemented")
-//    }
-//    override fun onGetRestaurantReviewFailure(message: String) { }
+        val startPosition = Int.MAX_VALUE/2
+        recyclerView.scrollToPosition(startPosition)
+    }
+
 
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) { }
@@ -126,4 +115,24 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     override fun onGetThreeRecipeListFailure(message: String) { }
     override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
     override fun onPostRecipeDetailFailure(message: String) { }
+    //서버 - 식당
+    override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
+        val range = 0..response.information.size
+        val randomNums = arrayListOf<Int>()
+        //난수 생성
+        while(randomNums.size <5){
+            val randomNum = range.random()
+            if(randomNum !in randomNums){
+                randomNums.add(randomNum)
+            }
+        }
+        for(i:Int in 1..5){
+            recommendRestList.add(response.information[i])
+        }
+        setRestaurantRVAdapter()
+        Log.d("TAG", "onPostFindRestaurantSuccess: ")
+    }
+    override fun onPostFIndRestaurantFailure(message: String) {
+        Log.d("TAG", "onPostFIndRestaurantFailure: $message")
+    }
 }
