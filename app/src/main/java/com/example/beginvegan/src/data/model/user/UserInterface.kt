@@ -4,9 +4,6 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 
 interface UserInterface {
 
-    fun onPostUserVeganTypeSuccess(response: VeganTypeResponse)
+    fun onPostUserVeganTypeSuccess(response: UserVeganResponse)
     fun onPostUserVeganTypeFailure(message: String)
-
-    fun onGetUserBookmarksSuccess(response: List<RestaurantDetailResponse>)
-    fun onGetUserBookmarksFailure(message: String)
 }

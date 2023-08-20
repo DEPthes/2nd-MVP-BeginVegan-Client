@@ -1,7 +1,7 @@
-package com.example.beginvegan.src.data.model.user
+package com.example.beginvegan.src.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class VeganTypeResponse(
+data class Message(
     @SerializedName("message") val message: String
 )
