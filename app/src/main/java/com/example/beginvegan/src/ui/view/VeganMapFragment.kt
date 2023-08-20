@@ -42,10 +42,10 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     private lateinit var dataList: ArrayList<String>
     private lateinit var mapView: MapView
     override fun init() {
-        showLoadingDialog(requireContext())
+//        showLoadingDialog(requireContext())
         setMapView()
         getBottomSheetDialogDefaultHeight()
-        RestaurantFindService(this).tryPostFindRestaurant(Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude))
+//        RestaurantFindService(this).tryPostFindRestaurant(Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude))
     }
     private fun setMapView(){
         mapView = MapView(this@VeganMapFragment.activity)
@@ -53,9 +53,9 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(ApplicationClass.xLatitude.toDouble(), ApplicationClass.xLongitude.toDouble()), 1, true);
         Log.d("setMapCenterPointAndZoomLevel",ApplicationClass.xLatitude)
         Log.d("setMapCenterPointAndZoomLevel",ApplicationClass.xLongitude)
-        mapView.currentLocationTrackingMode =
-            MapView.CurrentLocationTrackingMode.TrackingModeOnWithMarkerHeadingWithoutMapMoving
-        setRestaurantGps()
+//        mapView.currentLocationTrackingMode =
+//            MapView.CurrentLocationTrackingMode.TrackingModeOnWithMarkerHeadingWithoutMapMoving
+//        setRestaurantGps()
     }
     private fun getBottomSheetDialogDefaultHeight(): Int {
         return getWindowHeight() * 70 / 100

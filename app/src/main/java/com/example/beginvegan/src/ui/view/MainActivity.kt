@@ -62,9 +62,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
                 success?.let { location ->
                     ApplicationClass.xLatitude = (location.latitude).toString()
                     ApplicationClass.xLongitude = (location.longitude).toString()
-                    Log.d("getLocation","latitude: ${location.latitude} longitude: ${location.longitude}")
-                    Log.d("getLocation",ApplicationClass.xLatitude)
-                    Log.d("getLocation",ApplicationClass.xLongitude)
                 }
             }
             .addOnFailureListener { fail ->
