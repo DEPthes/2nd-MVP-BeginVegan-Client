@@ -64,6 +64,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         binding.rvRecipes.adapter = recipeAdapter
         binding.rvRecipes.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL,false)
 
+        //레시피 상세 페이지
         recipeAdapter.setOnItemClickListener(object: RecipeListRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: String, position: Int) {
                 onDialogBtnClicked()
@@ -71,6 +72,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         })
     }
 
+    //필터 선택시 UI 반영
     private fun checkFilter(filter:Chip, checked:Boolean){
         if(checked){
             filter.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.color_primary3))
@@ -83,13 +85,17 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
             filter.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_primary3))
         }
     }
+    //필터 적용
+    private fun applyFilter(){
 
+    }
 
     //recipe Dialog
     fun onDialogBtnClicked(){
         val dialog = RecipeDetailDialog(requireContext())
         dialog.show()
     }
+    //인스턴스
     companion object{
         fun newInstance(): MainRecipeFragment {
             return MainRecipeFragment()
