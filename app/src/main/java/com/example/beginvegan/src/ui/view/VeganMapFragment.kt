@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
+import com.example.beginvegan.src.data.model.restaurant.RestaurantFindInterface
+import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
 import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
 import net.daum.mf.map.api.MapPOIItem
@@ -34,7 +36,7 @@ import net.daum.mf.map.api.MapView
 class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     FragmentVeganMapBinding::bind,
     R.layout.fragment_vegan_map
-),MapView.POIItemEventListener
+),MapView.POIItemEventListener, RestaurantFindInterface
 {
     private lateinit var dataList: ArrayList<String>
     private lateinit var mapView: MapView
@@ -227,5 +229,11 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     }
 
     override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
+    }
+
+    override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
+    }
+
+    override fun onPostFIndRestaurantFailure(message: String) {
     }
 }
