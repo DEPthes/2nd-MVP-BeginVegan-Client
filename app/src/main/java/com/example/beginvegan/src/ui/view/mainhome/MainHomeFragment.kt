@@ -122,17 +122,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
-        val range = 0..response.information.size
+        val range = 0..(response.information.size-1)
         val randomNums = arrayListOf<Int>()
         //난수 생성
-        while(randomNums.size <5){
-            val randomNum = range.random()
-            if(randomNum !in randomNums){
-                randomNums.add(randomNum)
-            }
-        }
         for(i:Int in 0..4){
-            recommendRestList.add(response.information[i])
+            var randomNum = range.random()
+            if(randomNum in randomNums){
+                randomNum = range.random()
+            }
+            randomNums.add(randomNum)
+        }
+        for(i:Int in 0..(randomNums.size-1)){
+            recommendRestList.add(response.information[randomNums[i]])
         }
         setRestaurantRVAdapter()
     }
