@@ -8,9 +8,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.beginvegan.R
 import com.example.beginvegan.databinding.DialogHomeMagazineDetailBinding
 import com.example.beginvegan.src.data.model.magazine.MagazineDetail
@@ -30,8 +34,13 @@ class HomeMagazineDetailDialog(context: Context, private val data:MagazineDetail
         //데이터 연결
         binding.tvMagazineTitle.text = data.title
         val contents = data.magazineContents
-//        createTextView(contents[0])
-//        binding.tvMagazineContent.text = data.magazineContents
+        for(i:Int in 0..contents.size){
+            if(data.id==1&&i==0){
+                createImageView(contents[i].content)
+            }else{
+                createTextView(contents[i].content)
+            }
+        }
 
         //dialog 크기
 //        val layoutParams = WindowManager.LayoutParams()
@@ -51,5 +60,13 @@ class HomeMagazineDetailDialog(context: Context, private val data:MagazineDetail
         val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
         newTextView.layoutParams = params
         binding.llMagazineContents.addView(newTextView)
+    }
+
+    private fun createImageView(url:String){
+        val newImgView = ImageView(context)
+        Glide.with(context).load(url).into(newImgView)
+        val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+        newImgView.layoutParams = params
+        binding.llMagazineContents.addView(newImgView)
     }
 }

@@ -7,8 +7,9 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.example.beginvegan.databinding.DialogRecipeDetailBinding
+import com.example.beginvegan.src.data.model.recipe.RecipeDetail
 
-class RecipeDetailDialog(context: Context): Dialog(context) {
+class RecipeDetailDialog(context: Context,private val data: RecipeDetail): Dialog(context) {
 
     private val binding: DialogRecipeDetailBinding = DialogRecipeDetailBinding.inflate(
         LayoutInflater.from(context))
@@ -20,9 +21,14 @@ class RecipeDetailDialog(context: Context): Dialog(context) {
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         //데이터 연결
-//        binding.tvVeganType.setText("")
-//        binding.tvRecipeTitle.setText("")
-//        binding.tvRecipeContent.setText("")
+        binding.tvVeganType.text = data.veganType
+        binding.tvRecipeTitle.text = data.name
+        var ingredients = "&lt;재료&gt;\n"
+        for(i:Int in 0..data.ingredients.size){
+            if(i!=0){ingredients+=", "}
+            ingredients += data.ingredients[i].name
+        }
+//        binding.tvRecipeIngredients.text =
 
         //dialog 크기
 //        val layoutParams = WindowManager.LayoutParams()

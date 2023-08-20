@@ -9,7 +9,7 @@ import com.example.beginvegan.databinding.ItemRecipeBinding
 import com.example.beginvegan.src.data.model.recipe.Recipe
 import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
 
-class RecipeListRVAdapter(private val recipeList: List<RecipeListResponse>):
+class RecipeListRVAdapter(private val recipeList: List<Recipe>):
     RecyclerView.Adapter<RecipeListRVAdapter.RecycleViewHolder>() {
     private var listener: OnItemClickListener? = null
     private lateinit var filterRecipleList : ArrayList<Recipe>
@@ -28,14 +28,15 @@ class RecipeListRVAdapter(private val recipeList: List<RecipeListResponse>):
             parent,
             false
         )
+//        filterRecipleList = arrayListOf()
 //        filterRecipleList = recipeList
         return RecycleViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = filterRecipleList.size
+    override fun getItemCount(): Int = recipeList.size
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
-        val item = filterRecipleList[position]
+        val item = recipeList[position]
 //        if(filter=="전체보기"){
 //            holder.bind(item)
 //        }else{
@@ -47,14 +48,20 @@ class RecipeListRVAdapter(private val recipeList: List<RecipeListResponse>):
 
         if(position != RecyclerView.NO_POSITION){
             holder.itemView.setOnClickListener {
-                listener?.onItemClick(holder.itemView, filterRecipleList[position], position)
+                listener?.onItemClick(holder.itemView, recipeList[position], position)
             }
         }
     }
 
     //필터
     fun applyFilter(filter:String){
-
+        filterRecipleList = arrayListOf()
+        for(i:Int in 0..recipeList.size){
+            if(recipeList[i].veganType == filter){
+                filterRecipleList.add(recipeList[i])
+            }
+        }
+        notifyDataSetChanged()
     }
 
     //인터페이스

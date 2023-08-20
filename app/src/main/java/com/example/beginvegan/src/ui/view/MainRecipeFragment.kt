@@ -20,21 +20,21 @@ import com.example.beginvegan.util.RecipeDetailDialog
 import com.google.android.material.chip.Chip
 
 class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
-    FragmentMainRecipeBinding::bind, R.layout.fragment_main_recipe), RecipeInterface{
+    FragmentMainRecipeBinding::bind, R.layout.fragment_main_recipe),
+    RecipeInterface{
 
-    private lateinit var recipeList: List<RecipeListResponse>
+    private lateinit var recipeList: List<Recipe>
     override fun init() {
-        val position = arguments?.getInt("position")
-        if(position!=null){
-            onDialogBtnClicked()
+        val id = arguments?.getInt("recipeId")
+        if (id != null) {
+            onDialogBtnClicked(id)
         }
 
         //Service
         RecipeService(this).tryGetRecipeList()
 
 
-        //레시피 리스트
-        initializeViews()
+
 
         //filter
 //        binding.cgRecipeFilters.setOnCheckedChangeListener{group, checkedId ->
@@ -73,7 +73,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         //레시피 상세 페이지
         recipeAdapter.setOnItemClickListener(object: RecipeListRVAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: Recipe, position: Int) {
-                onDialogBtnClicked()
+                onDialogBtnClicked(data.id)
             }
         })
     }
@@ -93,28 +93,34 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     }
 
     //recipe Dialog
-    fun onDialogBtnClicked(){
-        val dialog = RecipeDetailDialog(requireContext())
-        dialog.show()
+    fun onDialogBtnClicked(id:Int){
+        RecipeService(this).tryPostRecipeDetail(id)
     }
     //인스턴스
-    companion object{
-        fun newInstance(): MainRecipeFragment {
-            return MainRecipeFragment()
-        }
-    }
+//    companion object{
+//        fun newInstance(): MainRecipeFragment {
+//            return MainRecipeFragment()
+//        }
+//    }
 
-    //Server
+    //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) {
-//        recipeList = response
+        recipeList = listOf(response.information)
+        //레시피 리스트
+        initializeViews()
         Log.d("TAG", "onGetRecipeListSuccess: ")
     }
 
     override fun onGetRecipeListFailure(message: String) {
-        Log.d("TAG", "onGetRecipeListFailure: #")
+        Log.d("TAG", "onGetRecipeListFailure: $message")
     }
     override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) { }
     override fun onGetThreeRecipeListFailure(message: String) { }
-    override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
-    override fun onPostRecipeDetailFailure(message: String) { }
+    override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) {
+        val dialog = RecipeDetailDialog(requireContext(), response.information)
+        dialog.show()
+    }
+    override fun onPostRecipeDetailFailure(message: String) {
+        Log.d("TAG", "onPostRecipeDetailFailure: $message")
+    }
 }
