@@ -23,21 +23,21 @@ import com.example.beginvegan.src.ui.adapter.HomeTodayRecipeVPAdapter
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
-    RestaurantInterface, RecipeInterface{
+    RecipeInterface{
 
-    lateinit var todayRecipeList: List<RecipeThree>
+//    lateinit var todayRecipeList: List<RecipeThree>
 
     override fun init() {
         //서버 데이터 불러오기
 //        RestaurantService(this).tryGetRestaurantDetail()
-        RecipeService(this).tryGetThreeRecipeList()
+        RecipeService(this)
 
-        //추천 레스토랑
+        //추천 레스토랑 RecyclerView
         initializeViews()
 
-        //오늘의 추천 레시피
+        //오늘의 추천 레시피 ViewPager
         val vpTodayRecipe = binding.vpTodayRecipe
-        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this, todayRecipeList)
+        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this)
         vpTodayRecipe.adapter = homeTodayRecipeAdapter
 
         vpTodayRecipe.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
@@ -59,7 +59,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             }
         })
 
-        //비건 매거진
+        //비건 매거진 ViewPager
         val vpMagazines = binding.vpMagazines
         val homeMagazineAdapter = HomeMagazineVPAdapter(this)
         vpMagazines.adapter = homeMagazineAdapter
@@ -98,27 +98,32 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         dialog.show()
     }
 
-    //추천 식당 5개
-    override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
-        TODO("Not yet implemented")
-    }
+    //오늘의 추천 레시피
+//    fun getRecipeData(index:Int): RecipeThree{
+//        return todayRecipeList[index]
+//    }
 
-    override fun onGetRestaurantDetailFailure(message: String) {
-        TODO("Not yet implemented")
-    }
+    //서버 - 식당
+//    override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun onGetRestaurantDetailFailure(message: String) {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
+//        TODO("Not yet implemented")
+//    }
+//    override fun onGetRestaurantReviewFailure(message: String) { }
 
-    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
-        TODO("Not yet implemented")
-    }
-    override fun onGetRestaurantReviewFailure(message: String) { }
-
-    //레시피
+    //서버 - 레시피
     override fun onGetRecipeListSuccess(response: List<RecipeListResponse>) { }
     override fun onGetRecipeListFailure(message: String) { }
     override fun onGetThreeRecipeListSuccess(response: List<RecipeThreeResponse>) {
-        todayRecipeList = listOf(
-            response[0].information, response[1].information, response[2].information
-        )
+//        todayRecipeList = listOf(
+//            response[0].information, response[1].information, response[2].information
+//        )
     }
     override fun onGetThreeRecipeListFailure(message: String) {
         Log.d("TAG", "onGetThreeRecipeListFailure: ")

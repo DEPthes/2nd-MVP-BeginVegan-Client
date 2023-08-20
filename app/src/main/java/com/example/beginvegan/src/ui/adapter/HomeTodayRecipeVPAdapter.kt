@@ -8,7 +8,7 @@ import com.example.beginvegan.src.ui.view.mainhome.HomeRecipe1Fragment
 import com.example.beginvegan.src.ui.view.mainhome.HomeRecipe2Fragment
 import com.example.beginvegan.src.ui.view.mainhome.MainHomeFragment
 
-class HomeTodayRecipeVPAdapter(mainHomeFragment: MainHomeFragment, private val recipeList: List<RecipeThree>): FragmentStateAdapter(mainHomeFragment) {
+class HomeTodayRecipeVPAdapter(mainHomeFragment: MainHomeFragment): FragmentStateAdapter(mainHomeFragment) {
 
     val fragmentList = listOf<Fragment>(
         HomeRecipe0Fragment(),
@@ -19,6 +19,9 @@ class HomeTodayRecipeVPAdapter(mainHomeFragment: MainHomeFragment, private val r
     override fun getItemCount(): Int { return fragmentList.size }
 
     override fun createFragment(position: Int): Fragment {
+//        val fragment = fragmentList[position]
+//        fragment.getData
+
         return fragmentList[position]
     }
 }
