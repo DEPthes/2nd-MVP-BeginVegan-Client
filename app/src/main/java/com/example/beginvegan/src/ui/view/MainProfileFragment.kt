@@ -6,6 +6,8 @@ import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainProfileBinding
+import com.example.beginvegan.src.data.model.user.UserInterface
+import com.example.beginvegan.src.data.model.user.UserVeganService
 import com.example.beginvegan.src.ui.adapter.ProfileMyRecordsVPAdapter
 import com.example.beginvegan.src.ui.view.vegantest.VeganTestActivity
 import com.example.beginvegan.util.LogoutDialog
@@ -14,10 +16,11 @@ import com.example.beginvegan.util.ProfileEditVeganTypeDialog
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMainProfileBinding::bind, R.layout.fragment_main_profile
-    ),BottomSheetLogoutFragment.MyFragmentInteractionListener
-    ,ProfileEditNameDialog.EditNameDialogListener
-    ,ProfileEditVeganTypeDialog.EditVeganTypeDialogListener{
+    ),BottomSheetLogoutFragment.MyFragmentInteractionListener,
+    ProfileEditNameDialog.EditNameDialogListener,
+    ProfileEditVeganTypeDialog.EditVeganTypeDialogListener{
     override fun init() {
+
         //ViewPager
         val vpMyRecords = binding.vpMyRecords
         vpMyRecords.adapter = ProfileMyRecordsVPAdapter(this)
