@@ -11,11 +11,10 @@ import retrofit2.Response
 
 class RestaurantService(val restaurantInterface: RestaurantInterface){
     private val restaurantRetrofitInterface: RestaurantRetrofitInterface = ApplicationClass.sRetrofit.create(RestaurantRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.xAccessToken))
 
     // 식당/카페 상세 정보(메뉴까지) 조회
     fun tryGetRestaurantDetail(restaurantId: Int){
-        restaurantRetrofitInterface.getRestaurantsDetail(accessToken,restaurantId).enqueue(object: Callback<RestaurantDetailResponse>{
+        restaurantRetrofitInterface.getRestaurantsDetail(ApplicationClass.xAccessToken,restaurantId).enqueue(object: Callback<RestaurantDetailResponse>{
             override fun onResponse(
                 call: Call<RestaurantDetailResponse>,
                 response: Response<RestaurantDetailResponse>
@@ -43,7 +42,7 @@ class RestaurantService(val restaurantInterface: RestaurantInterface){
 
     // 식당/카페 리뷰 조회
     fun tryGetRestaurantReview(restaurantId: Int){
-        restaurantRetrofitInterface.getRestaurantReview(accessToken,restaurantId).enqueue(object: Callback<RestaurantReviewResponse>{
+        restaurantRetrofitInterface.getRestaurantReview(ApplicationClass.xAccessToken,restaurantId).enqueue(object: Callback<RestaurantReviewResponse>{
             override fun onResponse(
                 call: Call<RestaurantReviewResponse>,
                 response: Response<RestaurantReviewResponse>

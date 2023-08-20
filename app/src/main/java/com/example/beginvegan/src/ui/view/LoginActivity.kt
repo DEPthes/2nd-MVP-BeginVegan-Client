@@ -1,23 +1,20 @@
 package com.example.beginvegan.src.ui.view
 
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityLoginBinding
 import com.example.beginvegan.src.data.model.auth.Auth
+import com.example.beginvegan.src.data.model.auth.AuthLoginResponse
 import com.example.beginvegan.src.data.model.auth.AuthResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignInterface
 import com.example.beginvegan.src.data.model.auth.AuthSignService
 import com.example.beginvegan.src.data.model.user.UserCheckInterface
 import com.example.beginvegan.src.data.model.user.UserCheckService
 import com.example.beginvegan.src.data.model.user.UserResponse
-import com.example.beginvegan.src.data.model.user.UserService
-import com.example.beginvegan.util.Constants.ACCESS_TOKEN
 import com.example.beginvegan.util.Constants.PROVIDER_ID
-import com.example.beginvegan.util.Constants.REFRESH_TOKEN
 import com.example.beginvegan.util.Constants.USER_EMAIL
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -26,7 +23,7 @@ import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface,UserCheckInterface{
     private lateinit var mAuth: Auth
-    
+
     private  val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e("KaKao Login | CallBack", "로그인 실패 $error")
@@ -101,20 +98,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         // 자동 로그인을 위한 유저 로그인 정보 저장
         ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID,mAuth.providerId).apply()
         ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL,mAuth.email).apply()
-        UserCheckService(this).tryGetUser()
         // 싱글톤 토큰 / 유저 정보 기입
-        ApplicationClass.xAccessToken = response.accessToken
+        ApplicationClass.xAccessToken = "${response.tokenType} ${response.accessToken}"
         ApplicationClass.xRefreshToken = response.refreshToken
+        Log.d("setUserData xAccessToken",ApplicationClass.xAccessToken)
+        Log.d("setUserData xRefreshToken",ApplicationClass.xRefreshToken)
+
+        UserCheckService(this).tryGetUser()
     }
 
-    override fun onPostAuthSignInSuccess(response: AuthResponse) {
+    override fun onPostAuthSignInSuccess(response: AuthLoginResponse) {
         Log.d("onPostAuthSignInSuccess",response.toString())
-        setUserData(response)
+        setUserData(response.information)
     }
 
     override fun onPostAuthSignInFailed(message: String) {
         Log.d("onPostAuthSignInFailed",message)
-        AuthSignService(this).tryPostAuthSignIn(mAuth)
+        AuthSignService(this).tryPostAuthSignUp(mAuth)
     }
 
     override fun onPostAuthSignUpSuccess(response: AuthResponse) {

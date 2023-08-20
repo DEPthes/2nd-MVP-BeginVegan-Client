@@ -11,10 +11,9 @@ import retrofit2.Response
 class UserCheckService(val userCheckInterface: UserCheckInterface) {
     private val userRetrofitInterface: UserRetrofitInterface = ApplicationClass.sRetrofit.create(
         UserRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.xAccessToken))
 
     fun tryGetUser(){
-        userRetrofitInterface.getUser(accessToken).enqueue(object: Callback<UserResponse> {
+        userRetrofitInterface.getUser(ApplicationClass.xAccessToken).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if(response.code() == 200){
                     userCheckInterface.onGetUserSuccess(response.body() as UserResponse)

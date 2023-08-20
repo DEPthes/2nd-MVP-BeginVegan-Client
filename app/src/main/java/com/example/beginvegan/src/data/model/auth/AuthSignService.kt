@@ -12,10 +12,10 @@ class AuthSignService(val authSignInterface: AuthSignInterface) {
     private val authRetrofitInterface: AuthRetrofitInterface = ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
 
     fun tryPostAuthSignIn(auth: Auth){
-        authRetrofitInterface.postAuthSignIn(auth.email,auth.providerId).enqueue(object: Callback<AuthResponse>{
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+        authRetrofitInterface.postAuthSignIn(AuthLogin(auth.providerId,auth.email)).enqueue(object: Callback<AuthLoginResponse>{
+            override fun onResponse(call: Call<AuthLoginResponse>, response: Response<AuthLoginResponse>) {
                 if(response.code() == 200){
-                    authSignInterface.onPostAuthSignInSuccess(response.body() as AuthResponse)
+                    authSignInterface.onPostAuthSignInSuccess(response.body() as AuthLoginResponse)
                 }else{
                     try{
                         val gson = Gson()
@@ -28,7 +28,7 @@ class AuthSignService(val authSignInterface: AuthSignInterface) {
                 }
             }
 
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            override fun onFailure(call: Call<AuthLoginResponse>, t: Throwable) {
                 authSignInterface.onPostAuthSignInFailed(t.message?:"통신 오류")
             }
 
