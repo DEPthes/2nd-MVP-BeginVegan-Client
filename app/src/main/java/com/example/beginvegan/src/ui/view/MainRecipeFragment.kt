@@ -105,14 +105,15 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     }
 
     //Server
-    override fun onGetRecipeListSuccess(response: List<RecipeListResponse>) {
-        recipeList = response
+    override fun onGetRecipeListSuccess(response: RecipeListResponse) {
+//        recipeList = response
+        Log.d("TAG", "onGetRecipeListSuccess: ")
     }
 
     override fun onGetRecipeListFailure(message: String) {
         Log.d("TAG", "onGetRecipeListFailure: #")
     }
-    override fun onGetThreeRecipeListSuccess(response: List<RecipeThreeResponse>) { }
+    override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) { }
     override fun onGetThreeRecipeListFailure(message: String) { }
     override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
     override fun onPostRecipeDetailFailure(message: String) { }

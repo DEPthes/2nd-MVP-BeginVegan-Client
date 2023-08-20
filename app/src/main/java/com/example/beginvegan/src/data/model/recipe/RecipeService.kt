@@ -3,7 +3,6 @@ package com.example.beginvegan.src.data.model.recipe
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.RecipeRetrofitInterface
-import com.example.beginvegan.util.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,13 +14,13 @@ class RecipeService(val recipeInterface: RecipeInterface) {
     // 전체 레시피 목록 조회
     fun tryGetRecipeList() {
         recipeRetrofitInterface.getRecipeList(ApplicationClass.xAccessToken)
-            .enqueue(object : Callback<List<RecipeListResponse>> {
+            .enqueue(object : Callback<RecipeListResponse> {
                 override fun onResponse(
-                    call: Call<List<RecipeListResponse>>,
-                    response: Response<List<RecipeListResponse>>
+                    call: Call<RecipeListResponse>,
+                    response: Response<RecipeListResponse>
                 ) {
                     if (response.code() == 200) {
-                        recipeInterface.onGetRecipeListSuccess(response.body() as List<RecipeListResponse>)
+                        recipeInterface.onGetRecipeListSuccess(response.body() as RecipeListResponse)
                     } else {
                         try {
                             val gson = Gson()
@@ -38,7 +37,7 @@ class RecipeService(val recipeInterface: RecipeInterface) {
 
                 }
 
-                override fun onFailure(call: Call<List<RecipeListResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<RecipeListResponse>, t: Throwable) {
                     recipeInterface.onGetRecipeListFailure(t.message ?: "통신 오류")
                 }
 
@@ -48,13 +47,13 @@ class RecipeService(val recipeInterface: RecipeInterface) {
     // 3가지 음식 목록 조회
     fun tryGetThreeRecipeList() {
         recipeRetrofitInterface.getThreeRecipeList(ApplicationClass.xAccessToken)
-            .enqueue(object : Callback<List<RecipeThreeResponse>> {
+            .enqueue(object : Callback<RecipeThreeResponse> {
                 override fun onResponse(
-                    call: Call<List<RecipeThreeResponse>>,
-                    response: Response<List<RecipeThreeResponse>>
+                    call: Call<RecipeThreeResponse>,
+                    response: Response<RecipeThreeResponse>
                 ) {
                     if (response.code() == 200) {
-                        recipeInterface.onGetThreeRecipeListSuccess(response.body() as List<RecipeThreeResponse>)
+                        recipeInterface.onGetThreeRecipeListSuccess(response.body() as RecipeThreeResponse)
                     } else {
                         try {
                             val gson = Gson()
@@ -70,7 +69,7 @@ class RecipeService(val recipeInterface: RecipeInterface) {
                     }
                 }
 
-                override fun onFailure(call: Call<List<RecipeThreeResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<RecipeThreeResponse>, t: Throwable) {
                     recipeInterface.onGetThreeRecipeListFailure(t.message ?: "통신 오류")
                 }
 

@@ -25,12 +25,12 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
     RecipeInterface{
 
-//    lateinit var todayRecipeList: List<RecipeThree>
+    var todayRecipeList: List<RecipeThree>? = null
 
     override fun init() {
         //서버 데이터 불러오기
 //        RestaurantService(this).tryGetRestaurantDetail()
-        RecipeService(this)
+        RecipeService(this).tryGetThreeRecipeList()
 
         //추천 레스토랑 RecyclerView
         initializeViews()
@@ -118,15 +118,16 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 //    override fun onGetRestaurantReviewFailure(message: String) { }
 
     //서버 - 레시피
-    override fun onGetRecipeListSuccess(response: List<RecipeListResponse>) { }
+    override fun onGetRecipeListSuccess(response: RecipeListResponse) { }
     override fun onGetRecipeListFailure(message: String) { }
-    override fun onGetThreeRecipeListSuccess(response: List<RecipeThreeResponse>) {
+    override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
 //        todayRecipeList = listOf(
 //            response[0].information, response[1].information, response[2].information
 //        )
+        Log.d("TAG", "onGetThreeRecipeListSuccess: ")
     }
     override fun onGetThreeRecipeListFailure(message: String) {
-        Log.d("TAG", "onGetThreeRecipeListFailure: ")
+        Log.d("TAG", "onGetThreeRecipeListFailure: $message ")
     }
     override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
     override fun onPostRecipeDetailFailure(message: String) { }
