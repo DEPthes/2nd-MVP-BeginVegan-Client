@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view
 
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
@@ -12,9 +13,10 @@ import com.example.beginvegan.util.ProfileEditNameDialog
 import com.example.beginvegan.util.ProfileEditVeganTypeDialog
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
-    FragmentMainProfileBinding::bind, R.layout.fragment_main_profile
-), BottomSheetLogoutFragment.MyFragmentInteractionListener {
+class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMainProfileBinding::bind, R.layout.fragment_main_profile
+    ),BottomSheetLogoutFragment.MyFragmentInteractionListener
+    ,ProfileEditNameDialog.EditNameDialogListener
+    ,ProfileEditVeganTypeDialog.EditVeganTypeDialogListener{
     override fun init() {
         //ViewPager
         val vpMyRecords = binding.vpMyRecords
@@ -48,32 +50,40 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(
         }
     }
 
-    //닉네임 수정 dialog
-    private fun openEditUserNameDialog(){
-        val editNameDialog = ProfileEditNameDialog(requireContext())
+    //닉네임 수정
+    private fun openEditUserNameDialog(){ //dialog 띄우기
+        val editNameDialog = ProfileEditNameDialog(requireContext(), binding.tvUsername.text.toString())
+        editNameDialog.setListener(this)
         editNameDialog.show()
     }
-    //Vegan Type 수정 dialog
-    private fun openEditVeganTypeDialog(){
-        val editVeganTypeDialog = ProfileEditVeganTypeDialog(requireContext())
+    override fun editNameOnSaveClicked(name: String) { //수정한 name UI 반영
+        binding.tvUsername.text = name
+    }
+
+    //비건 유형 수정
+    private fun openEditVeganTypeDialog(){ //dialog 띄우기
+        val editVeganTypeDialog = ProfileEditVeganTypeDialog(requireContext(), binding.tvUserVeganType.text.toString())
+        editVeganTypeDialog.setListener(this)
         editVeganTypeDialog.show()
     }
-    //로그아웃 more button
-    private fun openBottomSheetLogout(){
+    override fun editVeganTypeOnSaveClicked(type:String){
+        binding.tvUserVeganType.text = type
+    }
+
+    //로그아웃
+    private fun openBottomSheetLogout(){ //bottom sheet 열기
         val bottomSheet =BottomSheetLogoutFragment()
         bottomSheet.listener = this
         bottomSheet.show(requireActivity().supportFragmentManager, null)
     }
-    //로그아웃 dialog
-    fun openLogoutDialog() {
-        Log.d("TAG", "openLogoutDialog: 로그아웃 dialog open")
+    fun openLogoutDialog() { //dialog 띄우기
         val logoutDialog = LogoutDialog(requireContext())
         logoutDialog.show()
     }
-
-    override fun onButtonClicked() {
-        Log.d("TAG", "onButtonClicked: ")
+    override fun onButtonClicked() { //dialog 로그아웃 버튼 클릭
         openLogoutDialog()
     }
+
+
 
 }

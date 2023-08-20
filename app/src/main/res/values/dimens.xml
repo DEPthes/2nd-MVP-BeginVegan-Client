@@ -80,6 +80,7 @@
     <dimen name="line_4">4dp</dimen>
 
     <!--    Dim(dp)-->
+    <dimen name="dim_3">3dp</dimen>
     <dimen name="dim_10">10dp</dimen>
 
     <dimen name="drag_handle_width">32dp</dimen>

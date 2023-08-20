@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.beginvegan.R
 import com.example.beginvegan.databinding.ItemHomeRecommendRestaurantBinding
+import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 
-class HomeRecommendRestRVAdapter(private val context: Context, private val onItemClick:(position:Int)-> Unit):RecyclerView.Adapter<HomeRecommendRestRVAdapter.RecyclerViewHolder>() {
-    val restaurantNames = listOf(
-        "Sample1", "Sample2", "Sample3", "Sample4", "Sample5"
-    )
+class HomeRecommendRestRVAdapter(private val context: Context,private val recommendRestList: ArrayList<NearRestaurant>):
+    RecyclerView.Adapter<HomeRecommendRestRVAdapter.RecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val binding = ItemHomeRecommendRestaurantBinding.inflate(
@@ -22,34 +21,25 @@ class HomeRecommendRestRVAdapter(private val context: Context, private val onIte
             parent,
             false
         )
-        return RecyclerViewHolder(binding)
+        return RecyclerViewHolder(context, binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val item = restaurantNames[position % restaurantNames.size]
-        holder.bind(item, position)
-        //item 클릭 시
-        holder.itemView.setOnClickListener{
-            onItemClick.invoke(position)
-        }
+        val item = recommendRestList[position % recommendRestList.size]
+        holder.bind(item)
     }
 
     override fun getItemCount() = Int.MAX_VALUE
 
-    class RecyclerViewHolder( private val binding: ItemHomeRecommendRestaurantBinding) :
+    class RecyclerViewHolder(private val context: Context, private val binding: ItemHomeRecommendRestaurantBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        //sample img
-        val resImg = listOf(
-            R.drawable.test_home_res1,
-            R.drawable.test_home_res2,
-            R.drawable.test_home_re3,
-            R.drawable.test_res2,
-            R.drawable.test_res,
-        )
-        fun bind(restName: String, position: Int) {
-//            binding.ivRestaurantImg.setImageURI()
-            binding.tvRestaurantName.setText(restName)
-            binding.ivRestaurantImg.setImageResource(resImg[position % resImg.size])
+        fun bind(data:NearRestaurant) {
+            binding.tvRestaurantName.text = data.name
+//            if(data.imageUrl!=null){
+//                Glide.with(context).load(data.imageUrl).into(binding.ivRestaurantImg)
+//            }else{
+//                binding.ivRestaurantImg.setImageResource(R.drawable.test_home_res1)
+//            }
         }
     }
 }

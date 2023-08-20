@@ -11,7 +11,6 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityMainBinding
-import com.example.beginvegan.src.data.model.restaurant.Coordinate
 import com.example.beginvegan.src.ui.view.mainhome.MainHomeFragment
 import com.google.android.gms.location.LocationServices
 
@@ -52,6 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         supportFragmentManager.beginTransaction().replace(R.id.fl_main, fragment).commit()
         binding.bnvMain.selectedItemId = R.id.item_recipe
     }
+
     @SuppressLint("MissingPermission")
     private fun getLocation(){
         val fusedLocationProviderClient =
