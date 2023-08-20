@@ -13,10 +13,7 @@ import retrofit2.create
 
 class MagazineService(val magazineInterface: MagazineInterface) {
     private val magazineRetrofitInterface: MagazineRetrofitInterface = ApplicationClass.sRetrofit.create(MagazineRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.sSharedPreferences.getString(
-        Constants.ACCESS_TOKEN,
-        null
-    )))
+    private val accessToken = ("Bearer "+(ApplicationClass.xAccessToken))
 
     // 2가지 매거진 목록 조회
     fun tryGetMagazineTwoList(){

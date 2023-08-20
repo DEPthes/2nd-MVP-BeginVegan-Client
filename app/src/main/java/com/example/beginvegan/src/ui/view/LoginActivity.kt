@@ -1,7 +1,6 @@
 package com.example.beginvegan.src.ui.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -10,17 +9,20 @@ import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityLoginBinding
 import com.example.beginvegan.src.data.model.auth.Auth
 import com.example.beginvegan.src.data.model.auth.AuthResponse
-import com.example.beginvegan.src.data.model.auth.AuthSignUpInterface
-import com.example.beginvegan.src.data.model.auth.AuthSignUpService
+import com.example.beginvegan.src.data.model.auth.AuthSignInterface
+import com.example.beginvegan.src.data.model.auth.AuthSignService
+import com.example.beginvegan.src.data.model.user.UserService
 import com.example.beginvegan.util.Constants.ACCESS_TOKEN
+import com.example.beginvegan.util.Constants.PROVIDER_ID
 import com.example.beginvegan.util.Constants.REFRESH_TOKEN
+import com.example.beginvegan.util.Constants.USER_EMAIL
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignUpInterface{
+class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface{
+    private lateinit var mAuth: Auth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,6 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
 
         }
     }
+
 
     override fun init() {
         binding.btnLoginKakao.setOnClickListener{
@@ -80,34 +83,59 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                         "\n이메일: ${user.kakaoAccount?.email}" +
                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                val auth = Auth(
+                mAuth = Auth(
                     (user.id).toString()!!,
                     user.kakaoAccount?.profile?.nickname!!,
                     user.kakaoAccount?.email!!,
                     user.kakaoAccount?.profile?.thumbnailImageUrl!!)
-                AuthSignUpService(this).tryPostAuthSignUp(auth)
+                AuthSignService(this).tryPostAuthSignIn(mAuth)
             }
         }
     }
-    private fun moveToMain(){
-        val intent = Intent(this,MainActivity::class.java)
+    private fun moveToWelcome(){
+        val intent = Intent(this,WelcomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun onPostAuthSignInSuccess(response: AuthResponse) {
+        Log.d("access",response.accessToken)
+        Log.d("refresh",response.refreshToken)
+        Log.d("tokenType",response.tokenType)
+        setUserData(response)
+//        moveToWelcome()
+//        dismissLoadingDialog()
+    }
+
+    override fun onPostAuthSignInFailed(message: String) {
+        Log.d("onPostAuthSignInFailed",message)
+        AuthSignService(this).tryPostAuthSignIn(mAuth)
     }
 
     override fun onPostAuthSignUpSuccess(response: AuthResponse) {
         Log.d("access",response.accessToken)
         Log.d("refresh",response.refreshToken)
         Log.d("tokenType",response.tokenType)
-        ApplicationClass.sSharedPreferences.edit().putString(ACCESS_TOKEN,response.accessToken)
-        ApplicationClass.sSharedPreferences.edit().putString(REFRESH_TOKEN,response.refreshToken)
-        moveToMain()
+        setUserData(response)
+        moveToWelcome()
         dismissLoadingDialog()
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
         Log.d("onPostAuthSignUpFailed",message)
         dismissLoadingDialog()
+    }
+
+    private fun setUserData(response: AuthResponse){
+        // 자동 로그인을 위한 유저 로그인 정보 저장
+        ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID,mAuth.providerId).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL,mAuth.email).apply()
+
+        UserService
+        // 싱글톤 토큰 / 유저 정보 기입
+        ApplicationClass.xAccessToken = response.accessToken
+        ApplicationClass.xRefreshToken = response.refreshToken
+        ApplicationClass.xAuth = Auth(mAuth.providerId,mAuth.email,mAuth.nickname,mAuth.profileImgUrl)
     }
 
 }

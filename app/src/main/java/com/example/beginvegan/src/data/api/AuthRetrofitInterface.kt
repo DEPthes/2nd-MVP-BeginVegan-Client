@@ -10,6 +10,11 @@ import retrofit2.http.POST
 
 interface AuthRetrofitInterface {
     // 유저 회원가입
+    @POST("/auth/sign-in")
+    fun postAuthSignIn(
+        @Body email: String,
+        @Body providerId: String
+    ): Call<AuthResponse>
     @POST("/auth/sign-up")
     fun postAuthSignUp(
         @Body auth: Auth
