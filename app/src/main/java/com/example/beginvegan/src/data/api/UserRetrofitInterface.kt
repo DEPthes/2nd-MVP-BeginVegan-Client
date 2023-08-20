@@ -30,7 +30,7 @@ interface UserRetrofitInterface {
     @GET("/api/v1/bookmarks")
     fun getUserBookmarks(
         @Header("Authorization") accessToken: String?
-    ): Call<List<RestaurantDetailResponse>>
+    ): Call<RestaurantDetailResponse>
 
     // 유저 닉네임 변경
     @POST("/api/v1/users/nickname")
