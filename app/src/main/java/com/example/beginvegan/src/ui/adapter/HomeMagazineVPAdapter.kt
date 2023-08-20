@@ -2,15 +2,16 @@ package com.example.beginvegan.src.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.beginvegan.src.data.model.magazine.Magazine
 import com.example.beginvegan.src.ui.view.mainhome.HomeMagazineVeganDefineFragment
 import com.example.beginvegan.src.ui.view.mainhome.HomeMagazineVeganTypesFragment
 import com.example.beginvegan.src.ui.view.mainhome.MainHomeFragment
 
-class HomeMagazineVPAdapter(mainHomeFragment: MainHomeFragment): FragmentStateAdapter(mainHomeFragment) {
+class HomeMagazineVPAdapter(mainHomeFragment: MainHomeFragment, private val magazineList:List<Magazine>): FragmentStateAdapter(mainHomeFragment) {
 
     val fragmentList = listOf<Fragment>(
-        HomeMagazineVeganDefineFragment(),
-        HomeMagazineVeganTypesFragment()
+        HomeMagazineVeganDefineFragment(magazineList[0]),
+        HomeMagazineVeganTypesFragment(magazineList[1])
     )
 
     override fun getItemCount(): Int { return fragmentList.size }
