@@ -9,9 +9,8 @@ import com.example.beginvegan.databinding.ActivityMainBinding
 import com.example.beginvegan.src.ui.view.mainhome.MainHomeFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it)}) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+    var userName:String?=null
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
 
@@ -27,7 +26,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainRecipeFragment()).commit()
                 }
                 R.id.item_profile->{
-                    Log.d("TAG", "init: main activity")
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainProfileFragment()).commit()
                 }
             }
@@ -44,4 +42,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         supportFragmentManager.beginTransaction().replace(R.id.fl_main, fragment).commit()
         binding.bnvMain.selectedItemId = R.id.item_recipe
     }
+
 }
