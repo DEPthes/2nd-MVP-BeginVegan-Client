@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view.vegantest
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View

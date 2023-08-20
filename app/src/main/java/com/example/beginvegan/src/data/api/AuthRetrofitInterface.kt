@@ -1,6 +1,8 @@
 package com.example.beginvegan.src.data.api
 
 import com.example.beginvegan.src.data.model.auth.Auth
+import com.example.beginvegan.src.data.model.auth.AuthLogin
+import com.example.beginvegan.src.data.model.auth.AuthLoginResponse
 import com.example.beginvegan.src.data.model.auth.AuthResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignOutResponse
 import retrofit2.Call
@@ -10,6 +12,10 @@ import retrofit2.http.POST
 
 interface AuthRetrofitInterface {
     // 유저 회원가입
+    @POST("/auth/sign-in")
+    fun postAuthSignIn(
+        @Body auth:AuthLogin
+    ): Call<AuthLoginResponse>
     @POST("/auth/sign-up")
     fun postAuthSignUp(
         @Body auth: Auth

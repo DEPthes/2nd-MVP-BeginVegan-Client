@@ -1,30 +1,29 @@
 package com.example.beginvegan.src.ui.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityLoginBinding
 import com.example.beginvegan.src.data.model.auth.Auth
+import com.example.beginvegan.src.data.model.auth.AuthLoginResponse
 import com.example.beginvegan.src.data.model.auth.AuthResponse
-import com.example.beginvegan.src.data.model.auth.AuthSignUpInterface
-import com.example.beginvegan.src.data.model.auth.AuthSignUpService
-import com.example.beginvegan.util.Constants.ACCESS_TOKEN
-import com.example.beginvegan.util.Constants.REFRESH_TOKEN
+import com.example.beginvegan.src.data.model.auth.AuthSignInterface
+import com.example.beginvegan.src.data.model.auth.AuthSignService
+import com.example.beginvegan.src.data.model.user.UserCheckInterface
+import com.example.beginvegan.src.data.model.user.UserCheckService
+import com.example.beginvegan.src.data.model.user.UserResponse
+import com.example.beginvegan.util.Constants.PROVIDER_ID
+import com.example.beginvegan.util.Constants.USER_EMAIL
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignUpInterface{
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface,UserCheckInterface{
+    private lateinit var mAuth: Auth
 
-    }
     private  val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e("KaKao Login | CallBack", "로그인 실패 $error")
@@ -36,6 +35,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
 
         }
     }
+
 
     override fun init() {
         binding.btnLoginKakao.setOnClickListener{
@@ -80,33 +80,64 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                         "\n이메일: ${user.kakaoAccount?.email}" +
                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                val auth = Auth(
+                mAuth = Auth(
                     (user.id).toString()!!,
                     user.kakaoAccount?.profile?.nickname!!,
                     user.kakaoAccount?.email!!,
                     user.kakaoAccount?.profile?.thumbnailImageUrl!!)
-                AuthSignUpService(this).tryPostAuthSignUp(auth)
+                AuthSignService(this).tryPostAuthSignIn(mAuth)
             }
         }
     }
-    private fun moveToMain(){
-        val intent = Intent(this,MainActivity::class.java)
+    private fun moveToWelcome(){
+        val intent = Intent(this,WelcomeActivity::class.java)
         startActivity(intent)
         finish()
     }
+    private fun setUserData(response: AuthResponse){
+        // 자동 로그인을 위한 유저 로그인 정보 저장
+        ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID,mAuth.providerId).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL,mAuth.email).apply()
+        // 싱글톤 토큰 / 유저 정보 기입
+        ApplicationClass.xAccessToken = "${response.tokenType} ${response.accessToken}"
+        ApplicationClass.xRefreshToken = response.refreshToken
+        Log.d("setUserData xAccessToken",ApplicationClass.xAccessToken)
+        Log.d("setUserData xRefreshToken",ApplicationClass.xRefreshToken)
+
+        UserCheckService(this).tryGetUser()
+    }
+
+    override fun onPostAuthSignInSuccess(response: AuthLoginResponse) {
+        Log.d("onPostAuthSignInSuccess",response.toString())
+        setUserData(response.information)
+    }
+
+    override fun onPostAuthSignInFailed(message: String) {
+        Log.d("onPostAuthSignInFailed",message)
+        AuthSignService(this).tryPostAuthSignUp(mAuth)
+    }
 
     override fun onPostAuthSignUpSuccess(response: AuthResponse) {
-        Log.d("access",response.accessToken)
-        Log.d("refresh",response.refreshToken)
-        Log.d("tokenType",response.tokenType)
-        ApplicationClass.sSharedPreferences.edit().putString(ACCESS_TOKEN,response.accessToken)
-        ApplicationClass.sSharedPreferences.edit().putString(REFRESH_TOKEN,response.refreshToken)
-        moveToMain()
-        dismissLoadingDialog()
+        Log.d("onPostAuthSignUpSuccess",response.toString())
+        setUserData(response)
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
         Log.d("onPostAuthSignUpFailed",message)
+        dismissLoadingDialog()
+    }
+
+
+
+    override fun onGetUserSuccess(response: UserResponse) {
+        Log.d("onGetUserSuccess",response.toString())
+        ApplicationClass.xAuth = Auth(mAuth.providerId,mAuth.email,response.name,response.imageUrl)
+        dismissLoadingDialog()
+        moveToWelcome()
+    }
+
+    override fun onGetUserFailure(message: String) {
+        Log.d("onGetUserFailure",message)
         dismissLoadingDialog()
     }
 
