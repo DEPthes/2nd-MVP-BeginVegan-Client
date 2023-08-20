@@ -15,13 +15,13 @@ interface RecipeRetrofitInterface {
     @GET("/api/v1/foods/recipe-list")
     fun getRecipeList(
         @Header("Authorization") accessToken: String?,
-    ): Call<List<RecipeListResponse>>
+    ): Call<RecipeListResponse>
 
     // 3가지 음식 목록 조회
-    @GET("/api/v1/foods/recipe-list")
+    @GET("/api/v1/foods/random-food-list")
     fun getThreeRecipeList(
         @Header("Authorization") accessToken: String?,
-    ):Call<List<RecipeThreeResponse>>
+    ):Call<RecipeThreeResponse>
 
     // 레시피 상세 정보 조회
     @POST("/api/v1/foods/recipe-detail")
