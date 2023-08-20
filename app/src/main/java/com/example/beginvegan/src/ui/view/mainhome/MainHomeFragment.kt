@@ -36,7 +36,8 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     override fun init() {
         //서버 데이터 불러오기
-
+        val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //test
+        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList()
 
         //비건 매거진 ViewPager
@@ -106,12 +107,11 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         )
         setRecipeVPAdapter()
         Log.d("TAG", "onGetThreeRecipeListSuccess: ")
-        val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //test
-        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
+
     }
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
-
+        recommendRestList = arrayListOf()
         Log.d("TAG", "onPostFindRestaurantSuccess: ")
         val range = 0..response.information.size
         val randomNums = arrayListOf<Int>()
@@ -125,7 +125,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         for(i:Int in 1..5){
             recommendRestList.add(response.information[i])
         }
-//        setRestaurantRVAdapter()
+        setRestaurantRVAdapter()
         Log.d("TAG", "onPostFindRestaurantSuccess: ${recommendRestList[0].name}")
 
     }
