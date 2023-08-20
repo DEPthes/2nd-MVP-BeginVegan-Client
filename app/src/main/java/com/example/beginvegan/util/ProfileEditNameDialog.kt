@@ -8,11 +8,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import com.example.beginvegan.databinding.DialogProfileEditNameBinding
+import com.example.beginvegan.src.data.model.user.UserModifyNameInterface
+import com.example.beginvegan.src.data.model.user.UserModifyNameResponse
+import com.example.beginvegan.src.data.model.user.UserModifyNameService
 
-class ProfileEditNameDialog(context: Context, private val originalName:String): Dialog(context) {
+class ProfileEditNameDialog(context: Context, private val originalName:String): Dialog(context),
+    UserModifyNameInterface{
     private val binding: DialogProfileEditNameBinding = DialogProfileEditNameBinding.inflate(
         LayoutInflater.from(context))
 
+    val TAG = "tag"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -25,6 +30,7 @@ class ProfileEditNameDialog(context: Context, private val originalName:String): 
                 listener?.editNameOnSaveClicked(binding.tietNewName.text.toString())
             }
             //서버에 저장
+            UserModifyNameService(this).tryPostUserModifyName()
             this.dismiss()
         }
     }
@@ -37,5 +43,14 @@ class ProfileEditNameDialog(context: Context, private val originalName:String): 
 
     fun setListener(listener: EditNameDialogListener) {
         this.listener = listener
+    }
+
+    //서버 - 유저
+    override fun onPostUserModifyNameSuccess(response: UserModifyNameResponse) {
+        Log.d(TAG, "onPostUserModifyNameSuccess: ")
+    }
+
+    override fun onPostUserModifyNameFailure(message: String) {
+        Log.d(TAG, "onPostUserModifyNameFailure: $message")
     }
 }
