@@ -15,9 +15,7 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
     private val binding: DialogProfileEidtVeganTypeBinding = DialogProfileEidtVeganTypeBinding.inflate(
         LayoutInflater.from(context))
 
-    var selectedId:Int = 6
-    val veganTypeListKr = listOf("비건","락토 베지테리언","락토-오보 베지테리언","페스코 베지테리언","폴로 베지테리언","플렉시테리언")
-    val veganTypeListEng = listOf("VEGAN", "LACTO_VEGETARIAN", "OVO_VEGETARIAN", "LACTO_OVO_VEGETARIAN", "POLLOTARIAN", "PASCATARIAN", "FLEXITARIAN")
+    var selectedType:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -31,26 +29,24 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
         window!!.attributes = layoutParams
 
         //기존 유형 선택된 상태로 표시하기
-        val index = veganTypeListKr.indexOf(originalType)
-        when(index){
-            0 -> {binding.rbVegan.isChecked = true}
-            1 -> {binding.rbLacto.isChecked = true}
-            2 -> {binding.rbLactoOvo.isChecked = true}
-            3 -> {binding.rbPescatarian.isChecked = true}
-            4 -> {binding.rbPollotarian.isChecked = true}
-            5 -> {binding.rbFlexitarian.isChecked = true}
+        when(originalType){
+            VeganTypes.VEGAN.veganType -> {binding.rbVegan.isChecked = true}
+            VeganTypes.LACTO_VEGETARIAN.veganType -> {binding.rbLacto.isChecked = true}
+            VeganTypes.LACTO_OVO_VEGETARIAN.veganType -> {binding.rbLactoOvo.isChecked = true}
+            VeganTypes.PASCATARIAN.veganType -> {binding.rbPescatarian.isChecked = true}
+            VeganTypes.POLLOTARIAN.veganType -> {binding.rbPollotarian.isChecked = true}
+            VeganTypes.FLEXITARIAN.veganType -> {binding.rbFlexitarian.isChecked = true}
         }
         //setOnChangeListener
         binding.rgEditVeganType.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
-                R.id.rb_vegan -> {selectVeganType(0)}
-                R.id.rb_lacto -> {selectVeganType(1)}
-                R.id.rb_lacto_ovo-> {selectVeganType(2)}
-                R.id.rb_pescatarian -> {selectVeganType(3)}
-                R.id.rb_pollotarian -> {selectVeganType(4)}
-                R.id.rb_flexitarian -> {selectVeganType(5)}
+                R.id.rb_vegan -> {selectedType = VeganTypes.VEGAN.veganType}
+                R.id.rb_lacto -> {selectedType = VeganTypes.LACTO_VEGETARIAN.veganType}
+                R.id.rb_lacto_ovo-> {selectedType = VeganTypes.LACTO_OVO_VEGETARIAN.veganType}
+                R.id.rb_pescatarian -> {selectedType = VeganTypes.PASCATARIAN.veganType}
+                R.id.rb_pollotarian -> {selectedType = VeganTypes.POLLOTARIAN.veganType}
+                R.id.rb_flexitarian -> {selectedType = VeganTypes.FLEXITARIAN.veganType}
             }
-
         }
         //Cancel
         binding.btnCancel.setOnClickListener {
@@ -58,22 +54,16 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
         }
         //Confrim
         binding.btnConfirm.setOnClickListener {
-            saveVagenType(selectedId)
+            saveVagenType()
         }
     }
-
-    private fun selectVeganType(checkedId:Int){
-        //클릭한 정보 저장
-        selectedId = checkedId
-    }
-    private fun saveVagenType(checkedId:Int){
+    private fun saveVagenType(){
         //저장
-        if(checkedId!=6){
-            listener?.editVeganTypeOnSaveClicked(veganTypeListKr[checkedId])
+        if(!selectedType.isNullOrEmpty()){
+            listener?.editVeganTypeOnSaveClicked(selectedType.toString())
         }
-
         //서버 저장
-//        veganTypeListEng[checkedId]
+//        VeganTypes.values().find { it.veganType == selectedType}
         this.dismiss()
     }
 
