@@ -25,8 +25,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
     RecipeInterface{
 
-    var todayRecipeList: List<RecipeThree>? = null
+    lateinit var todayRecipeList: List<RecipeThree>
 
+    override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
+        todayRecipeList = listOf(
+            response.information[0], response.information[1], response.information[2]
+        )
+        setRecipeVPAdapter()
+    }
     override fun init() {
         //서버 데이터 불러오기
 //        RestaurantService(this).tryGetRestaurantDetail()
@@ -34,30 +40,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
         //추천 레스토랑 RecyclerView
         initializeViews()
-
-        //오늘의 추천 레시피 ViewPager
-        val vpTodayRecipe = binding.vpTodayRecipe
-        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this)
-        vpTodayRecipe.adapter = homeTodayRecipeAdapter
-
-        vpTodayRecipe.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                when(position){
-                    0 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                    }
-                    1 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                    }
-                    2 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                    }
-                }
-            }
-        })
 
         //비건 매거진 ViewPager
         val vpMagazines = binding.vpMagazines
@@ -98,10 +80,31 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         dialog.show()
     }
 
-    //오늘의 추천 레시피
-//    fun getRecipeData(index:Int): RecipeThree{
-//        return todayRecipeList[index]
-//    }
+    //오늘의 추천 레시피 ViewPager
+    private fun setRecipeVPAdapter(){
+        val vpTodayRecipe = binding.vpTodayRecipe
+        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this, todayRecipeList)
+        vpTodayRecipe.adapter = homeTodayRecipeAdapter
+
+        vpTodayRecipe.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                when(position){
+                    0 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_active)
+                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                    }
+                    1 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_active)
+                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                    }
+                    2 -> { binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
+                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_active)
+                    }
+                }
+            }
+        })
+    }
 
     //서버 - 식당
 //    override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
@@ -120,15 +123,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) { }
     override fun onGetRecipeListFailure(message: String) { }
-    override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
-//        todayRecipeList = listOf(
-//            response[0].information, response[1].information, response[2].information
-//        )
-        Log.d("TAG", "onGetThreeRecipeListSuccess: ")
-    }
-    override fun onGetThreeRecipeListFailure(message: String) {
-        Log.d("TAG", "onGetThreeRecipeListFailure: $message ")
-    }
+    override fun onGetThreeRecipeListFailure(message: String) { }
     override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
     override fun onPostRecipeDetailFailure(message: String) { }
 }

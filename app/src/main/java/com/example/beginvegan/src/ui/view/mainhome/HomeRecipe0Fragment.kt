@@ -10,19 +10,18 @@ import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentHomeRecipe0Binding
 import com.example.beginvegan.src.data.model.recipe.RecipeThree
 import com.example.beginvegan.src.ui.view.MainActivity
+import com.example.beginvegan.util.VeganTypes
 
-class HomeRecipe0Fragment : BaseFragment<FragmentHomeRecipe0Binding>(
+class HomeRecipe0Fragment(private val data:RecipeThree) : BaseFragment<FragmentHomeRecipe0Binding>(
     FragmentHomeRecipe0Binding::bind,R.layout.fragment_home_recipe_0) {
 
-    lateinit var data: RecipeThree
     override fun init() {
         binding.btnRecipe0.setOnClickListener {
             (activity as MainActivity).goRecipe(0)
         }
-//        (parentFragment as MainHomeFragment).getRecipeData(0)
 
-//        binding.tvRecipeTitle.text = data.name
-//        binding.tvRecipeVeganType.text = data.veganType
-//        binding.tvRecipeDescription.text = data.description
+        binding.tvRecipeTitle.text = data.name
+        binding.tvRecipeVeganType.text = VeganTypes.valueOf(data.veganType).veganType
+        binding.tvRecipeDescription.text = data.description
     }
 }
