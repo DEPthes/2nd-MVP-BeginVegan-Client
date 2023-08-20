@@ -1,7 +1,8 @@
 package com.example.beginvegan.src.data.model.review
 
+import com.example.beginvegan.config.BaseResponse
 import com.google.gson.annotations.SerializedName
 
 data class ReviewListResponse(
-    @SerializedName("reviews") val reviews: List<Review>
-)
+    @SerializedName("information") val information: List<Review>
+):BaseResponse()

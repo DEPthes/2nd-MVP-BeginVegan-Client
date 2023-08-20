@@ -11,11 +11,11 @@ import retrofit2.Response
 class AuthSignService(val authSignInterface: AuthSignInterface) {
     private val authRetrofitInterface: AuthRetrofitInterface = ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
 
-    fun tryPostAuthSignIn(auth: Auth){
-        authRetrofitInterface.postAuthSignIn(AuthLogin(auth.providerId,auth.email)).enqueue(object: Callback<AuthLoginResponse>{
-            override fun onResponse(call: Call<AuthLoginResponse>, response: Response<AuthLoginResponse>) {
+    fun tryPostAuthSignIn(auth: KakaoAuth){
+        authRetrofitInterface.postAuthSignIn(AuthLogin(auth.providerId!!,auth.email)).enqueue(object: Callback<AuthSignResponse>{
+            override fun onResponse(call: Call<AuthSignResponse>, response: Response<AuthSignResponse>) {
                 if(response.code() == 200){
-                    authSignInterface.onPostAuthSignInSuccess(response.body() as AuthLoginResponse)
+                    authSignInterface.onPostAuthSignInSuccess(response.body() as AuthSignResponse)
                 }else{
                     try{
                         val gson = Gson()
@@ -28,17 +28,17 @@ class AuthSignService(val authSignInterface: AuthSignInterface) {
                 }
             }
 
-            override fun onFailure(call: Call<AuthLoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<AuthSignResponse>, t: Throwable) {
                 authSignInterface.onPostAuthSignInFailed(t.message?:"통신 오류")
             }
 
         })
     }
-    fun tryPostAuthSignUp(auth: Auth){
-        authRetrofitInterface.postAuthSignUp(auth).enqueue(object: Callback<AuthResponse> {
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+    fun tryPostAuthSignUp(auth: KakaoAuth){
+        authRetrofitInterface.postAuthSignUp(auth).enqueue(object: Callback<AuthSignResponse> {
+            override fun onResponse(call: Call<AuthSignResponse>, response: Response<AuthSignResponse>) {
                 if(response.code() == 200){
-                    authSignInterface.onPostAuthSignUpSuccess(response.body() as AuthResponse)
+                    authSignInterface.onPostAuthSignUpSuccess(response.body() as AuthSignResponse)
                 }else{
                     try{
                         val gson = Gson()
@@ -51,7 +51,7 @@ class AuthSignService(val authSignInterface: AuthSignInterface) {
                 }
             }
 
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            override fun onFailure(call: Call<AuthSignResponse>, t: Throwable) {
                 authSignInterface.onPostAuthSignUpFailed(t.message?:"통신 오류")
             }
 

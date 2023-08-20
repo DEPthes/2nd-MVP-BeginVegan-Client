@@ -7,7 +7,8 @@ import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivityLoginBinding
 import com.example.beginvegan.src.data.model.auth.Auth
-import com.example.beginvegan.src.data.model.auth.AuthLoginResponse
+import com.example.beginvegan.src.data.model.auth.KakaoAuth
+import com.example.beginvegan.src.data.model.auth.AuthSignResponse
 import com.example.beginvegan.src.data.model.auth.AuthResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignInterface
 import com.example.beginvegan.src.data.model.auth.AuthSignService
@@ -22,7 +23,7 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface,UserCheckInterface{
-    private lateinit var mAuth: Auth
+    private lateinit var mAuth: KakaoAuth
 
     private  val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
@@ -80,7 +81,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                         "\n이메일: ${user.kakaoAccount?.email}" +
                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                mAuth = Auth(
+                mAuth = KakaoAuth(
                     (user.id).toString()!!,
                     user.kakaoAccount?.profile?.nickname!!,
                     user.kakaoAccount?.email!!,
@@ -107,7 +108,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         UserCheckService(this).tryGetUser()
     }
 
-    override fun onPostAuthSignInSuccess(response: AuthLoginResponse) {
+    override fun onPostAuthSignInSuccess(response: AuthSignResponse) {
         Log.d("onPostAuthSignInSuccess",response.toString())
         setUserData(response.information)
     }
@@ -117,9 +118,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         AuthSignService(this).tryPostAuthSignUp(mAuth)
     }
 
-    override fun onPostAuthSignUpSuccess(response: AuthResponse) {
+    override fun onPostAuthSignUpSuccess(response: AuthSignResponse) {
         Log.d("onPostAuthSignUpSuccess",response.toString())
-        setUserData(response)
+        setUserData(response.information)
+        // 비건 타입이 null 일 경우 테스트 연결
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
@@ -131,7 +133,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
 
     override fun onGetUserSuccess(response: UserResponse) {
         Log.d("onGetUserSuccess",response.toString())
-        ApplicationClass.xAuth = Auth(mAuth.providerId,mAuth.email,response.name,response.imageUrl)
+        ApplicationClass.xAuth = Auth(
+            response.id,
+            response.name,
+            response.email,
+            response.imageUrl,
+            response.marketingConsent,
+            response.veganType,
+            response.provider,
+            response.role,
+            response.providerId
+            )
         dismissLoadingDialog()
         moveToWelcome()
     }

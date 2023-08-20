@@ -3,24 +3,23 @@ package com.example.beginvegan.src.data.model.user
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.UserRetrofitInterface
-import com.example.beginvegan.util.Constants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserService(val userInterface: UserInterface){
+class UserVeganService(val userInterface: UserInterface){
     private val userRetrofitInterface: UserRetrofitInterface = ApplicationClass.sRetrofit.create(UserRetrofitInterface::class.java)
     private val accessToken = ("Bearer "+(ApplicationClass.xAccessToken))
 
     fun tryPostUserVeganType(veganType: String){
-        userRetrofitInterface.postUserVeganType(accessToken,veganType).enqueue(object: Callback<VeganTypeResponse>{
+        userRetrofitInterface.postUserVeganType(accessToken,veganType).enqueue(object: Callback<UserVeganResponse>{
             override fun onResponse(
-                call: Call<VeganTypeResponse>,
-                response: Response<VeganTypeResponse>
+                call: Call<UserVeganResponse>,
+                response: Response<UserVeganResponse>
             ) {
                 if(response.code() == 200){
-                    userInterface.onPostUserVeganTypeSuccess(response.body() as VeganTypeResponse)
+                    userInterface.onPostUserVeganTypeSuccess(response.body() as UserVeganResponse)
                 }else{
                     try{
                         val gson = Gson()
@@ -33,7 +32,7 @@ class UserService(val userInterface: UserInterface){
                 }
             }
 
-            override fun onFailure(call: Call<VeganTypeResponse>, t: Throwable) {
+            override fun onFailure(call: Call<UserVeganResponse>, t: Throwable) {
                 userInterface.onPostUserVeganTypeFailure(t.message?:"통신 오류")
             }
 

@@ -10,6 +10,11 @@ object Constants {
     const val USER_EMAIL = "USER_EMAIL"
     const val USER_NAME ="USER_NAME"
     const val USER_IMG_URL="USER_IMG_URL"
+    const val USER_ID = "USER_ID"
+    const val USER_MARKETING_CONSENT = "USER_MARKETING_CONSENT"
+    const val USER_VEGAN_TYPE ="USER_VEGAN_TYPE"
+    const val USER_PROVIDER = "USER_PROVIDER"
+    const val USER_ROLE ="USER_ROLE"
 
     // VALIDATION
     const val EMAIL_VALIDATION =
