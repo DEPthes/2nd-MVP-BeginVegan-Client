@@ -36,6 +36,7 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
             VeganTypes.PASCATARIAN.veganType -> {binding.rbPescatarian.isChecked = true}
             VeganTypes.POLLOTARIAN.veganType -> {binding.rbPollotarian.isChecked = true}
             VeganTypes.FLEXITARIAN.veganType -> {binding.rbFlexitarian.isChecked = true}
+            "비기너" -> {binding.rbBeginner.isChecked = true}
         }
         //setOnChangeListener
         binding.rgEditVeganType.setOnCheckedChangeListener { group, checkedId ->
@@ -46,6 +47,7 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
                 R.id.rb_pescatarian -> {selectedType = VeganTypes.PASCATARIAN.veganType}
                 R.id.rb_pollotarian -> {selectedType = VeganTypes.POLLOTARIAN.veganType}
                 R.id.rb_flexitarian -> {selectedType = VeganTypes.FLEXITARIAN.veganType}
+                R.id.rb_beginner -> {selectedType = "비기너"}
             }
         }
         //Cancel

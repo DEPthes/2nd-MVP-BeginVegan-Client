@@ -87,6 +87,17 @@
                     android:includeFontPadding="false"
                     android:textColor="@drawable/selector_rbtn_text_color"
                     android:layout_marginVertical="@dimen/margin_10"/>
+                <RadioButton
+                    android:id="@+id/rb_beginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:text="@string/vegan_type_beginner_kr"
+                    android:textSize="@dimen/text_16"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@drawable/selector_rbtn_text_color"
+                    android:layout_marginVertical="@dimen/margin_10"/>
             </RadioGroup>
             <Button
                 android:id="@+id/btn_cancel"
