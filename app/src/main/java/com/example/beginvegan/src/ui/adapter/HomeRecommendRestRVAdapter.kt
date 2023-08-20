@@ -37,10 +37,10 @@ class HomeRecommendRestRVAdapter(private val context: Context,private val recomm
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data:NearRestaurant) {
             binding.tvRestaurantName.text = data.name
-            if(data.imageUrl!=null){
+            if(!data.imageUrl.isNullOrEmpty()){
                 Glide.with(context).load(data.imageUrl).transform(CenterCrop(),RoundedCorners(8)).into(binding.ivRestaurantImg)
             }else{
-                binding.ivRestaurantImg.setImageResource(R.drawable.test_home_res1)
+                binding.ivRestaurantImg.setImageResource(R.drawable.test_res2)
             }
         }
     }

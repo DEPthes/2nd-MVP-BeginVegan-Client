@@ -12,24 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentProfileMyreviewBinding
+import com.example.beginvegan.src.data.model.review.Review
+import com.example.beginvegan.src.data.model.review.ReviewInterface
+import com.example.beginvegan.src.data.model.review.ReviewListResponse
+import com.example.beginvegan.src.data.model.review.ReviewService
+import com.example.beginvegan.src.data.model.review.WriteReviewResponse
 import com.example.beginvegan.src.ui.adapter.ProfileMyReviewRVAdapter
 import com.example.beginvegan.src.ui.adapter.RecipeListRVAdapter
 
 class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
     FragmentProfileMyreviewBinding::bind, R.layout.fragment_profile_myreview
-) {
-    private lateinit var reviewList: ArrayList<String>
+    ),ReviewInterface {
+    private lateinit var reviewList: List<Review>
+    val TAG = "tag"
     override fun init() {
-        Log.d("TAG", "init: my review")
-        reviewList = arrayListOf()
-        reviewList.apply {
-            add("hello1")
-            add("hello2")
-            add("hello3")
-            add("hello4")
-        }
-
-        initializeViews()
+        ReviewService(this).tryGetReviewList()
     }
 
     private fun initializeViews(){
@@ -38,7 +35,7 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
         binding.rvMyreview.layoutManager = LinearLayoutManager(this.context)
 
         reviewAdapter.setOnItemClickListener(object: ProfileMyReviewRVAdapter.OnItemClickListener{
-            override fun onItemClick(v: View, data: String, position: Int) {
+            override fun onItemClick(v: View, data: Review, position: Int) {
                 Log.d("TAG", "onItemClick: my review")
             }
         })
@@ -55,5 +52,17 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
                 }
             }
         })
+    }
+    //서버 - 리뷰
+    override fun onPostWriteReviewSuccess(response: WriteReviewResponse) { }
+    override fun onPostWriteReviewFailure(message: String) { }
+    override fun onGetReviewListSuccess(response: ReviewListResponse) {
+        Log.d(TAG, "onGetReviewListSuccess: ")
+        reviewList = listOf()
+        reviewList = response.information
+        initializeViews()
+    }
+    override fun onGetReviewListFailure(message: String) {
+        Log.d(TAG, "onGetReviewListFailure: $message")
     }
 }

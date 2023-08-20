@@ -37,6 +37,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     lateinit var todayRecipeList: List<RecipeThree>
     lateinit var recommendRestList: ArrayList<NearRestaurant>
+    val TAG = "TAG"
 
     override fun init() {
         //서버 데이터 불러오기
@@ -122,7 +123,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
-        val range = 0..(response.information.size-1)
+        val range = 0 until response.information.size
         val randomNums = arrayListOf<Int>()
         //난수 생성
         for(i:Int in 0..4){
@@ -132,9 +133,10 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             }
             randomNums.add(randomNum)
         }
-        for(i:Int in 0..(randomNums.size-1)){
+        for(i:Int in 0 until randomNums.size){
             recommendRestList.add(response.information[randomNums[i]])
         }
+        Log.d(TAG, "onPostFindRestaurantSuccess: ")
         setRestaurantRVAdapter()
     }
     //서버 - 유저
