@@ -1,24 +1,43 @@
 package com.example.beginvegan.src.ui.view.mainhome
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainHomeBinding
+import com.example.beginvegan.src.data.model.recipe.Recipe
+import com.example.beginvegan.src.data.model.recipe.RecipeDetailResponse
+import com.example.beginvegan.src.data.model.recipe.RecipeInterface
+import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
+import com.example.beginvegan.src.data.model.recipe.RecipeService
+import com.example.beginvegan.src.data.model.recipe.RecipeThree
+import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
+import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantService
 import com.example.beginvegan.src.ui.adapter.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.HomeTodayRecipeVPAdapter
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
-    FragmentMainHomeBinding::bind,R.layout.fragment_main_home ){
+    FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
+    RestaurantInterface, RecipeInterface{
+
+    lateinit var todayRecipeList: List<RecipeThree>
 
     override fun init() {
+        //서버 데이터 불러오기
+//        RestaurantService(this).tryGetRestaurantDetail()
+        RecipeService(this).tryGetThreeRecipeList()
+
         //추천 레스토랑
         initializeViews()
 
         //오늘의 추천 레시피
         val vpTodayRecipe = binding.vpTodayRecipe
-        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this)
+        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this, todayRecipeList)
         vpTodayRecipe.adapter = homeTodayRecipeAdapter
 
         vpTodayRecipe.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
@@ -78,4 +97,32 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val dialog = HomeMagazineDetailDialog(requireContext())
         dialog.show()
     }
+
+    //추천 식당 5개
+    override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetRestaurantDetailFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
+        TODO("Not yet implemented")
+    }
+    override fun onGetRestaurantReviewFailure(message: String) { }
+
+    //레시피
+    override fun onGetRecipeListSuccess(response: List<RecipeListResponse>) { }
+    override fun onGetRecipeListFailure(message: String) { }
+    override fun onGetThreeRecipeListSuccess(response: List<RecipeThreeResponse>) {
+        todayRecipeList = listOf(
+            response[0].information, response[1].information, response[2].information
+        )
+    }
+    override fun onGetThreeRecipeListFailure(message: String) {
+        Log.d("TAG", "onGetThreeRecipeListFailure: ")
+    }
+    override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
+    override fun onPostRecipeDetailFailure(message: String) { }
 }

@@ -17,9 +17,11 @@ class HomeRecipe0Fragment : BaseFragment<FragmentHomeRecipe0Binding>(
         binding.btnRecipe0.setOnClickListener {
             (activity as MainActivity).goRecipe(0)
         }
+    }
 
-//        binding.tvRecipeTitle.setText()
-//        binding.tvRecipeVeganType.setText()
-//        binding.tvRecipeDescription.setText()
+    fun setData(title:String, type:String, description:String){
+        binding.tvRecipeTitle.text = title
+        binding.tvRecipeVeganType.text = type
+        binding.tvRecipeDescription.text = description
     }
 }
