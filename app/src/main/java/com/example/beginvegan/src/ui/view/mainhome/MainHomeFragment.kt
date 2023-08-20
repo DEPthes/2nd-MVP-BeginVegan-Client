@@ -29,6 +29,7 @@ import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.ui.adapter.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.HomeTodayRecipeVPAdapter
+import com.example.beginvegan.util.HomeMagazineDetailDialog
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
@@ -121,17 +122,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
-        val range = 0..response.information.size
+        val range = 0 until response.information.size
         val randomNums = arrayListOf<Int>()
         //난수 생성
-        while(randomNums.size <5){
-            val randomNum = range.random()
-            if(randomNum !in randomNums){
-                randomNums.add(randomNum)
-            }
-        }
         for(i:Int in 0..4){
-            recommendRestList.add(response.information[i])
+            var randomNum = range.random()
+            if(randomNum in randomNums){
+                randomNum = range.random()
+            }
+            randomNums.add(randomNum)
+        }
+        for(i:Int in 0 until randomNums.size){
+            recommendRestList.add(response.information[randomNums[i]])
         }
         setRestaurantRVAdapter()
     }
@@ -155,6 +157,8 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         Log.d("TAG", "onGetMagazineTwoListFailure: $message")
     }
     override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) {
+        val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
+        dialog.show()
         Log.d("TAG", "onPostMagazineDetailSuccess: ")
     }
     override fun onPostMagazineDetailFailure(message: String) {
