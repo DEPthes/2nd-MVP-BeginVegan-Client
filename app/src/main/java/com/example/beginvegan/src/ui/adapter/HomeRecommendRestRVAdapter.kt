@@ -12,10 +12,8 @@ import com.example.beginvegan.R
 import com.example.beginvegan.databinding.ItemHomeRecommendRestaurantBinding
 import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 
-class HomeRecommendRestRVAdapter(private val context: Context,private val recommendRestList: ArrayList<NearRestaurant>):RecyclerView.Adapter<HomeRecommendRestRVAdapter.RecyclerViewHolder>() {
-//    val restaurantNames = listOf(
-//        "Sample1", "Sample2", "Sample3", "Sample4", "Sample5"
-//    )
+class HomeRecommendRestRVAdapter(private val context: Context,private val recommendRestList: ArrayList<NearRestaurant>):
+    RecyclerView.Adapter<HomeRecommendRestRVAdapter.RecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val binding = ItemHomeRecommendRestaurantBinding.inflate(
@@ -37,7 +35,11 @@ class HomeRecommendRestRVAdapter(private val context: Context,private val recomm
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data:NearRestaurant) {
             binding.tvRestaurantName.text = data.name
-            Glide.with(context).load(data.imageUrl).into(binding.ivRestaurantImg)
+//            if(data.imageUrl!=null){
+//                Glide.with(context).load(data.imageUrl).into(binding.ivRestaurantImg)
+//            }else{
+//                binding.ivRestaurantImg.setImageResource(R.drawable.test_home_res1)
+//            }
         }
     }
 }

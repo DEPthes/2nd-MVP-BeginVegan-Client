@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
+import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainHomeBinding
 import com.example.beginvegan.src.data.model.recipe.Recipe
@@ -33,16 +34,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     lateinit var todayRecipeList: List<RecipeThree>
     lateinit var recommendRestList: ArrayList<NearRestaurant>
 
-    override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
-        todayRecipeList = listOf(
-            response.information[0], response.information[1], response.information[2]
-        )
-        setRecipeVPAdapter()
-    }
     override fun init() {
         //서버 데이터 불러오기
-        val coordinate = Coordinate("37.580261","126.922838") //test
-        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
+
         RecipeService(this).tryGetThreeRecipeList()
 
         //비건 매거진 ViewPager
@@ -63,8 +57,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             }
         })
     }
-
-
 
 
     //매거진 Dialog
@@ -107,16 +99,20 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val startPosition = Int.MAX_VALUE/2
         recyclerView.scrollToPosition(startPosition)
     }
-
-
-    //서버 - 레시피
-    override fun onGetRecipeListSuccess(response: RecipeListResponse) { }
-    override fun onGetRecipeListFailure(message: String) { }
-    override fun onGetThreeRecipeListFailure(message: String) { }
-    override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
-    override fun onPostRecipeDetailFailure(message: String) { }
-    //서버 - 식당
+    //오늘의 레시피
+    override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
+        todayRecipeList = listOf(
+            response.information[0], response.information[1], response.information[2]
+        )
+        setRecipeVPAdapter()
+        Log.d("TAG", "onGetThreeRecipeListSuccess: ")
+        val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //test
+        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
+    }
+    //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
+
+        Log.d("TAG", "onPostFindRestaurantSuccess: ")
         val range = 0..response.information.size
         val randomNums = arrayListOf<Int>()
         //난수 생성
@@ -129,10 +125,17 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         for(i:Int in 1..5){
             recommendRestList.add(response.information[i])
         }
-        setRestaurantRVAdapter()
-        Log.d("TAG", "onPostFindRestaurantSuccess: ")
+//        setRestaurantRVAdapter()
+        Log.d("TAG", "onPostFindRestaurantSuccess: ${recommendRestList[0].name}")
+
     }
-    override fun onPostFIndRestaurantFailure(message: String) {
-        Log.d("TAG", "onPostFIndRestaurantFailure: $message")
-    }
+
+    //서버 - 레시피
+    override fun onGetRecipeListSuccess(response: RecipeListResponse) { }
+    override fun onGetRecipeListFailure(message: String) { }
+    override fun onGetThreeRecipeListFailure(message: String) { }
+    override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { }
+    override fun onPostRecipeDetailFailure(message: String) { }
+    //서버 - 식당
+    override fun onPostFIndRestaurantFailure(message: String) { Log.d("TAG", "onPostFIndRestaurantFailure: $message") }
 }
