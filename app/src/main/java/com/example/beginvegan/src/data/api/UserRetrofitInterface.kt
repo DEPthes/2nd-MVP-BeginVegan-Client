@@ -2,9 +2,8 @@ package com.example.beginvegan.src.data.api
 
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.user.UserModifyNameResponse
-import com.example.beginvegan.src.data.model.user.VeganType
 import com.example.beginvegan.src.data.model.user.UserResponse
-import com.example.beginvegan.src.data.model.user.VeganTypeResponse
+import com.example.beginvegan.src.data.model.user.UserVeganResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,7 +24,7 @@ interface UserRetrofitInterface {
     fun postUserVeganType(
         @Header("Authorization") accessToken: String?,
         @Body veganType: String
-    ): Call<VeganTypeResponse>
+    ): Call<UserVeganResponse>
 
     // 유저의 스크랩 조회
     @GET("/api/v1/bookmarks")
