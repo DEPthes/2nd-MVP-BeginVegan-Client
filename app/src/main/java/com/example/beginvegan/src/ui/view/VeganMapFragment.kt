@@ -24,8 +24,10 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
+import com.example.beginvegan.src.data.model.restaurant.Coordinate
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
 import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
 import net.daum.mf.map.api.MapPOIItem
@@ -40,12 +42,20 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     private lateinit var dataList: ArrayList<String>
     private lateinit var mapView: MapView
     override fun init() {
+        showLoadingDialog(requireContext())
         setMapView()
+        getBottomSheetDialogDefaultHeight()
+        RestaurantFindService(this).tryPostFindRestaurant(Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude))
     }
     private fun setMapView(){
         mapView = MapView(this@VeganMapFragment.activity)
         binding.mvVeganMap.addView(mapView)
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.223036, 127.187954), 1, true);
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(ApplicationClass.xLatitude.toDouble(), ApplicationClass.xLongitude.toDouble()), 1, true);
+        Log.d("setMapCenterPointAndZoomLevel",ApplicationClass.xLatitude)
+        Log.d("setMapCenterPointAndZoomLevel",ApplicationClass.xLongitude)
+        mapView.currentLocationTrackingMode =
+            MapView.CurrentLocationTrackingMode.TrackingModeOnWithMarkerHeadingWithoutMapMoving
+        setRestaurantGps()
     }
     private fun getBottomSheetDialogDefaultHeight(): Int {
         return getWindowHeight() * 70 / 100
@@ -60,18 +70,19 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 
     private fun setRestaurantGps() {
         // for문으로 데이터 갯수만큼 돌리기
-        var la = 37.223036
-        var lo = 127.187954
+        var la = ApplicationClass.xLatitude.toDouble()
+        var lo = ApplicationClass.xLongitude.toDouble()
         for (i: Int in 1..10) {
             val marker = MapPOIItem()
             la -= 0.0001
             lo += 0.0001
-            marker.itemName = "Default$i"
-            marker.tag = 0
-            marker.mapPoint = MapPoint.mapPointWithGeoCoord(la, lo)
-            marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
-            marker.selectedMarkerType =
-                MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+            marker.apply{
+                itemName = "Default$i"
+                tag = 0
+                mapPoint = MapPoint.mapPointWithGeoCoord(la, lo)
+                markerType = MapPOIItem.MarkerType.CustomImage
+                customImageResourceId = R.drawable.marker_spot
+            }.isShowCalloutBalloonOnTouch = false
             mapView.addPOIItem(marker)
         }
         mapView.setPOIItemEventListener(this)
@@ -116,36 +127,26 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     }
 
     override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+        // 마커 처리하기
         Toast.makeText(context, p1!!.itemName.toString(), Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
-    }
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {}
 
     override fun onCalloutBalloonOfPOIItemTouched(
         mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?
-    ) {
-        // 말풍선 클릭 시
-        val builder = android.app.AlertDialog.Builder(context)
-        val itemList = arrayOf("토스트", "마커 삭제", "취소")
-        builder.setTitle("${poiItem?.itemName}")
-        builder.setItems(itemList) { dialog, which ->
-            when (which) {
-                0 -> Toast.makeText(context, "토스트", Toast.LENGTH_SHORT).show()  // 토스트
-                1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
-                2 -> dialog.dismiss()   // 대화상자 닫기
-            }
-        }
-        builder.show()
-    }
+    ) {}
 
-    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
-    }
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {}
 
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
+        dismissLoadingDialog()
+        Log.d("onPostFindRestaurantSuccess",response.toString())
+       //
     }
 
-    override fun onPostFIndRestaurantFailure(message: String) {
+    override fun onPostFindRestaurantFailure(message: String) {
+        Log.d("onPostFindRestaurantFailure",message)
     }
 
     // 트래킹 모드

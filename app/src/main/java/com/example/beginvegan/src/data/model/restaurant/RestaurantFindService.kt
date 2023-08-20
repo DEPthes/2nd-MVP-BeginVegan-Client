@@ -25,16 +25,16 @@ class RestaurantFindService(val restaurantFindInterface: RestaurantFindInterface
                         val gson = Gson()
                         val errorResponse =
                             gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                        restaurantFindInterface.onPostFIndRestaurantFailure(errorResponse.message)
+                        restaurantFindInterface.onPostFindRestaurantFailure(errorResponse.message)
                     }catch(e:Exception){
-                        restaurantFindInterface.onPostFIndRestaurantFailure(e.message?:"통신 오류")
+                        restaurantFindInterface.onPostFindRestaurantFailure(e.message?:"통신 오류")
                     }
 
                 }
             }
 
             override fun onFailure(call: Call<RestaurantFindResponse>, t: Throwable) {
-                restaurantFindInterface.onPostFIndRestaurantFailure(t.message?:"통신 오류")
+                restaurantFindInterface.onPostFindRestaurantFailure(t.message?:"통신 오류")
             }
 
         })

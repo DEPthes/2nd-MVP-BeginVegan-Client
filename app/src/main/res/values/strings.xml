@@ -78,6 +78,7 @@
     <string name="vegan_type_pescatarian_kr">페스코테리언</string>
     <string name="vegan_type_pollotarian_kr">폴로테리언</string>
     <string name="vegan_type_flexitarian_kr">플렉시테리언</string>
+    <string name="vegan_type_beginner_kr">비기너</string>
 
     <!--    Vegan Type English -->
     <string name="vegan_type_vegan_eng">Vegan</string>
