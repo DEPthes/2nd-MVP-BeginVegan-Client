@@ -11,6 +11,9 @@ import com.example.beginvegan.src.data.model.auth.Auth
 import com.example.beginvegan.src.data.model.auth.AuthResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignInterface
 import com.example.beginvegan.src.data.model.auth.AuthSignService
+import com.example.beginvegan.src.data.model.user.UserCheckInterface
+import com.example.beginvegan.src.data.model.user.UserCheckService
+import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.data.model.user.UserService
 import com.example.beginvegan.util.Constants.ACCESS_TOKEN
 import com.example.beginvegan.util.Constants.PROVIDER_ID
@@ -21,12 +24,9 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface{
+class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface,UserCheckInterface{
     private lateinit var mAuth: Auth
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    
     private  val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e("KaKao Login | CallBack", "로그인 실패 $error")
@@ -97,14 +97,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         startActivity(intent)
         finish()
     }
+    private fun setUserData(response: AuthResponse){
+        // 자동 로그인을 위한 유저 로그인 정보 저장
+        ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID,mAuth.providerId).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL,mAuth.email).apply()
+        UserCheckService(this).tryGetUser()
+        // 싱글톤 토큰 / 유저 정보 기입
+        ApplicationClass.xAccessToken = response.accessToken
+        ApplicationClass.xRefreshToken = response.refreshToken
+    }
 
     override fun onPostAuthSignInSuccess(response: AuthResponse) {
-        Log.d("access",response.accessToken)
-        Log.d("refresh",response.refreshToken)
-        Log.d("tokenType",response.tokenType)
+        Log.d("onPostAuthSignInSuccess",response.toString())
         setUserData(response)
-//        moveToWelcome()
-//        dismissLoadingDialog()
     }
 
     override fun onPostAuthSignInFailed(message: String) {
@@ -113,12 +118,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     }
 
     override fun onPostAuthSignUpSuccess(response: AuthResponse) {
-        Log.d("access",response.accessToken)
-        Log.d("refresh",response.refreshToken)
-        Log.d("tokenType",response.tokenType)
+        Log.d("onPostAuthSignUpSuccess",response.toString())
         setUserData(response)
-        moveToWelcome()
-        dismissLoadingDialog()
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
@@ -126,16 +127,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         dismissLoadingDialog()
     }
 
-    private fun setUserData(response: AuthResponse){
-        // 자동 로그인을 위한 유저 로그인 정보 저장
-        ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID,mAuth.providerId).apply()
-        ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL,mAuth.email).apply()
 
-        UserService
-        // 싱글톤 토큰 / 유저 정보 기입
-        ApplicationClass.xAccessToken = response.accessToken
-        ApplicationClass.xRefreshToken = response.refreshToken
-        ApplicationClass.xAuth = Auth(mAuth.providerId,mAuth.email,mAuth.nickname,mAuth.profileImgUrl)
+
+    override fun onGetUserSuccess(response: UserResponse) {
+        Log.d("onGetUserSuccess",response.toString())
+        ApplicationClass.xAuth = Auth(mAuth.providerId,mAuth.email,response.name,response.imageUrl)
+        dismissLoadingDialog()
+        moveToWelcome()
+    }
+
+    override fun onGetUserFailure(message: String) {
+        Log.d("onGetUserFailure",message)
+        dismissLoadingDialog()
     }
 
 }
