@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
+import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindInterface
@@ -44,6 +45,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     private fun setMapView(){
         mapView = MapView(this@VeganMapFragment.activity)
         binding.mvVeganMap.addView(mapView)
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.223036, 127.187954), 1, true);
     }
     private fun getBottomSheetDialogDefaultHeight(): Int {
         return getWindowHeight() * 70 / 100
@@ -55,12 +57,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         (context as Activity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
         return displayMetrics.heightPixels
     }
-    private fun startTracking() {
-        mapView.currentLocationTrackingMode =
-            MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
-        mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
-        setRestaurantGps()
-    }
+
     private fun setRestaurantGps() {
         // for문으로 데이터 갯수만큼 돌리기
         var la = 37.223036
@@ -149,5 +146,13 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     }
 
     override fun onPostFIndRestaurantFailure(message: String) {
+    }
+
+    // 트래킹 모드
+    private fun startTracking() {
+        mapView.currentLocationTrackingMode =
+            MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
+        mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
+        setRestaurantGps()
     }
 }
