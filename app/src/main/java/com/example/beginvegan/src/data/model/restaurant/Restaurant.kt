@@ -13,5 +13,5 @@ open class Restaurant(
     @SerializedName("longitude") val longitude: String,
     @SerializedName("kakaoMapUrl") val kakaoMapUrl: String,
     @SerializedName("imageUrl") val imageUrl:String,
-    @SerializedName("imageSource") val imageSource: String
+    @SerializedName("imageSource") val imageSource: String?
 )
