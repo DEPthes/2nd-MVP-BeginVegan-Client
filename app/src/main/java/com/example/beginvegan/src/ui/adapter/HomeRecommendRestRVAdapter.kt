@@ -35,11 +35,14 @@ class HomeRecommendRestRVAdapter(private val context: Context,private val recomm
 
     class RecyclerViewHolder(private val context: Context, private val binding: ItemHomeRecommendRestaurantBinding) :
         RecyclerView.ViewHolder(binding.root) {
+//        val sampleImg = listOf<Drawable>(R.drawable.test_home_res1,)
+        var emptyNum = 0
         fun bind(data:NearRestaurant) {
             binding.tvRestaurantName.text = data.name
             if(!data.imageUrl.isNullOrEmpty()){
                 Glide.with(context).load(data.imageUrl).transform(CenterCrop(),RoundedCorners(8)).into(binding.ivRestaurantImg)
             }else{
+//                if(emptyNum==0){}
                 Glide.with(context).load(R.drawable.test_home_res1).transform(CenterCrop(),RoundedCorners(8)).into(binding.ivRestaurantImg)
             }
         }
