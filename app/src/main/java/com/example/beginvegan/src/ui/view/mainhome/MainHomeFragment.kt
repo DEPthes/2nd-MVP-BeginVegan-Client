@@ -42,7 +42,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         //서버 데이터 불러오기
         UserCheckService(this).tryGetUser() //유저
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
-//        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
+        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
         MagazineService(this).tryGetMagazineTwoList() //매거진
     }
@@ -117,32 +117,39 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         todayRecipeList = listOf(
             response.information[0], response.information[1], response.information[2]
         )
-        Log.d("TAG", "onGetThreeRecipeListSuccess:")
         setRecipeVPAdapter()
     }
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
-        val range = 0 until response.information.size
-        Log.d("TAG", "onPostFindRestaurantSuccess: ${response.information.size}")
-        val randomNums = arrayListOf<Int>()
-        //난수 생성
-        for(i:Int in 0..4){
-            var randomNum:Int = range.random()
-            Log.d("TAG", "onPostFindRestaurantSuccess: $i : $randomNum")
-            if(randomNum in randomNums){
-                randomNum = range.random()
-                Log.d("TAG", "onPostFindRestaurantSuccess: $i : $randomNum")
+        if(response.information.size >0){
+            val range = 0 until response.information.size
+            val randomNums = arrayListOf<Int>()
+            //난수 생성
+            for(i:Int in 0..4){
+                var randomNum:Int = range.random()
+                if(randomNum in randomNums){
+                    randomNum = range.random()
+                }
+                randomNums.add(randomNum)
             }
-            randomNums.add(randomNum)
+            for(i:Int in 0 until randomNums.size){
+                recommendRestList.add(response.information[randomNums[i]])
+            }
+            setRestaurantRVAdapter()
         }
-        Log.d("TAG", "onPostFindRestaurantSuccess: after")
-        for(i:Int in 0 until randomNums.size){
-            recommendRestList.add(response.information[randomNums[i]])
-        }
-        Log.d("TAG", "onPostFindRestaurantSuccess: done")
-        setRestaurantRVAdapter()
     }
+    //서버 - 매거진
+    override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) { //fragment ViewPager 띄우기
+        val magazineList = listOf(response.information[0], response.information[1])
+        setMagazineVPAdapter(magazineList)
+    }
+    override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) { //매거진 상세페이지
+        val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
+        dialog.show()
+    }
+
+    ///서버///
     //서버 - 유저
     override fun onGetUserFailure(message: String) { }
     //서버 - 레시피
@@ -154,17 +161,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //서버 - 식당
     override fun onPostFindRestaurantFailure(message: String) { }
     //서버 - 매거진
-    override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) {
-        val magazineList = listOf(response.information[0], response.information[1])
-        setMagazineVPAdapter(magazineList)
-    }
     override fun onGetMagazineTwoListFailure(message: String) { }
-    override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) {
-        val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
-        dialog.show()
-        Log.d("Magazine", "onPostMagazineDetailSuccess: ")
-    }
-    override fun onPostMagazineDetailFailure(message: String) {
-        Log.d("Magazine", "onPostMagazineDetailFailure: $message")
-    }
+    override fun onPostMagazineDetailFailure(message: String) { }
 }

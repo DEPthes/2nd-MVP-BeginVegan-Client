@@ -50,6 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         val fragment = MainRecipeFragment()
         val bundle = Bundle()
         bundle.putInt("recipeId",id)
+        Log.d("TAG", "goRecipe: in MainActivity $id")
         fragment.arguments = bundle
 
         supportFragmentManager.beginTransaction().replace(R.id.fl_main, fragment).commit()
