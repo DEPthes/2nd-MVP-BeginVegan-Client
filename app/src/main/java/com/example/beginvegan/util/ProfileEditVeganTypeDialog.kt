@@ -9,12 +9,17 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import com.example.beginvegan.R
 import com.example.beginvegan.databinding.DialogProfileEidtVeganTypeBinding
+import com.example.beginvegan.src.data.model.user.UserInterface
+import com.example.beginvegan.src.data.model.user.UserVeganResponse
+import com.example.beginvegan.src.data.model.user.UserVeganService
 
-class ProfileEditVeganTypeDialog(context: Context, private val originalType:String): Dialog(context) {
+class ProfileEditVeganTypeDialog(context: Context, private val originalType:String): Dialog(context),
+    UserInterface{
     private val binding: DialogProfileEidtVeganTypeBinding = DialogProfileEidtVeganTypeBinding.inflate(
         LayoutInflater.from(context))
 
     var selectedType:String? = null
+    val TAG = "EditType"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -63,8 +68,9 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
         if(!selectedType.isNullOrEmpty()){
             listener?.editVeganTypeOnSaveClicked(selectedType.toString())
         }
-        //서버 저장
-//        VeganTypes.values().find { it.veganType == selectedType}
+        //서버 - 유저
+        val veganType = VeganType.values().find { it.veganType == selectedType}.toString()
+        UserVeganService(this).tryPostUserVeganType(veganType)
         this.dismiss()
     }
 
@@ -76,5 +82,13 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
 
     fun setListener(listener: EditVeganTypeDialogListener) {
         this.listener = listener
+    }
+    //서버 - 유저
+    override fun onPostUserVeganTypeSuccess(response: UserVeganResponse) {
+        Log.d(TAG, "onPostUserVeganTypeSuccess: ")
+    }
+
+    override fun onPostUserVeganTypeFailure(message: String) {
+        Log.d(TAG, "onPostUserVeganTypeFailure: $message")
     }
 }

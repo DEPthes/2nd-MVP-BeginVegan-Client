@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view.mainhome
 
+import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentHomeMagazineVeganDefineBinding
@@ -9,10 +10,11 @@ class HomeMagazineVeganDefineFragment(private val data:Magazine) : BaseFragment<
     FragmentHomeMagazineVeganDefineBinding::bind,R.layout.fragment_home_magazine_vegan_define ) {
 
     override fun init() {
+        binding.tvMagazineTitleDefine.text = data.title
+
         binding.btnMagazineDefine.setOnClickListener {
             val homeFragment = parentFragment as MainHomeFragment
             homeFragment.onDialogBtnClicked(data.id)
-            binding.tvMagazineTitleDefine.text = data.title
         }
     }
 

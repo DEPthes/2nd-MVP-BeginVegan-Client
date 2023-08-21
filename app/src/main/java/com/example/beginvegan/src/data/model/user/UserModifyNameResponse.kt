@@ -8,5 +8,5 @@ data class UserModifyNameResponse(
 ): BaseResponse()
 
 data class ModifyName(
-    @SerializedName("nickname") val nickname:String
+    @SerializedName("message") val message:String
 )

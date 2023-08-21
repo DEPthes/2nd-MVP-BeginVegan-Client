@@ -40,11 +40,12 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     override fun init() {
         //서버 데이터 불러오기
+        showLoadingDialog(requireContext())
         UserCheckService(this).tryGetUser() //유저
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
-//        MagazineService(this).tryGetMagazineTwoList() //매거진
+        MagazineService(this).tryGetMagazineTwoList() //매거진
     }
 
     //추천 식당 recyclerView
@@ -55,6 +56,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
         val startPosition = Int.MAX_VALUE/2
         recyclerView.scrollToPosition(startPosition)
+        dismissLoadingDialog()
     }
     //오늘의 추천 레시피 ViewPager
     private fun setRecipeVPAdapter(){
@@ -103,7 +105,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //매거진 Dialog
     fun onDialogBtnClicked(id:Int){
         //매거진 디테일 호출
-//        MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
+        MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
     }
 
 
@@ -122,21 +124,34 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
-        val range = 0 until response.information.size
-        val randomNums = arrayListOf<Int>()
-        //난수 생성
-        for(i:Int in 0..4){
-            var randomNum = range.random()
-            if(randomNum in randomNums){
-                randomNum = range.random()
+        if(response.information.size >0){
+            val range = 0 until response.information.size
+            val randomNums = arrayListOf<Int>()
+            //난수 생성
+            for(i:Int in 0..4){
+                var randomNum:Int = range.random()
+                if(randomNum in randomNums){
+                    randomNum = range.random()
+                }
+                randomNums.add(randomNum)
             }
-            randomNums.add(randomNum)
+            for(i:Int in 0 until randomNums.size){
+                recommendRestList.add(response.information[randomNums[i]])
+            }
+            setRestaurantRVAdapter()
         }
-        for(i:Int in 0 until randomNums.size){
-            recommendRestList.add(response.information[randomNums[i]])
-        }
-        setRestaurantRVAdapter()
     }
+    //서버 - 매거진
+    override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) { //fragment ViewPager 띄우기
+        val magazineList = listOf(response.information[0], response.information[1])
+        setMagazineVPAdapter(magazineList)
+    }
+    override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) { //매거진 상세페이지
+        val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
+        dialog.show()
+    }
+
+    ///서버///
     //서버 - 유저
     override fun onGetUserFailure(message: String) { }
     //서버 - 레시피
@@ -148,20 +163,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //서버 - 식당
     override fun onPostFindRestaurantFailure(message: String) { }
     //서버 - 매거진
-    override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) {
-        val magazineList = listOf(response.information[0], response.information[1])
-        setMagazineVPAdapter(magazineList)
-        Log.d("TAG", "onGetMagazineTwoListSuccess: ")
-    }
-    override fun onGetMagazineTwoListFailure(message: String) {
-        Log.d("TAG", "onGetMagazineTwoListFailure: $message")
-    }
-    override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) {
-        val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
-        dialog.show()
-        Log.d("TAG", "onPostMagazineDetailSuccess: ")
-    }
-    override fun onPostMagazineDetailFailure(message: String) {
-        Log.d("TAG", "onPostMagazineDetailFailure: $message")
-    }
+    override fun onGetMagazineTwoListFailure(message: String) { }
+    override fun onPostMagazineDetailFailure(message: String) { }
 }

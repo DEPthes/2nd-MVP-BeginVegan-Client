@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view.mainhome
 
+import android.util.Log
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentHomeRecipe0Binding
@@ -12,6 +13,7 @@ class HomeRecipe0Fragment(private val data:RecipeThree) : BaseFragment<FragmentH
 
     override fun init() {
         binding.btnRecipe0.setOnClickListener {
+            Log.d("TAG", "init: setOnClick")
             (activity as MainActivity).goRecipe(data.id)
         }
 

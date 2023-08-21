@@ -30,7 +30,8 @@ class ProfileMyScrapRVAdapter(private val scrapList: ArrayList<String>): Recycle
             binding.tvRestaurantTime.text = time
             binding.tvRestaurantAddress.text = address
             binding.ibDeleteScrap.setOnClickListener {
-                //
+                //서버 - 북마크
+
             }
         }
     }
@@ -48,14 +49,10 @@ class ProfileMyScrapRVAdapter(private val scrapList: ArrayList<String>): Recycle
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val item = scrapList[position]
-        holder.bind("식당 이름","time","address", position)
 
-        Log.d("TEST","onBindViewHolder")
         if(position != RecyclerView.NO_POSITION){
-            Log.d("TAG","Click")
             holder.itemView.setOnClickListener {
                 listener?.onItemClick(holder.itemView, scrapList[position], position)
-                Log.d("TAG","ClickListener")
             }
         }
     }
@@ -68,7 +65,6 @@ class ProfileMyScrapRVAdapter(private val scrapList: ArrayList<String>): Recycle
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){
-        Log.d("TAG","setOnItemClickListener")
         this.listener = listener
     }
 }
