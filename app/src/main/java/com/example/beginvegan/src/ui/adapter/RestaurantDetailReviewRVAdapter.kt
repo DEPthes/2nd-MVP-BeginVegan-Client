@@ -6,15 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemRestaurantReviewBinding
 import com.example.beginvegan.databinding.ItemVeganmapRestaurantBinding
+import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
+import com.example.beginvegan.src.data.model.restaurant.ReviewDetail
 
-class RestaurantDetailReviewRVAdapter(private val dataList: ArrayList<String>) :
+class RestaurantDetailReviewRVAdapter(private val dataList: ArrayList<ReviewDetail>) :
     RecyclerView.Adapter<RestaurantDetailReviewRVAdapter.DataViewHolder>() {
-    private var listener: OnItemClickListener? = null
 
     inner class DataViewHolder(private val binding: ItemRestaurantReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+        fun bind(position: Int) {
             // bind
+            binding.tvReviewContent.text = dataList[position].content
+            binding.tvReviewUsername.text = dataList[position].user.name
+            binding.tvReviewDate.text = dataList[position].user.createdDate
         }
     }
 
@@ -32,12 +36,7 @@ class RestaurantDetailReviewRVAdapter(private val dataList: ArrayList<String>) :
         holder: DataViewHolder,
         position: Int
     ) {
-        holder.bind()
-        if (position != RecyclerView.NO_POSITION) {
-            holder.itemView.setOnClickListener {
-                listener?.onItemClick(holder.itemView, dataList[position], position)
-            }
-        }
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -46,11 +45,4 @@ class RestaurantDetailReviewRVAdapter(private val dataList: ArrayList<String>) :
         return position
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(v: View, data: String, position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
 }

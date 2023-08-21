@@ -78,7 +78,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
             MapPoint.mapPointWithGeoCoord(
                 ApplicationClass.xLatitude.toDouble(),
                 ApplicationClass.xLongitude.toDouble()
-            ), 1, true
+            ), 4, true
         )
         Log.d("setMapCenterPointAndZoomLevel", ApplicationClass.xLatitude)
         Log.d("setMapCenterPointAndZoomLevel", ApplicationClass.xLongitude)
@@ -90,6 +90,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
             Log.d("Touch", "mapView")
             if (bottomSheetBehavior.state != STATE_COLLAPSED) {
                 bottomSheetBehavior.state = STATE_COLLAPSED
+                setRVAdapter()
             }
             false
         }
@@ -114,8 +115,8 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
             marker.apply {
                 itemName = response.information[i].name
                 mapPoint = MapPoint.mapPointWithGeoCoord(
-                    ApplicationClass.xLatitude.toDouble() - 0.001 * i.toDouble(),
-                    ApplicationClass.xLongitude.toDouble() + 0.001 * i.toDouble()
+                    response.information[i].latitude.toDouble(),
+                    response.information[i].longitude.toDouble()
                 )
                 markerType = MapPOIItem.MarkerType.CustomImage
                 tag = i
@@ -152,6 +153,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
             VeganMapBottomSheetRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
                 Log.d("ItemClick", data.toString())
+                Log.d("ItemClick", data.id.toString())
                 showLoadingDialog(requireContext())
                 parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
                 parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)

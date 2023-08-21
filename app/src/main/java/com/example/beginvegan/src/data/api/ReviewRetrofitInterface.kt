@@ -19,10 +19,9 @@ interface ReviewRetrofitInterface {
         @Body content: String
     ): Call<WriteReviewResponse>
 
-    @GET("/api/v1/restaurants/review/{restaurant-id}?page={n}")
+    @GET("/api/v1/reviews")
     fun getReviewList(
         @Header("Authorization") accessToken: String?,
         @Path("restaurant-id") id: Int,
-        @Path("n") page: Int
     ): Call<ReviewListResponse>
 }

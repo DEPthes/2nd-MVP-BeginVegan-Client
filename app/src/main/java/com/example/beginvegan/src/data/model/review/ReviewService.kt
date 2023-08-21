@@ -43,8 +43,8 @@ class ReviewService(val reviewInterface: ReviewInterface) {
             })
     }
 
-    fun tryGetReviewList() {
-        reviewRetrofitInterface.getReviewList(ApplicationClass.xAccessToken).enqueue(object : Callback<ReviewListResponse> {
+    fun tryGetReviewList(restaurantId: Int) {
+        reviewRetrofitInterface.getReviewList(ApplicationClass.xAccessToken,restaurantId).enqueue(object : Callback<ReviewListResponse> {
             override fun onResponse(
                 call: Call<ReviewListResponse>,
                 response: Response<ReviewListResponse>

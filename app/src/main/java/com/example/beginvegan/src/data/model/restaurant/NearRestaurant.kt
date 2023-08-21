@@ -7,6 +7,8 @@ data class NearRestaurant(
     @SerializedName("name") val name: String,
     @SerializedName("businessHours") val businessHours: String,
     @SerializedName("address") val address: Address,
+    @SerializedName("latitude") val latitude: String,
+    @SerializedName("longitude") val longitude: String,
     @SerializedName("imageUrl") val imageUrl: String,
     @SerializedName("menus") val menus: List<NearRestaurantMenus>
 )
