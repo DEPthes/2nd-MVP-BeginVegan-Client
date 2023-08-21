@@ -40,6 +40,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     override fun init() {
         //서버 데이터 불러오기
+        showLoadingDialog(requireContext())
         UserCheckService(this).tryGetUser() //유저
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
@@ -55,6 +56,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
         val startPosition = Int.MAX_VALUE/2
         recyclerView.scrollToPosition(startPosition)
+        dismissLoadingDialog()
     }
     //오늘의 추천 레시피 ViewPager
     private fun setRecipeVPAdapter(){

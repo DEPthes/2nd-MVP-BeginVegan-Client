@@ -31,17 +31,18 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     private var selectedRecipeId:Int? = null
     val TAG = "recipe"
     override fun init() {
-        selectedRecipeId = arguments?.getInt("recipeId")
-        Log.d("TAG", "init: in Fragment $selectedRecipeId")
-        if (selectedRecipeId!=null) {
-            Log.d("TAG", "init: id not null")
-            onDialogBtnClicked(selectedRecipeId!!)
-        }
+//        selectedRecipeId = arguments?.getInt("recipeId")
+//        Log.d("TAG", "init: in Fragment $selectedRecipeId")
+//        if (selectedRecipeId!=null) {
+//            Log.d("TAG", "init: id not null")
+//            onDialogBtnClicked(selectedRecipeId!!)
+//        }
 
         //Service
+        showLoadingDialog(requireContext())
         RecipeService(this).tryGetRecipeList()
 
-        //filter
+        //filter UI 적용
         binding.cgRecipeFilters.setOnCheckedChangeListener{group, checkedId ->
             val checkedChip: Chip = binding.root.findViewById(checkedId)
             checkFilter(checkedChip, checkedChip.isChecked)
@@ -69,6 +70,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         }
     }
 
+    //레시피 리스트 RVAdapter
     private fun initializeViews(list:List<RecipeList>){
         val recipeAdapter = RecipeListRVAdapter(list)
         binding.rvRecipes.adapter = recipeAdapter
@@ -80,6 +82,8 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
                 onDialogBtnClicked(data.id)
             }
         })
+
+        dismissLoadingDialog()
     }
 
     //필터 선택시 UI 반영
@@ -88,9 +92,8 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
             filter.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.color_primary3))
             filter.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_white))
 
-            //필터
+            //필터 함수 실행
             setFilter(binding.cgRecipeFilters.indexOfChild(filter) - 1)
-//            initializeViews(filter)
         }else{
             filter.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.color_white))
             filter.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_primary3))
@@ -104,29 +107,19 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
             val enum =enumValues<VeganTypes>()
             val filter = enum[index].name
             filterList = arrayListOf()
-            Log.d(TAG, "setFilter: $filter")
             for(i:Int in 0 until recipeList.size){
                 if(recipeList[i].veganType==filter){
                     filterList.add(recipeList[i])
-                    Log.d(TAG, "setFilter: ${recipeList[i].veganType}")
                 }
             }
-            Log.d(TAG, "setFilter: fnish for")
             initializeViews(filterList)
         }
     }
 
-    //recipe Dialog
+    //레시피 상세 정보 Dialog 띄우기
     fun onDialogBtnClicked(id:Int){
         RecipeService(this).tryPostRecipeDetail(id)
-        Log.d(TAG, "onDialogBtnClicked: dialog")
     }
-    //인스턴스
-//    companion object{
-//        fun newInstance(): MainRecipeFragment {
-//            return MainRecipeFragment()
-//        }
-//    }
 
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) { //전체 레시피 목록 조회

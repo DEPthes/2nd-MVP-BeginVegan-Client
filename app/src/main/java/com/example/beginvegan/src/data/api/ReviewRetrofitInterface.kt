@@ -22,6 +22,5 @@ interface ReviewRetrofitInterface {
     @GET("/api/v1/reviews")
     fun getReviewList(
         @Header("Authorization") accessToken: String?,
-        @Path("restaurant-id") id: Int,
     ): Call<ReviewListResponse>
 }

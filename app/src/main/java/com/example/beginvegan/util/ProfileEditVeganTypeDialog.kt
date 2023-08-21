@@ -70,7 +70,7 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
             listener?.editVeganTypeOnSaveClicked(selectedType.toString())
         }
         //서버 - 유저
-        val veganType = VeganTypes.values().find { it.veganType == selectedType}.toString() 
+        val veganType = VeganTypes.values().find { it.veganType == selectedType}.toString()
         UserVeganService(this).tryPostUserVeganType(veganType)
         this.dismiss()
     }

@@ -40,7 +40,7 @@ class HomeRecommendRestRVAdapter(private val context: Context,private val recomm
             if(!data.imageUrl.isNullOrEmpty()){
                 Glide.with(context).load(data.imageUrl).transform(CenterCrop(),RoundedCorners(8)).into(binding.ivRestaurantImg)
             }else{
-                binding.ivRestaurantImg.setImageResource(R.drawable.test_home_res1)
+                Glide.with(context).load(R.drawable.test_home_res1).transform(CenterCrop(),RoundedCorners(8)).into(binding.ivRestaurantImg)
             }
         }
     }

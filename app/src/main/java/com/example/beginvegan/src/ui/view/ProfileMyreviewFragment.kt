@@ -24,9 +24,9 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
     FragmentProfileMyreviewBinding::bind, R.layout.fragment_profile_myreview
     ),ReviewInterface {
     private lateinit var reviewList: List<Review>
-    val TAG = "tag"
+    val TAG = "review"
     override fun init() {
-//        ReviewService(this).tryGetReviewList()
+        ReviewService(this).tryGetReviewList()
     }
 
     private fun initializeViews(){
