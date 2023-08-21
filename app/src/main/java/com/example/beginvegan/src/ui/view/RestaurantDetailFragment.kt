@@ -75,16 +75,32 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         }
         // callback Listener Review
         parentFragmentManager.setFragmentResultListener("requestKey",viewLifecycleOwner) { requestKey, bundle ->
-            val result = bundle.getString("review")
-            Log.d("setFragmentResultListener",result.toString())
+            checkLast = false
         }
 
     }
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
         Log.d("onGetRestaurantDetailSuccess",response.toString())
-        Glide.with(requireContext()).load(response.information.restaurant.imageUrl).into(binding.ivRestaurantImg)
-        Glide.with(requireContext()).load(response.information.menus[0].imageUrl).into(binding.ivMenuImg1)
-        Glide.with(requireContext()).load(response.information.menus[1].imageUrl).into(binding.ivMenuImg2)
+
+        if (response.information.restaurant.imageUrl.isNullOrEmpty()) {
+            Glide.with(requireContext()).load(R.drawable.test_res2)
+                .into(binding.ivRestaurantImg)
+        } else {
+            Glide.with(requireContext()).load(response.information.restaurant.imageUrl).into(binding.ivRestaurantImg)
+        }
+        if (response.information.menus[0].imageUrl.isNullOrEmpty()) {
+            Glide.with(requireContext()).load(R.drawable.test_res2)
+                .into(binding.ivMenuImg1)
+        } else {
+            Glide.with(requireContext()).load(response.information.menus[0].imageUrl).into(binding.ivMenuImg1)
+        }
+        if (response.information.menus[1].imageUrl.isNullOrEmpty()) {
+            Glide.with(requireContext()).load(R.drawable.test_res2)
+                .into(binding.ivMenuImg2)
+        } else {
+            Glide.with(requireContext()).load(response.information.menus[1].imageUrl).into(binding.ivMenuImg2)
+        }
+
         binding.tvRestaurantAddress.text = response.information.restaurant.address.detailAddress
         if(response.information.restaurant.restaurantType == "RESTAURANT"){
             binding.tvRestaurantType.text = "식당"

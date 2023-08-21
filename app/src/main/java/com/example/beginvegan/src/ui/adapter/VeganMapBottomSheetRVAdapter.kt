@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.beginvegan.R
 import com.example.beginvegan.databinding.ItemVeganmapRestaurantBinding
 import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
 
-class VeganMapBottomSheetRVAdapter(private val context: Context, private val dataList: ArrayList<NearRestaurant>) :
+class VeganMapBottomSheetRVAdapter(
+    private val context: Context,
+    private val dataList: ArrayList<NearRestaurant>
+) :
     RecyclerView.Adapter<VeganMapBottomSheetRVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
 
@@ -20,9 +24,28 @@ class VeganMapBottomSheetRVAdapter(private val context: Context, private val dat
             binding.tvVeganmapRestaurantName.text = dataList[position].name
             binding.tvVeganmapRestaurantTime.text = dataList[position].businessHours
             binding.ivVeganmapRestaurantAddress.text = dataList[position].address.detailAddress
-            Glide.with(context).load(dataList[position].imageUrl).into(binding.ivVeganmapRestaurantFirst)
-            Glide.with(context).load(dataList[position].menus[0].imageUrl).into(binding.ivVeganmapRestaurantFirst)
-            Glide.with(context).load(dataList[position].menus[1].imageUrl).into(binding.ivVeganmapRestaurantThird)
+            if (dataList[position].imageUrl.isNullOrEmpty()) {
+                Glide.with(context).load(R.drawable.test_res2)
+                    .into(binding.ivVeganmapRestaurantFirst)
+            } else {
+                Glide.with(context).load(dataList[position].imageUrl)
+                    .into(binding.ivVeganmapRestaurantFirst)
+            }
+            if (dataList[position].menus[0].imageUrl.isNullOrEmpty()) {
+                Glide.with(context).load(R.drawable.test_res)
+                    .into(binding.ivVeganmapRestaurantFirst)
+            } else {
+                Glide.with(context).load(dataList[position].menus[0].imageUrl)
+                    .into(binding.ivVeganmapRestaurantFirst)
+            }
+            if (dataList[position].menus[1].imageUrl.isNullOrEmpty()) {
+                Glide.with(context).load(R.drawable.test_salad)
+                    .into(binding.ivVeganmapRestaurantFirst)
+            } else {
+                Glide.with(context).load(dataList[position].menus[1].imageUrl)
+                    .into(binding.ivVeganmapRestaurantThird)
+            }
+
         }
     }
 
