@@ -128,12 +128,16 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             val range = 0 until response.information.size
             val randomNums = arrayListOf<Int>()
             //난수 생성
-            for(i:Int in 0..4){
+            for(i:Int in 0..5){
                 var randomNum:Int = range.random()
                 if(randomNum in randomNums){
                     randomNum = range.random()
+                    if(randomNum !in randomNums){
+                        randomNums.add(randomNum)
+                    }
+                }else{
+                    randomNums.add(randomNum)
                 }
-                randomNums.add(randomNum)
             }
             for(i:Int in 0 until randomNums.size){
                 recommendRestList.add(response.information[randomNums[i]])
