@@ -45,7 +45,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
-//        MagazineService(this).tryGetMagazineTwoList() //매거진
+        MagazineService(this).tryGetMagazineTwoList() //매거진
     }
 
     //추천 식당 recyclerView
@@ -104,7 +104,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //매거진 Dialog
     fun onDialogBtnClicked(id:Int){
         //매거진 디테일 호출
-//        MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
+//        MagazineService(this).tryPostMagazineDetail(id)
     }
 
 
@@ -153,17 +153,17 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) {
         val magazineList = listOf(response.information[0], response.information[1])
         setMagazineVPAdapter(magazineList)
-        Log.d("TAG", "onGetMagazineTwoListSuccess: ")
+        Log.d("Magazine", "onGetMagazineTwoListSuccess: ")
     }
     override fun onGetMagazineTwoListFailure(message: String) {
-        Log.d("TAG", "onGetMagazineTwoListFailure: $message")
+        Log.d("Magazine", "onGetMagazineTwoListFailure: $message")
     }
     override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) {
         val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
         dialog.show()
-        Log.d("TAG", "onPostMagazineDetailSuccess: ")
+        Log.d("Magazine", "onPostMagazineDetailSuccess: ")
     }
     override fun onPostMagazineDetailFailure(message: String) {
-        Log.d("TAG", "onPostMagazineDetailFailure: $message")
+        Log.d("Magazine", "onPostMagazineDetailFailure: $message")
     }
 }
