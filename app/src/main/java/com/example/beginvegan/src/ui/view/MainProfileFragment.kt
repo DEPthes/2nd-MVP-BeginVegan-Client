@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.beginvegan.R
+import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainProfileBinding
 import com.example.beginvegan.src.data.model.user.UserInterface
@@ -51,6 +52,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMai
         binding.btnProfileMore.setOnClickListener {
             openBottomSheetLogout()
         }
+        binding.tvUsername.text = ApplicationClass.xAuth.name
     }
 
     //닉네임 수정

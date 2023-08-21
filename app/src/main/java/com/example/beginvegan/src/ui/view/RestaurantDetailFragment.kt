@@ -40,7 +40,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
             val restaurantId = bundle.getInt(RESTAURANT_ID)
             Log.d("restaurantId",restaurantId.toString())
             RestaurantService(this).tryGetRestaurantDetail(restaurantId)
-
             RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
             binding.ibRestaurantBookmarks.setOnClickListener {
                 showLoadingDialog(requireContext())
@@ -65,17 +64,20 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
                     }
                 }
             })
+            dismissLoadingDialog()
         }
 
+        dismissLoadingDialog()
 
 
 
         binding.btnReviewGoWrite.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.fl_main,WriteReviewFragment()).addToBackStack().commit()
         }
         // callback Listener Review
         parentFragmentManager.setFragmentResultListener("requestKey",viewLifecycleOwner) { requestKey, bundle ->
             checkLast = false
+            dismissLoadingDialog()
         }
 
     }

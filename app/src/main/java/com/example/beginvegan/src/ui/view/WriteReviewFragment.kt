@@ -30,10 +30,10 @@ class WriteReviewFragment : BaseFragment<FragmentWriteReviewBinding>(
                 showLoadingDialog(requireContext())
                 val result = binding.etWriteReview.text.toString()
                 ReviewService(this).tryPostWriteReview(restaurantId,result)
+                dismissLoadingDialog()
             }
         }
         dismissLoadingDialog()
-
     }
 
     override fun onPostWriteReviewSuccess(response: WriteReviewResponse) {
