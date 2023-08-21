@@ -11,6 +11,7 @@ import com.example.beginvegan.databinding.FragmentMainRecipeBinding
 import com.example.beginvegan.src.data.model.recipe.Recipe
 import com.example.beginvegan.src.data.model.recipe.RecipeDetailResponse
 import com.example.beginvegan.src.data.model.recipe.RecipeInterface
+import com.example.beginvegan.src.data.model.recipe.RecipeList
 import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
 import com.example.beginvegan.src.data.model.recipe.RecipeService
 import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
@@ -23,7 +24,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     FragmentMainRecipeBinding::bind, R.layout.fragment_main_recipe),
     RecipeInterface{
 
-    private lateinit var recipeList: List<Recipe>
+    private lateinit var recipeList: List<RecipeList>
     override fun init() {
         val id = arguments?.getInt("recipeId")
         if (id != null) {
@@ -105,7 +106,8 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) {
-//        recipeList = listOf(response.information)
+        recipeList = listOf()
+        recipeList = response.information
         //레시피 리스트
         initializeViews()
         Log.d("TAG", "onGetRecipeListSuccess: ")

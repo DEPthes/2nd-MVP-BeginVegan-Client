@@ -32,37 +32,43 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     private lateinit var reViewList: ArrayList<ReviewDetail>
     private var pageNo = 0
     private lateinit var dataRVAdapter : RestaurantDetailReviewRVAdapter
+    private var checkLast: Boolean = false
     override fun init() {
+        reViewList = arrayListOf()
         showLoadingDialog(requireContext())
         parentFragmentManager.setFragmentResultListener(RESTAURANT_ID,viewLifecycleOwner){ _, bundle ->
             val restaurantId = bundle.getInt(RESTAURANT_ID)
             Log.d("restaurantId",restaurantId.toString())
             RestaurantService(this).tryGetRestaurantDetail(restaurantId)
+
             RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
             binding.ibRestaurantBookmarks.setOnClickListener {
+                showLoadingDialog(requireContext())
                 if(binding.ibRestaurantBookmarks.isPressed){
                     RestaurantScrapDeleteService(this).tryDeleteScrapRestaurant(restaurantId)
                 }else{
                     RestaurantScrapService(this).tryPostScrapRestaurant(restaurantId)
                 }
-
             }
+            // 페이징 처리
+            binding.rvRestaurantReviews.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val lastVisibleItemPosition =
+                        (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
+                    if (lastVisibleItemPosition == itemTotalCount&&!checkLast) {
+                        Log.d("lastVisibleItemPosition","Last Item")
+                        showLoadingDialog(requireContext())
+                        pageNo++
+                        RestaurantService(this@RestaurantDetailFragment).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
+                    }
+                }
+            })
         }
 
 
-        // 페이징 처리
-        binding.rvRestaurantReviews.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val lastVisibleItemPosition =
-                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                val itemTotalCount = 10
-                if (lastVisibleItemPosition + 1 == itemTotalCount) {
-                    // Last page next data load
 
-                }
-            }
-        })
 
         binding.btnReviewGoWrite.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
@@ -103,29 +109,49 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     }
     override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
         Log.d("onGetRestaurantReviewSuccess",response.toString())
-        reViewList = arrayListOf()
         for (i: Int in 0 until response.information.reviews.size) {
             reViewList.add(response.information.reviews[i])
         }
-        binding.tvReviewCount.text = "방문자 리뷰 ${response.information.reviews.size}개"
+//        로직상 오류
+//        binding.tvReviewCount.text = "방문자 리뷰 ${response.information.reviews.size}개"
         dataRVAdapter  = RestaurantDetailReviewRVAdapter(reViewList)
         binding.rvRestaurantReviews.adapter = dataRVAdapter
         binding.rvRestaurantReviews.layoutManager = LinearLayoutManager(this.context)
+        dismissLoadingDialog()
     }
+
+    override fun onGetRestaurantReviewAddSuccess(response: RestaurantReviewResponse) {
+
+        Log.d("onGetRestaurantReviewAddSuccess",response.toString())
+        if(response.information.reviews.isNotEmpty()){
+            for (i: Int in 0 until response.information.reviews.size) {
+                reViewList.add(response.information.reviews[i])
+            }
+            binding.rvRestaurantReviews.adapter!!.notifyItemRangeChanged(0,reViewList.size)
+        }else{
+            checkLast = true
+        }
+        dismissLoadingDialog()
+    }
+
     override fun onGetRestaurantReviewFailure(message: String) {
         Log.d("onGetRestaurantReviewFailure",message)
+        dismissLoadingDialog()
     }
 
     override fun onPostScrapRestaurantSuccess(response: RestaurantScrapResponse) {
         Toast.makeText(requireContext(),response.information.message,Toast.LENGTH_SHORT).show()
+        dismissLoadingDialog()
     }
 
     override fun onPostScrapRestaurantFailure(message: String) {
         Log.d("onPostScrapRestaurantFailure",message)
+        dismissLoadingDialog()
     }
 
     override fun onDeleteScrapRestaurantSuccess(response: RestaurantScrapDeleteResponse) {
         Toast.makeText(requireContext(),response.information.message,Toast.LENGTH_SHORT).show()
+        dismissLoadingDialog()
     }
 
     override fun onDeleteScrapRestaurantFailure(message: String) {
