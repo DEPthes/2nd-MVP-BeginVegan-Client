@@ -13,6 +13,7 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentProfileMyreviewBinding
 import com.example.beginvegan.src.data.model.review.Review
+import com.example.beginvegan.src.data.model.review.ReviewDetail
 import com.example.beginvegan.src.data.model.review.ReviewInterface
 import com.example.beginvegan.src.data.model.review.ReviewListResponse
 import com.example.beginvegan.src.data.model.review.ReviewService
@@ -23,32 +24,27 @@ import com.example.beginvegan.src.ui.adapter.RecipeListRVAdapter
 class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
     FragmentProfileMyreviewBinding::bind, R.layout.fragment_profile_myreview
     ),ReviewInterface {
-    private lateinit var reviewList: List<Review>
+    private lateinit var reviewList: ArrayList<ReviewDetail>
+    private var pageNo = 0
+    private var checkLast: Boolean = false
+    private lateinit var reviewAdapter: ProfileMyReviewRVAdapter
     val TAG = "review"
     override fun init() {
-        ReviewService(this).tryGetReviewList()
-    }
-
-    private fun initializeViews(){
-        val reviewAdapter = ProfileMyReviewRVAdapter(reviewList)
-        binding.rvMyreview.adapter = reviewAdapter
-        binding.rvMyreview.layoutManager = LinearLayoutManager(this.context)
-
-        reviewAdapter.setOnItemClickListener(object: ProfileMyReviewRVAdapter.OnItemClickListener{
-            override fun onItemClick(v: View, data: Review, position: Int) {
-                Log.d("TAG", "onItemClick: my review")
-            }
-        })
+        ReviewService(this).tryGetReviewList(pageNo)
+        reviewList = arrayListOf()
         // 페이징 처리
         binding.rvMyreview.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val lastVisibleItemPosition =
                     (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                val itemTotalCount = 10
-                if (lastVisibleItemPosition + 1 == itemTotalCount) {
-                    // Last page next data load
-
+                val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
+                if (lastVisibleItemPosition == itemTotalCount&&!checkLast) {
+                    if(reviewList.size>9){
+                        showLoadingDialog(requireContext())
+                        pageNo++
+                        ReviewService(this@ProfileMyreviewFragment).tryGetReviewList(pageNo)
+                    }
                 }
             }
         })
@@ -57,11 +53,29 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
     override fun onPostWriteReviewSuccess(response: WriteReviewResponse) { }
     override fun onPostWriteReviewFailure(message: String) { }
     override fun onGetReviewListSuccess(response: ReviewListResponse) {
-        Log.d(TAG, "onGetReviewListSuccess: ")
-        reviewList = listOf()
-        reviewList = response.information
-        initializeViews()
+        reviewList = arrayListOf()
+        Log.d(TAG, "onGetReviewListSuccess: ${response.information.review} ")
+        for (i: Int in 0 until response.information.review.size) {
+            reviewList.add(response.information.review[i])
+        }
+        reviewAdapter = ProfileMyReviewRVAdapter(reviewList)
+        binding.rvMyreview.adapter = reviewAdapter
+        binding.rvMyreview.layoutManager = LinearLayoutManager(this.context)
+//        reviewList = response.information
     }
+
+    override fun onGetReviewListAddSuccess(response: ReviewListResponse) {
+        if(response.information.review.isNotEmpty()){
+            for (i: Int in 0 until response.information.review.size) {
+                reviewList.add(response.information.review[i])
+            }
+            binding.rvMyreview.adapter!!.notifyItemRangeChanged(0,reviewList.size)
+        }else{
+            checkLast = true
+        }
+        dismissLoadingDialog()
+    }
+
     override fun onGetReviewListFailure(message: String) {
         Log.d(TAG, "onGetReviewListFailure: $message")
     }

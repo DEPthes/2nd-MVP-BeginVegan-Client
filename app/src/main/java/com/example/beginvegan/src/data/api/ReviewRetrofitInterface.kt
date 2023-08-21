@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ReviewRetrofitInterface {
 
@@ -23,5 +24,6 @@ interface ReviewRetrofitInterface {
     @GET("/api/v1/reviews")
     fun getReviewList(
         @Header("Authorization") accessToken: String?,
+        @Query("page") page: Int
     ): Call<ReviewListResponse>
 }

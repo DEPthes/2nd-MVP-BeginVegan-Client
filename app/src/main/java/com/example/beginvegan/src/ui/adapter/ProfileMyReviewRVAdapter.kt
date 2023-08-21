@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemProfileMyreviewBinding
 import com.example.beginvegan.src.data.model.review.Review
+import com.example.beginvegan.src.data.model.review.ReviewDetail
 
-class ProfileMyReviewRVAdapter(private val reviewList: List<Review>): RecyclerView.Adapter<ProfileMyReviewRVAdapter.RecycleViewHolder>() {
-    private var listener: OnItemClickListener? = null
+class ProfileMyReviewRVAdapter(private val reviewList: List<ReviewDetail>): RecyclerView.Adapter<ProfileMyReviewRVAdapter.RecycleViewHolder>() {
 
     inner class RecycleViewHolder(private val binding: ItemProfileMyreviewBinding):
         RecyclerView.ViewHolder(binding.root){
-        fun bind(restaurantName:String, date:String, content:String){
+        fun bind(position: Int){
             Log.d("TEST","bind")
-            binding.tvRestaurantName.text = restaurantName
-            binding.tvDate.text = date
-            binding.tvReviewContent.text = content
+            binding.tvRestaurantName.text = reviewList[position].restaurant.name
+            binding.tvDate.text =  reviewList[position].date
+            binding.tvReviewContent.text =  reviewList[position].content
         }
     }
 
@@ -33,29 +33,10 @@ class ProfileMyReviewRVAdapter(private val reviewList: List<Review>): RecyclerVi
     override fun getItemCount(): Int = reviewList.size
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
-        val item = reviewList[position]
-        holder.bind("식당 이름","date","content")
-
-        Log.d("TEST","onBindViewHolder")
-        if(position != RecyclerView.NO_POSITION){
-            Log.d("TAG","Click")
-            holder.itemView.setOnClickListener {
-                listener?.onItemClick(holder.itemView, reviewList[position], position)
-                Log.d("TAG","ClickListener")
-            }
-        }
+        holder.bind(position)
     }
 
     override fun getItemViewType(position: Int): Int {
         return position
-    }
-    interface OnItemClickListener {
-        fun onItemClick(v: View, data: Review, position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener){
-
-        Log.d("TAG","setOnItemClickListener")
-        this.listener = listener
     }
 }

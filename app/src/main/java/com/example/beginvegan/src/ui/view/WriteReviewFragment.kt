@@ -52,6 +52,8 @@ class WriteReviewFragment : BaseFragment<FragmentWriteReviewBinding>(
     }
 
     override fun onGetReviewListSuccess(response: ReviewListResponse) {}
+    override fun onGetReviewListAddSuccess(response: ReviewListResponse) {
+    }
 
     override fun onGetReviewListFailure(message: String) {}
 }
