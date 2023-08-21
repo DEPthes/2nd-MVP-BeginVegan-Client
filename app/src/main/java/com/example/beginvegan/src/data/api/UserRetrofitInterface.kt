@@ -36,5 +36,6 @@ interface UserRetrofitInterface {
     @POST("/api/v1/users/nickname")
     fun postUserModifyName(
         @Header("Authorization") accessToken: String?,
+        @Body nickname: String
     ):Call<UserModifyNameResponse>
 }
