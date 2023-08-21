@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import com.example.beginvegan.R
@@ -30,23 +29,23 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
 
         //기존 유형 선택된 상태로 표시하기
         when(originalType){
-            VeganTypes.VEGAN.veganType -> {binding.rbVegan.isChecked = true}
-            VeganTypes.LACTO_VEGETARIAN.veganType -> {binding.rbLacto.isChecked = true}
-            VeganTypes.LACTO_OVO_VEGETARIAN.veganType -> {binding.rbLactoOvo.isChecked = true}
-            VeganTypes.PASCATARIAN.veganType -> {binding.rbPescatarian.isChecked = true}
-            VeganTypes.POLLOTARIAN.veganType -> {binding.rbPollotarian.isChecked = true}
-            VeganTypes.FLEXITARIAN.veganType -> {binding.rbFlexitarian.isChecked = true}
+            VeganType.VEGAN.veganType -> {binding.rbVegan.isChecked = true}
+            VeganType.LACTO_VEGETARIAN.veganType -> {binding.rbLacto.isChecked = true}
+            VeganType.LACTO_OVO_VEGETARIAN.veganType -> {binding.rbLactoOvo.isChecked = true}
+            VeganType.PASCATARIAN.veganType -> {binding.rbPescatarian.isChecked = true}
+            VeganType.POLLOTARIAN.veganType -> {binding.rbPollotarian.isChecked = true}
+            VeganType.FLEXITARIAN.veganType -> {binding.rbFlexitarian.isChecked = true}
             "비기너" -> {binding.rbBeginner.isChecked = true}
         }
         //setOnChangeListener
         binding.rgEditVeganType.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
-                R.id.rb_vegan -> {selectedType = VeganTypes.VEGAN.veganType}
-                R.id.rb_lacto -> {selectedType = VeganTypes.LACTO_VEGETARIAN.veganType}
-                R.id.rb_lacto_ovo-> {selectedType = VeganTypes.LACTO_OVO_VEGETARIAN.veganType}
-                R.id.rb_pescatarian -> {selectedType = VeganTypes.PASCATARIAN.veganType}
-                R.id.rb_pollotarian -> {selectedType = VeganTypes.POLLOTARIAN.veganType}
-                R.id.rb_flexitarian -> {selectedType = VeganTypes.FLEXITARIAN.veganType}
+                R.id.rb_vegan -> {selectedType = VeganType.VEGAN.veganType}
+                R.id.rb_lacto -> {selectedType = VeganType.LACTO_VEGETARIAN.veganType}
+                R.id.rb_lacto_ovo-> {selectedType = VeganType.LACTO_OVO_VEGETARIAN.veganType}
+                R.id.rb_pescatarian -> {selectedType = VeganType.PASCATARIAN.veganType}
+                R.id.rb_pollotarian -> {selectedType = VeganType.POLLOTARIAN.veganType}
+                R.id.rb_flexitarian -> {selectedType = VeganType.FLEXITARIAN.veganType}
                 R.id.rb_beginner -> {selectedType = "비기너"}
             }
         }

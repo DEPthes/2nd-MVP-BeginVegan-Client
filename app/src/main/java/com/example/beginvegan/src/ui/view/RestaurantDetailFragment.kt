@@ -89,13 +89,13 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
             Glide.with(requireContext()).load(response.information.restaurant.imageUrl).into(binding.ivRestaurantImg)
         }
         if (response.information.menus[0].imageUrl.isNullOrEmpty()) {
-            Glide.with(requireContext()).load(R.drawable.test_res2)
+            Glide.with(requireContext()).load(R.drawable.test_res)
                 .into(binding.ivMenuImg1)
         } else {
             Glide.with(requireContext()).load(response.information.menus[0].imageUrl).into(binding.ivMenuImg1)
         }
         if (response.information.menus[1].imageUrl.isNullOrEmpty()) {
-            Glide.with(requireContext()).load(R.drawable.test_res2)
+            Glide.with(requireContext()).load(R.drawable.test_salad)
                 .into(binding.ivMenuImg2)
         } else {
             Glide.with(requireContext()).load(response.information.menus[1].imageUrl).into(binding.ivMenuImg2)

@@ -3,6 +3,7 @@ package com.example.beginvegan.src.data.model.user
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.UserRetrofitInterface
+import com.example.beginvegan.util.VeganType
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback

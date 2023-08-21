@@ -1,6 +1,6 @@
 package com.example.beginvegan.util
 
-enum class VeganTypes(val veganType:String) {
+enum class VeganType(val veganType:String) {
     VEGAN("비건"),
     LACTO_VEGETARIAN("락토 베지테리언"),
     LACTO_OVO_VEGETARIAN("락토-오보 베지테리언"),
