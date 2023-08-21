@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.beginvegan.R
+import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainProfileBinding
 import com.example.beginvegan.src.data.model.user.UserInterface
@@ -33,6 +34,8 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMai
                 1-> tab.text = "나의 스크랩"
             }
         }.attach()
+        //시작 시 유저 이름 반영
+        binding.tvUsername.text = ApplicationClass.xAuth.name
 
         //닉네임 수정 dialog
         binding.ibEditUsername.setOnClickListener{
@@ -60,6 +63,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMai
         editNameDialog.show()
     }
     override fun editNameOnSaveClicked(name: String) { //수정한 name UI 반영
+        ApplicationClass.xAuth.name = name //이름 변경
         binding.tvUsername.text = name
     }
 

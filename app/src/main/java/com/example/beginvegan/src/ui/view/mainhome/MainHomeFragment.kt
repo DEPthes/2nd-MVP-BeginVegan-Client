@@ -33,7 +33,7 @@ import com.example.beginvegan.util.HomeMagazineDetailDialog
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind,R.layout.fragment_main_home ),
-    UserCheckInterface,RecipeInterface, RestaurantFindInterface, MagazineInterface{
+    RecipeInterface, RestaurantFindInterface, MagazineInterface{
 
     lateinit var todayRecipeList: List<RecipeThree>
     lateinit var recommendRestList: ArrayList<NearRestaurant>
@@ -41,11 +41,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     override fun init() {
         //서버 데이터 불러오기
         showLoadingDialog(requireContext())
-        UserCheckService(this).tryGetUser() //유저
+//        UserCheckService(this).tryGetUser() //유저
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
         MagazineService(this).tryGetMagazineTwoList() //매거진
+
+        //유저 이름
+        binding.tvSloganGreeting.text = "${ApplicationClass.xAuth.name}님, 안녕하세요!"
     }
 
     //추천 식당 recyclerView
@@ -111,9 +114,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     ///서버///
     //유저 이름 받아오기
-    override fun onGetUserSuccess(response: UserResponse) {
-        binding.tvSloganGreeting.text = "${response.name}님, 안녕하세요!"
-    }
+//    override fun onGetUserSuccess(response: UserResponse) {
+//        binding.tvSloganGreeting.text = "${response.name}님, 안녕하세요!"
+//    }
     //오늘의 레시피
     override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
         todayRecipeList = listOf(
@@ -128,12 +131,16 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             val range = 0 until response.information.size
             val randomNums = arrayListOf<Int>()
             //난수 생성
-            for(i:Int in 0..4){
+            for(i:Int in 0..5){
                 var randomNum:Int = range.random()
                 if(randomNum in randomNums){
                     randomNum = range.random()
+                    if(randomNum !in randomNums){
+                        randomNums.add(randomNum)
+                    }
+                }else{
+                    randomNums.add(randomNum)
                 }
-                randomNums.add(randomNum)
             }
             for(i:Int in 0 until randomNums.size){
                 recommendRestList.add(response.information[randomNums[i]])
@@ -153,7 +160,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     ///서버///
     //서버 - 유저
-    override fun onGetUserFailure(message: String) { }
+//    override fun onGetUserFailure(message: String) { }
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) { }
     override fun onGetRecipeListFailure(message: String) { }
