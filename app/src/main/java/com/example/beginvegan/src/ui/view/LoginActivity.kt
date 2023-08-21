@@ -15,6 +15,7 @@ import com.example.beginvegan.src.data.model.auth.AuthSignService
 import com.example.beginvegan.src.data.model.user.UserCheckInterface
 import com.example.beginvegan.src.data.model.user.UserCheckService
 import com.example.beginvegan.src.data.model.user.UserResponse
+import com.example.beginvegan.src.ui.view.vegantest.VeganTestActivity
 import com.example.beginvegan.util.Constants.PROVIDER_ID
 import com.example.beginvegan.util.Constants.USER_EMAIL
 import com.kakao.sdk.auth.model.OAuthToken
@@ -22,13 +23,14 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}),AuthSignInterface,UserCheckInterface{
+class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.inflate(it) }),
+    AuthSignInterface, UserCheckInterface {
     private lateinit var mAuth: KakaoAuth
-
-    private  val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+    private var creator: Boolean = true
+    private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e("KaKao Login | CallBack", "로그인 실패 $error")
-            Toast.makeText(this,"카카오 로그인 실패",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
         } else if (token != null) {
             Log.e("KaKao Login | CallBack", "로그인 성공 ${token.accessToken}")
             showLoadingDialog(this)
@@ -39,7 +41,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
 
 
     override fun init() {
-        binding.btnLoginKakao.setOnClickListener{
+        binding.btnLoginKakao.setOnClickListener {
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
                 // 카카오톡 로그인
                 UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
@@ -47,13 +49,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                     if (error != null) {
                         Log.e("KaKao Login", "로그인 실패 $error")
                         // 사용자가 취소
-                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled ) {
+                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                             Log.e("KaKao Login", "로그인 실패 사용자 취소")
                             return@loginWithKakaoTalk
                         }
                         // 다른 오류
                         else {
-                            UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback) // 카카오 이메일 로그인
+                            UserApiClient.instance.loginWithKakaoAccount(
+                                this,
+                                callback = mCallback
+                            ) // 카카오 이메일 로그인
                             Log.e("KaKao Login", "예외 오류")
                         }
                     }
@@ -66,73 +71,85 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                 }
             } else {
                 Log.e("KaKao Login", "이메일 로그인")
-                UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback) // 카카오 이메일 로그인
+                UserApiClient.instance.loginWithKakaoAccount(
+                    this,
+                    callback = mCallback
+                ) // 카카오 이메일 로그인
             }
         }
     }
-    private fun getKakaoUserData(){
+
+    private fun getKakaoUserData() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e("KaKao User", "사용자 정보 요청 실패", error)
-            }
-            else if (user != null) {
-                Log.i("KaKao User", "사용자 정보 요청 성공" +
-                        "\n회원번호: ${user.id}" +
-                        "\n이메일: ${user.kakaoAccount?.email}" +
-                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+            } else if (user != null) {
+                Log.i(
+                    "KaKao User", "사용자 정보 요청 성공" +
+                            "\n회원번호: ${user.id}" +
+                            "\n이메일: ${user.kakaoAccount?.email}" +
+                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                )
                 mAuth = KakaoAuth(
                     (user.id).toString()!!,
                     user.kakaoAccount?.profile?.nickname!!,
                     user.kakaoAccount?.email!!,
-                    user.kakaoAccount?.profile?.thumbnailImageUrl!!)
+                    user.kakaoAccount?.profile?.thumbnailImageUrl!!
+                )
                 AuthSignService(this).tryPostAuthSignIn(mAuth)
             }
         }
     }
-    private fun moveToWelcome(){
-        val intent = Intent(this,WelcomeActivity::class.java)
+
+    private fun moveToWelcomeOrTest() {
+        val intent: Intent = if (creator) {
+            Intent(this, VeganTestActivity::class.java)
+        } else {
+            Intent(this, WelcomeActivity::class.java)
+        }
         startActivity(intent)
         finish()
     }
-    private fun setUserData(response: AuthResponse){
+
+    private fun setUserData(response: AuthResponse) {
         // 자동 로그인을 위한 유저 로그인 정보 저장
-        ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID,mAuth.providerId).apply()
-        ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL,mAuth.email).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID, mAuth.providerId).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL, mAuth.email).apply()
         // 싱글톤 토큰 / 유저 정보 기입
         ApplicationClass.xAccessToken = "${response.tokenType} ${response.accessToken}"
         ApplicationClass.xRefreshToken = response.refreshToken
-        Log.d("setUserData xAccessToken",ApplicationClass.xAccessToken)
-        Log.d("setUserData xRefreshToken",ApplicationClass.xRefreshToken)
+        Log.d("setUserData xAccessToken", ApplicationClass.xAccessToken)
+        Log.d("setUserData xRefreshToken", ApplicationClass.xRefreshToken)
 
         UserCheckService(this).tryGetUser()
     }
 
     override fun onPostAuthSignInSuccess(response: AuthSignResponse) {
-        Log.d("onPostAuthSignInSuccess",response.toString())
+        Log.d("onPostAuthSignInSuccess", response.toString())
         setUserData(response.information)
+        creator = false
     }
 
     override fun onPostAuthSignInFailed(message: String) {
-        Log.d("onPostAuthSignInFailed",message)
+        Log.d("onPostAuthSignInFailed", message)
         AuthSignService(this).tryPostAuthSignUp(mAuth)
     }
 
     override fun onPostAuthSignUpSuccess(response: AuthSignResponse) {
-        Log.d("onPostAuthSignUpSuccess",response.toString())
+        Log.d("onPostAuthSignUpSuccess", response.toString())
         setUserData(response.information)
         // 비건 타입이 null 일 경우 테스트 연결
     }
 
     override fun onPostAuthSignUpFailed(message: String) {
-        Log.d("onPostAuthSignUpFailed",message)
+        Log.d("onPostAuthSignUpFailed", message)
         dismissLoadingDialog()
     }
 
 
-
     override fun onGetUserSuccess(response: UserResponse) {
-        Log.d("onGetUserSuccess",response.toString())
+        Log.d("onGetUserSuccess", response.toString())
         ApplicationClass.xAuth = Auth(
             response.id,
             response.name,
@@ -143,13 +160,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             response.provider,
             response.role,
             response.providerId
-            )
+        )
         dismissLoadingDialog()
-        moveToWelcome()
+        moveToWelcomeOrTest()
     }
 
     override fun onGetUserFailure(message: String) {
-        Log.d("onGetUserFailure",message)
+        Log.d("onGetUserFailure", message)
         dismissLoadingDialog()
     }
 
