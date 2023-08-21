@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view.mainhome
 
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
@@ -29,6 +30,7 @@ import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.ui.adapter.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.HomeTodayRecipeVPAdapter
+import com.example.beginvegan.src.ui.view.RestaurantDetailFragment
 import com.example.beginvegan.util.HomeMagazineDetailDialog
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
@@ -37,6 +39,8 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     lateinit var todayRecipeList: List<RecipeThree>
     lateinit var recommendRestList: ArrayList<NearRestaurant>
+
+    lateinit var homeRecommendRestRVAdapter: HomeRecommendRestRVAdapter
 
     override fun init() {
         //서버 데이터 불러오기
@@ -53,10 +57,10 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     //추천 식당 recyclerView
     private fun setRestaurantRVAdapter(){
+        homeRecommendRestRVAdapter = HomeRecommendRestRVAdapter(requireContext(),recommendRestList)
         val recyclerView = binding.rvHomeRecommendRestaurant
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,true)
-        recyclerView.adapter = HomeRecommendRestRVAdapter(requireContext(),recommendRestList)
-
+        recyclerView.adapter = homeRecommendRestRVAdapter
         val startPosition = Int.MAX_VALUE/2
         recyclerView.scrollToPosition(startPosition)
         dismissLoadingDialog()

@@ -12,10 +12,10 @@ class HomeRecipe0Fragment(private val data:RecipeThree) : BaseFragment<FragmentH
     FragmentHomeRecipe0Binding::bind,R.layout.fragment_home_recipe_0) {
 
     override fun init() {
-        binding.btnRecipe0.setOnClickListener {
-            Log.d("TAG", "init: setOnClick")
-            (activity as MainActivity).goRecipe(data.id)
-        }
+//        binding.btnRecipe0.setOnClickListener {
+//            Log.d("TAG", "init: setOnClick")
+//            (activity as MainActivity).goRecipe(data.id)
+//        }
 
         binding.tvRecipeTitle.text = data.name
         binding.tvRecipeVeganType.text = VeganTypes.valueOf(data.veganType).veganType
