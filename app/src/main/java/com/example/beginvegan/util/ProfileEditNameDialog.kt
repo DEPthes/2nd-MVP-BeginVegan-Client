@@ -30,7 +30,7 @@ class ProfileEditNameDialog(context: Context, private val originalName:String): 
                 listener?.editNameOnSaveClicked(binding.tietNewName.text.toString())
             }
             //서버에 저장
-            UserModifyNameService(this).tryPostUserModifyName()
+//            UserModifyNameService(this).tryPostUserModifyName()
             this.dismiss()
         }
     }

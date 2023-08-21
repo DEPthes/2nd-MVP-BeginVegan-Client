@@ -26,7 +26,7 @@ class ProfileMyreviewFragment : BaseFragment<FragmentProfileMyreviewBinding>(
     private lateinit var reviewList: List<Review>
     val TAG = "tag"
     override fun init() {
-        ReviewService(this).tryGetReviewList()
+//        ReviewService(this).tryGetReviewList()
     }
 
     private fun initializeViews(){

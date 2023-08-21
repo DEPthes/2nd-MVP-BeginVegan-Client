@@ -42,9 +42,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         //서버 데이터 불러오기
         UserCheckService(this).tryGetUser() //유저
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
-        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
+//        RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
-//        MagazineService(this).tryGetMagazineTwoList() //매거진
+        MagazineService(this).tryGetMagazineTwoList() //매거진
     }
 
     //추천 식당 recyclerView
@@ -103,7 +103,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //매거진 Dialog
     fun onDialogBtnClicked(id:Int){
         //매거진 디테일 호출
-//        MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
+        MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
     }
 
 
@@ -117,23 +117,30 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         todayRecipeList = listOf(
             response.information[0], response.information[1], response.information[2]
         )
+        Log.d("TAG", "onGetThreeRecipeListSuccess:")
         setRecipeVPAdapter()
     }
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
-        val range = 0..response.information.size
+        val range = 0 until response.information.size
+        Log.d("TAG", "onPostFindRestaurantSuccess: ${response.information.size}")
         val randomNums = arrayListOf<Int>()
         //난수 생성
-        while(randomNums.size <5){
-            val randomNum = range.random()
-            if(randomNum !in randomNums){
-                randomNums.add(randomNum)
-            }
-        }
         for(i:Int in 0..4){
-            recommendRestList.add(response.information[i])
+            var randomNum:Int = range.random()
+            Log.d("TAG", "onPostFindRestaurantSuccess: $i : $randomNum")
+            if(randomNum in randomNums){
+                randomNum = range.random()
+                Log.d("TAG", "onPostFindRestaurantSuccess: $i : $randomNum")
+            }
+            randomNums.add(randomNum)
         }
+        Log.d("TAG", "onPostFindRestaurantSuccess: after")
+        for(i:Int in 0 until randomNums.size){
+            recommendRestList.add(response.information[randomNums[i]])
+        }
+        Log.d("TAG", "onPostFindRestaurantSuccess: done")
         setRestaurantRVAdapter()
     }
     //서버 - 유저
@@ -150,17 +157,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) {
         val magazineList = listOf(response.information[0], response.information[1])
         setMagazineVPAdapter(magazineList)
-        Log.d("TAG", "onGetMagazineTwoListSuccess: ")
     }
-    override fun onGetMagazineTwoListFailure(message: String) {
-        Log.d("TAG", "onGetMagazineTwoListFailure: $message")
-    }
+    override fun onGetMagazineTwoListFailure(message: String) { }
     override fun onPostMagazineDetailSuccess(response: MagazineDetailResponse) {
         val dialog = HomeMagazineDetailDialog(requireContext(), response.information)
         dialog.show()
-        Log.d("TAG", "onPostMagazineDetailSuccess: ")
+        Log.d("Magazine", "onPostMagazineDetailSuccess: ")
     }
     override fun onPostMagazineDetailFailure(message: String) {
-        Log.d("TAG", "onPostMagazineDetailFailure: $message")
+        Log.d("Magazine", "onPostMagazineDetailFailure: $message")
     }
 }
