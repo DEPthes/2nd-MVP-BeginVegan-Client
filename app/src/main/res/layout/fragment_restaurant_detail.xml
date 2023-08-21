@@ -44,69 +44,82 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="4dp"/>
-        <ImageView
-            android:id="@+id/iv_icon_location"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_restaurant_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_restaurant_type"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"/>
-        <TextView
-            android:id="@+id/tv_restaurant_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="남양주시 호평동"
-            android:textSize="14sp"
-            android:textColor="@color/color_text_89"
-            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_type"
-            app:layout_constraintStart_toEndOf="@id/iv_icon_location"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="32dp"/>
-        <ImageView
-            android:id="@+id/iv_icon_time"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_icon_location"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"/>
-        <TextView
-            android:id="@+id/tv_restaurant_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="화~금 00:00~00:00"
-            android:textSize="14sp"
-            android:textColor="@color/color_text_89"
-            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_address"
-            app:layout_constraintStart_toEndOf="@id/iv_icon_time"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"/>
-        <ImageView
-            android:id="@+id/iv_icon_call"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_icon_time"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"/>
-        <TextView
-            android:id="@+id/tv_call_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="031-000-0000"
-            android:textSize="14sp"
-            android:textColor="@color/color_text_89"
-            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_time"
-            app:layout_constraintStart_toEndOf="@id/iv_icon_call"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/v_divider_1">
+            <ImageView
+                android:id="@+id/iv_icon_location"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_gps_gray"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"/>
+            <TextView
+                android:id="@+id/tv_restaurant_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남양주시 호평동"
+                android:textSize="14sp"
+                android:textColor="@color/color_text_89"
+                app:layout_constraintTop_toTopOf="@id/iv_icon_location"
+                app:layout_constraintBottom_toBottomOf="@id/iv_icon_location"
+                app:layout_constraintStart_toEndOf="@id/iv_icon_location"
+                android:layout_marginStart="4dp"/>
+            <ImageView
+                android:id="@+id/iv_icon_time"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_time_gray"
+                app:layout_constraintTop_toBottomOf="@id/iv_icon_location"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tv_restaurant_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화~금 00:00~00:00"
+                android:textSize="14sp"
+                android:textColor="@color/color_text_89"
+                app:layout_constraintTop_toTopOf="@id/iv_icon_time"
+                app:layout_constraintBottom_toBottomOf="@id/iv_icon_time"
+                app:layout_constraintStart_toEndOf="@id/iv_icon_time"
+                android:layout_marginStart="4dp"/>
+            <ImageView
+                android:id="@+id/iv_icon_call"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_phone_gray"
+                app:layout_constraintTop_toBottomOf="@id/iv_icon_time"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tv_call_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="031-000-0000"
+                android:textSize="14sp"
+                android:textColor="@color/color_text_89"
+                app:layout_constraintTop_toTopOf="@id/iv_icon_call"
+                app:layout_constraintBottom_toBottomOf="@id/iv_icon_call"
+                app:layout_constraintStart_toEndOf="@id/iv_icon_call"
+                android:layout_marginStart="4dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
             android:id="@+id/v_divider_1"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:background="@color/color_gray_f2"
-            app:layout_constraintTop_toBottomOf="@id/tv_call_number"
+            app:layout_constraintTop_toBottomOf="@id/cl_restaurant_info_layout"
             android:layout_marginTop="24dp"/>
         <TextView
             android:id="@+id/tv_menu_title"

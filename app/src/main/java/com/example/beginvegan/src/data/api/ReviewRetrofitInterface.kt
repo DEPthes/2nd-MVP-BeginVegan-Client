@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.data.api
 
 import com.example.beginvegan.src.data.model.review.ReviewListResponse
+import com.example.beginvegan.src.data.model.review.ReviewRequest
 import com.example.beginvegan.src.data.model.review.WriteReviewResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -15,8 +16,7 @@ interface ReviewRetrofitInterface {
     @POST("/api/v1/reviews")
     fun postWriteReview(
         @Header("Authorization") accessToken: String?,
-        @Body restaurant: Int,
-        @Body content: String
+        @Body review: ReviewRequest
     ): Call<WriteReviewResponse>
 
     // 리뷰조회

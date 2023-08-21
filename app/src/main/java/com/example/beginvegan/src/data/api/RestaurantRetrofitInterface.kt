@@ -33,7 +33,7 @@ interface RestaurantRetrofitInterface {
     ): Call<RestaurantReviewResponse>
 
     // 식당/카페 스크랩
-    @POST("@Path(\"restaurant-id\") id: String")
+    @POST("/api/v1/restaurants/{restaurant-id}")
     fun postScrapRestaurant(
         @Header("Authorization") accessToken: String?,
         @Path("restaurant-id") id: Int

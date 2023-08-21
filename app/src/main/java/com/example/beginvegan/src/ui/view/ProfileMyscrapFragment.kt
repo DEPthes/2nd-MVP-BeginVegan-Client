@@ -23,13 +23,6 @@ class ProfileMyscrapFragment : BaseFragment<FragmentProfileMyscrapBinding>(
     override fun init() {
         Log.d("TAG", "init: my scrap")
         scrapList = arrayListOf()
-        scrapList.apply {
-            add("hello1")
-            add("hello2")
-            add("hello3")
-            add("hello4")
-        }
-
         initializeViews()
     }
 
