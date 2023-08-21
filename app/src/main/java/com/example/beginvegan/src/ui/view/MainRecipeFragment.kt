@@ -18,6 +18,7 @@ import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
 import com.example.beginvegan.src.ui.adapter.RecipeListRVAdapter
 import com.example.beginvegan.src.ui.view.vegantest.TestQuestionMilkFragment
 import com.example.beginvegan.util.RecipeDetailDialog
+import com.example.beginvegan.util.VeganTypes
 import com.google.android.material.chip.Chip
 import kotlin.properties.Delegates
 
@@ -26,7 +27,9 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     RecipeInterface{
 
     private lateinit var recipeList: List<RecipeList>
+    private lateinit var filterList: ArrayList<RecipeList>
     private var selectedRecipeId:Int? = null
+    val TAG = "recipe"
     override fun init() {
         selectedRecipeId = arguments?.getInt("recipeId")
         Log.d("TAG", "init: in Fragment $selectedRecipeId")
@@ -39,10 +42,10 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         RecipeService(this).tryGetRecipeList()
 
         //filter
-//        binding.cgRecipeFilters.setOnCheckedChangeListener{group, checkedId ->
-//            val checkedChip: Chip = binding.root.findViewById(checkedId)
-//            checkFilter(checkedChip, checkedChip.isChecked)
-//        }
+        binding.cgRecipeFilters.setOnCheckedChangeListener{group, checkedId ->
+            val checkedChip: Chip = binding.root.findViewById(checkedId)
+            checkFilter(checkedChip, checkedChip.isChecked)
+        }
         binding.cFilterAll.setOnCheckedChangeListener{ _, isChecked ->
             checkFilter(binding.cFilterAll, isChecked)
         }
@@ -66,15 +69,14 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         }
     }
 
-    private fun initializeViews(){
-        val recipeAdapter = RecipeListRVAdapter(recipeList)
-        Log.d("TAG", "initializeViews: before")
+    private fun initializeViews(list:List<RecipeList>){
+        val recipeAdapter = RecipeListRVAdapter(list)
         binding.rvRecipes.adapter = recipeAdapter
         binding.rvRecipes.layoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.VERTICAL,false)
 
         //레시피 상세 페이지
         recipeAdapter.setOnItemClickListener(object: RecipeListRVAdapter.OnItemClickListener{
-            override fun onItemClick(v: View, data: Recipe, position: Int) {
+            override fun onItemClick(v: View, data: RecipeList, position: Int) {
                 onDialogBtnClicked(data.id)
             }
         })
@@ -87,17 +89,37 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
             filter.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_white))
 
             //필터
-//            initializeViews(filter.text.toString())
+            setFilter(binding.cgRecipeFilters.indexOfChild(filter) - 1)
+//            initializeViews(filter)
         }else{
             filter.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.color_white))
             filter.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_primary3))
+        }
+    }
+    //필터
+    private fun setFilter(index:Int){
+        if(index==-1){
+            initializeViews(recipeList)
+        }else{
+            val enum =enumValues<VeganTypes>()
+            val filter = enum[index].name
+            filterList = arrayListOf()
+            Log.d(TAG, "setFilter: $filter")
+            for(i:Int in 0 until recipeList.size){
+                if(recipeList[i].veganType==filter){
+                    filterList.add(recipeList[i])
+                    Log.d(TAG, "setFilter: ${recipeList[i].veganType}")
+                }
+            }
+            Log.d(TAG, "setFilter: fnish for")
+            initializeViews(filterList)
         }
     }
 
     //recipe Dialog
     fun onDialogBtnClicked(id:Int){
         RecipeService(this).tryPostRecipeDetail(id)
-        Log.d("TAG", "onDialogBtnClicked: dialog")
+        Log.d(TAG, "onDialogBtnClicked: dialog")
     }
     //인스턴스
 //    companion object{
@@ -108,26 +130,17 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) { //전체 레시피 목록 조회
-//        response.information
-//        val newRecipeLists=listOf(response.information[0])
         recipeList = listOf()
         recipeList = response.information
-
         //레시피 리스트
-        initializeViews()
-        Log.d("TAG", "onGetRecipeListSuccess: ")
-    }
-    override fun onGetRecipeListFailure(message: String) {
-        Log.d("TAG", "onGetRecipeListFailure: $message")
+        initializeViews(recipeList)
     }
     override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { //레시피 상세 정보 조회
         val dialog = RecipeDetailDialog(requireContext(), response.information)
         dialog.show()
-        Log.d("TAG", "onPostRecipeDetailSuccess: ")
     }
-    override fun onPostRecipeDetailFailure(message: String) {
-        Log.d("TAG", "onPostRecipeDetailFailure: $message")
-    }
+    override fun onGetRecipeListFailure(message: String) { }
+    override fun onPostRecipeDetailFailure(message: String) { }
     override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) { }
     override fun onGetThreeRecipeListFailure(message: String) { }
 }
