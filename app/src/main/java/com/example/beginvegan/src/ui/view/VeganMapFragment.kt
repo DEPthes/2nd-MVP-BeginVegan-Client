@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
@@ -37,6 +38,7 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
 import com.example.beginvegan.src.ui.adapter.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.util.Constants.ACCESS_FINE_LOCATION
+import com.example.beginvegan.util.Constants.RESTAURANT_ID
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
@@ -50,36 +52,50 @@ import net.daum.mf.map.api.MapView
 class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     FragmentVeganMapBinding::bind,
     R.layout.fragment_vegan_map
-), MapView.POIItemEventListener, RestaurantFindInterface{
+), MapView.POIItemEventListener, RestaurantFindInterface {
     private lateinit var dataList: ArrayList<NearRestaurant>
     private lateinit var mapView: MapView
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var constAdapter: VeganMapBottomSheetRVAdapter
+    private lateinit var varAdapter: VeganMapBottomSheetRVAdapter
     override fun init() {
 //        showLoadingDialog(requireContext())
         setMapView()
         binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
-        RestaurantFindService(this).tryPostFindRestaurant(Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude))
+        RestaurantFindService(this).tryPostFindRestaurant(
+            Coordinate(
+                ApplicationClass.xLatitude,
+                ApplicationClass.xLongitude
+            )
+        )
     }
-    private fun setMapView(){
+
+    private fun setMapView() {
         mapView = MapView(this@VeganMapFragment.activity)
         binding.mvVeganMap.addView(mapView)
         bottomSheetBehavior = BottomSheetBehavior.from(binding.veganmapBottomSheet.clBottomSheet)
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(ApplicationClass.xLatitude.toDouble(), ApplicationClass.xLongitude.toDouble()), 1, true)
-        Log.d("setMapCenterPointAndZoomLevel",ApplicationClass.xLatitude)
-        Log.d("setMapCenterPointAndZoomLevel",ApplicationClass.xLongitude)
+        mapView.setMapCenterPointAndZoomLevel(
+            MapPoint.mapPointWithGeoCoord(
+                ApplicationClass.xLatitude.toDouble(),
+                ApplicationClass.xLongitude.toDouble()
+            ), 1, true
+        )
+        Log.d("setMapCenterPointAndZoomLevel", ApplicationClass.xLatitude)
+        Log.d("setMapCenterPointAndZoomLevel", ApplicationClass.xLongitude)
         mapView.currentLocationTrackingMode =
             MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving
 //        setRestaurantGps()
 
         mapView.setOnTouchListener { v, event ->
-            Log.d("Touch","mapView")
-            if(bottomSheetBehavior.state != STATE_COLLAPSED){
+            Log.d("Touch", "mapView")
+            if (bottomSheetBehavior.state != STATE_COLLAPSED) {
                 bottomSheetBehavior.state = STATE_COLLAPSED
             }
             false
         }
 
     }
+
     private fun getBottomSheetDialogDefaultHeight(): Int {
         return getWindowHeight() * 70 / 100
         // 위 수치는 기기 높이 대비 70%로 높이를 설정
@@ -93,42 +109,78 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 
     private fun setRestaurantGps(response: RestaurantFindResponse) {
         // for문으로 데이터 갯수만큼 돌리기
-        for(i: Int in 0 until response.information.size){
+        for (i: Int in 0 until response.information.size) {
             val marker = MapPOIItem()
-            marker.apply{
+            marker.apply {
                 itemName = response.information[i].name
-                mapPoint = MapPoint.mapPointWithGeoCoord(ApplicationClass.xLatitude.toDouble()-0.001*i.toDouble(),ApplicationClass.xLongitude.toDouble()+0.001*i.toDouble())
+                mapPoint = MapPoint.mapPointWithGeoCoord(
+                    ApplicationClass.xLatitude.toDouble() - 0.001 * i.toDouble(),
+                    ApplicationClass.xLongitude.toDouble() + 0.001 * i.toDouble()
+                )
                 markerType = MapPOIItem.MarkerType.CustomImage
+                tag = i
                 customImageResourceId = R.drawable.marker_spot
             }.isShowCalloutBalloonOnTouch = false
             mapView.addPOIItem(marker)
         }
         mapView.setPOIItemEventListener(this)
     }
+
     // Set Restaurant List and Click and Test Data
     private fun setRestaurantList(response: RestaurantFindResponse) {
+        showLoadingDialog(requireContext())
         dataList = arrayListOf()
-        for(i: Int in 0 until response.information.size){
+        for (i: Int in 0 until response.information.size) {
             dataList.add(response.information[i])
         }
-        val dataRVAdapter = VeganMapBottomSheetRVAdapter(requireContext(),dataList)
-        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = dataRVAdapter
+        setRVAdapter()
+        dismissLoadingDialog()
+    }
+
+    private fun setChangeRestaurantList(position: Int) {
+        showLoadingDialog(requireContext())
+        var varDataList: ArrayList<NearRestaurant> = arrayListOf()
+        varDataList.addAll(dataList)
+        for (i: Int in 0 until position) {
+            varDataList.add(varDataList.removeAt(0))
+        }
+        varAdapter = VeganMapBottomSheetRVAdapter(requireContext(), varDataList)
+        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = varAdapter
         binding.veganmapBottomSheet.rvBottomSheetRestaurantList.layoutManager =
             LinearLayoutManager(this.context)
-        dataRVAdapter.setOnItemClickListener(object :
+        varAdapter.setOnItemClickListener(object :
             VeganMapBottomSheetRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
                 Log.d("ItemClick", data.toString())
                 showLoadingDialog(requireContext())
-                Handler(Looper.myLooper()!!).postDelayed({
-                    dismissLoadingDialog()
-                    parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
-                        .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
-                }, 3000)
-
+                parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
+                parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
+                    .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
+                dismissLoadingDialog()
             }
 
         })
+        dismissLoadingDialog()
+    }
+
+    private fun setRVAdapter() {
+        constAdapter = VeganMapBottomSheetRVAdapter(requireContext(), dataList)
+        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = constAdapter
+        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.layoutManager =
+            LinearLayoutManager(this.context)
+        constAdapter.setOnItemClickListener(object :
+            VeganMapBottomSheetRVAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
+                Log.d("ItemClick", data.toString())
+                showLoadingDialog(requireContext())
+                parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
+                parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
+                    .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
+                dismissLoadingDialog()
+            }
+
+        })
+        dismissLoadingDialog()
     }
 
     override fun onPause() {
@@ -138,26 +190,33 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 
 
     override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
-        // 마커 처리하기
         bottomSheetBehavior.state = STATE_HALF_EXPANDED
+        setChangeRestaurantList(p1!!.tag)
+        mapView.setMapCenterPoint(
+            MapPoint.mapPointWithGeoCoord(
+                p1.mapPoint.mapPointGeoCoord.latitude,
+                p1.mapPoint.mapPointGeoCoord.longitude
+            ), true
+        )
     }
 
     override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {}
 
     override fun onCalloutBalloonOfPOIItemTouched(
         mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?
-    ) {}
+    ) {
+    }
 
     override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {}
 
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
-        Log.d("onPostFindRestaurantSuccess",response.toString())
+        Log.d("onPostFindRestaurantSuccess", response.toString())
         setRestaurantGps(response)
         setRestaurantList(response)
     }
 
     override fun onPostFindRestaurantFailure(message: String) {
-        Log.d("onPostFindRestaurantFailure",message)
+        Log.d("onPostFindRestaurantFailure", message)
     }
 
 }

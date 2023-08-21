@@ -7,6 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ReviewRetrofitInterface {
 
@@ -18,8 +19,10 @@ interface ReviewRetrofitInterface {
         @Body content: String
     ): Call<WriteReviewResponse>
 
-    @GET("/api/v1/reviews")
+    @GET("/api/v1/restaurants/review/{restaurant-id}?page={n}")
     fun getReviewList(
         @Header("Authorization") accessToken: String?,
+        @Path("restaurant-id") id: Int,
+        @Path("n") page: Int
     ): Call<ReviewListResponse>
 }

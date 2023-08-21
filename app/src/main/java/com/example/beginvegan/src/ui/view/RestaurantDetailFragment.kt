@@ -13,7 +13,9 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapDeleteResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantService
 import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
+import com.example.beginvegan.util.Constants.RESTAURANT_ID
 
 class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     FragmentRestaurantDetailBinding::bind,
@@ -22,7 +24,11 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     private lateinit var reViewList: ArrayList<String>
 
     override fun init() {
-        // Res 아이디 받아오기
+        parentFragmentManager.setFragmentResultListener(RESTAURANT_ID,viewLifecycleOwner){ requestKey, bundle ->
+            val restaurantId = bundle.getString(RESTAURANT_ID)
+            RestaurantService(this).tryGetRestaurantDetail(restaurantId!!.toInt())
+            RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt())
+        }
 
         reViewList = arrayListOf()
         reViewList.apply{

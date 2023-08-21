@@ -16,6 +16,8 @@ object Constants {
     const val USER_PROVIDER = "USER_PROVIDER"
     const val USER_ROLE ="USER_ROLE"
 
+    const val RESTAURANT_ID = "RESTAURANT_ID"
+
     // VALIDATION
     const val EMAIL_VALIDATION =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
