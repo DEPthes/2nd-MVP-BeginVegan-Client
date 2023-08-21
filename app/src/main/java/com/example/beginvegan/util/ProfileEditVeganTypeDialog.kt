@@ -20,7 +20,7 @@ class ProfileEditVeganTypeDialog(context: Context, private val originalType:Stri
         LayoutInflater.from(context))
 
     var selectedType:String? = null
-    val TAG = "TAG"
+    val TAG = "EditType"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

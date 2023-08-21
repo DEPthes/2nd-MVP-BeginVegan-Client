@@ -17,20 +17,22 @@ class ProfileEditNameDialog(context: Context, private val originalName:String): 
     private val binding: DialogProfileEditNameBinding = DialogProfileEditNameBinding.inflate(
         LayoutInflater.from(context))
 
-    val TAG = "tag"
+    val TAG = "EditName"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+
         binding.tietNewName.hint = originalName
         binding.btnConfirm.setOnClickListener {
+            val newName = binding.tietNewName.text.toString()
             //name 수정 처리
             if(!binding.tietNewName.text.isNullOrEmpty()){
-                listener?.editNameOnSaveClicked(binding.tietNewName.text.toString())
+                listener?.editNameOnSaveClicked(newName)
             }
             //서버에 저장
-//            UserModifyNameService(this).tryPostUserModifyName()
+            UserModifyNameService(this).tryPostUserModifyName(newName)
             this.dismiss()
         }
     }
@@ -49,7 +51,6 @@ class ProfileEditNameDialog(context: Context, private val originalName:String): 
     override fun onPostUserModifyNameSuccess(response: UserModifyNameResponse) {
         Log.d(TAG, "onPostUserModifyNameSuccess: ")
     }
-
     override fun onPostUserModifyNameFailure(message: String) {
         Log.d(TAG, "onPostUserModifyNameFailure: $message")
     }
