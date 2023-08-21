@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Toast
 import com.example.beginvegan.databinding.DialogProfileEditNameBinding
 import com.example.beginvegan.src.data.model.user.UserModifyNameInterface
 import com.example.beginvegan.src.data.model.user.UserModifyNameResponse
@@ -28,11 +29,13 @@ class ProfileEditNameDialog(context: Context, private val originalName:String): 
         binding.btnConfirm.setOnClickListener {
             val newName = binding.tietNewName.text.toString()
             //name 수정 처리
-            if(!binding.tietNewName.text.isNullOrEmpty()){
+            if(binding.tietNewName.text.toString().isNotEmpty()){
                 listener?.editNameOnSaveClicked(newName)
+                //서버에 저장
+                UserModifyNameService(this).tryPostUserModifyName(newName)
+            }else{
+                Toast.makeText(context,"닉네임은 공백으로 처리할 수 없습니다.",Toast.LENGTH_SHORT).show()
             }
-            //서버에 저장
-            UserModifyNameService(this).tryPostUserModifyName(newName)
             this.dismiss()
         }
     }

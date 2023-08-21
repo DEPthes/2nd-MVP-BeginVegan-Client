@@ -2,6 +2,7 @@ package com.example.beginvegan.src.ui.view.vegantest
 
 import android.util.Log
 import com.example.beginvegan.R
+import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 import com.example.beginvegan.src.data.model.user.UserInterface
@@ -24,6 +25,7 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
 
         //테스트 결과 받아와서 띄워주기
         binding.tvVeganTypeKr.setText(userVeganType)
+        ApplicationClass.xAuth.veganType = userVeganType
         binding.tvVeganTypeEng.setText(testActivity.getTypeEng())
         binding.tvVeganTypeDescription.setText(testActivity.getDescription())
 

@@ -13,7 +13,7 @@ class ReviewService(val reviewInterface: ReviewInterface) {
     private val reviewRetrofitInterface: ReviewRetrofitInterface =
         ApplicationClass.sRetrofit.create(ReviewRetrofitInterface::class.java)
     fun tryPostWriteReview(restaurantId: Int, content: String) {
-        reviewRetrofitInterface.postWriteReview(ApplicationClass.xAccessToken,restaurantId, content)
+        reviewRetrofitInterface.postWriteReview(ApplicationClass.xAccessToken,ReviewRequest(restaurantId, content))
             .enqueue(object : Callback<WriteReviewResponse> {
                 override fun onResponse(
                     call: Call<WriteReviewResponse>,
@@ -43,14 +43,18 @@ class ReviewService(val reviewInterface: ReviewInterface) {
             })
     }
 
-    fun tryGetReviewList() {
-        reviewRetrofitInterface.getReviewList(ApplicationClass.xAccessToken).enqueue(object : Callback<ReviewListResponse> {
+    fun tryGetReviewList(pageNo: Int) {
+        reviewRetrofitInterface.getReviewList(ApplicationClass.xAccessToken,pageNo).enqueue(object : Callback<ReviewListResponse> {
             override fun onResponse(
                 call: Call<ReviewListResponse>,
                 response: Response<ReviewListResponse>
             ) {
                 if (response.code() == 200) {
-                    reviewInterface.onGetReviewListSuccess(response.body() as ReviewListResponse)
+                    if(pageNo == 0){
+                        reviewInterface.onGetReviewListSuccess(response.body() as ReviewListResponse)
+                    }else{
+                        reviewInterface.onGetReviewListAddSuccess(response.body() as ReviewListResponse)
+                    }
                 } else {
                     try {
                         val gson = Gson()

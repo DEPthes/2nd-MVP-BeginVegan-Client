@@ -54,6 +54,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMai
         binding.btnProfileMore.setOnClickListener {
             openBottomSheetLogout()
         }
+        binding.tvUsername.text = ApplicationClass.xAuth.name
     }
 
     //닉네임 수정

@@ -33,21 +33,21 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     private var pageNo = 0
     private lateinit var dataRVAdapter : RestaurantDetailReviewRVAdapter
     private var checkLast: Boolean = false
+    private var restaurantId= 0
     override fun init() {
         reViewList = arrayListOf()
         showLoadingDialog(requireContext())
         parentFragmentManager.setFragmentResultListener(RESTAURANT_ID,viewLifecycleOwner){ _, bundle ->
-            val restaurantId = bundle.getInt(RESTAURANT_ID)
+            restaurantId = bundle.getInt(RESTAURANT_ID)
             Log.d("restaurantId",restaurantId.toString())
             RestaurantService(this).tryGetRestaurantDetail(restaurantId)
-
             RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
             binding.ibRestaurantBookmarks.setOnClickListener {
                 showLoadingDialog(requireContext())
                 if(binding.ibRestaurantBookmarks.isPressed){
-                    RestaurantScrapDeleteService(this).tryDeleteScrapRestaurant(restaurantId)
-                }else{
                     RestaurantScrapService(this).tryPostScrapRestaurant(restaurantId)
+                }else{
+                    RestaurantScrapDeleteService(this).tryDeleteScrapRestaurant(restaurantId)
                 }
             }
             // 페이징 처리
@@ -65,19 +65,26 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
                     }
                 }
             })
+            dismissLoadingDialog()
         }
 
+        dismissLoadingDialog()
 
 
 
         binding.btnReviewGoWrite.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
+            parentFragmentManager.setFragmentResult("review",bundleOf("review" to restaurantId))
+            parentFragmentManager.beginTransaction().hide(this@RestaurantDetailFragment)
+                .add(R.id.fl_main, WriteReviewFragment()).addToBackStack(null).commit()
         }
         // callback Listener Review
-        parentFragmentManager.setFragmentResultListener("requestKey",viewLifecycleOwner) { requestKey, bundle ->
+        parentFragmentManager.setFragmentResultListener("return",viewLifecycleOwner) { _, _ ->
             checkLast = false
-        }
+            dismissLoadingDialog()
+            pageNo=0
+            RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
 
+        }
     }
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
         Log.d("onGetRestaurantDetailSuccess",response.toString())
@@ -124,6 +131,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         Log.d("onGetRestaurantDetailFailure",message)
     }
     override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
+        reViewList = arrayListOf()
         Log.d("onGetRestaurantReviewSuccess",response.toString())
         for (i: Int in 0 until response.information.reviews.size) {
             reViewList.add(response.information.reviews[i])
@@ -161,6 +169,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     }
 
     override fun onPostScrapRestaurantFailure(message: String) {
+        Toast.makeText(requireContext(),"이미 스크랩이 되어 있습니다.",Toast.LENGTH_SHORT).show()
         Log.d("onPostScrapRestaurantFailure",message)
         dismissLoadingDialog()
     }
@@ -172,6 +181,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
 
     override fun onDeleteScrapRestaurantFailure(message: String) {
         Log.d("onDeleteScrapRestaurantFailure",message)
+        dismissLoadingDialog()
     }
 
 }

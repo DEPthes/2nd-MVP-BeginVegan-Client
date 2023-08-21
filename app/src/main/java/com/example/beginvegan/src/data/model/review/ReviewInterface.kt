@@ -5,5 +5,6 @@ interface ReviewInterface {
     fun onPostWriteReviewFailure(message: String)
 
     fun onGetReviewListSuccess(response: ReviewListResponse)
+    fun onGetReviewListAddSuccess(response:ReviewListResponse)
     fun onGetReviewListFailure(message: String)
 }

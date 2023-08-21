@@ -4,6 +4,7 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.user.NickName
 import com.example.beginvegan.src.data.model.user.UserModifyNameResponse
 import com.example.beginvegan.src.data.model.user.UserResponse
+import com.example.beginvegan.src.data.model.user.UserScrapResponse
 import com.example.beginvegan.src.data.model.user.UserVeganResponse
 import com.example.beginvegan.src.data.model.user.VeganType
 import com.example.beginvegan.util.VeganTypes
@@ -12,6 +13,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface UserRetrofitInterface {
 
@@ -32,8 +34,9 @@ interface UserRetrofitInterface {
     // 유저의 스크랩 조회
     @GET("/api/v1/bookmarks")
     fun getUserBookmarks(
-        @Header("Authorization") accessToken: String?
-    ): Call<RestaurantDetailResponse>
+        @Header("Authorization") accessToken: String?,
+        @Query("page") page: Int
+    ): Call<UserScrapResponse>
 
     // 유저 닉네임 변경
     @POST("/api/v1/users/nickname")

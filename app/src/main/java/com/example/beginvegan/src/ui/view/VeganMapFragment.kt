@@ -160,7 +160,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
                     .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
                 dismissLoadingDialog()
             }
-
         })
         dismissLoadingDialog()
     }

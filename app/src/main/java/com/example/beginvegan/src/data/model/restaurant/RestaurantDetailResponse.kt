@@ -10,6 +10,7 @@ data class RestaurantDetailResponse(
 data class RestaurantDetail(
     @SerializedName("restaurant")
     val restaurant: RestaurantDetailType,
+    @SerializedName("menus")
     val menus: List<Menus>
 )
 data class RestaurantDetailType(
