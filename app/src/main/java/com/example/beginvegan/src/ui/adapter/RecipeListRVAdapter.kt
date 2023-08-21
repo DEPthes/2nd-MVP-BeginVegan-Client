@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemRecipeBinding
 import com.example.beginvegan.src.data.model.recipe.RecipeList
-import com.example.beginvegan.util.VeganType
+import com.example.beginvegan.util.VeganTypes
 
 class RecipeListRVAdapter(private val recipeList: List<RecipeList>):
     RecyclerView.Adapter<RecipeListRVAdapter.RecycleViewHolder>() {
@@ -16,7 +16,7 @@ class RecipeListRVAdapter(private val recipeList: List<RecipeList>):
     inner class RecycleViewHolder(private val binding: ItemRecipeBinding):
         RecyclerView.ViewHolder(binding.root){
         fun bind(recipe:RecipeList){
-            binding.tvVeganType.text = VeganType.valueOf(recipe.veganType).veganType
+            binding.tvVeganType.text = VeganTypes.valueOf(recipe.veganType).veganType
             binding.tvRecipeName.text = recipe.name
             var ingredients = ""
             for(i:Int in 0 until recipe.ingredients.size){

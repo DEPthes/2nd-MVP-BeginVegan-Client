@@ -39,6 +39,7 @@ class RestaurantDetailReviewRVAdapter(private val dataList: ArrayList<ReviewDeta
         holder.bind(position)
     }
 
+
     override fun getItemCount(): Int = dataList.size
 
     override fun getItemViewType(position: Int): Int {

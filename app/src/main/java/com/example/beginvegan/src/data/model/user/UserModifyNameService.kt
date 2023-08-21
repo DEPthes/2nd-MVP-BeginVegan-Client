@@ -13,7 +13,7 @@ class UserModifyNameService(val userModifyNameInterface: UserModifyNameInterface
         ApplicationClass.sRetrofit.create(UserRetrofitInterface::class.java)
 
     fun tryPostUserModifyName(nickname: String) {
-        userRetrofitInterface.postUserModifyName(ApplicationClass.xAccessToken,nickname).enqueue(object :
+        userRetrofitInterface.postUserModifyName(ApplicationClass.xAccessToken,NickName(nickname)).enqueue(object :
             Callback<UserModifyNameResponse> {
             override fun onResponse(
                 call: Call<UserModifyNameResponse>,

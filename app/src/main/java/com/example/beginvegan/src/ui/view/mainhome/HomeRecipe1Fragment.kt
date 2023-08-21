@@ -5,7 +5,7 @@ import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentHomeRecipe1Binding
 import com.example.beginvegan.src.data.model.recipe.RecipeThree
 import com.example.beginvegan.src.ui.view.MainActivity
-import com.example.beginvegan.util.VeganType
+import com.example.beginvegan.util.VeganTypes
 
 class HomeRecipe1Fragment(private val data: RecipeThree) : BaseFragment<FragmentHomeRecipe1Binding>(
     FragmentHomeRecipe1Binding::bind,R.layout.fragment_home_recipe_1) {
@@ -15,7 +15,7 @@ class HomeRecipe1Fragment(private val data: RecipeThree) : BaseFragment<Fragment
             (activity as MainActivity).goRecipe(data.id)
         }
         binding.tvRecipeTitle.text = data.name
-        binding.tvRecipeVeganType.text = VeganType.valueOf(data.veganType).veganType
+        binding.tvRecipeVeganType.text = VeganTypes.valueOf(data.veganType).veganType
         binding.tvRecipeDescription.text = data.description
     }
 }

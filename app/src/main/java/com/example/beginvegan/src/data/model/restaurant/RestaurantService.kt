@@ -48,7 +48,12 @@ class RestaurantService(val restaurantInterface: RestaurantInterface){
                 response: Response<RestaurantReviewResponse>
             ) {
                 if(response.code()==200){
-                    restaurantInterface.onGetRestaurantReviewSuccess(response.body() as RestaurantReviewResponse)
+                    if(page==0){
+                        restaurantInterface.onGetRestaurantReviewSuccess(response.body() as RestaurantReviewResponse)
+                    }else{
+                        restaurantInterface.onGetRestaurantReviewAddSuccess(response.body() as RestaurantReviewResponse)
+                    }
+
                 }
                 else{
                     try{

@@ -9,6 +9,7 @@ interface RestaurantInterface {
 
     // 식당/카페 리뷰 조회
     fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse)
+    fun onGetRestaurantReviewAddSuccess(response: RestaurantReviewResponse)
     fun onGetRestaurantReviewFailure(message: String)
 
 
