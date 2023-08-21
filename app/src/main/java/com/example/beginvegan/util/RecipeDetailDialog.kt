@@ -33,12 +33,15 @@ class RecipeDetailDialog(context: Context,private val data: RecipeDetail): Dialo
         binding.tvRecipeTitle.text = data.name
 
         val contents = data.blocks
-        for(i:Int in 0 until contents.size){
-            if(contents[i].sequence!=0){
+        for(i:Int in contents.indices){
+            var contentText = ""
+            if(contents[i].sequence==0){
+                contentText = "<재료>\n"
+            }else{
                 createNumTitle(contents[i].sequence)
             }
-            Log.d("recipe", "onCreate: ${contents[i].content}")
-            createTextView(contents[i].content)
+            contentText += contents[i].content
+            createTextView(contentText)
         }
 
         //dialog 크기

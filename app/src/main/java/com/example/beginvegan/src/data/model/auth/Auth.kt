@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Auth(
     @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
+    @SerializedName("name") var name: String,
     @SerializedName("email") val email: String,
     @SerializedName("imageUrl") val imageUrl: String?,
     @SerializedName("marketingConsent") val marketingConsent: String?,
