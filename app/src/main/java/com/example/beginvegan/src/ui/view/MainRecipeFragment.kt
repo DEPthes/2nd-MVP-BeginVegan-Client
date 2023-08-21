@@ -15,7 +15,7 @@ import com.example.beginvegan.src.data.model.recipe.RecipeService
 import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
 import com.example.beginvegan.src.ui.adapter.RecipeListRVAdapter
 import com.example.beginvegan.util.RecipeDetailDialog
-import com.example.beginvegan.util.VeganType
+import com.example.beginvegan.util.VeganTypes
 import com.google.android.material.chip.Chip
 
 class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
@@ -100,7 +100,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         if(index==-1){
             initializeViews(recipeList)
         }else{
-            val enum =enumValues<VeganType>()
+            val enum =enumValues<VeganTypes>()
             val filter = enum[index].name
             filterList = arrayListOf()
             for(i:Int in 0 until recipeList.size){

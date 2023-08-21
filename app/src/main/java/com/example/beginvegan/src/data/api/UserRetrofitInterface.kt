@@ -4,9 +4,9 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.user.NickName
 import com.example.beginvegan.src.data.model.user.UserModifyNameResponse
 import com.example.beginvegan.src.data.model.user.UserResponse
-import com.example.beginvegan.src.data.model.user.UserVegan
 import com.example.beginvegan.src.data.model.user.UserVeganResponse
-import com.example.beginvegan.util.VeganType
+import com.example.beginvegan.src.data.model.user.VeganType
+import com.example.beginvegan.util.VeganTypes
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,7 +26,7 @@ interface UserRetrofitInterface {
     @POST("/api/v1/users/vegan-type")
     fun postUserVeganType(
         @Header("Authorization") accessToken: String?,
-        @Body veganType: UserVegan
+        @Body veganType: VeganType
     ): Call<UserVeganResponse>
 
     // 유저의 스크랩 조회

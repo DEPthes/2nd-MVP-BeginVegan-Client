@@ -1,8 +1,7 @@
 package com.example.beginvegan.src.data.model.user
 
-import com.example.beginvegan.util.VeganType
 import com.google.gson.annotations.SerializedName
 
-data class UserVegan (
+data class VeganType(
     @SerializedName("veganType") val veganType: String
 )

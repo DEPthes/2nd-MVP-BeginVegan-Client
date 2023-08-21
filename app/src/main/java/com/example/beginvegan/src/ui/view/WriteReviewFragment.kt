@@ -26,13 +26,13 @@ class WriteReviewFragment : BaseFragment<FragmentWriteReviewBinding>(
         ) { _, bundle ->
             val restaurantId = bundle.getInt(Constants.RESTAURANT_ID)
             Log.d("WriteReviewFragment", restaurantId.toString())
-            dismissLoadingDialog()
             binding.bSaveReview.setOnClickListener {
                 showLoadingDialog(requireContext())
                 val result = binding.etWriteReview.text.toString()
                 ReviewService(this).tryPostWriteReview(restaurantId,result)
             }
         }
+        dismissLoadingDialog()
 
     }
 

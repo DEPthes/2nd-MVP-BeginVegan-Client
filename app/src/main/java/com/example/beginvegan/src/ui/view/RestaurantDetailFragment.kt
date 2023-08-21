@@ -100,7 +100,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         } else {
             Glide.with(requireContext()).load(response.information.menus[1].imageUrl).into(binding.ivMenuImg2)
         }
-
+        binding.tvRestaurantName.text = response.information.restaurant.name
         binding.tvRestaurantAddress.text = response.information.restaurant.address.detailAddress
         if(response.information.restaurant.restaurantType == "RESTAURANT"){
             binding.tvRestaurantType.text = "식당"

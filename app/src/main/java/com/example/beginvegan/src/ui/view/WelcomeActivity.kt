@@ -61,4 +61,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>({ActivityWelcomeBin
                 Toast.makeText(this,fail.message, Toast.LENGTH_SHORT).show()
             }
     }
+
+    // 비건 타입 수정
+
 }

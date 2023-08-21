@@ -3,7 +3,7 @@ package com.example.beginvegan.src.data.model.user
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.ErrorResponse
 import com.example.beginvegan.src.data.api.UserRetrofitInterface
-import com.example.beginvegan.util.VeganType
+import com.example.beginvegan.util.VeganTypes
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,10 +11,9 @@ import retrofit2.Response
 
 class UserVeganService(val userInterface: UserInterface){
     private val userRetrofitInterface: UserRetrofitInterface = ApplicationClass.sRetrofit.create(UserRetrofitInterface::class.java)
-    private val accessToken = ("Bearer "+(ApplicationClass.xAccessToken))
 
     fun tryPostUserVeganType(veganType: String){
-        userRetrofitInterface.postUserVeganType(accessToken,veganType).enqueue(object: Callback<UserVeganResponse>{
+        userRetrofitInterface.postUserVeganType(ApplicationClass.xAccessToken,VeganType(veganType)).enqueue(object: Callback<UserVeganResponse>{
             override fun onResponse(
                 call: Call<UserVeganResponse>,
                 response: Response<UserVeganResponse>

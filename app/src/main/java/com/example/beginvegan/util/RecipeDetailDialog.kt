@@ -29,7 +29,7 @@ class RecipeDetailDialog(context: Context,private val data: RecipeDetail): Dialo
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         //데이터 연결
-        binding.tvVeganType.text = VeganType.valueOf(data.veganType).veganType
+        binding.tvVeganType.text = VeganTypes.valueOf(data.veganType).veganType
         binding.tvRecipeTitle.text = data.name
 
         val contents = data.blocks
