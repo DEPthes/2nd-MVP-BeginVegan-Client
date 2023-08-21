@@ -38,11 +38,6 @@
         <activity
             android:name=".src.ui.view.SplashActivity"
             android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".src.ui.view.LoginActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,8 +45,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".src.ui.view.WriteReviewFragment"
-            android:exported="false" />
+            android:name=".src.ui.view.LoginActivity"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".src.ui.view.vegantest.VeganTestActivity"
             android:exported="true" >
@@ -60,8 +57,8 @@
         <activity
             android:name=".src.ui.view.MainActivity"
             android:exported="true" >
-
         </activity>
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="fb5550ba69a57eb73aae78bc996d8a8e" />

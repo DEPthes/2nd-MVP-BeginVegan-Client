@@ -41,8 +41,8 @@ class RestaurantService(val restaurantInterface: RestaurantInterface){
     }
 
     // 식당/카페 리뷰 조회
-    fun tryGetRestaurantReview(restaurantId: Int){
-        restaurantRetrofitInterface.getRestaurantReview(ApplicationClass.xAccessToken,restaurantId).enqueue(object: Callback<RestaurantReviewResponse>{
+    fun tryGetRestaurantReview(restaurantId: Int,page: Int){
+        restaurantRetrofitInterface.getRestaurantReview(ApplicationClass.xAccessToken,restaurantId,page).enqueue(object: Callback<RestaurantReviewResponse>{
             override fun onResponse(
                 call: Call<RestaurantReviewResponse>,
                 response: Response<RestaurantReviewResponse>

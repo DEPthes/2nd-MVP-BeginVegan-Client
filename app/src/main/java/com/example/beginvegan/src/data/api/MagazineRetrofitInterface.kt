@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface MagazineRetrofitInterface {
 
     // 2가지 매거진 목록 조회
-    @GET("/api/v1/magazines/random-megazine-list")
+    @GET("/api/v1/magazines/random-magazine-list")
     fun getMagazineTwoList(
         @Header("Authorization") accessToken: String?,
     ): Call<MagazineTwoResponse>
