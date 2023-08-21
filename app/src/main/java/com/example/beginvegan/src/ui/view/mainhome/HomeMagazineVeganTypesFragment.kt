@@ -9,10 +9,11 @@ class HomeMagazineVeganTypesFragment(private val data:Magazine) : BaseFragment<F
     FragmentHomeMagazineVeganTypesBinding::bind,R.layout.fragment_home_magazine_vegan_types ) {
 
     override fun init() {
+        binding.tvMagazineTitleDefine.text = data.title
+
         binding.btnMagazineTypes.setOnClickListener {
             val homeFragment = parentFragment as MainHomeFragment
             homeFragment.onDialogBtnClicked(data.id)
-            binding.tvMagazineTitleDefine.text = data.title
         }
     }
 }

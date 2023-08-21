@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemProfileMyreviewBinding
+import com.example.beginvegan.src.data.model.review.Review
 
-class ProfileMyReviewRVAdapter(private val reviewList: ArrayList<String>): RecyclerView.Adapter<ProfileMyReviewRVAdapter.RecycleViewHolder>() {
+class ProfileMyReviewRVAdapter(private val reviewList: List<Review>): RecyclerView.Adapter<ProfileMyReviewRVAdapter.RecycleViewHolder>() {
     private var listener: OnItemClickListener? = null
 
     inner class RecycleViewHolder(private val binding: ItemProfileMyreviewBinding):
@@ -49,7 +50,7 @@ class ProfileMyReviewRVAdapter(private val reviewList: ArrayList<String>): Recyc
         return position
     }
     interface OnItemClickListener {
-        fun onItemClick(v: View, data: String, position: Int)
+        fun onItemClick(v: View, data: Review, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){
