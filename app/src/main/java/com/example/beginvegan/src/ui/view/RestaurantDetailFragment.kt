@@ -14,8 +14,12 @@ import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 import com.example.beginvegan.src.data.model.restaurant.RestaurantDetailResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantReviewResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapDeleteInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapDeleteResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapDeleteService
+import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapResponse
+import com.example.beginvegan.src.data.model.restaurant.RestaurantScrapService
 import com.example.beginvegan.src.data.model.restaurant.RestaurantService
 import com.example.beginvegan.src.data.model.restaurant.ReviewDetail
 import com.example.beginvegan.src.ui.adapter.RestaurantDetailReviewRVAdapter
@@ -24,7 +28,7 @@ import com.example.beginvegan.util.Constants.RESTAURANT_ID
 class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     FragmentRestaurantDetailBinding::bind,
     R.layout.fragment_restaurant_detail
-),RestaurantInterface{
+),RestaurantInterface,RestaurantScrapInterface,RestaurantScrapDeleteInterface{
     private lateinit var reViewList: ArrayList<ReviewDetail>
     private var pageNo = 0
     private lateinit var dataRVAdapter : RestaurantDetailReviewRVAdapter
@@ -35,6 +39,14 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
             Log.d("restaurantId",restaurantId.toString())
             RestaurantService(this).tryGetRestaurantDetail(restaurantId)
             RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
+            binding.ibRestaurantBookmarks.setOnClickListener {
+                if(binding.ibRestaurantBookmarks.isPressed){
+                    RestaurantScrapDeleteService(this).tryDeleteScrapRestaurant(restaurantId)
+                }else{
+                    RestaurantScrapService(this).tryPostScrapRestaurant(restaurantId)
+                }
+
+            }
         }
 
 
@@ -51,6 +63,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
                 }
             }
         })
+
         binding.btnReviewGoWrite.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fl_main,WriteReviewFragment()).addToBackStack(null).commit()
         }
@@ -104,16 +117,19 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
     }
 
     override fun onPostScrapRestaurantSuccess(response: RestaurantScrapResponse) {
-        Toast.makeText(requireContext(),response.information.toString(),Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(),response.information.message,Toast.LENGTH_SHORT).show()
     }
+
     override fun onPostScrapRestaurantFailure(message: String) {
         Log.d("onPostScrapRestaurantFailure",message)
     }
-    override fun onPostScrapDeleteRestaurantSuccess(response: RestaurantScrapDeleteResponse) {
-        Toast.makeText(requireContext(),response.information.toString(),Toast.LENGTH_SHORT).show()
+
+    override fun onDeleteScrapRestaurantSuccess(response: RestaurantScrapDeleteResponse) {
+        Toast.makeText(requireContext(),response.information.message,Toast.LENGTH_SHORT).show()
     }
 
-    override fun onPostScrapDeleteRestaurantFailure(message: String) {
-        Log.d("onPostScrapDeleteRestaurantFailure",message)
+    override fun onDeleteScrapRestaurantFailure(message: String) {
+        Log.d("onDeleteScrapRestaurantFailure",message)
     }
+
 }
