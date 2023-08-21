@@ -23,7 +23,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         super.onCreate(savedInstanceState)
     }
     override fun init() {
-        getLocation()
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
 
         binding.bnvMain.setOnItemSelectedListener {
@@ -68,20 +67,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
 //        linear.addView(newTextView)
 //    }
 
-    @SuppressLint("MissingPermission")
-    private fun getLocation(){
-        val fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this)
 
-        fusedLocationProviderClient.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY,null)
-            .addOnSuccessListener { success: Location? ->
-                success?.let { location ->
-                    ApplicationClass.xLatitude = (location.latitude).toString()
-                    ApplicationClass.xLongitude = (location.longitude).toString()
-                }
-            }
-            .addOnFailureListener { fail ->
-                Toast.makeText(this,fail.message,Toast.LENGTH_SHORT).show()
-            }
-    }
 }

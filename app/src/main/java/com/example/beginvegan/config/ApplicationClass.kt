@@ -45,8 +45,8 @@ class ApplicationClass : Application() {
             USER_PROVIDER,
             null,
             null)
-        var xLatitude = "37.580261"
-        var xLongitude ="126.922838"
+        var xLatitude = "37.22269"
+        var xLongitude ="127.19016"
 
     }
     private fun initRetrofitInstance() {

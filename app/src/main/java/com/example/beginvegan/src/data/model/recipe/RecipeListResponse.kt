@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 // 전체 레시피 목록 조회
 data class RecipeListResponse(
-    @SerializedName("information") val information: RecipeList
+    @SerializedName("information") val information: List<RecipeList>
 ):BaseResponse()

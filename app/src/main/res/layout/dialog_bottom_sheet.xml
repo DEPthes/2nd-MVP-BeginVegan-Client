@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_hideable="false"
+    app:behavior_halfExpandedRatio="0.4"
     app:behavior_peekHeight="24dp"
     android:background="@drawable/shape_veganmap_bottom_sheet"
     >
@@ -28,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_veganmap_dialog_drag_handle"
-            android:layout_marginTop="@dimen/margin_4"/>
+            android:layout_marginTop="@dimen/margin_16"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

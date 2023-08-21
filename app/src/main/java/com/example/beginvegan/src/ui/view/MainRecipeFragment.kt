@@ -105,7 +105,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) {
-        recipeList = listOf(response.information)
+//        recipeList = listOf(response.information)
         //레시피 리스트
         initializeViews()
         Log.d("TAG", "onGetRecipeListSuccess: ")

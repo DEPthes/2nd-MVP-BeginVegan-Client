@@ -11,12 +11,5 @@ interface RestaurantInterface {
     fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse)
     fun onGetRestaurantReviewFailure(message: String)
 
-    // 식당/카페 스크랩
-    fun onPostScrapRestaurantSuccess(response: RestaurantScrapResponse)
-    fun onPostScrapRestaurantFailure(message: String)
-
-    // 식당/카페 스크랩 해제
-    fun onPostScrapDeleteRestaurantSuccess(response: RestaurantScrapDeleteResponse)
-    fun onPostScrapDeleteRestaurantFailure(message: String)
 
 }

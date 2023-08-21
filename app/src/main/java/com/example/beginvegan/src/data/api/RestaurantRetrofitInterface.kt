@@ -13,6 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RestaurantRetrofitInterface {
 
@@ -27,7 +28,8 @@ interface RestaurantRetrofitInterface {
     @GET("/api/v1/restaurants/review/{restaurant-id}")
     fun getRestaurantReview(
         @Header("Authorization") accessToken: String?,
-        @Path("restaurant-id") id: Int
+        @Path("restaurant-id") id: Int,
+        @Query("page") page: Int
     ): Call<RestaurantReviewResponse>
 
     // 식당/카페 스크랩
