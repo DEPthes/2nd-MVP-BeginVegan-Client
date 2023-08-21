@@ -1,16 +1,13 @@
 package com.example.beginvegan.src.ui.view.vegantest
 
-import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganTestAfterBinding
 import com.example.beginvegan.src.data.model.user.UserInterface
 import com.example.beginvegan.src.data.model.user.UserVeganResponse
 import com.example.beginvegan.src.data.model.user.UserVeganService
-import com.example.beginvegan.util.VeganTypes
+import com.example.beginvegan.util.VeganType
 
 class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
     FragmentVeganTestAfterBinding::bind,R.layout.fragment_vegan_test_after),
@@ -22,7 +19,7 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
         val veganTestBeforeFragment = VeganTestBeforeFragment.newInstance()
         //서버 - 유저
         val userVeganType = testActivity.getUserType()
-        veganTypes = (VeganTypes.values().find { it.veganType == userVeganType}).toString()
+        veganTypes = (VeganType.values().find { it.veganType == userVeganType}).toString()
         UserVeganService(this).tryPostUserVeganType(veganTypes)
 
         //테스트 결과 받아와서 띄워주기

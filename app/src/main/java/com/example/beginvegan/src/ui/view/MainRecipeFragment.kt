@@ -1,14 +1,12 @@
 package com.example.beginvegan.src.ui.view
 
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainRecipeBinding
-import com.example.beginvegan.src.data.model.recipe.Recipe
 import com.example.beginvegan.src.data.model.recipe.RecipeDetailResponse
 import com.example.beginvegan.src.data.model.recipe.RecipeInterface
 import com.example.beginvegan.src.data.model.recipe.RecipeList
@@ -16,11 +14,9 @@ import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
 import com.example.beginvegan.src.data.model.recipe.RecipeService
 import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
 import com.example.beginvegan.src.ui.adapter.RecipeListRVAdapter
-import com.example.beginvegan.src.ui.view.vegantest.TestQuestionMilkFragment
 import com.example.beginvegan.util.RecipeDetailDialog
-import com.example.beginvegan.util.VeganTypes
+import com.example.beginvegan.util.VeganType
 import com.google.android.material.chip.Chip
-import kotlin.properties.Delegates
 
 class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     FragmentMainRecipeBinding::bind, R.layout.fragment_main_recipe),
@@ -104,7 +100,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         if(index==-1){
             initializeViews(recipeList)
         }else{
-            val enum =enumValues<VeganTypes>()
+            val enum =enumValues<VeganType>()
             val filter = enum[index].name
             filterList = arrayListOf()
             for(i:Int in 0 until recipeList.size){
