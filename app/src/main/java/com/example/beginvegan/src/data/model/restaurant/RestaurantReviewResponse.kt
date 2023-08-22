@@ -8,7 +8,8 @@ data class RestaurantReviewResponse(
 ) : BaseResponse()
 
 data class RestaurantReview(
-    @SerializedName("reviews") val reviews: List<ReviewDetail>
+    @SerializedName("reviews") val reviews: List<ReviewDetail>,
+    @SerializedName("totalCount") val totalCount: Int
 )
 
 data class ReviewDetail(

@@ -131,6 +131,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         Log.d("onGetRestaurantDetailFailure",message)
     }
     override fun onGetRestaurantReviewSuccess(response: RestaurantReviewResponse) {
+        binding.tvReviewCount.text = ("방문자 리뷰 ${response.information.totalCount}개")
         reViewList = arrayListOf()
         Log.d("onGetRestaurantReviewSuccess",response.toString())
         for (i: Int in 0 until response.information.reviews.size) {
