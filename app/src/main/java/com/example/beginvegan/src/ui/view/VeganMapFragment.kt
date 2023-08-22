@@ -83,7 +83,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         Log.d("setMapCenterPointAndZoomLevel", ApplicationClass.xLatitude)
         Log.d("setMapCenterPointAndZoomLevel", ApplicationClass.xLongitude)
         mapView.currentLocationTrackingMode =
-            MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving
+            MapView.CurrentLocationTrackingMode.TrackingModeOff
 //        setRestaurantGps()
 
         mapView.setOnTouchListener { v, event ->

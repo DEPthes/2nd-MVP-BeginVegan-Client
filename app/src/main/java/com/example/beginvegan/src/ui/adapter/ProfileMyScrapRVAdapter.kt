@@ -23,7 +23,7 @@ class ProfileMyScrapRVAdapter(private val context: Context, private val scrapLis
             } else {
                 Glide.with(context).load(scrapList[position].imageUrl).into(binding.ivRestaurantImg)
             }
-            Glide.with(context).load(scrapList[position].imageUrl).into(binding.ivRestaurantImg)
+//            Glide.with(context).load(scrapList[position].imageUrl).into(binding.ivRestaurantImg)
             binding.tvRestaurantName.text = scrapList[position].name
             binding.tvRestaurantTime.text = scrapList[position].businessHours
             binding.tvRestaurantAddress.text = scrapList[position].address.detailAddress

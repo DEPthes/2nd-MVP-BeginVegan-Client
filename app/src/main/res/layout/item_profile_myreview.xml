@@ -18,14 +18,14 @@
             android:includeFontPadding="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-        <ImageButton
-            android:id="@+id/ib_delete_review"
-            android:layout_width="@dimen/btn_24"
-            android:layout_height="@dimen/btn_24"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_general_close"
-            android:background="@color/color_transparent"/>
+<!--        <ImageButton-->
+<!--            android:id="@+id/ib_delete_review"-->
+<!--            android:layout_width="@dimen/btn_24"-->
+<!--            android:layout_height="@dimen/btn_24"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:src="@drawable/ic_general_close"-->
+<!--            android:background="@color/color_transparent"/>-->
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
