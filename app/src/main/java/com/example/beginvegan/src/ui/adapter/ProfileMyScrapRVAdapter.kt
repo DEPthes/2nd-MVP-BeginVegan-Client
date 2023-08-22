@@ -17,7 +17,12 @@ class ProfileMyScrapRVAdapter(private val context: Context, private val scrapLis
     inner class RecycleViewHolder(private val binding: ItemProfileMyscrapBinding):
         RecyclerView.ViewHolder(binding.root){
         fun bind(position: Int){
-            Log.d("TEST","bind")
+            if (scrapList[position].imageUrl.isNullOrEmpty()) {
+                Glide.with(context).load(R.drawable.test_res2)
+                    .into(binding.ivRestaurantImg)
+            } else {
+                Glide.with(context).load(scrapList[position].imageUrl).into(binding.ivRestaurantImg)
+            }
             Glide.with(context).load(scrapList[position].imageUrl).into(binding.ivRestaurantImg)
             binding.tvRestaurantName.text = scrapList[position].name
             binding.tvRestaurantTime.text = scrapList[position].businessHours
