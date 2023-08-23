@@ -13,12 +13,6 @@
         app:cardCornerRadius="@dimen/radius_16"
         android:elevation="@dimen/dim_10"
         android:layout_gravity="center">
-        <Button
-            android:id="@+id/btn_recipe_0"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/color_transparent"
-            android:background="@color/color_transparent"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
