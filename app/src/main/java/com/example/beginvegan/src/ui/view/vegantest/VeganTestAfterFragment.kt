@@ -21,6 +21,7 @@ class VeganTestAfterFragment : BaseFragment<FragmentVeganTestAfterBinding>(
         //서버 - 유저
         val userVeganType = testActivity.getUserType()
         veganTypes = (VeganTypes.values().find { it.veganType == userVeganType}).toString()
+        ApplicationClass.xAuth.veganType = veganTypes
         UserVeganService(this).tryPostUserVeganType(veganTypes)
 
         //테스트 결과 받아와서 띄워주기

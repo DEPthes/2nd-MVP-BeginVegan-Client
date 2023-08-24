@@ -36,6 +36,11 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMai
         }.attach()
         //시작 시 유저 이름 반영
         binding.tvUsername.text = ApplicationClass.xAuth.name
+        if(ApplicationClass.xAuth.veganType.isNullOrEmpty()){
+            binding.tvUserVeganType.text = "비기너"
+        }else{
+            binding.tvUserVeganType.text = ApplicationClass.xAuth.veganType
+        }
 
         //닉네임 수정 dialog
         binding.ibEditUsername.setOnClickListener{
