@@ -3,6 +3,7 @@ package com.example.beginvegan.src.ui.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.example.beginvegan.R
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
@@ -14,6 +15,7 @@ import com.example.beginvegan.src.ui.view.vegantest.VeganTestActivity
 import com.example.beginvegan.util.LogoutDialog
 import com.example.beginvegan.util.ProfileEditNameDialog
 import com.example.beginvegan.util.ProfileEditVeganTypeDialog
+import com.example.beginvegan.util.VeganTypes
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMainProfileBinding::bind, R.layout.fragment_main_profile
@@ -55,6 +57,10 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(FragmentMai
             openBottomSheetLogout()
         }
         binding.tvUsername.text = ApplicationClass.xAuth.name
+//        binding.tvUserVeganType.text = VeganTypes.valueOf("${ApplicationClass.xAuth.veganType}").veganType
+        if(ApplicationClass.xAuth.imageUrl != null){
+            Glide.with(requireContext()).load(ApplicationClass.xAuth.imageUrl).into(binding.civProfileImage)
+        }
     }
 
     //닉네임 수정
