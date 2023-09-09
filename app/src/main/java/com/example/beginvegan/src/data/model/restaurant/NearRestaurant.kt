@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.data.model.restaurant
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class NearRestaurant(
     @SerializedName("id") val id: Int,
@@ -11,7 +12,7 @@ data class NearRestaurant(
     @SerializedName("longitude") val longitude: String,
     @SerializedName("imageUrl") val imageUrl: String,
     @SerializedName("menus") val menus: List<NearRestaurantMenus>
-)
+): Serializable
 data class NearRestaurantMenus(
     @SerializedName("id") val id: Int,
     @SerializedName("imageUrl") val imageUrl: String?
