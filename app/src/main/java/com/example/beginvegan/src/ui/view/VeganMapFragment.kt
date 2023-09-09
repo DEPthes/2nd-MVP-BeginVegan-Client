@@ -57,8 +57,10 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     private lateinit var dataList: ArrayList<NearRestaurant>
     private lateinit var mapView: MapView
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
     private lateinit var constAdapter: VeganMapBottomSheetRVAdapter
     private lateinit var varAdapter: VeganMapBottomSheetRVAdapter
+    private lateinit var singleAdapter: VeganMapBottomSheetRVAdapter
     override fun init() {
         setMapView()
         binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
@@ -170,11 +172,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         varAdapter.setOnItemClickListener(object :
             VeganMapBottomSheetRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-                showLoadingDialog(requireContext())
-                parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
-                parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
-                    .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
-                dismissLoadingDialog()
+                moveDetail(data)
             }
         })
         dismissLoadingDialog()
@@ -188,17 +186,19 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         constAdapter.setOnItemClickListener(object :
             VeganMapBottomSheetRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-                showLoadingDialog(requireContext())
-                parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
-                parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
-                    .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
-                dismissLoadingDialog()
+                moveDetail(data)
             }
 
         })
         dismissLoadingDialog()
     }
-
+    private fun moveDetail(data: NearRestaurant){
+        showLoadingDialog(requireContext())
+        parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
+        parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
+            .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
+        dismissLoadingDialog()
+    }
     override fun onPause() {
         super.onPause()
         binding.mvVeganMap.removeAllViews()
