@@ -2,6 +2,7 @@ package com.example.beginvegan.src.ui.view.mainhome
 
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.beginvegan.R
@@ -31,6 +32,9 @@ import com.example.beginvegan.src.ui.adapter.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.HomeTodayRecipeVPAdapter
 import com.example.beginvegan.src.ui.view.RestaurantDetailFragment
+import com.example.beginvegan.src.ui.view.VeganMapFragment
+import com.example.beginvegan.util.Constants.RECOMMENDED_POSITION
+import com.example.beginvegan.util.Constants.RECOMMENDED_RES
 import com.example.beginvegan.util.HomeMagazineDetailDialog
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
@@ -151,6 +155,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             }
             setRestaurantRVAdapter()
         }
+        homeRecommendRestRVAdapter.setOnItemClickListener(object: HomeRecommendRestRVAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
+                // 고유 포지션 찾아야함
+                parentFragmentManager.setFragmentResult(RECOMMENDED_POSITION,bundleOf(RECOMMENDED_POSITION to data))
+                parentFragmentManager.setFragmentResult(RECOMMENDED_RES,bundleOf(RECOMMENDED_RES to data))
+                parentFragmentManager.beginTransaction().add(R.id.fl_main, VeganMapFragment()).commit()
+//                    .setReorderingAllowed(true).commitAllowingStateLoss()
+
+            }
+
+
+        })
     }
     //서버 - 매거진
     override fun onGetMagazineTwoListSuccess(response: MagazineTwoResponse) { //fragment ViewPager 띄우기

@@ -50,6 +50,11 @@ class HomeRecommendRestRVAdapter(
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(position)
+        if (position != RecyclerView.NO_POSITION) {
+            holder.itemView.setOnClickListener {
+                listener?.onItemClick(holder.itemView, recommendRestList[position], position)
+            }
+        }
     }
 
     override fun getItemCount(): Int = recommendRestList.size
