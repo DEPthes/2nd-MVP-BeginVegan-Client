@@ -39,7 +39,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         showLoadingDialog(requireContext())
         parentFragmentManager.setFragmentResultListener(RESTAURANT_ID,viewLifecycleOwner){ _, bundle ->
             restaurantId = bundle.getInt(RESTAURANT_ID)
-            Log.d("restaurantId",restaurantId.toString())
             RestaurantService(this).tryGetRestaurantDetail(restaurantId)
             RestaurantService(this).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
             binding.ibRestaurantBookmarks.setOnClickListener {
@@ -58,7 +57,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
                         (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                     val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
                     if (lastVisibleItemPosition == itemTotalCount&&!checkLast) {
-                        Log.d("lastVisibleItemPosition","Last Item")
                         showLoadingDialog(requireContext())
                         pageNo++
                         RestaurantService(this@RestaurantDetailFragment).tryGetRestaurantReview(restaurantId!!.toInt(),pageNo)
@@ -87,7 +85,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         }
     }
     override fun onGetRestaurantDetailSuccess(response: RestaurantDetailResponse) {
-        Log.d("onGetRestaurantDetailSuccess",response.toString())
 
         if (response.information.restaurant.imageUrl.isNullOrEmpty()) {
             Glide.with(requireContext()).load(R.drawable.test_res2)
@@ -137,8 +134,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding>(
         for (i: Int in 0 until response.information.reviews.size) {
             reViewList.add(response.information.reviews[i])
         }
-//        로직상 오류
-//        binding.tvReviewCount.text = "방문자 리뷰 ${response.information.reviews.size}개"
         dataRVAdapter  = RestaurantDetailReviewRVAdapter(reViewList)
         binding.rvRestaurantReviews.adapter = dataRVAdapter
         binding.rvRestaurantReviews.layoutManager = LinearLayoutManager(this.context)
