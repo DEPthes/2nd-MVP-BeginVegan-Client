@@ -49,7 +49,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     override fun init() {
         //서버 데이터 불러오기
         showLoadingDialog(requireContext())
-//        UserCheckService(this).tryGetUser() //유저
         val coordinate = Coordinate(ApplicationClass.xLatitude,ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
@@ -118,13 +117,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         //매거진 디테일 호출
         MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
     }
-
-
-    ///서버///
-    //유저 이름 받아오기
-//    override fun onGetUserSuccess(response: UserResponse) {
-//        binding.tvSloganGreeting.text = "${response.name}님, 안녕하세요!"
-//    }
     //오늘의 레시피
     override fun onGetThreeRecipeListSuccess(response: RecipeThreeResponse) {
         todayRecipeList = listOf(

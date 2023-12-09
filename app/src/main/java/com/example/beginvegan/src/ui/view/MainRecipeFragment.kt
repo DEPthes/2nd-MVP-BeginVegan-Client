@@ -1,6 +1,7 @@
 package com.example.beginvegan.src.ui.view
 
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,27 +39,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
             val checkedChip: Chip = binding.root.findViewById(checkedId)
             checkFilter(checkedChip, checkedChip.isChecked)
         }
-        binding.cFilterAll.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterAll, isChecked)
-        }
-        binding.cFilterVegan.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterVegan, isChecked)
-        }
-        binding.cFilterLacto.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterLacto, isChecked)
-        }
-        binding.cFilterLactoOvo.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterLactoOvo, isChecked)
-        }
-        binding.cFilterPesco.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterPesco, isChecked)
-        }
-        binding.cFilterPollo.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterPollo, isChecked)
-        }
-        binding.cFilterFlexitarian.setOnCheckedChangeListener { _, isChecked ->
-            checkFilter(binding.cFilterFlexitarian, isChecked)
-        }
+
     }
 
     //레시피 리스트 RVAdapter
@@ -80,24 +61,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     //필터 선택시 UI 반영
     private fun checkFilter(filter: Chip, checked: Boolean) {
         if (checked) {
-            filter.chipBackgroundColor = ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.color_primary3
-                )
-            )
-            filter.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_white))
-
-            //필터 함수 실행
             setFilter(binding.cgRecipeFilters.indexOfChild(filter) - 1)
-        } else {
-            filter.chipBackgroundColor = ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.color_white
-                )
-            )
-            filter.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_primary3))
         }
     }
 
