@@ -51,10 +51,6 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>({ActivityWelcomeBin
                 success?.let { location ->
                     ApplicationClass.xLatitude = (location.latitude).toString()
                     ApplicationClass.xLongitude = (location.longitude).toString()
-                    Log.d("getLocation | location",location.latitude.toString())
-                    Log.d("getLocation | location",location.longitude.toString())
-                    Log.d("getLocation | Application", ApplicationClass.xLatitude)
-                    Log.d("getLocation | Application", ApplicationClass.xLatitude)
                 }
             }
             .addOnFailureListener { fail ->

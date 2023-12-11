@@ -6,18 +6,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.util.Base64
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.beginvegan.R
 import com.example.beginvegan.config.BaseActivity
 import com.example.beginvegan.databinding.ActivitySplashBinding
 import com.example.beginvegan.util.Constants
+import java.security.MessageDigest
+
 
 class  SplashActivity : BaseActivity<ActivitySplashBinding>({ActivitySplashBinding.inflate(it)}){
     override fun init() {
