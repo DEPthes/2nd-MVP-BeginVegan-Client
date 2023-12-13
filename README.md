@@ -20,148 +20,22 @@
 
 📂 com.example.beginvegan
  ┣ 📂config
- ┃ ┣ 📜AccessTokenInterceptor.kt
- ┃ ┣ 📜ApplicationClass.kt
- ┃ ┣ 📜BaseActivity.kt
- ┃ ┣ 📜BaseFragment.kt
- ┃ ┣ 📜BaseResponse.kt
- ┃ ┗ 📜ErrorResponse.kt
  ┣ 📂src
  ┃ ┣ 📂data
  ┃ ┃ ┣ 📂api
- ┃ ┃ ┃ ┣ 📜AuthRetrofitInterface.kt
- ┃ ┃ ┃ ┣ 📜MagazineRetrofitInterface.kt
- ┃ ┃ ┃ ┣ 📜RecipeRetrofitInterface.kt
- ┃ ┃ ┃ ┣ 📜RestaurantRetrofitInterface.kt
- ┃ ┃ ┃ ┣ 📜ReviewRetrofitInterface.kt
- ┃ ┃ ┃ ┗ 📜UserRetrofitInterface.kt
  ┃ ┃ ┗ 📂model
  ┃ ┃ ┃ ┣ 📂auth
- ┃ ┃ ┃ ┃ ┣ 📜Auth.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthLogin.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthSignInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthSignOutInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthSignOutResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthSignOutService.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthSignResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthSignService.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthTokenRefreshInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthTokenRefreshService.kt
- ┃ ┃ ┃ ┃ ┣ 📜AuthTokenResponse.kt
- ┃ ┃ ┃ ┃ ┗ 📜KakaoAuth.kt
  ┃ ┃ ┃ ┣ 📂magazine
- ┃ ┃ ┃ ┃ ┣ 📜Magazine.kt
- ┃ ┃ ┃ ┃ ┣ 📜MagazineContents.kt
- ┃ ┃ ┃ ┃ ┣ 📜MagazineDetail.kt
- ┃ ┃ ┃ ┃ ┣ 📜MagazineDetailResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜MagazineInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜MagazineService.kt
- ┃ ┃ ┃ ┃ ┗ 📜MagazineTwoResponse.kt
  ┃ ┃ ┃ ┣ 📂recipe
- ┃ ┃ ┃ ┃ ┣ 📜Block.kt
- ┃ ┃ ┃ ┃ ┣ 📜Ingredients.kt
- ┃ ┃ ┃ ┃ ┣ 📜Recipe.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeDetail.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeDetailResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeList.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeListResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeService.kt
- ┃ ┃ ┃ ┃ ┣ 📜RecipeThree.kt
- ┃ ┃ ┃ ┃ ┗ 📜RecipeThreeResponse.kt
  ┃ ┃ ┃ ┣ 📂restaurant
- ┃ ┃ ┃ ┃ ┣ 📜Address.kt
- ┃ ┃ ┃ ┃ ┣ 📜Coordinate.kt
- ┃ ┃ ┃ ┃ ┣ 📜Menus.kt
- ┃ ┃ ┃ ┃ ┣ 📜NearRestaurant.kt
- ┃ ┃ ┃ ┃ ┣ 📜Restaurant.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantDetailResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantFindInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantFindResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantFindService.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantReviewResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantScrapDeleteInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantScrapDeleteResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantScrapDeleteService.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantScrapInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantScrapResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜RestaurantScrapService.kt
- ┃ ┃ ┃ ┃ ┗ 📜RestaurantService.kt
  ┃ ┃ ┃ ┣ 📂review
- ┃ ┃ ┃ ┃ ┣ 📜Review.kt
- ┃ ┃ ┃ ┃ ┣ 📜ReviewInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜ReviewListResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜ReviewRequest.kt
- ┃ ┃ ┃ ┃ ┣ 📜ReviewService.kt
- ┃ ┃ ┃ ┃ ┗ 📜WriteReviewResponse.kt
  ┃ ┃ ┃ ┣ 📂user
- ┃ ┃ ┃ ┃ ┣ 📜NickName.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserCheckInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserCheckService.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserModifyNameInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserModifyNameResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserModifyNameService.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserScrapInterface.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserScrapResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserScrapService.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserVeganResponse.kt
- ┃ ┃ ┃ ┃ ┣ 📜UserVeganService.kt
- ┃ ┃ ┃ ┃ ┗ 📜VeganType.kt
- ┃ ┃ ┃ ┗ 📜Message.kt
  ┃ ┗ 📂ui
  ┃ ┃ ┣ 📂adapter
- ┃ ┃ ┃ ┣ 📜HomeMagazineVPAdapter.kt
- ┃ ┃ ┃ ┣ 📜HomeRecommendRestRVAdapter.kt
- ┃ ┃ ┃ ┣ 📜HomeTodayRecipeVPAdapter.kt
- ┃ ┃ ┃ ┣ 📜ProfileMyRecordsVPAdapter.kt
- ┃ ┃ ┃ ┣ 📜ProfileMyReviewRVAdapter.kt
- ┃ ┃ ┃ ┣ 📜ProfileMyScrapRVAdapter.kt
- ┃ ┃ ┃ ┣ 📜RecipeListRVAdapter.kt
- ┃ ┃ ┃ ┣ 📜RestaurantDetailReviewRVAdapter.kt
- ┃ ┃ ┃ ┗ 📜VeganMapBottomSheetRVAdapter.kt
  ┃ ┃ ┗ 📂view
  ┃ ┃ ┃ ┣ 📂mainhome
- ┃ ┃ ┃ ┃ ┣ 📜HomeMagazineVeganDefineFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜HomeMagazineVeganTypesFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜HomeRecipe0Fragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜HomeRecipe1Fragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜HomeRecipe2Fragment.kt
- ┃ ┃ ┃ ┃ ┗ 📜MainHomeFragment.kt
  ┃ ┃ ┃ ┣ 📂vegantest
- ┃ ┃ ┃ ┃ ┣ 📜TestQuestionChickenFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜TestQuestionEggFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜TestQuestionFishFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜TestQuestionMeatFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜TestQuestionMilkFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜VeganTestActivity.kt
- ┃ ┃ ┃ ┃ ┣ 📜VeganTestAfterFragment.kt
- ┃ ┃ ┃ ┃ ┣ 📜VeganTestBeforeFragment.kt
- ┃ ┃ ┃ ┃ ┗ 📜VeganTestOngoingFragment.kt
- ┃ ┃ ┃ ┣ 📜BottomSheetLogoutFragment.kt
- ┃ ┃ ┃ ┣ 📜LoginActivity.kt
- ┃ ┃ ┃ ┣ 📜MainActivity.kt
- ┃ ┃ ┃ ┣ 📜MainProfileFragment.kt
- ┃ ┃ ┃ ┣ 📜MainRecipeFragment.kt
- ┃ ┃ ┃ ┣ 📜ProfileMyreviewFragment.kt
- ┃ ┃ ┃ ┣ 📜ProfileMyscrapFragment.kt
- ┃ ┃ ┃ ┣ 📜RestaurantDetailFragment.kt
- ┃ ┃ ┃ ┣ 📜SplashActivity.kt
- ┃ ┃ ┃ ┣ 📜VeganMapFragment.kt
- ┃ ┃ ┃ ┣ 📜WelcomeActivity.kt
- ┃ ┃ ┃ ┗ 📜WriteReviewFragment.kt
  ┗ 📂util
- ┃ ┣ 📜Constants.kt
- ┃ ┣ 📜HomeMagazineDetailDialog.kt
- ┃ ┣ 📜LoadingDialog.kt
- ┃ ┣ 📜LogoutDialog.kt
- ┃ ┣ 📜ProfileEditNameDialog.kt
- ┃ ┣ 📜ProfileEditVeganTypeDialog.kt
- ┃ ┣ 📜RecipeDetailDialog.kt
- ┃ ┗ 📜VeganTypes.kt
 ```
 
 ### ⚒️ Tech Stack
