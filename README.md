@@ -17,6 +17,7 @@
 ### 📁 Foldering
 ```
 
+```
 📂 com.example.beginvegan
  ┣ 📂config
  ┃ ┣ 📜AccessTokenInterceptor.kt
@@ -161,6 +162,7 @@
  ┃ ┣ 📜ProfileEditVeganTypeDialog.kt
  ┃ ┣ 📜RecipeDetailDialog.kt
  ┃ ┗ 📜VeganTypes.kt
+```
 
 ### ⚒️ Tech Stack
 | | Tech Stack  |
