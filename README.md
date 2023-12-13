@@ -16,8 +16,6 @@
 [ScreenShot](" ")
 ### 📁 Foldering
 ```
-
-
 📂 com.example.beginvegan
  ┣ 📂config
  ┣ 📂src
