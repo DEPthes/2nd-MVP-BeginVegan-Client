@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import com.example.beginvegan.util.VeganTypes
 class RecipeListRVAdapter(private val recipeList: List<RecipeList>):
     RecyclerView.Adapter<RecipeListRVAdapter.RecycleViewHolder>() {
     private var listener: OnItemClickListener? = null
-    val TAG = "recipe"
 
     inner class RecycleViewHolder(private val binding: ItemRecipeBinding):
         RecyclerView.ViewHolder(binding.root){
@@ -46,6 +46,7 @@ class RecipeListRVAdapter(private val recipeList: List<RecipeList>):
         if(position != RecyclerView.NO_POSITION){
             holder.itemView.setOnClickListener {
                 listener?.onItemClick(holder.itemView, recipeList[position], position)
+                Log.d("Recipe List Adapater", "${recipeList[position]}")
             }
         }
     }
