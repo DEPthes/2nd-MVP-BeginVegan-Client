@@ -42,9 +42,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 ),
     RecipeInterface, RestaurantFindInterface, MagazineInterface {
 
-    lateinit var todayRecipeList: List<RecipeThree>
-    lateinit var recommendRestList: ArrayList<NearRestaurant>
-    lateinit var homeRecommendRestRVAdapter: HomeRecommendRestRVAdapter
+    private lateinit var todayRecipeList: List<RecipeThree>
+    private lateinit var recommendRestList: ArrayList<NearRestaurant>
+    private lateinit var homeRecommendRestRVAdapter: HomeRecommendRestRVAdapter
 
     override fun init() {
         //서버 데이터 불러오기
@@ -75,7 +75,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val vpTodayRecipe = binding.vpTodayRecipe
         val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this, todayRecipeList)
         vpTodayRecipe.adapter = homeTodayRecipeAdapter
-        //Indicator
         binding.ciTodayRecipe.setViewPager(binding.vpTodayRecipe)
     }
 
@@ -84,7 +83,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val vpMagazines = binding.vpMagazines
         val homeMagazineAdapter = HomeMagazineVPAdapter(this, magazineList)
         vpMagazines.adapter = homeMagazineAdapter
-        //Indicator
         binding.ciMagazineContents.setViewPager(binding.vpMagazines)
     }
 
@@ -154,8 +152,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         dialog.show()
     }
 
-    ///서버///
-    //서버 - 유저
 //    override fun onGetUserFailure(message: String) { }
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) {}
