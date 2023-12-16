@@ -76,29 +76,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this, todayRecipeList)
         vpTodayRecipe.adapter = homeTodayRecipeAdapter
         //Indicator
-        vpTodayRecipe.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                when (position) {
-                    0 -> {
-                        binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                    }
-
-                    1 -> {
-                        binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                    }
-
-                    2 -> {
-                        binding.ivTodayRecipeIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivTodayRecipeIndicator2.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                    }
-                }
-            }
-        })
+        binding.ciTodayRecipe.setViewPager(binding.vpTodayRecipe)
     }
 
     //비건 매거진 ViewPager
@@ -107,21 +85,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         val homeMagazineAdapter = HomeMagazineVPAdapter(this, magazineList)
         vpMagazines.adapter = homeMagazineAdapter
         //Indicator
-        vpMagazines.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                when (position) {
-                    0 -> {
-                        binding.ivMagazineIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                        binding.ivMagazineIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                    }
-
-                    1 -> {
-                        binding.ivMagazineIndicator0.setImageResource(R.drawable.shape_circle_home_indicator_inactive)
-                        binding.ivMagazineIndicator1.setImageResource(R.drawable.shape_circle_home_indicator_active)
-                    }
-                }
-            }
-        })
+        binding.ciMagazineContents.setViewPager(binding.vpMagazines)
     }
 
     //매거진 Dialog
