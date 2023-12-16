@@ -29,7 +29,6 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     private var selectedRecipeId: Int? = null
     val TAG = "recipe"
     override fun init() {
-
         //Service
         showLoadingDialog(requireContext())
         RecipeService(this).tryGetRecipeList()

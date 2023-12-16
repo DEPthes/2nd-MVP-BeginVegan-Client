@@ -87,4 +87,9 @@
     <dimen name="drag_handle_height">4dp</dimen>
     <dimen name="drag_handle_peek_height">19dp</dimen>
 
+    <!--    indicator(dp)-->
+    <dimen name="indicator_height">48dp</dimen>
+    <dimen name="indicator_dot_height">8dp</dimen>
+    <dimen name="indicator_dot_width">8dp</dimen>
+
 </resources>

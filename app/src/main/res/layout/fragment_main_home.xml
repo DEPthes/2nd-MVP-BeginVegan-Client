@@ -1,172 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".src.ui.view.mainhome.MainHomeFragment">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_home_slogan"
         android:layout_width="@dimen/item_276"
         android:layout_height="@dimen/item_80"
+        android:layout_marginTop="@dimen/margin_36"
         android:backgroundTint="@color/color_primary1"
         app:cardCornerRadius="@dimen/radius_12"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll_recommend_restaurant"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_36">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--     START   카드 뷰-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tv_slogan_greeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00님, 안녕하세요!"
-                android:textSize="@dimen/text_16"
-                android:textColor="@color/color_primary3"
-                android:fontFamily="@font/notosanskr_bold"
-                android:includeFontPadding="false"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginHorizontal="@dimen/margin_16"/>
+                android:fontFamily="@font/notosanskr_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="00님, 안녕하세요!"
+                android:textColor="@color/color_primary3"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_slogan_veganner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_24"
+                android:fontFamily="@font/notosanskr_bold"
+                android:includeFontPadding="false"
                 android:text="&apos;비기너&apos;"
                 android:textColor="@color/color_text_32"
                 android:textSize="@dimen/text_16"
-                android:fontFamily="@font/notosanskr_bold"
-                android:includeFontPadding="false"
-                app:layout_constraintTop_toBottomOf="@id/tv_slogan_greeting"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/margin_24"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_slogan_greeting" />
+
             <TextView
                 android:id="@+id/tv_slogan_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/home_slogan_description"
-                android:textSize="@dimen/text_16"
-                android:textColor="@color/color_text_32"
+                android:layout_marginEnd="@dimen/margin_24"
                 android:fontFamily="@font/notosanskr_regular"
                 android:includeFontPadding="false"
-                app:layout_constraintTop_toBottomOf="@id/tv_slogan_greeting"
+                android:text="@string/home_slogan_description"
+                android:textColor="@color/color_text_32"
+                android:textSize="@dimen/text_16"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/margin_24"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_slogan_greeting" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/tv_home_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_semi_title"
-        android:textColor="@color/color_text_32"
-        android:textSize="@dimen/text_16"
-        android:fontFamily="@font/notosanskr_medium"
-        android:includeFontPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/cv_home_slogan"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_36"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home_recommend_restaurant"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_128"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_description"
-        android:layout_marginTop="@dimen/margin_4"
-        tools:listitem="@layout/item_home_recommend_restaurant" />
-    <TextView
-        android:id="@+id/tv_title_today_recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_today_recipe"
-        android:textColor="@color/color_text_32"
-        android:textSize="@dimen/text_16"
-        android:fontFamily="@font/notosanskr_medium"
-        android:includeFontPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/rv_home_recommend_restaurant"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/margin_20"
-        android:layout_marginStart="@dimen/side_margin" />
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_today_recipe"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_134"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_today_recipe"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_4"/>
+    <!--    END 카드뷰-->
+    <!--    START 주변 식당 추천-->
     <LinearLayout
-        android:id="@+id/ll_today_recipe_indicators"
-        android:layout_width="wrap_content"
+        android:id="@+id/ll_recommend_restaurant"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/vp_today_recipe"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/ll_recommend_recipe"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_2">
-        <ImageView
-            android:id="@+id/iv_today_recipe_indicator_0"
-            android:layout_width="@dimen/item_8"
-            android:layout_height="@dimen/item_8"
-            android:src="@drawable/shape_circle_home_indicator_active"/>
-        <ImageView
-            android:id="@+id/iv_today_recipe_indicator_1"
-            android:layout_width="@dimen/item_8"
-            android:layout_height="@dimen/item_8"
-            android:src="@drawable/shape_circle_home_indicator_inactive"
-            android:layout_marginHorizontal="@dimen/margin_8"/>
-        <ImageView
-            android:id="@+id/iv_today_recipe_indicator_2"
-            android:layout_width="@dimen/item_8"
-            android:layout_height="@dimen/item_8"
-            android:src="@drawable/shape_circle_home_indicator_inactive"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_home_slogan">
+
+        <TextView
+            android:id="@+id/tv_home_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/home_semi_title"
+            android:textColor="@color/color_text_32"
+            android:textSize="@dimen/text_16" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_recommend_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_128"
+            android:layout_marginTop="@dimen/margin_4"
+            tools:listitem="@layout/item_home_recommend_restaurant" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/tv_title_magazine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_vegan_magazine"
-        android:textColor="@color/color_text_32"
-        android:textSize="@dimen/text_16"
-        android:fontFamily="@font/notosanskr_medium"
-        android:includeFontPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/ll_today_recipe_indicators"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/margin_20"
-        android:layout_marginStart="@dimen/side_margin" />
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_magazines"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_88"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_magazine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_12"/>
+    <!--    END 주변 식당 추천-->
+    <!--    START-->
     <LinearLayout
-        android:id="@+id/ll_magazine_indicators"
-        android:layout_width="wrap_content"
+        android:id="@+id/ll_recommend_recipe"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/vp_magazines"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/ll_magazine_contents"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_12">
-        <ImageView
-            android:id="@+id/iv_magazine_indicator_0"
-            android:layout_width="@dimen/item_8"
-            android:layout_height="@dimen/item_8"
-            android:src="@drawable/shape_circle_home_indicator_active"/>
-        <ImageView
-            android:id="@+id/iv_magazine_indicator_1"
-            android:layout_width="@dimen/item_8"
-            android:layout_height="@dimen/item_8"
-            android:src="@drawable/shape_circle_home_indicator_inactive"
-            android:layout_marginStart="@dimen/margin_8"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_recommend_restaurant">
+
+        <TextView
+            android:id="@+id/tv_title_today_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:fontFamily="@font/notosanskr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/home_today_recipe"
+            android:textColor="@color/color_text_32"
+            android:textSize="@dimen/text_16" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_today_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_134"
+            android:layout_marginTop="@dimen/margin_4" />
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/ci_today_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height"
+            app:ci_animator="@drawable/scale_indicator_with_alpha"
+            app:ci_drawable="@drawable/shape_circle_home_indicator_active"
+            app:ci_drawable_unselected="@drawable/shape_circle_home_indicator_inactive"
+            app:ci_height="@dimen/indicator_dot_height"
+            app:ci_width="@dimen/indicator_dot_width" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_magazine_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_recommend_recipe">
+
+        <TextView
+            android:id="@+id/tv_title_magazine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:fontFamily="@font/notosanskr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/home_vegan_magazine"
+            android:textColor="@color/color_text_32"
+            android:textSize="@dimen/text_16" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_magazines"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_88" />
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/ci_magazine_contents"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height"
+            app:ci_animator="@drawable/scale_indicator_with_alpha"
+            app:ci_drawable="@drawable/shape_circle_home_indicator_active"
+            app:ci_drawable_unselected="@drawable/shape_circle_home_indicator_inactive"
+            app:ci_height="@dimen/indicator_dot_height"
+            app:ci_width="@dimen/indicator_dot_width" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

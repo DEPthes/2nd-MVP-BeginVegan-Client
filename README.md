@@ -1,4 +1,3 @@
-
 ## 🙌 Team 안드로가요
 ### 🍀 About Begin, Vegan 
 <img src = "https://github.com/DEPthes/2nd-MVP-BeginVegan-Client/assets/32347874/39c727cd-9218-431c-ae0e-c31abec7d8f9" width = "200"></br>
@@ -47,4 +46,3 @@
 | 메시지 | SnackBar / Dialog Custom |
 | Binding | BindingActivity & BindingFragment |
 | 지도 | KaKao Map API |
-
