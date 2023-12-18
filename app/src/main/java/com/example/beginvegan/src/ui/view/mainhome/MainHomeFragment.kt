@@ -2,6 +2,7 @@ package com.example.beginvegan.src.ui.view.mainhome
 
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -45,6 +46,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     private lateinit var todayRecipeList: List<RecipeThree>
     private lateinit var recommendRestList: ArrayList<NearRestaurant>
     private lateinit var homeRecommendRestRVAdapter: HomeRecommendRestRVAdapter
+    private lateinit var homeRecommendTodayRecipeVPAdapter: HomeTodayRecipeVPAdapter
 
     override fun init() {
         //서버 데이터 불러오기
@@ -72,10 +74,15 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     //오늘의 추천 레시피 ViewPager
     private fun setRecipeVPAdapter() {
-        val vpTodayRecipe = binding.vpTodayRecipe
-        val homeTodayRecipeAdapter = HomeTodayRecipeVPAdapter(this, todayRecipeList)
-        vpTodayRecipe.adapter = homeTodayRecipeAdapter
+        homeRecommendTodayRecipeVPAdapter = HomeTodayRecipeVPAdapter(todayRecipeList)
+        binding.vpTodayRecipe.adapter = homeRecommendTodayRecipeVPAdapter
         binding.ciTodayRecipe.setViewPager(binding.vpTodayRecipe)
+        homeRecommendTodayRecipeVPAdapter.setOnItemClickListener(object: HomeTodayRecipeVPAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: RecipeThree, position: Int) {
+                Toast.makeText(requireContext(),data.name,Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     //비건 매거진 ViewPager
