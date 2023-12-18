@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".src.ui.view.vegantest.TestQuestionMilkFragment">
+    tools:context=".src.ui.view.test.TestQuestionMilkFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_vegan_test_ongoing"

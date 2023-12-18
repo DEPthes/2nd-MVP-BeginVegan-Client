@@ -8,10 +8,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import androidx.core.content.ContextCompat.startActivity
 import com.example.beginvegan.databinding.DialogLogoutBinding
-import com.example.beginvegan.src.ui.view.LoginActivity
-import com.example.beginvegan.src.ui.view.vegantest.VeganTestActivity
+import com.example.beginvegan.src.ui.view.login.LoginActivity
 
 class LogoutDialog(context: Context): Dialog(context) {
     private val binding: DialogLogoutBinding = DialogLogoutBinding.inflate(

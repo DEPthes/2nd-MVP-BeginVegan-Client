@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide
 import com.example.beginvegan.R
 import com.example.beginvegan.databinding.DialogHomeMagazineDetailBinding
 import com.example.beginvegan.src.data.model.magazine.MagazineDetail
-import com.example.beginvegan.src.ui.view.MainActivity
 
 class HomeMagazineDetailDialog(context: Context, private val data:MagazineDetail): Dialog(context) {
 
