@@ -1,7 +1,6 @@
 package com.example.beginvegan.src.ui.view.home
 
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
@@ -28,8 +27,11 @@ import com.example.beginvegan.src.ui.adapter.home.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.home.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.home.HomeTodayRecipeVPAdapter
 import com.example.beginvegan.src.ui.view.map.VeganMapFragment
+import com.example.beginvegan.src.ui.view.recipe.MainRecipeFragment
+import com.example.beginvegan.util.Constants.HOME_TODAY_RECIPE_TO_RECIPE
 import com.example.beginvegan.util.Constants.RECOMMENDED_POSITION
-import com.example.beginvegan.util.Constants.RECOMMENDED_RES
+import com.example.beginvegan.util.Constants.RECOMMENDED_RESTAURANT
+import com.example.beginvegan.util.Constants.TODAY_RECIPE
 import com.example.beginvegan.util.HomeMagazineDetailDialog
 
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
@@ -43,41 +45,13 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     private lateinit var homeRecommendTodayRecipeVPAdapter: HomeTodayRecipeVPAdapter
 
     override fun init() {
-        //서버 데이터 불러오기
         showLoadingDialog(requireContext())
         val coordinate = Coordinate(ApplicationClass.xLatitude, ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
         MagazineService(this).tryGetMagazineTwoList() //매거진
-
         //유저 이름
         binding.tvSloganGreeting.text = "${ApplicationClass.xAuth.name}님, 안녕하세요!"
-    }
-
-    //추천 식당 recyclerView
-    private fun setRestaurantRVAdapter() {
-        homeRecommendRestRVAdapter = HomeRecommendRestRVAdapter(requireContext(), recommendRestList)
-        val recyclerView = binding.rvHomeRecommendRestaurant
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
-        recyclerView.adapter = homeRecommendRestRVAdapter
-        val startPosition = Int.MAX_VALUE / 2
-        recyclerView.scrollToPosition(startPosition)
-        dismissLoadingDialog()
-    }
-
-    //오늘의 추천 레시피 ViewPager
-    private fun setRecipeVPAdapter() {
-        homeRecommendTodayRecipeVPAdapter = HomeTodayRecipeVPAdapter(todayRecipeList)
-        binding.vpTodayRecipe.adapter = homeRecommendTodayRecipeVPAdapter
-        binding.ciTodayRecipe.setViewPager(binding.vpTodayRecipe)
-        homeRecommendTodayRecipeVPAdapter.setOnItemClickListener(object: HomeTodayRecipeVPAdapter.OnItemClickListener{
-            override fun onItemClick(v: View, data: RecipeThree, position: Int) {
-                Toast.makeText(requireContext(),data.name,Toast.LENGTH_SHORT).show()
-
-            }
-
-        })
     }
 
     //비건 매거진 ViewPager
@@ -90,8 +64,15 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     //매거진 Dialog
     fun onDialogBtnClicked(id: Int) {
-        //매거진 디테일 호출
         MagazineService(this).tryPostMagazineDetail(id) //매거진 상세 정보 호출
+    }
+
+    //오늘의 추천 레시피 ViewPager
+    private fun setRecipeVPAdapter() {
+        homeRecommendTodayRecipeVPAdapter = HomeTodayRecipeVPAdapter(todayRecipeList)
+        binding.vpTodayRecipe.adapter = homeRecommendTodayRecipeVPAdapter
+        binding.ciTodayRecipe.setViewPager(binding.vpTodayRecipe)
+        onClickRecommendRecipe()
     }
 
     //오늘의 레시피
@@ -100,6 +81,53 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             response.information[0], response.information[1], response.information[2]
         )
         setRecipeVPAdapter()
+    }
+
+    // 오늘의 추천 레시피 클릭시 레시피로 이동
+    private fun onClickRecommendRecipe() {
+        homeRecommendTodayRecipeVPAdapter.setOnItemClickListener(object :
+            HomeTodayRecipeVPAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: RecipeThree, position: Int) {
+                parentFragmentManager.setFragmentResult(
+                    HOME_TODAY_RECIPE_TO_RECIPE, bundleOf(
+                        TODAY_RECIPE to data
+                    )
+                )
+                parentFragmentManager.beginTransaction().replace(R.id.fl_main, MainRecipeFragment()).commit()
+            }
+        })
+    }
+
+    //추천 식당 recyclerView
+    private fun setRestaurantRVAdapter() {
+        homeRecommendRestRVAdapter = HomeRecommendRestRVAdapter(requireContext(), recommendRestList)
+        val recyclerView = binding.rvHomeRecommendRestaurant
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
+        recyclerView.adapter = homeRecommendRestRVAdapter
+        val startPosition = Int.MAX_VALUE / 2
+        recyclerView.scrollToPosition(startPosition)
+        dismissLoadingDialog()
+        onClickRecommendRestaurant()
+    }
+
+    // 오늘의 추천 식당 클릭시 비건 맵으로 이동
+    private fun onClickRecommendRestaurant() {
+        homeRecommendRestRVAdapter.setOnItemClickListener(object :
+            HomeRecommendRestRVAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
+                parentFragmentManager.setFragmentResult(
+                    RECOMMENDED_POSITION,
+                    bundleOf(RECOMMENDED_POSITION to data)
+                )
+                parentFragmentManager.setFragmentResult(
+                    RECOMMENDED_RESTAURANT,
+                    bundleOf(RECOMMENDED_RESTAURANT to data)
+                )
+                parentFragmentManager.beginTransaction().replace(R.id.fl_main, VeganMapFragment())
+                    .commit()
+            }
+        })
     }
 
     //추천 식당
@@ -125,22 +153,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
             }
             setRestaurantRVAdapter()
         }
-        // 추천 식당 클릭시
-        homeRecommendRestRVAdapter.setOnItemClickListener(object :
-            HomeRecommendRestRVAdapter.OnItemClickListener {
-            override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-                parentFragmentManager.setFragmentResult(
-                    RECOMMENDED_POSITION,
-                    bundleOf(RECOMMENDED_POSITION to data)
-                )
-                parentFragmentManager.setFragmentResult(
-                    RECOMMENDED_RES,
-                    bundleOf(RECOMMENDED_RES to data)
-                )
-                parentFragmentManager.beginTransaction().add(R.id.fl_main, VeganMapFragment())
-                    .commit()
-            }
-        })
     }
 
     //서버 - 매거진
@@ -154,7 +166,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         dialog.show()
     }
 
-//    override fun onGetUserFailure(message: String) { }
+    //    override fun onGetUserFailure(message: String) { }
     //서버 - 레시피
     override fun onGetRecipeListSuccess(response: RecipeListResponse) {}
     override fun onGetRecipeListFailure(message: String) {}

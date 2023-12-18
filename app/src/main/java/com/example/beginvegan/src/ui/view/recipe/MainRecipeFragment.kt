@@ -12,14 +12,14 @@ import com.example.beginvegan.src.data.model.recipe.RecipeListResponse
 import com.example.beginvegan.src.data.model.recipe.RecipeService
 import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
 import com.example.beginvegan.src.ui.adapter.recipe.RecipeListRVAdapter
+import com.example.beginvegan.src.ui.view.main.MainActivity
 import com.example.beginvegan.util.RecipeDetailDialog
 import com.example.beginvegan.util.VeganTypes
 import com.google.android.material.chip.Chip
 
 class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     FragmentMainRecipeBinding::bind, R.layout.fragment_main_recipe
-),
-    RecipeInterface {
+), RecipeInterface {
 
     private lateinit var recipeList: List<RecipeList>
     private lateinit var filterList: ArrayList<RecipeList>

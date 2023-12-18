@@ -18,7 +18,7 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
 import com.example.beginvegan.src.ui.adapter.map.VeganMapBottomSheetRVAdapter
 import com.example.beginvegan.src.ui.view.map.restaurant.RestaurantDetailFragment
-import com.example.beginvegan.util.Constants.RECOMMENDED_RES
+import com.example.beginvegan.util.Constants.RECOMMENDED_RESTAURANT
 import com.example.beginvegan.util.Constants.RESTAURANT_ID
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -38,7 +38,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 
     private lateinit var constAdapter: VeganMapBottomSheetRVAdapter
     private lateinit var varAdapter: VeganMapBottomSheetRVAdapter
-    private lateinit var singleAdapter: VeganMapBottomSheetRVAdapter
     override fun init() {
         setMapView()
         binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
@@ -48,8 +47,8 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
                 ApplicationClass.xLongitude
             )
         )
-        parentFragmentManager.setFragmentResultListener(RECOMMENDED_RES,viewLifecycleOwner) { _, bundle ->
-            var data = bundle.getSerializable(RECOMMENDED_RES) as NearRestaurant
+        parentFragmentManager.setFragmentResultListener(RECOMMENDED_RESTAURANT,viewLifecycleOwner) { _, bundle ->
+            var data = bundle.getSerializable(RECOMMENDED_RESTAURANT) as NearRestaurant
             if(data != null){
                 initTrans(0,data)
             }

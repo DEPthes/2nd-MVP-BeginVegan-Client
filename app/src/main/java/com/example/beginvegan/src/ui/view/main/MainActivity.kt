@@ -33,7 +33,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
                     ).commit()
                 }
                 R.id.item_profile->{
-                    Log.d("TAG", "init: main activity")
                     supportFragmentManager.beginTransaction().replace(R.id.fl_main,
                         MainProfileFragment()
                     ).commit()
@@ -43,17 +42,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         }
     }
 
-    //홈에서 추천 레시피 클릭했을 때
-    fun goRecipe(id:Int){
-        val fragment = MainRecipeFragment()
-        val bundle = Bundle()
-        bundle.putInt("recipeId",id)
-        Log.d("TAG", "goRecipe: in MainActivity $id")
-        fragment.arguments = bundle
-
-        supportFragmentManager.beginTransaction().replace(R.id.fl_main, fragment).commit()
+    fun selectNavigationRecipe(){
         binding.bnvMain.selectedItemId = R.id.item_recipe
     }
+    fun selectNavigationRestaurant(){
+        binding.bnvMain.selectedItemId = R.id.item_map
+    }
+    //홈에서 추천 레시피 클릭했을 때
+//    fun goRecipe(id:Int){
+//        val fragment = MainRecipeFragment()
+//        val bundle = Bundle()
+//        bundle.putInt("recipeId",id)
+//        Log.d("TAG", "goRecipe: in MainActivity $id")
+//        fragment.arguments = bundle
+//
+//        supportFragmentManager.beginTransaction().replace(R.id.fl_main, fragment).commit()
+//        binding.bnvMain.selectedItemId = R.id.item_recipe
+//    }
 
 
 }
