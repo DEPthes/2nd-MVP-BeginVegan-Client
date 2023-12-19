@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".src.ui.view.WelcomeActivity"
+            android:name=".src.ui.view.main.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".src.ui.view.SplashActivity"
+            android:name=".src.ui.view.main.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,17 +45,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".src.ui.view.LoginActivity"
+            android:name=".src.ui.view.login.LoginActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.ui.view.vegantest.VeganTestActivity"
+            android:name=".src.ui.view.test.VeganTestActivity"
             android:exported="true" >
 
         </activity>
         <activity
-            android:name=".src.ui.view.MainActivity"
+            android:name=".src.ui.view.main.MainActivity"
             android:exported="true" >
         </activity>
 
