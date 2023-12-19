@@ -39,6 +39,9 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     private lateinit var constAdapter: VeganMapBottomSheetRVAdapter
     private lateinit var varAdapter: VeganMapBottomSheetRVAdapter
     override fun init() {
+        // 1번 Navigation Bar를 클릭해서 이동했을 경우 -> 맵뷰 제공
+
+        // 2번 추천 식당을 눌러서 이동했을 경우 -> 해당하는 식당 핀으로 이동 및 해당하는 식당의 바텀시트 제공
         setMapView()
         binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
         RestaurantFindService(this).tryPostFindRestaurant(

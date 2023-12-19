@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beginvegan.databinding.ItemHomeTodayRecipeBinding
+import com.example.beginvegan.src.data.model.recipe.Recipe
 import com.example.beginvegan.src.data.model.recipe.RecipeThree
 import com.example.beginvegan.util.VeganTypes
 
