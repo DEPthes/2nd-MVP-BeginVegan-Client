@@ -13,6 +13,9 @@ import com.example.beginvegan.src.ui.view.profile.MainProfileFragment
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it)}) {
     override fun init() {
         supportFragmentManager.beginTransaction().replace(R.id.fl_main,MainHomeFragment()).commit()
+        setBottomNavigationViewListener()
+    }
+    private fun setBottomNavigationViewListener(){
 
         binding.bnvMain.setOnItemSelectedListener {
             when(it.itemId){
@@ -39,6 +42,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
         }
     }
     fun setActiveBottomNavigationItem(itemId: Int) {
+        binding.bnvMain.setOnItemSelectedListener(null)
         binding.bnvMain.selectedItemId = itemId
+        setBottomNavigationViewListener()
     }
 }

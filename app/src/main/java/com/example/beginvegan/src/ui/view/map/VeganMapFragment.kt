@@ -167,8 +167,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         setBottomSheetRVAdapter()
     }
     private fun setAdapterSingleBottomSheet(data: NearRestaurant) {
-
-        Log.d("TEST","setAdapterSingleBottomSheet")
         var selectedRestaurant: ArrayList<NearRestaurant> = arrayListOf()
         selectedRestaurant.add(data)
         bottomSheetAdapter = VeganMapBottomSheetRVAdapter(mContext!!, selectedRestaurant)

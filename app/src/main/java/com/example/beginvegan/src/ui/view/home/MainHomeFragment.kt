@@ -90,18 +90,13 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         homeRecommendTodayRecipeVPAdapter.setOnItemClickListener(object :
             HomeTodayRecipeVPAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: RecipeThree, position: Int) {
-//                val bundle = Bundle().apply{
-//                    bundleOf(TODAY_RECIPE to data)
-//                }
                 parentFragmentManager.setFragmentResult(
                     HOME_TODAY_RECIPE_TO_RECIPE, bundleOf(
                         TODAY_RECIPE to data
                     )
                 )
-//                (activity as MainActivity).setActiveBottomNavigationItem(R.id.item_recipe)
-//                MainRecipeFragment().arguments = bundle
+                (activity as MainActivity).setActiveBottomNavigationItem(R.id.item_recipe)
                 parentFragmentManager.beginTransaction().replace(R.id.fl_main, MainRecipeFragment()).commit()
-                (activity as? MainActivity)?.setActiveBottomNavigationItem(R.id.item_recipe)
             }
         })
     }
@@ -132,9 +127,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
                     RECOMMENDED_RESTAURANT,
                     bundleOf(RECOMMENDED_RESTAURANT to data)
                 )
+                (activity as MainActivity).setActiveBottomNavigationItem(R.id.item_map)
                 parentFragmentManager.beginTransaction().replace(R.id.fl_main, VeganMapFragment())
                     .commit()
-                (activity as? MainActivity)?.setActiveBottomNavigationItem(R.id.item_map)
             }
         })
     }
