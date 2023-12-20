@@ -96,7 +96,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
                     )
                 )
                 (activity as MainActivity).setActiveBottomNavigationItem(R.id.item_recipe)
-                parentFragmentManager.beginTransaction().replace(R.id.fl_main, MainRecipeFragment()).commit()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, MainRecipeFragment())
+                    .commit()
             }
         })
     }
@@ -119,16 +121,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         homeRecommendRestRVAdapter.setOnItemClickListener(object :
             HomeRecommendRestRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-                parentFragmentManager.setFragmentResult(
-                    RECOMMENDED_POSITION,
-                    bundleOf(RECOMMENDED_POSITION to data)
-                )
-                parentFragmentManager.setFragmentResult(
-                    RECOMMENDED_RESTAURANT,
-                    bundleOf(RECOMMENDED_RESTAURANT to data)
-                )
+//                parentFragmentManager.setFragmentResult(
+//                    RECOMMENDED_RESTAURANT,
+//                    bundleOf(RECOMMENDED_RESTAURANT to data)
+//                )
+                val bundle = Bundle().apply {
+                    putSerializable(RECOMMENDED_RESTAURANT, data)
+                }
                 (activity as MainActivity).setActiveBottomNavigationItem(R.id.item_map)
-                parentFragmentManager.beginTransaction().replace(R.id.fl_main, VeganMapFragment())
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fl_main, VeganMapFragment().apply {
+                        arguments = bundle
+                    })
                     .commit()
             }
         })

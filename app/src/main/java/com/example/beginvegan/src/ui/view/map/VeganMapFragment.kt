@@ -57,9 +57,28 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         super.onPause()
         binding.mvVeganMap.removeAllViews()
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // case: Recommend restaurant click
+        if (arguments != null) {
+            val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getSerializable(RECOMMENDED_RESTAURANT, NearRestaurant::class.java)
+            } else {
+                arguments?.getSerializable(RECOMMENDED_RESTAURANT) as? NearRestaurant
+            }
+            if (data != null) {
+                recommendRestaurantData = data
+                recommendRestaurantTrigger = false
+            }
+        }
     }
 
     override fun onDetach() {
@@ -69,22 +88,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
 
     override fun init() {
         showLoadingDialog(requireContext())
-        // case2: Recommend restaurant click
-        parentFragmentManager.setFragmentResultListener(
-            RECOMMENDED_RESTAURANT,
-            viewLifecycleOwner
-        ) { _, bundle ->
-            val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                bundle.getSerializable(RECOMMENDED_RESTAURANT, NearRestaurant::class.java)
-            } else {
-                bundle.getSerializable(RECOMMENDED_RESTAURANT) as? NearRestaurant
-            }
-            if (data != null) {
-                recommendRestaurantData = data
-                recommendRestaurantTrigger = false
-            }
-        }
-        // case1: NavigationBar click
         initializeMapView()
         binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
         RestaurantFindService(this).tryPostFindRestaurant(
@@ -150,7 +153,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     }
 
 
-    private fun setBottomSheetRVAdapter(){
+    private fun setBottomSheetRVAdapter() {
         binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = bottomSheetAdapter
         binding.veganmapBottomSheet.rvBottomSheetRestaurantList.layoutManager =
             LinearLayoutManager(mContext)
@@ -162,10 +165,12 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         })
         bottomSheetBehavior.state = STATE_HALF_EXPANDED
     }
+
     private fun setAdapterBottomSheet() {
         bottomSheetAdapter = VeganMapBottomSheetRVAdapter(mContext!!, dataList)
         setBottomSheetRVAdapter()
     }
+
     private fun setAdapterSingleBottomSheet(data: NearRestaurant) {
         var selectedRestaurant: ArrayList<NearRestaurant> = arrayListOf()
         selectedRestaurant.add(data)
@@ -185,16 +190,18 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
             .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
     }
 
-
     override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
         setAdapterSingleBottomSheet(p1?.userObject as NearRestaurant)
     }
+
     override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {}
     override fun onCalloutBalloonOfPOIItemTouched(
         p0: MapView?,
         p1: MapPOIItem?,
         p2: MapPOIItem.CalloutBalloonButtonType?
-    ) {}
+    ) {
+    }
+
     override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {}
 
 
