@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view.home
 
+import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
 import com.example.beginvegan.src.ui.adapter.home.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.home.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.home.HomeTodayRecipeVPAdapter
+import com.example.beginvegan.src.ui.view.main.MainActivity
 import com.example.beginvegan.src.ui.view.map.VeganMapFragment
 import com.example.beginvegan.src.ui.view.recipe.MainRecipeFragment
 import com.example.beginvegan.util.Constants.HOME_TODAY_RECIPE_TO_RECIPE
@@ -88,12 +90,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         homeRecommendTodayRecipeVPAdapter.setOnItemClickListener(object :
             HomeTodayRecipeVPAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: RecipeThree, position: Int) {
+//                val bundle = Bundle().apply{
+//                    bundleOf(TODAY_RECIPE to data)
+//                }
                 parentFragmentManager.setFragmentResult(
                     HOME_TODAY_RECIPE_TO_RECIPE, bundleOf(
                         TODAY_RECIPE to data
                     )
                 )
+//                (activity as MainActivity).setActiveBottomNavigationItem(R.id.item_recipe)
+//                MainRecipeFragment().arguments = bundle
                 parentFragmentManager.beginTransaction().replace(R.id.fl_main, MainRecipeFragment()).commit()
+                (activity as? MainActivity)?.setActiveBottomNavigationItem(R.id.item_recipe)
             }
         })
     }
@@ -126,6 +134,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
                 )
                 parentFragmentManager.beginTransaction().replace(R.id.fl_main, VeganMapFragment())
                     .commit()
+                (activity as? MainActivity)?.setActiveBottomNavigationItem(R.id.item_map)
             }
         })
     }
