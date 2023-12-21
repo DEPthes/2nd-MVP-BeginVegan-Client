@@ -1,9 +1,15 @@
 package com.example.beginvegan.src.ui.view.map
 
 import android.app.Activity
+import android.content.Context
+import android.os.Build
+import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,13 +17,16 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentVeganMapBinding
+import com.example.beginvegan.src.data.model.recipe.RecipeThree
 import com.example.beginvegan.src.data.model.restaurant.Coordinate
 import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
 import com.example.beginvegan.src.ui.adapter.map.VeganMapBottomSheetRVAdapter
+import com.example.beginvegan.src.ui.view.main.MainActivity
 import com.example.beginvegan.src.ui.view.map.restaurant.RestaurantDetailFragment
+import com.example.beginvegan.util.Constants
 import com.example.beginvegan.util.Constants.RECOMMENDED_RESTAURANT
 import com.example.beginvegan.util.Constants.RESTAURANT_ID
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -27,22 +36,59 @@ import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
+/*
+* 추천 식당 클릭후 어댑터 연결 문제
+* */
 
 class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     FragmentVeganMapBinding::bind,
     R.layout.fragment_vegan_map
-), MapView.POIItemEventListener, RestaurantFindInterface {
+), RestaurantFindInterface, MapView.POIItemEventListener {
     private lateinit var dataList: ArrayList<NearRestaurant>
     private lateinit var mapView: MapView
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var bottomSheetAdapter: VeganMapBottomSheetRVAdapter
+    private lateinit var recommendRestaurantData: NearRestaurant
+    private var recommendRestaurantTrigger = true
+    private var mContext: Context? = null
 
-    private lateinit var constAdapter: VeganMapBottomSheetRVAdapter
-    private lateinit var varAdapter: VeganMapBottomSheetRVAdapter
+    // Android Lifecycle
+    override fun onPause() {
+        super.onPause()
+        binding.mvVeganMap.removeAllViews()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // case: Recommend restaurant click
+        if (arguments != null) {
+            val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getSerializable(RECOMMENDED_RESTAURANT, NearRestaurant::class.java)
+            } else {
+                arguments?.getSerializable(RECOMMENDED_RESTAURANT) as? NearRestaurant
+            }
+            if (data != null) {
+                recommendRestaurantData = data
+                recommendRestaurantTrigger = false
+            }
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mContext = null
+    }
+
     override fun init() {
-        // 1번 Navigation Bar를 클릭해서 이동했을 경우 -> 맵뷰 제공
-
-        // 2번 추천 식당을 눌러서 이동했을 경우 -> 해당하는 식당 핀으로 이동 및 해당하는 식당의 바텀시트 제공
-        setMapView()
+        showLoadingDialog(requireContext())
+        initializeMapView()
         binding.veganmapBottomSheet.clBottomSheet.maxHeight = getBottomSheetDialogDefaultHeight()
         RestaurantFindService(this).tryPostFindRestaurant(
             Coordinate(
@@ -50,30 +96,10 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
                 ApplicationClass.xLongitude
             )
         )
-        parentFragmentManager.setFragmentResultListener(RECOMMENDED_RESTAURANT,viewLifecycleOwner) { _, bundle ->
-            var data = bundle.getSerializable(RECOMMENDED_RESTAURANT) as NearRestaurant
-            if(data != null){
-                initTrans(0,data)
-            }
-        }
-    }
-    private fun initTrans(position: Int,data: NearRestaurant){
-        // 해당 핀으로 이동
-        // 핀에 해당하는 내용 출력
-        bottomSheetBehavior.state = STATE_HALF_EXPANDED
-        // 바텀시트 바꾸기 ( 수정 필요)
-//        setChangeRestaurantList(position)
-        // 위치 변경
-        mapView.setMapCenterPoint(
-            MapPoint.mapPointWithGeoCoord(
-                data.latitude.toDouble(),
-                data.longitude.toDouble()
-            ), true
-        )
     }
 
-    // 맵뷰 초기화
-    private fun setMapView() {
+    // Initialize MapView & MapView Click
+    private fun initializeMapView() {
         mapView = MapView(this@VeganMapFragment.activity)
         binding.mvVeganMap.addView(mapView)
         bottomSheetBehavior = BottomSheetBehavior.from(binding.veganmapBottomSheet.clBottomSheet)
@@ -85,17 +111,16 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         )
         mapView.currentLocationTrackingMode =
             MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving
-        mapView.setOnTouchListener { v, event ->
-            Log.d("Touch", "mapView")
+        mapView.setOnTouchListener { _, _ ->
             if (bottomSheetBehavior.state != STATE_COLLAPSED) {
                 bottomSheetBehavior.state = STATE_COLLAPSED
-                setRVAdapter()
             }
             false
         }
 
     }
 
+    // BottomSheet Sizing | Height 70%
     private fun getBottomSheetDialogDefaultHeight(): Int {
         return getWindowHeight() * 70 / 100
         // 위 수치는 기기 높이 대비 70%로 높이를 설정
@@ -107,112 +132,93 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         return displayMetrics.heightPixels
     }
 
-    private fun setRestaurantGps(response: RestaurantFindResponse) {
-        // for문으로 데이터 갯수만큼 돌리기
-        for (i: Int in 0 until response.information.size) {
-            val marker = MapPOIItem()
-            marker.apply {
-                itemName = response.information[i].name
+    // Restaurant's pin setting and connect MapView
+    private fun setMapViewRestaurantMarker() {
+        dataList.forEachIndexed { index, info ->
+            val marker = MapPOIItem().apply {
+                itemName = info.name
                 mapPoint = MapPoint.mapPointWithGeoCoord(
-                    response.information[i].latitude.toDouble(),
-                    response.information[i].longitude.toDouble()
+                    info.latitude.toDouble(),
+                    info.longitude.toDouble()
                 )
+                userObject = dataList[index]
                 markerType = MapPOIItem.MarkerType.CustomImage
-                tag = i
+                tag = index
                 customImageResourceId = R.drawable.marker_spot
-            }.isShowCalloutBalloonOnTouch = false
+                isShowCalloutBalloonOnTouch = false
+            }
             mapView.addPOIItem(marker)
         }
         mapView.setPOIItemEventListener(this)
     }
 
-    // Set Restaurant List and Click and Test Data
-    private fun setRestaurantList(response: RestaurantFindResponse) {
-        showLoadingDialog(requireContext())
-        dataList = arrayListOf()
-        for (i: Int in 0 until response.information.size) {
-            dataList.add(response.information[i])
-        }
-        setRVAdapter()
-        dismissLoadingDialog()
-    }
 
-    private fun setChangeRestaurantList(position: Int) {
-        showLoadingDialog(requireContext())
-        var varDataList: ArrayList<NearRestaurant> = arrayListOf()
-        varDataList.addAll(dataList)
-        for (i: Int in 0 until position) {
-            varDataList.add(varDataList.removeAt(0))
-        }
-        varAdapter = VeganMapBottomSheetRVAdapter(requireContext(), varDataList)
-        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = varAdapter
+    private fun setBottomSheetRVAdapter() {
+        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = bottomSheetAdapter
         binding.veganmapBottomSheet.rvBottomSheetRestaurantList.layoutManager =
-            LinearLayoutManager(this.context)
-
-        varAdapter.setOnItemClickListener(object :
+            LinearLayoutManager(mContext)
+        bottomSheetAdapter.setOnItemClickListener(object :
             VeganMapBottomSheetRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-                moveDetail(data)
+                moveRestaurantDetail(data)
             }
         })
-        dismissLoadingDialog()
-    }
-
-    private fun setRVAdapter() {
-        constAdapter = VeganMapBottomSheetRVAdapter(requireContext(), dataList)
-        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.adapter = constAdapter
-        binding.veganmapBottomSheet.rvBottomSheetRestaurantList.layoutManager =
-            LinearLayoutManager(this.context)
-        constAdapter.setOnItemClickListener(object :
-            VeganMapBottomSheetRVAdapter.OnItemClickListener {
-            override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-                moveDetail(data)
-            }
-
-        })
-        dismissLoadingDialog()
-    }
-    private fun moveDetail(data: NearRestaurant){
-        showLoadingDialog(requireContext())
-        parentFragmentManager.setFragmentResult(RESTAURANT_ID,bundleOf(RESTAURANT_ID to data.id))
-        parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
-            .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
-        dismissLoadingDialog()
-    }
-    override fun onPause() {
-        super.onPause()
-        binding.mvVeganMap.removeAllViews()
-    }
-
-
-    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
         bottomSheetBehavior.state = STATE_HALF_EXPANDED
-        setChangeRestaurantList(p1!!.tag)
+    }
+
+    private fun setAdapterBottomSheet() {
+        bottomSheetAdapter = VeganMapBottomSheetRVAdapter(mContext!!, dataList)
+        setBottomSheetRVAdapter()
+    }
+
+    private fun setAdapterSingleBottomSheet(data: NearRestaurant) {
+        var selectedRestaurant: ArrayList<NearRestaurant> = arrayListOf()
+        selectedRestaurant.add(data)
+        bottomSheetAdapter = VeganMapBottomSheetRVAdapter(mContext!!, selectedRestaurant)
         mapView.setMapCenterPoint(
             MapPoint.mapPointWithGeoCoord(
-                p1.mapPoint.mapPointGeoCoord.latitude,
-                p1.mapPoint.mapPointGeoCoord.longitude
+                data.latitude.toDouble(),
+                data.longitude.toDouble()
             ), true
         )
+        setBottomSheetRVAdapter()
+    }
+
+    private fun moveRestaurantDetail(data: NearRestaurant) {
+        parentFragmentManager.setFragmentResult(RESTAURANT_ID, bundleOf(RESTAURANT_ID to data.id))
+        parentFragmentManager.beginTransaction().hide(this@VeganMapFragment)
+            .add(R.id.fl_main, RestaurantDetailFragment()).addToBackStack(null).commit()
+    }
+
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+        setAdapterSingleBottomSheet(p1?.userObject as NearRestaurant)
     }
 
     override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {}
-
     override fun onCalloutBalloonOfPOIItemTouched(
-        mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?
+        p0: MapView?,
+        p1: MapPOIItem?,
+        p2: MapPOIItem.CalloutBalloonButtonType?
     ) {
     }
 
     override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {}
 
+
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
-        Log.d("onPostFindRestaurantSuccess", response.toString())
-        setRestaurantGps(response)
-        setRestaurantList(response)
+        dataList = ArrayList(response.information)
+        setMapViewRestaurantMarker()
+        if (recommendRestaurantTrigger) {
+            setAdapterBottomSheet()
+        } else {
+            setAdapterSingleBottomSheet(recommendRestaurantData)
+        }
+        dismissLoadingDialog()
     }
 
     override fun onPostFindRestaurantFailure(message: String) {
         Log.d("onPostFindRestaurantFailure", message)
     }
+
 
 }

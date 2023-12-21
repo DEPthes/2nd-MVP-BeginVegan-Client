@@ -1,5 +1,6 @@
 package com.example.beginvegan.src.ui.view.recipe
 
+import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.View
@@ -31,12 +32,20 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     private lateinit var recipeList: List<RecipeList>
     private lateinit var filterList: ArrayList<RecipeList>
-    private var selectedRecipeId: Int? = null
-    val TAG = "recipe"
-    override fun init() {
+    private var mContext: Context? = null
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mContext = null
+    }
+    override fun init() {
         // case 1-1: 비건 타입별 레시피로 이동 할 경우
-        showLoadingDialog(requireContext())
+        showLoadingDialog(mContext!!)
         RecipeService(this).tryGetRecipeList()
         binding.cgRecipeFilters.setOnCheckedChangeListener { _, checkedId ->
             val checkedChip: Chip = binding.root.findViewById(checkedId)
@@ -111,7 +120,7 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
     }
 
     override fun onPostRecipeDetailSuccess(response: RecipeDetailResponse) { //레시피 상세 정보 조회
-        val dialog = RecipeDetailDialog(requireContext(), response.information)
+        val dialog = RecipeDetailDialog(mContext!!, response.information)
         dialog.show()
     }
 
