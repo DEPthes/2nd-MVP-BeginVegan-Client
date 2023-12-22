@@ -61,8 +61,6 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
