@@ -16,6 +16,7 @@ import com.example.beginvegan.src.data.model.recipe.RecipeService
 import com.example.beginvegan.src.data.model.recipe.RecipeThree
 import com.example.beginvegan.src.data.model.recipe.RecipeThreeResponse
 import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
+import com.example.beginvegan.src.data.model.user.VeganType
 import com.example.beginvegan.src.ui.adapter.recipe.RecipeListRVAdapter
 import com.example.beginvegan.src.ui.view.main.MainActivity
 import com.example.beginvegan.util.Constants
@@ -31,32 +32,42 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
 
     private lateinit var recipeList: List<RecipeList>
     private lateinit var filterList: ArrayList<RecipeList>
-    private var selectedRecipeId: Int? = null
-    val TAG = "recipe"
+
     override fun init() {
 
         // case 1-1: 비건 타입별 레시피로 이동 할 경우
         showLoadingDialog(requireContext())
         RecipeService(this).tryGetRecipeList()
-        binding.cgRecipeFilters.setOnCheckedChangeListener { _, checkedId ->
-            val checkedChip: Chip = binding.root.findViewById(checkedId)
-            checkFilter(checkedChip, checkedChip.isChecked)
+
+        for (i in 0 until binding.cgRecipeFilters.childCount) {
+            val chip = binding.cgRecipeFilters.getChildAt(i) as Chip
+            chip.setOnClickListener {
+                if (chip.isChecked) {
+                    setFilter(chip.tag.toString())
+                } else {
+                    initializeViews(recipeList)
+                }
+            }
         }
 
         // case 1-2: 오늘의 추천 레시피에서 하나를 골라 이동 할 경우
-        parentFragmentManager.setFragmentResultListener(HOME_TODAY_RECIPE_TO_RECIPE,viewLifecycleOwner) { _, bundle ->
-            val data =if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                bundle.getSerializable(TODAY_RECIPE ,RecipeThree::class.java)
+        parentFragmentManager.setFragmentResultListener(
+            HOME_TODAY_RECIPE_TO_RECIPE,
+            viewLifecycleOwner
+        ) { _, bundle ->
+            val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                bundle.getSerializable(TODAY_RECIPE, RecipeThree::class.java)
             } else {
                 bundle.getSerializable(TODAY_RECIPE) as? RecipeThree
             }
-            if(data != null){
+            if (data != null) {
                 RecipeService(this).tryPostRecipeDetail(data.id)
             }
         }
 
 
     }
+
     //레시피 리스트 RVAdapter
     private fun initializeViews(list: List<RecipeList>) {
         val recipeAdapter = RecipeListRVAdapter(list)
@@ -73,28 +84,16 @@ class MainRecipeFragment : BaseFragment<FragmentMainRecipeBinding>(
         dismissLoadingDialog()
     }
 
-    //필터 선택시 UI 반영
-    private fun checkFilter(filter: Chip, checked: Boolean) {
-        if (checked) {
-            setFilter(binding.cgRecipeFilters.indexOfChild(filter) - 1)
-        }
-    }
-
     //필터
-    private fun setFilter(index: Int) {
-        if (index == -1) {
-            initializeViews(recipeList)
-        } else {
-            val enum = enumValues<VeganTypes>()
-            val filter = enum[index].name
-            filterList = arrayListOf()
-            for (i: Int in 0 until recipeList.size) {
-                if (recipeList[i].veganType == filter) {
-                    filterList.add(recipeList[i])
-                }
+    private fun setFilter(veganType: String) {
+        filterList = arrayListOf()
+        for (i: Int in recipeList.indices) {
+            if (recipeList[i].veganType == veganType) {
+                filterList.add(recipeList[i])
             }
-            initializeViews(filterList)
         }
+        initializeViews(filterList)
+
     }
 
     //레시피 상세 정보 Dialog 띄우기

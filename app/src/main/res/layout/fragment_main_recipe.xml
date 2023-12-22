@@ -28,24 +28,25 @@
                 app:selectionRequired="false"
                 android:layout_marginStart="@dimen/side_margin"
                 android:paddingRight="@dimen/margin_32">
-                <com.google.android.material.chip.Chip
-                    style="@style/CustomVeganTypeChip"
-                    android:id="@+id/c_filter_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/item_52"
-                    app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/recipe_filter_all"
-                    android:textSize="@dimen/text_14"
-                    android:fontFamily="@font/notosanskr_regular"
-                    android:checkable="true"
-                    android:checked="true"/>
+<!--                <com.google.android.material.chip.Chip-->
+<!--                    style="@style/CustomVeganTypeChip"-->
+<!--                    android:id="@+id/c_filter_all"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/item_52"-->
+<!--                    app:chipCornerRadius="@dimen/radius_25"-->
+<!--                    android:text="@string/recipe_filter_all"-->
+<!--                    android:textSize="@dimen/text_14"-->
+<!--                    android:fontFamily="@font/notosanskr_regular"-->
+<!--                    android:checkable="true"-->
+<!--                    android:checked="true"/>-->
                 <com.google.android.material.chip.Chip
                     style="@style/CustomVeganTypeChip"
                     android:id="@+id/c_filter_vegan"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/item_52"
                     app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/vegan_type_vegan_kr"
+                    android:text="@string/recipe_filter_vegan_kr"
+                    android:tag="@string/recipe_filter_vegan_en"
                     android:textSize="@dimen/text_14"
                     android:fontFamily="@font/notosanskr_regular"
                     android:checkable="true"/>
@@ -55,7 +56,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/item_52"
                     app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/recipe_filter_lacto"
+                    android:text="@string/recipe_filter_lacto_kr"
+                    android:tag="@string/recipe_filter_lacto_en"
                     android:textSize="@dimen/text_14"
                     android:fontFamily="@font/notosanskr_regular"
                     android:checkable="true"/>
@@ -65,7 +67,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/item_52"
                     app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/recipe_filter_lacto_ovo"
+                    android:text="@string/recipe_filter_lacto_ovo_kr"
+                    android:tag="@string/recipe_filter_lacto_ovo_en"
                     android:textSize="@dimen/text_14"
                     android:fontFamily="@font/notosanskr_regular"
                     android:checkable="true"/>
@@ -75,7 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/item_52"
                     app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/vegan_type_pescatarian_kr"
+                    android:text="@string/recipe_filter_pescatarian_kr"
+                    android:tag="@string/recipe_filter_pescatarian_en"
                     android:textSize="@dimen/text_14"
                     android:fontFamily="@font/notosanskr_regular"
                     android:checkable="true" />
@@ -85,7 +89,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/item_52"
                     app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/recipe_filter_pollo"
+                    android:text="@string/recipe_filter_pollo_kr"
+                    android:tag="@string/recipe_filter_pollo_en"
                     android:textSize="@dimen/text_14"
                     android:fontFamily="@font/notosanskr_regular"
                     android:checkable="true"/>
@@ -95,7 +100,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/item_52"
                     app:chipCornerRadius="@dimen/radius_25"
-                    android:text="@string/vegan_type_flexitarian_kr"
+                    android:text="@string/recipe_filter_flexitarian_kr"
+                    android:tag="@string/recipe_filter_flexitarian_en"
                     android:textSize="@dimen/text_14"
                     android:fontFamily="@font/notosanskr_regular"
                     android:checkable="true"/>

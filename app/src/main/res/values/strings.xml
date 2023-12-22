@@ -67,10 +67,19 @@
 
     <!--    Recipe Filter -->
     <string name="recipe_filter_all">전체보기</string>
-    <string name="recipe_filter_lacto">락토</string>
-    <string name="recipe_filter_lacto_ovo">락토-오보</string>
-    <string name="recipe_filter_pollo">폴로</string>
 
+    <string name="recipe_filter_vegan_kr">비건</string>
+    <string name="recipe_filter_lacto_kr">락토</string>
+    <string name="recipe_filter_lacto_ovo_kr">락토-오보</string>
+    <string name="recipe_filter_pescatarian_kr">페스코테리언</string>
+    <string name="recipe_filter_pollo_kr">폴로</string>
+    <string name="recipe_filter_flexitarian_kr">플렉시테리언</string>
+    <string name="recipe_filter_vegan_en">VEGAN</string>
+    <string name="recipe_filter_lacto_en">LACTO_VEGETARIAN</string>
+    <string name="recipe_filter_lacto_ovo_en">LACTO_OVO_VEGETARIAN-오보</string>
+    <string name="recipe_filter_pescatarian_en">PASCATARIAN</string>
+    <string name="recipe_filter_pollo_en">POLLOTARIAN</string>
+    <string name="recipe_filter_flexitarian_en">FLEXITARIAN</string>
     <!--    Vegan Type Korean -->
     <string name="vegan_type_vegan_kr">비건</string>
     <string name="vegan_type_lacto_kr">락토 베지테리언</string>
