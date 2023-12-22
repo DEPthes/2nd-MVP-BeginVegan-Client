@@ -121,10 +121,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         homeRecommendRestRVAdapter.setOnItemClickListener(object :
             HomeRecommendRestRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: NearRestaurant, position: Int) {
-//                parentFragmentManager.setFragmentResult(
-//                    RECOMMENDED_RESTAURANT,
-//                    bundleOf(RECOMMENDED_RESTAURANT to data)
-//                )
                 val bundle = Bundle().apply {
                     putSerializable(RECOMMENDED_RESTAURANT, data)
                 }
