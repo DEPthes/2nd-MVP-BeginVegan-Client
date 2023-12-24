@@ -32,27 +32,26 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Log.d("Build Version Check", "SDK VERSION 12 higher")
-            // SDK 12
             installSplashScreen()
             splashScreen.setOnExitAnimationListener { _ ->
-                Handler(mainLooper).postDelayed({
-                    moveToLogin()
-                }, 1000)
+                moveToLogin()
             }
         } else {
             Log.d("Build Version Check", "SDK VERSION 12 lower")
-            Handler(mainLooper).postDelayed({
-                moveToLogin()
-            }, 3000)
+            moveToLogin()
         }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
     }
 
     private fun moveToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+        Handler(mainLooper).postDelayed({
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3000)
+
     }
 }
