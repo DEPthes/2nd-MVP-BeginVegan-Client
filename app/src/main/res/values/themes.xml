@@ -1,10 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.Beginvegan" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Beginvegan" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/color_primary2</item>
+
     </style>
-
-    <style name="Theme.Beginvegan" parent="Base.Theme.Beginvegan" />
-
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+<!--        <item name="windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/test_home_re3</item>-->
+<!--        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/splash_logo</item>-->
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/color_white</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="s">@color/color_white</item>
+        <item name="postSplashScreenTheme">@style/Theme.Beginvegan</item>
+    </style>
     <style name="ShapeAppearanceOverlay.App.CornerSize8Percent" parent="">
         <item name="cornerSize">8dp</item>
         <item name="cornerFamily">rounded</item>
@@ -17,7 +22,7 @@
         <item name="cornerSize">20dp</item>
         <item name="cornerFamily">rounded</item>
     </style>
-    
+
     <style name="tabProfileTextSize" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/text_16</item>
         <item name="fontFamily">@font/notosanskr_regular</item>
