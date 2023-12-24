@@ -39,4 +39,5 @@
         <item name="android:textColor">@color/chip_state_color_text</item>
         <item name="rippleColor">@color/color_primary2</item>
     </style>
+
 </resources>
