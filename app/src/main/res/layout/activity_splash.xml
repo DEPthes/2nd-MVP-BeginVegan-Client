@@ -7,8 +7,8 @@
     tools:context=".src.ui.view.main.SplashActivity">
     <ImageView
         android:id="@+id/iv_splash_logo"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
+        android:layout_width="@dimen/splash_logo_width"
+        android:layout_height="@dimen/splash_logo_height"
         android:src="@drawable/logo_beginvegan"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
