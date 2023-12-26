@@ -191,7 +191,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
                     user.kakaoAccount?.email!!,
                     user.kakaoAccount?.profile?.thumbnailImageUrl!!
                 )
-                AuthSignService(this).tryPostAuthSignIn(mAuth)
+                AuthSignService(this).tryPostAuthSignIn(mAuth.providerId,mAuth.email)
             }
         }
     }
@@ -213,8 +213,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
         // 싱글톤 토큰 / 유저 정보 기입
         ApplicationClass.xAccessToken = "${response.tokenType} ${response.accessToken}"
         ApplicationClass.xRefreshToken = response.refreshToken
-        Log.d("setUserData xAccessToken", ApplicationClass.xAccessToken)
-        Log.d("setUserData xRefreshToken", ApplicationClass.xRefreshToken)
 
         UserCheckService(this).tryGetUser()
     }
