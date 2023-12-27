@@ -1,13 +1,16 @@
 package com.example.beginvegan.src.ui.view.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beginvegan.R
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.config.BaseFragment
 import com.example.beginvegan.databinding.FragmentMainHomeBinding
+import com.example.beginvegan.src.data.model.auth.Auth
 import com.example.beginvegan.src.data.model.magazine.Magazine
 import com.example.beginvegan.src.data.model.magazine.MagazineDetailResponse
 import com.example.beginvegan.src.data.model.magazine.MagazineInterface
@@ -24,6 +27,9 @@ import com.example.beginvegan.src.data.model.restaurant.NearRestaurant
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindInterface
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindResponse
 import com.example.beginvegan.src.data.model.restaurant.RestaurantFindService
+import com.example.beginvegan.src.data.model.user.UserCheckInterface
+import com.example.beginvegan.src.data.model.user.UserCheckService
+import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.ui.adapter.home.HomeMagazineVPAdapter
 import com.example.beginvegan.src.ui.adapter.home.HomeRecommendRestRVAdapter
 import com.example.beginvegan.src.ui.adapter.home.HomeTodayRecipeVPAdapter
@@ -39,7 +45,7 @@ import com.example.beginvegan.util.HomeMagazineDetailDialog
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     FragmentMainHomeBinding::bind, R.layout.fragment_main_home
 ),
-    RecipeInterface, RestaurantFindInterface, MagazineInterface {
+    RecipeInterface, RestaurantFindInterface, MagazineInterface ,UserCheckInterface{
 
     private lateinit var todayRecipeList: List<RecipeThree>
     private lateinit var recommendRestList: ArrayList<NearRestaurant>
@@ -48,6 +54,8 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
 
     override fun init() {
         showLoadingDialog(requireContext())
+
+        UserCheckService(this).tryGetUser()
         val coordinate = Coordinate(ApplicationClass.xLatitude, ApplicationClass.xLongitude) //식당
         RestaurantFindService(this).tryPostFindRestaurant(coordinate)
         RecipeService(this).tryGetThreeRecipeList() //레시피
@@ -134,6 +142,26 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
         })
     }
 
+    override fun onGetUserSuccess(response: UserResponse) {
+        ApplicationClass.xAuth = Auth(
+            response.id,
+            response.name,
+            response.email,
+            response.imageUrl,
+            response.marketingConsent,
+            response.veganType,
+            response.provider,
+            response.role,
+            response.providerId
+        )
+        binding.tvSloganGreeting.text = "${ApplicationClass.xAuth.name}님, 안녕하세요!"
+
+    }
+
+    override fun onGetUserFailure(message: String) {
+        Toast.makeText(requireContext(),"유저 정보를 불러 오는데 실패했습니다.",Toast.LENGTH_SHORT).show()
+    }
+
     //추천 식당
     override fun onPostFindRestaurantSuccess(response: RestaurantFindResponse) {
         recommendRestList = arrayListOf()
@@ -184,4 +212,5 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(
     //서버 - 매거진
     override fun onGetMagazineTwoListFailure(message: String) {}
     override fun onPostMagazineDetailFailure(message: String) {}
+
 }

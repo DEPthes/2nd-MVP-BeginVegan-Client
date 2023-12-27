@@ -33,8 +33,8 @@ class ApplicationClass : Application() {
         lateinit var sRetrofit: Retrofit
         lateinit var sSharedPreferences: SharedPreferences
 
-        var xAccessToken = ACCESS_TOKEN
-        var xRefreshToken = REFRESH_TOKEN
+        var xAccessToken: String? = ACCESS_TOKEN
+        var xRefreshToken: String? = REFRESH_TOKEN
         var xAuth = Auth(
             0,
             USER_NAME,
