@@ -11,8 +11,8 @@ import retrofit2.Response
 class AuthSignService(val authSignInterface: AuthSignInterface) {
     private val authRetrofitInterface: AuthRetrofitInterface = ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
 
-    fun tryPostAuthSignIn(auth: KakaoAuth){
-        authRetrofitInterface.postAuthSignIn(AuthLogin(auth.providerId!!,auth.email)).enqueue(object: Callback<AuthSignResponse>{
+    fun tryPostAuthSignIn(providerId: String,email: String){
+        authRetrofitInterface.postAuthSignIn(AuthLogin(providerId,email)).enqueue(object: Callback<AuthSignResponse>{
             override fun onResponse(call: Call<AuthSignResponse>, response: Response<AuthSignResponse>) {
                 if(response.code() == 200){
                     authSignInterface.onPostAuthSignInSuccess(response.body() as AuthSignResponse)

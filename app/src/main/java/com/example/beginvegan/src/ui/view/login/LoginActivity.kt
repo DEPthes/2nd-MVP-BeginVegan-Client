@@ -27,6 +27,7 @@ import com.example.beginvegan.src.data.model.user.UserResponse
 import com.example.beginvegan.src.ui.view.main.WelcomeActivity
 import com.example.beginvegan.src.ui.view.test.VeganTestActivity
 import com.example.beginvegan.util.Constants
+import com.example.beginvegan.util.Constants.ACCESS_TOKEN
 import com.example.beginvegan.util.Constants.PROVIDER_ID
 import com.example.beginvegan.util.Constants.USER_EMAIL
 import com.kakao.sdk.auth.model.OAuthToken
@@ -191,7 +192,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
                     user.kakaoAccount?.email!!,
                     user.kakaoAccount?.profile?.thumbnailImageUrl!!
                 )
-                AuthSignService(this).tryPostAuthSignIn(mAuth)
+                AuthSignService(this).tryPostAuthSignIn(mAuth.providerId,mAuth.email)
             }
         }
     }
@@ -210,11 +211,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
         // 자동 로그인을 위한 유저 로그인 정보 저장
         ApplicationClass.sSharedPreferences.edit().putString(PROVIDER_ID, mAuth.providerId).apply()
         ApplicationClass.sSharedPreferences.edit().putString(USER_EMAIL, mAuth.email).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(ACCESS_TOKEN,response.accessToken).apply()
         // 싱글톤 토큰 / 유저 정보 기입
         ApplicationClass.xAccessToken = "${response.tokenType} ${response.accessToken}"
         ApplicationClass.xRefreshToken = response.refreshToken
-        Log.d("setUserData xAccessToken", ApplicationClass.xAccessToken)
-        Log.d("setUserData xRefreshToken", ApplicationClass.xRefreshToken)
 
         UserCheckService(this).tryGetUser()
     }
