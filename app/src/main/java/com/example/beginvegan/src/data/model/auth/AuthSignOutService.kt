@@ -14,8 +14,8 @@ class AuthSignOutService(val authSignOutInterface: AuthSignOutInterface) {
     private val authRetrofitInterface: AuthRetrofitInterface =
         ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
 
-    private fun tryPostAuthSignOut(accessToken: String) {
-        authRetrofitInterface.postAuthSignOut(accessToken).enqueue(object :
+    fun tryPostAuthSignOut() {
+        authRetrofitInterface.postAuthSignOut(ApplicationClass.xAccessToken).enqueue(object :
             Callback<AuthSignOutResponse> {
             override fun onResponse(
                 call: Call<AuthSignOutResponse>,
