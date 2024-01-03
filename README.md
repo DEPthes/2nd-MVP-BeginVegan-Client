@@ -8,8 +8,16 @@
 > **비건 = 채식주의? NO! 비건은 그렇게 어렵지 않아**
 >
 > 커져가는 비건시장 속에서 헤매는 “비기너”들과 함께 ‘비거너’가 되는 여정을 함께합니다.
-> 
-> 
+<br/>
+
+### 🥦 New Direction: Project Updates
+
+📃 **[비긴, 비건 with Clean Architecture](https://github.com/DEPthes/2nd-MVP-BeginVegan-Client/wiki/%EB%B9%84%EA%B8%B4,-%EB%B9%84%EA%B1%B4-with-Clean-Architecture)**
+
+🧑🏻‍💻 **[비긴, 비건 Refactoring Repository](https://github.com/Begin-Vegan/BeginVegan-Android)**
+
+<br/>
+
 ### 👩‍💻 About Developers
 
 | [최정현](https://github.com/CHOI97) | [서윤지](https://github.com/syjeuion) |
