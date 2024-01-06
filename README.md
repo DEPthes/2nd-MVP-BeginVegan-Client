@@ -12,7 +12,7 @@
 
 ### 🥦 New Direction: Project Updates
 
-📃 **[비긴, 비건 with Clean Architecture](https://github.com/DEPthes/2nd-MVP-BeginVegan-Client/wiki/%EB%B9%84%EA%B8%B4,-%EB%B9%84%EA%B1%B4-with-Clean-Architecture)**
+📃 **[비긴, 비건 Refactoring with Clean Architecture](https://github.com/DEPthes/2nd-MVP-BeginVegan-Client/wiki/%EB%B9%84%EA%B8%B4,-%EB%B9%84%EA%B1%B4-Refactoring-with-Clean-Architecture)**
 
 🧑🏻‍💻 **[비긴, 비건 Refactoring Repository](https://github.com/Begin-Vegan/BeginVegan-Android)**
 
